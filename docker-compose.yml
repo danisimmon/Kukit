@@ -1,0 +1,84 @@
+services:
+  nginx:
+    image: nginx:latest
+    container_name: kukit_nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./frontend/build:/usr/share/nginx/html
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - php
+    networks:
+      - kukit_net
+
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile.php  # Asegúrate de que este Dockerfile esté en la misma carpeta que el docker-compose.yml
+    container_name: kukit_php
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./backend:/var/www/html
+    networks:
+      - kukit_net
+
+  mysql:
+    image: mysql:5.7
+    container_name: kukit_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - kukit_net
+
+  mongo:
+    image: mongo:latest
+    container_name: kukit_mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+    ports:
+      - "48250:27017"
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - kukit_net
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: kukit_phpmyadmin
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      ME_CONFIG_MYSQL_SERVER: kukit_mysql
+    ports:
+      - "8080:80"
+    depends_on:
+      - mysql
+    networks:
+      - kukit_net
+
+  mongoclient:
+    image: mongoclient/mongoclient
+    container_name: kukit_mongo_client
+    environment:
+      - MONGO_URL=mongodb://root:root@kukit_mongo:27017/admin
+    ports:
+      - "8083:3000"
+    networks:
+      - kukit_net
+    depends_on:
+      - mongo
+    restart: always
+
+volumes:
+  mysql-data:
+  mongo-data:
+
+networks:
+  kukit_net:
+    driver: bridge
