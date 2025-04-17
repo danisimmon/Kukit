@@ -13,7 +13,7 @@ services:
       - kukit_net
 
   frontend:
-    image: ruben1703/kukitfrontend:latest
+    image: kukitfrontend:latest
     container_name: kukit_frontend
     volumes:
       - ./frontend/kukit:/app
