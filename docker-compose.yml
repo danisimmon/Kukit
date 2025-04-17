@@ -15,7 +15,9 @@ services:
       - kukit_net
 
   frontend:
-    image: kukitfrontend:latest
+    build:
+      context: ./frontend/kukit
+      dockerfile: Dockerfile.front
     container_name: kukit_frontend
     volumes:
       - ./frontend/kukit:/app
@@ -23,7 +25,6 @@ services:
       - "5173:5173"
     networks:
       - kukit_net
-    command: ["npm", "run", "dev"]
 
   php:
     build:
