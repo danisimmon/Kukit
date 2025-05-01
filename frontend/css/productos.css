@@ -1,0 +1,50 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+}
+.tarjetas{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+.tarjeta{
+    width: 250px;
+    height: 300px;
+    background-color: #FAF3DD;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+}
+.tarjeta:hover{
+    transform: scale(1.05);
+}
+.tarjeta img{
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+.tarjeta h3{
+    margin: 10px 0;
+    font-size: 1.2em;
+    text-align: center;
+}
+.tarjeta p{
+    font-size: 0.9em;
+    text-align: center;
+}
+.tarjeta a{
+    text-decoration: none;
+    color: #C33333;
+    font-weight: bold;
+    margin-top: 10px;
+}
+.tarjeta a:hover{
+    text-decoration: underline;
+}

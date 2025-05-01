@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vite + React</title>
+    <link rel="stylesheet" href="css/style.css">
+    <title>Kukit</title>
 </head>
+
 <body>
     <div id="root"></div>
     <header>
         <a href="./index.html" id="logo-header">
-            <img src="https://campamento-tesoro-perdido-image-hosting.fra1.cdn.digitaloceanspaces.com/pics/logo.svg" alt="">
+            <img src="https://campamento-tesoro-perdido-image-hosting.fra1.cdn.digitaloceanspaces.com/pics/logo.svg"
+                alt="">
         </a>
         <button id="hamburger-menu">
             <span></span>
@@ -56,7 +60,7 @@
 
                     <button type="submit" class="login">Aceptar y crear cuenta</button>
                 </form>
-                
+
                 <button class="register volver-iniciar-sesion">Iniciar sesión</button>
 
                 <hr>
@@ -68,7 +72,7 @@
                         <div>
                             <img src="" alt="">
                         </div>
-                        
+
                     </div>
                 </section>
             </section>
@@ -84,7 +88,7 @@
 
                 <section class="contenedor-sign-up-social-media">
                     <h3>Accede desde</h3>
-        
+
                     <div class="contenedor-sign-up-icons">
                         <div>
                             <img src="" alt="">
@@ -93,7 +97,7 @@
                 </section>
 
                 <hr>
-        
+
                 <form>
                     <div>
                         <label for="email-sign-in" id="mail" class="mail">Correo electrónico:</label>
@@ -125,25 +129,43 @@
                 <div class="sun"></div>
                 <figure>
                     <img src="" alt="">
-                </figure>   
+                </figure>
             </div>
         </div>
         <section>
-            <div class="contenendor-recetas">
-                
+            <div class="contenendor-home" id="contenedor-recetas">
+                <div class="recetas">
+                    <h2>Recetas</h2>
+                    <div class="tarjetas-recetas" id="tarjetas-recetas">
+                        <!-- Aquí se generarán las tarjetas de recetas -->
+                    </div>
                 </div>
             </div>
-            <div class="contenedor-imprescindibles-novedades">
-                
+            <div class="contenedor-home" id="contenedor-imprescindibles-novedades">
+                <h2>Imprescindibles Kukit</h2>
+                <h2>Novedades de la semana</h2>
             </div>
-            <div class="contenedor-lista-compra">
-                
+            <div class="contenedor-home" id="contenedor-lista-compra">
+                <h2>Añade tus recetas y crea tu lista de la compra</h2>
+                <p>Ahora, con nuestra nueva funcionalidad, podrás buscar fácilmente tus recetas favoritas y añadir los
+                    ingredientes directamente a tu lista. Cuando te guste una receta, haz clic en "Añadir a la lista" y
+                    los ingredientes necesarios se agregarán a tu lista de la compra.
+                    Esto te permitirá ahorrar tiempo en tus compras y asegurarte de tener todo lo necesario para tus
+                    platos. ¡Cocinar nunca fue tan fácil!</p>
             </div>
-            <div class="contenedor-filtros-recetas">
-                
+            <div class="contenedor-home" id="contenedor-filtros-recetas">
+                <h2>Filtra tus recetas y descubre tu próxima receta</h2>
+                <p>En Kukit te lo ponemos fácil para encontrar la receta perfecta. Explora platos según su país de
+                    origen, filtra por los ingredientes que tienes en casa o elige opciones que se adapten a tus
+                    necesidades: sin gluten, veganas, bajas en carbohidratos y mucho más. Así ahorras tiempo y disfrutas
+                    justo lo que necesitas, sin complicaciones.</p>
             </div>
-            <div class="contenedor-calendario">
-
+            <div class="contenedor-home" id="contenedor-calendario">
+                <h2>Organiza tu cocina, domina tus recetas.</h2>
+                <p>Con Kukit puedes organizar tus comidas en pocos pasos. Cuando encuentres una receta que te guste,
+                    simplemente pulsa en “Añadir al calendario” y elige el día y momento (desayuno, comida o cena) en el
+                    que la quieres preparar. También puedes editar tu planificación semanal en cualquier momento, mover
+                    recetas o eliminarlas si cambian tus planes.</p>
             </div>
         </section>
     </main>
@@ -185,7 +207,8 @@
         <hr>
         <div class="footer-info">
             <a href="./index.html">
-                <img src="https://campamento-tesoro-perdido-image-hosting.fra1.cdn.digitaloceanspaces.com/pics/logo.svg" alt="">
+                <img src="https://campamento-tesoro-perdido-image-hosting.fra1.cdn.digitaloceanspaces.com/pics/logo.svg"
+                    alt="">
             </a>
             <p>By Rubén Peña, Ainhoa Blanca, Manuel Gómez & Daniel Simón</p>
             <!-- <div>
@@ -202,5 +225,6 @@
         </div>
     </footer>
     <script type="module" src="/src/main.jsx"></script>
-    </body>
+</body>
+
 </html>
