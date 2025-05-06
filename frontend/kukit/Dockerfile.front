@@ -1,15 +1,7 @@
-FROM kukitfrontend:latest 
-
+FROM node:20-alpine
 WORKDIR /app
-
 COPY package*.json ./
-COPY package*.json ./
-
-# Install dependencies (including dev dependencies)
 RUN npm install
-
 COPY . .
-
 EXPOSE 5173
-
-# CMD ["npm", "run", "dev"]
+CMD ["npm", "run", "dev"]

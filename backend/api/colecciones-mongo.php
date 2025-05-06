@@ -19,7 +19,7 @@ $recetas = {
     ],
     "idUsuario": "usuario456",
     "compartido": true,
-    "categorias": ["italiana", "rápida"],
+    "categorias": ["italiana", "rápida", "kid friendly", "bajo en grasas", "sin gluten", "proteico"],
     "tiempo_estimado": "15 min"
 }
 

@@ -21,11 +21,12 @@ services:
     container_name: kukit_frontend
     volumes:
       - ./frontend/kukit:/app
+      - /app/node_modules
     ports:
       - "5173:5173"
     networks:
       - kukit_net
-    command: npm run dev
+    command: sh -c "npm install && npm run dev"
 
   php:
     build:
