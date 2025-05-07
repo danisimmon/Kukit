@@ -1,4 +1,4 @@
-:root{
+:root {
     --primary-color: #C33333;
     --dark-primary-color: #922020;
     --secondary-color: #D9D9D9;
@@ -29,7 +29,8 @@ button {
 
 /* hover de .btn-reservation */
 button:hover {
-    background-color: var(--primary-color); /* Más translúcido */
+    background-color: var(--primary-color);
+    /* Más translúcido */
     transform: scale(1.05);
     box-shadow: 0px 0px 10px var(--dark-primary-color);
 }
@@ -39,16 +40,22 @@ input {
     border-radius: 10px;
     border: 1px solid rgba(0, 0, 0, 0.62);
     background: #FFF;
-    font-size: 14px; /* Tamaño del texto dentro del input */
-    color: #000; /* Color del texto dentro del input */
-    font-weight: 400; /* Peso del texto dentro del input */
-    padding: 10px; /* Espaciado interno para que el texto no quede pegado */
+    font-size: 14px;
+    /* Tamaño del texto dentro del input */
+    color: #000;
+    /* Color del texto dentro del input */
+    font-weight: 400;
+    /* Peso del texto dentro del input */
+    padding: 10px;
+    /* Espaciado interno para que el texto no quede pegado */
 }
 
 input:focus {
-    color: #333; /* Un color más oscuro para mejorar la visibilidad */
-    font-weight: 500; /* Hacerlo un poco más marcado al escribir */
-}   
+    color: #333;
+    /* Un color más oscuro para mejorar la visibilidad */
+    font-weight: 500;
+    /* Hacerlo un poco más marcado al escribir */
+}
 
 header {
     display: flex;
@@ -59,9 +66,10 @@ header {
     justify-content: space-between;
     align-items: center;
     place-self: center;
+    border-bottom: var(--text-color) solid 1px;
 }
 
-#hamburger-menu{
+#hamburger-menu {
     display: none;
     cursor: pointer;
     z-index: 200;
@@ -107,7 +115,7 @@ header nav ul li a::after {
     bottom: 0;
     left: -100%;
     background-color: var(--burning-coral);
-    transition: 
+    transition:
         left var(--nav-transition-speed) cubic-bezier(0.4, 0, 0.2, 1),
         background-color var(--nav-transition-speed) ease;
 }
@@ -240,7 +248,8 @@ header .contenedor-header .sign-up:hover {
     height: auto;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
     opacity: 1;
-    transform: scale(1); /* Asegura que no esté minimizado */
+    transform: scale(1);
+    /* Asegura que no esté minimizado */
     transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
@@ -266,14 +275,30 @@ header .contenedor-header .sign-up:hover {
     justify-content: center;
     align-items: flex-start;
     gap: 10px;
-    width: 95%;
+    width: 5%;
 }
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+/* .aceptar-terminos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 95%;
+} */
 
 #inicio-google {
     background-color: var(--background-color);
     color: var(--text-color);
     border: 1px solid rgba(0, 0, 0, 0.62);
 }
+
 .contenedor-email-password {
     display: flex;
     flex-direction: column;
@@ -410,7 +435,8 @@ footer .contenedor-footer div p {
     margin-bottom: 30px;
 }
 
-footer .contenedor-footer div figure > img, footer .contenedor-footer div a > img {
+footer .contenedor-footer div figure>img,
+footer .contenedor-footer div a>img {
     width: 52px !important;
     height: 52px !important;
 }
@@ -464,6 +490,7 @@ footer hr {
     background-color: var(--background-color);
     border-radius: 8px;
 }
+
 .img-hero {
     width: 100vw;
     height: 450px;
@@ -480,9 +507,9 @@ footer hr {
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
-  
-  .btn-reservation {
+}
+
+.btn-reservation {
     margin-top: 20px;
     padding: 12px 24px;
     border: none;
@@ -490,4 +517,103 @@ footer hr {
     font-weight: bold;
     cursor: pointer;
     width: 50%;
+}
+
+/* APARTADO DE RECETAS */
+.titulo-pagina {
+    display: flex;
+    margin-right: auto;
+    gap: 10px;
+    padding: 20px;
+    background-color: var(--background-color);
+    border-radius: 8px;
+}
+
+.linea-vertical {
+    width: 2px;
+    /* grosor de la línea */
+    height: 50px;
+    /* largo de la línea */
+    background-color: var(--primary-color);
+    /* color de la línea */
+}
+
+.numero-recetas{
+    color: var(--primary-color)
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+}
+.tarjetas{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+.tarjeta{
+    width: 250px;
+    height: auto;
+    background-color: var(--background-color);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+    cursor: pointer;
+}
+.tarjeta:hover{
+    transform: scale(1.05);
+}
+.imagen-receta-tarjeta{
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+/* .tarjeta img{
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+} */
+.tarjeta h3{
+    margin: 10px 0;
+    font-size: 1.2em;
+    text-align: center;
+    margin-right: 60%;
+}
+.tarjeta p{
+    font-size: 0.9em;
+    text-align: center;
+}
+.tarjeta a{
+    text-decoration: none;
+    color: #C33333;
+    font-weight: bold;
+    margin-top: 10px;
+}
+.tarjeta a:hover{
+    text-decoration: underline;
+    
+}
+
+.icono-bookmark {
+    position: relative;
+    bottom: 10%;
+    margin-left: 70%;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    transition: all 0.3s ease;
+    background-image: url("img/bookmark.png");
   }
+  
+.icono-bookmark:hover {
+    background-image: url("img/bookmark-relleno.png");
+}
