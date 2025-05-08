@@ -11,46 +11,134 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"
         defer></script>
-
+    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/productos.css">
 </head>
 
 <body>
-    <div class="container">
-        <div class="titulo">
-            <h2>Recetas</h2>
+    <div id="root"></div>
+    <header>
+        <a href="./index.html" id="logo-header">
+            <img src="img/logo_kukit.png" alt="" id="logo-header">
+        </a>
+        <button id="hamburger-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <nav>
+            <ul>
+                <li><a href="productos.html">Recetas</a></li>
+                <li><a href="">Lista de la compra</a></li>
+                <li><a href="">Plan de alimentación</a></li>
+            </ul>
+        </nav>
+        <div class="contenedor-header">
+            <button class="sign-in" id="sign-in">Iniciar sesión</button>
+            <button class="sign-up" id="sign-up">Regístrate</button>
         </div>
+        <div id="pop-up"></div>
+        <!-- <div class="pop-up-sign-up" id="pop-up-sign-up">
+            <section class="contenedor-sign-up" id="contenedor-sign-up">
+                <figure>
+                    <a href=""><img src="img/logo_kukit.png" alt="logo de kukit"></a>
+                </figure>
+
+                <h1>CREAR CUENTA</h1>
+                <hr class="linea-inicio-sesion">
+                <form action="" id="sign-up-form">
+
+                    <div>
+                        <label for="email-sign-up">Correo electrónico:</label>
+                        <input type="email" name="email-sign-up" id="email-sign-up">
+                    </div>
+
+                    <div>
+                        <label for="password-sign-up">Contraseña:</label>
+                        <input type="password" name="password-sign-up" id="password-sign-up">
+                    </div>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="recordarme" id="recordarme">
+                        <span>Recordarme</span>
+                    </label>
+
+                    <p class="aceptar-terminos">
+                        Al hacer clic en «Aceptar y crear cuenta», aceptas las <b><u>Condiciones de
+                                uso</u></b>, la <b><u>Política de privacidad</u></b> y la <b><u>Política de
+                                cookies</u></b> de Kukit
+                    </p>
+
+                    <button type="submit" class="botones-inicio-sesion">Aceptar y crear cuenta</button>
+                </form>
+                <p>¿Ya tienes cuenta?</p>
+                <button class="botones-inicio-sesion" id="inicio-google">Iniciar sesión</button>
+
+                <hr>
+
+            </section>
+        </div> -->
+
+        <!-- <div class="pop-up-sign-in" id="pop-up-sign-in">
+            <section class="contenedor-sign-in" id="contenedor-sign-in">
+                <figure>
+                    <a href="index.html"><img src="img/logo_kukit.png" alt="Logo de Kukit"></a>
+                </figure>
+
+                <h1>INICIAR SESIÓN</h1>
+                <hr class="linea-inicio-sesion">
+
+                <hr>
+
+                <form>
+                    <div class="contenedor-email-password">
+                        <label for="email-sign-in" id="mail" class="mail">Correo electrónico:</label>
+                        <input type="email" name="email-sign-in" id="email-sign-in">
+                        <span id="errorEmail"></span>
+                    </div>
+
+                    <div class="contenedor-email-password">
+                        <label for="password-sign-in" class="password-sign-in">Contraseña:</label>
+                        <input type="password" name="password-sign-in" id="password-sign-in">
+                        <span id="errorPassword"></span>
+                    </div>
+
+                    <button class="botones-inicio-sesion">Iniciar sesión</button>
+
+                </form>
+                <button class="botones-inicio-sesion" id="inicio-google">Iniciar sesión con Google</button>
+            </section>
+        </div> -->
+    </header>
+    <div class="container">
+        <div class="titulo-pagina">
+            <h2>Recetas</h2>
+            <div class="linea-vertical"></div>
+            <h2 class="numero-recetas">4 recetas</h2>
+        </div>
+
         <div class="tarjetas">
             <div class="tarjeta">
-                <img src="img/comida.jpg" alt="Receta 1">
+                <img src="img/comida.jpg" class="imagen-receta-tarjeta" alt="Receta 1">
                 <h3>Receta 1</h3>
-                <p>Descripción de la receta 1.</p>
-                <a class="btn" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
-                    aria-controls="offcanvasExample">Ver receta</a>
+                <img src="img/bookmark.png" class="icono-bookmark" alt="Guardar">
             </div>
 
             <div class="tarjeta">
-                <img src="img/comida.jpg" alt="Receta 1">
+                <img src="img/comida.jpg" class="imagen-receta-tarjeta" alt="Receta 1">
                 <h3>Receta 1</h3>
-                <p>Descripción de la receta 1.</p>
-                <a class="btn" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
-                    aria-controls="offcanvasExample">Ver receta</a>
+                <img src="img/bookmark.png" class="icono-bookmark" alt="Guardar">
             </div>
 
             <div class="tarjeta">
-                <img src="img/comida.jpg" alt="Receta 1">
+                <img src="img/comida.jpg" class="imagen-receta-tarjeta" alt="Receta 1">
                 <h3>Receta 1</h3>
-                <p>Descripción de la receta 1.</p>
-                <a class="btn" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
-                    aria-controls="offcanvasExample">Ver receta</a>
+                <img src="img/bookmark.png" class="icono-bookmark" alt="Guardar">
             </div>
 
             <div class="tarjeta">
-                <img src="img/comida.jpg" alt="Receta 1">
+                <img src="img/comida.jpg" class="imagen-receta-tarjeta" alt="Receta 1">
                 <h3>Receta 1</h3>
-                <p>Descripción de la receta 1.</p>
-                <a class="btn" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
-                    aria-controls="offcanvasExample">Ver receta</a>
+                <img src="img/bookmark.png" class="icono-bookmark" alt="Guardar">
             </div>
         </div>
     </div>
@@ -98,5 +186,16 @@
     </div>
 
 </body>
+<!-- <script>
+    const bookmark = document.querySelector('.icono-bookmark');
+
+    bookmark.addEventListener('mouseenter', () => {
+        bookmark.src = 'img/bookmark-relleno.png';
+    });
+
+    bookmark.addEventListener('mouseleave', () => {
+        bookmark.src = 'img/bookmark.png';
+    });
+</script> -->
 
 </html>
