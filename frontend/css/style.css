@@ -617,3 +617,68 @@ footer hr {
 .icono-bookmark:hover {
     background-image: url("img/bookmark-relleno.png");
 }
+
+/* Lista de la compra */
+
+.linea-separacion-compra{
+    
+    height: 5px;
+    /* largo de la línea */
+    background-color: var(--primary-color);
+    /* color de la línea */
+}
+
+.offcanvas-body li{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 5px;
+    background-color: var(--background-color);
+    border-radius: 8px;
+}
+.offcanvas-body h3{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 5px;
+    background-color: var(--background-color);
+    border-radius: 8px;
+}
+.offcanvas-body li:hover{
+    background-color: var(--primary-color);
+    color: var(--background-color);
+    cursor: pointer;
+}
+
+.offcanvas-body {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    width: 90%;
+    max-height: 90%;
+    border-radius: 10px;
+    border: var(--primary-color) solid 1px;
+}
+
+.botones-lista-compra {
+    display: flex;
+    flex-direction: column; /* Coloca los botones en columna */
+    align-items: center; /* Centra horizontalmente */
+    gap: 12px; /* Espacio vertical entre botones */
+    margin-top: 20px;
+  }
+
+.botones-inversos {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    border: 1px solid var(--primary-color);
+}
+.botones-inversos:hover{
+    background-color: var(--background-color);
+    color: var(--primary-colorext-color);
+    border: 1px solid var(--primary-color);
+}
