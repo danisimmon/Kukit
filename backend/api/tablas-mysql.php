@@ -100,114 +100,115 @@ $sql = "CREATE TABLE IF NOT EXISTS productos (
 
 mysqli_query($conexion, $sql);
 
-mysqli_query($conexion, "INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES 
-('Tomate', 'Alimentación seca', 'kg', 2.11),
-('Lechuga', 'Bebidas', 'litros', 2.25),
-('Cebolla', 'Verduras', 'unidad', 1.52),
-('Zanahoria', 'Carne', 'unidad', 5.01),
-('Pimiento', 'Fruta', 'kg', 1.87),
-('Judías verdes', 'Despensa', 'unidad', 3.82),
-('Espinacas', 'Despensa', 'unidad', 5.81),
-('Acelgas', 'Alimentación seca', 'pack', 2.67),
-('Pepino', 'Panadería', 'unidad', 3.11),
-('Brócoli', 'Pescado', 'kg', 4.03),
-('Lentejas', 'Legumbres', 'kg', 2.95),
-('Garbanzos', 'Panadería', 'unidad', 4.75)
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Alubias blancas', 'Lácteos', 'litros', 1.44);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Soja', 'Lácteos', 'unidad', 5.26);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Judión', 'Fruta', 'kg', 7.81);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Carne picada', 'Huevos', 'docena', 4.66);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Filete de ternera', 'Verduras', 'kg', 8.42);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Pollo entero', 'Fruta', 'unidad', 9.11);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Muslos de pollo', 'Huevos', 'docena', 7.29);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Chuletas de cerdo', 'Carne', 'unidad', 5.23);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Salmón', 'Fruta', 'kg', 4.72);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Merluza', 'Huevos', 'docena', 8.77);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Atún fresco', 'Huevos', 'docena', 6.81);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Calamares', 'Fruta', 'kg', 6.57);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Gambas', 'Huevos', 'docena', 4.98);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Manzana', 'Panadería', 'unidad', 3.33);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Pera', 'Panadería', 'unidad', 2.62);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Plátano', 'Panadería', 'unidad', 5.17);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Naranja', 'Legumbres', 'pack', 3.69);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Mandarina', 'Carne', 'kg', 7.11);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Leche entera', 'Panadería', 'unidad', 4.65);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Leche semidesnatada', 'Alimentación seca', 'kg', 6.77);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Yogur natural', 'Verduras', 'unidad', 7.62);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Yogur de sabores', 'Fruta', 'unidad', 2.95);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Queso curado', 'Alimentación seca', 'kg', 2.72);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Huevos camperos', 'Huevos', 'docena', 2.52);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Huevos blancos', 'Huevos', 'docena', 6.99);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Huevos ecológicos', 'Huevos', 'docena', 6.78);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Agua mineral', 'Limpieza', 'litros', 1.28);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Zumo de naranja', 'Huevos', 'docena', 7.31);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Refresco de cola', 'Huevos', 'docena', 5.97);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Refresco de limón', 'Verduras', 'unidad', 3.63);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Cerveza', 'Huevos', 'docena', 3.08);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Vino tinto', 'Pescado', 'kg', 2.75);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Vino blanco', 'Verduras', 'kg', 3.93);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Pan de molde', 'Despensa', 'pack', 6.32);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Pan integral', 'Lácteos', 'pack', 3.47);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Bollos', 'Lácteos', 'unidad', 3.01);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Magdalenas', 'Legumbres', 'kg', 8.18);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Harina', 'Lácteos', 'litros', 2.09);INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Cereal de desayuno', 'Lácteos', 'pack', 3.44);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Galletas', 'Alimentación seca', 'kg', 1.92);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Chocolates', 'Fruta', 'unidad', 3.87);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Patatas', 'Verduras', 'kg', 2.12);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Arroz', 'Legumbres', 'kg', 1.54);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Pasta', 'Despensa', 'kg', 1.76);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Aceite de oliva', 'Alimentación seca', 'litros', 6.34);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Vinagre', 'Alimentación seca', 'litros', 1.47);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Sal', 'Lácteos', 'kg', 0.95);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Azúcar', 'Despensa', 'kg', 2.14);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Harina de trigo', 'Panadería', 'kg', 1.66);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Levadura', 'Lácteos', 'unidad', 0.78);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Chocolate en polvo', 'Panadería', 'kg', 3.51);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Café', 'Alimentación seca', 'kg', 8.94);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Té', 'Bebidas', 'kg', 4.32);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Galletas saladas', 'Alimentación seca', 'kg', 2.35);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Patatas fritas', 'Panadería', 'pack', 1.53);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Snacks', 'Bebidas', 'unidad', 2.23);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Cerveza sin alcohol', 'Bebidas', 'litros', 2.18);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Vino rosado', 'Bebidas', 'litros', 5.01);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Vino espumoso', 'Bebidas', 'litros', 6.85);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Gaseosa', 'Bebidas', 'litros', 1.67);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Leche de almendras', 'Lácteos', 'litros', 2.99);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Leche de soja', 'Lácteos', 'litros', 2.45);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Lata de atún', 'Pescado', 'unidad', 1.59);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Lata de sardinas', 'Pescado', 'unidad', 1.23);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Lata de mejillones', 'Pescado', 'unidad', 2.41);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Lata de berberechos', 'Pescado', 'unidad', 1.89);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Sopa enlatada', 'Despensa', 'unidad', 1.68);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Puré de patatas', 'Despensa', 'unidad', 3.16);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Caldo de pollo', 'Legumbres', 'litros', 2.75);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Caldo de verduras', 'Legumbres', 'litros', 2.50);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Puré de verduras', 'Legumbres', 'unidad', 1.98);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Salsa de tomate', 'Alimentación seca', 'litros', 1.69);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Ketchup', 'Alimentación seca', 'litros', 2.40);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Mayonesa', 'Alimentación seca', 'litros', 3.29);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Aceite de girasol', 'Alimentación seca', 'litros', 1.45);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Vinagre balsámico', 'Alimentación seca', 'litros', 3.18);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Miel', 'Alimentación seca', 'kg', 5.62);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Mostaza', 'Alimentación seca', 'kg', 1.85);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Pechugas de pollo', 'Carne', 'kg', 6.90);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Pechugas de pavo', 'Carne', 'kg', 7.50);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Filetes de merluza', 'Pescado', 'kg', 9.85);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Bacalao', 'Pescado', 'kg', 10.25);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Pargo', 'Pescado', 'kg', 12.30);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Trucha', 'Pescado', 'kg', 6.42);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Salmón ahumado', 'Pescado', 'kg', 15.98);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Langostinos', 'Pescado', 'kg', 14.11);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Pulpo', 'Pescado', 'kg', 18.77);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Calamares congelados', 'Pescado', 'kg', 10.50);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Gambas congeladas', 'Pescado', 'kg', 13.99);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Aceite de coco', 'Alimentación seca', 'litros', 6.99);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Aceite de palma', 'Alimentación seca', 'litros', 4.22);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Harina de avena', 'Alimentación seca', 'kg', 4.68);
--- INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Pan rallado', 'Alimentación seca', 'kg', 2.56);
+mysqli_query($conexion, "INSERT INTO productos (nombre, categoria, unidad) VALUES 
+('Tomate', 'Alimentación seca', 'kg'),
+('Lechuga', 'Bebidas', 'litros'),
+('Cebolla', 'Verduras', 'unidad'),
+('Zanahoria', 'Carne', 'unidad'),
+('Pimiento', 'Fruta', 'kg'),
+('Judías verdes', 'Despensa', 'unidad'),
+('Espinacas', 'Despensa', 'unidad'),
+('Acelgas', 'Alimentación seca', 'pack'),
+('Pepino', 'Panadería', 'unidad'),
+('Brócoli', 'Pescado', 'kg'),
+('Lentejas', 'Legumbres', 'kg'),
+('Garbanzos', 'Panadería', 'unidad'),
+('Alubias blancas', 'Lácteos', 'litros'),
+('Soja', 'Lácteos', 'unidad'),
+('Judión', 'Fruta', 'kg'),
+('Carne picada', 'Huevos', 'docena'),
+('Filete de ternera', 'Verduras', 'kg'),
+('Pollo entero', 'Fruta', 'unidad'),
+('Muslos de pollo', 'Huevos', 'docena'),
+('Chuletas de cerdo', 'Carne', 'unidad'),
+('Salmón', 'Fruta', 'kg'),
+('Merluza', 'Huevos', 'docena'),
+('Atún fresco', 'Huevos', 'docena'),
+('Calamares', 'Fruta', 'kg'),
+('Gambas', 'Huevos', 'docena'),
+('Manzana', 'Panadería', 'unidad'),
+('Pera', 'Panadería', 'unidad'),
+('Plátano', 'Panadería', 'unidad'),
+('Naranja', 'Legumbres', 'pack'),
+('Mandarina', 'Carne', 'kg'),
+('Leche entera', 'Panadería', 'unidad'),
+('Leche semidesnatada', 'Alimentación seca', 'kg'),
+('Yogur natural', 'Verduras', 'unidad'),
+('Yogur de sabores', 'Fruta', 'unidad'),
+('Queso curado', 'Alimentación seca', 'kg'),
+('Huevos camperos', 'Huevos', 'docena'),
+('Huevos blancos', 'Huevos', 'docena'),
+('Huevos ecológicos', 'Huevos', 'docena'),
+('Agua mineral', 'Limpieza', 'litros'),
+('Zumo de naranja', 'Huevos', 'docena'),
+('Refresco de cola', 'Huevos', 'docena'),
+('Refresco de limón', 'Verduras', 'unidad'),
+('Cerveza', 'Huevos', 'docena'),
+('Vino tinto', 'Pescado', 'kg'),
+('Vino blanco', 'Verduras', 'kg'),
+('Pan de molde', 'Despensa', 'pack'),
+('Pan integral', 'Lácteos', 'pack'),
+('Bollos', 'Lácteos', 'unidad'),
+('Magdalenas', 'Legumbres', 'kg'),
+('Harina', 'Lácteos', 'litros'),
+('Cereal de desayuno', 'Lácteos', 'pack'),
+('Galletas', 'Alimentación seca', 'kg'),
+('Chocolates', 'Fruta', 'unidad'),
+('Patatas', 'Verduras', 'kg'),
+('Arroz', 'Legumbres', 'kg'),
+('Pasta', 'Despensa', 'kg'),
+('Aceite de oliva', 'Alimentación seca', 'litros'),
+('Vinagre', 'Alimentación seca', 'litros'),
+('Sal', 'Lácteos', 'kg'),
+('Azúcar', 'Despensa', 'kg'),
+('Harina de trigo', 'Panadería', 'kg'),
+('Levadura', 'Lácteos', 'unidad'),
+('Chocolate en polvo', 'Panadería', 'kg'),
+('Café', 'Alimentación seca', 'kg'),
+('Té', 'Bebidas', 'kg'),
+('Galletas saladas', 'Alimentación seca', 'kg'),
+('Patatas fritas', 'Panadería', 'pack'),
+('Snacks', 'Bebidas', 'unidad'),
+('Cerveza sin alcohol', 'Bebidas', 'litros'),
+('Vino rosado', 'Bebidas', 'litros'),
+('Vino espumoso', 'Bebidas', 'litros'),
+('Gaseosa', 'Bebidas', 'litros'),
+('Leche de almendras', 'Lácteos', 'litros'),
+('Leche de soja', 'Lácteos', 'litros'),
+('Lata de atún', 'Pescado', 'unidad'),
+('Lata de sardinas', 'Pescado', 'unidad'),
+('Lata de mejillones', 'Pescado', 'unidad'),
+('Lata de berberechos', 'Pescado', 'unidad'),
+('Sopa enlatada', 'Despensa', 'unidad'),
+('Puré de patatas', 'Despensa', 'unidad'),
+('Caldo de pollo', 'Legumbres', 'litros'),
+('Caldo de verduras', 'Legumbres', 'litros'),
+('Puré de verduras', 'Legumbres', 'unidad'),
+('Salsa de tomate', 'Alimentación seca', 'litros'),
+('Ketchup', 'Alimentación seca', 'litros'),
+('Mayonesa', 'Alimentación seca', 'litros'),
+('Aceite de girasol', 'Alimentación seca', 'litros'),
+('Vinagre balsámico', 'Alimentación seca', 'litros'),
+('Miel', 'Alimentación seca', 'kg'),
+('Mostaza', 'Alimentación seca', 'kg'),
+('Pechugas de pollo', 'Carne', 'kg'),
+('Pechugas de pavo', 'Carne', 'kg'),
+('Filetes de merluza', 'Pescado', 'kg'),
+('Bacalao', 'Pescado', 'kg'),
+('Pargo', 'Pescado', 'kg'),
+('Trucha', 'Pescado', 'kg'),
+('Salmón ahumado', 'Pescado', 'kg'),
+('Langostinos', 'Pescado', 'kg'),
+('Pulpo', 'Pescado', 'kg'),
+('Calamares congelados', 'Pescado', 'kg'),
+('Gambas congeladas', 'Pescado', 'kg'),
+('Aceite de coco', 'Alimentación seca', 'litros'),
+('Aceite de palma', 'Alimentación seca', 'litros'),
+('Harina de avena', 'Alimentación seca', 'kg'),
+('Pan rallado', 'Alimentación seca', 'kg')
 ");
 
-
+//Lista de la compra
 $sql = "CREATE TABLE IF NOT EXISTS listacompra_productos (
     id INT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     id_lista_compra INT(20) UNSIGNED NOT NULL,
