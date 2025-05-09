@@ -4,7 +4,7 @@ import axios from 'axios';
 const Login = () => {
   const [formData, setFormData] = useState({
     correo: '',
-    contraseña: ''
+    password: '' 
   });
 
   const [mensaje, setMensaje] = useState('');
@@ -22,10 +22,11 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const respuesta = await axios.post('http://localhost/ruta-al-backend.php', formData, {
+      const respuesta = await axios.post('localhost/backend/api/login/login.php', formData, {
         headers: {
           'Content-Type': 'application/json'
-        }
+        },
+        withCredentials: true
       });
 
       if (respuesta.data.success) {
@@ -58,12 +59,12 @@ const Login = () => {
           />
         </div>
         <div>
-          <label htmlFor="contraseña">Contraseña:</label>
+          <label htmlFor="password">Contraseña:</label>
           <input
             type="password"
-            id="contraseña"
-            name="contraseña"
-            value={formData.contraseña}
+            id="password"
+            name="password"
+            value={formData.password}
             onChange={manejarCambio}
             required
           />
