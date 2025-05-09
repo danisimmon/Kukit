@@ -4,51 +4,52 @@ include 'conecta-mysql.php';
 
 $sql = "CREATE TABLE IF NOT EXISTS usuario (
     id INT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL,
     password VARCHAR(100) NOT NULL
 )";
 
 mysqli_query($conexion, $sql);
 
-// Insertamos usuarios por defecto
+// Insertamos usuarios
 $password = password_hash('TrenZapato@81', PASSWORD_DEFAULT);
-$sql = "INSERT INTO usuario (email, password) VALUES ('pepeviyuela@gmail.com', '$password')";
+$sql = "INSERT INTO usuario (nombre, email, password) VALUES ('Pepe Viyuela', 'pepeviyuela@gmail.com', '$password')";
 mysqli_query($conexion, $sql);
 
 $password = password_hash('FuegoTijera@37', PASSWORD_DEFAULT);
-$sql = "INSERT INTO usuario (email, password) VALUES ('penelopecruz@hotmail.es', '$password')";
+$sql = "INSERT INTO usuario (nombre, email, password) VALUES ('Penélope Cruz', 'penelopecruz@hotmail.es', '$password')";
 mysqli_query($conexion, $sql);
 
 $password = password_hash('MonoTrampa#48', PASSWORD_DEFAULT);
-$sql = "INSERT INTO usuario (email, password) VALUES ('koisevilla@gmail.com', '$password')";
+$sql = "INSERT INTO usuario (nombre, email, password) VALUES ('Koi Sevilla', 'koisevilla@gmail.com', '$password')";
 mysqli_query($conexion, $sql);
 
 $password = password_hash('GuitarraRosa+77', PASSWORD_DEFAULT);
-$sql = "INSERT INTO usuario (email, password) VALUES ('farrukito@outlook.com', '$password')";
+$sql = "INSERT INTO usuario (nombre, email, password) VALUES ('Farrukito', 'farrukito@outlook.com', '$password')";
 mysqli_query($conexion, $sql);
 
 $password = password_hash('PezCereza#66', PASSWORD_DEFAULT);
-$sql = "INSERT INTO usuario (email, password) VALUES ('elxokas@yahoo.es', '$password')";
+$sql = "INSERT INTO usuario (nombre, email, password) VALUES ('El Xokas', 'elxokas@yahoo.es', '$password')";
 mysqli_query($conexion, $sql);
 
 $password = password_hash('SillaCometa@19', PASSWORD_DEFAULT);
-$sql = "INSERT INTO usuario (email, password) VALUES ('jamorant@hotmail.com', '$password')";
+$sql = "INSERT INTO usuario (nombre, email, password) VALUES ('Ja Morant', 'jamorant@hotmail.com', '$password')";
 mysqli_query($conexion, $sql);
 
 $password = password_hash('ToroMochila#08', PASSWORD_DEFAULT);
-$sql = "INSERT INTO usuario (email, password) VALUES ('andylucas@hotmail.com', '$password')";
+$sql = "INSERT INTO usuario (nombre, email, password) VALUES ('Andy y Lucas', 'andylucas@hotmail.com', '$password')";
 mysqli_query($conexion, $sql);
 
 $password = password_hash('RanaVelcro@33', PASSWORD_DEFAULT);
-$sql = "INSERT INTO usuario (email, password) VALUES ('operacioncamaron@gmail.es', '$password')";
+$sql = "INSERT INTO usuario (nombre, email, password) VALUES ('Operación Camarón', 'operacioncamaron@gmail.es', '$password')";
 mysqli_query($conexion, $sql);
 
 $password = password_hash('CieloGalleta_96', PASSWORD_DEFAULT);
-$sql = "INSERT INTO usuario (email, password) VALUES ('badbunny@yahoo.com', '$password')";
+$sql = "INSERT INTO usuario (nombre, email, password) VALUES ('Bad Bunny', 'badbunny@yahoo.com', '$password')";
 mysqli_query($conexion, $sql);
 
 $password = password_hash('TrucoSombra$74', PASSWORD_DEFAULT);
-$sql = "INSERT INTO usuario (email, password) VALUES ('fernandoalonso@hotmail.es', '$password')";
+$sql = "INSERT INTO usuario (nombre, email, password) VALUES ('Fernando Alonso', 'fernandoalonso@hotmail.es', '$password')";
 mysqli_query($conexion, $sql);
 
 
@@ -71,6 +72,7 @@ mysqli_query($conexion, $sql);
 // $id_tutor3 = $id_tutor1 + 2;
 // $id_tutor4 = $id_tutor1 + 3;
 
+//Tabla lista compra
 $sql = "CREATE TABLE IF NOT EXISTS lista_compra (
     id INT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     id_usuario INT(20) UNSIGNED NOT NULL,
@@ -93,8 +95,7 @@ $sql = "CREATE TABLE IF NOT EXISTS productos (
     id INT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
     categoria VARCHAR(100) NOT NULL,
-    unidad VARCHAR(50) NOT NULL,
-    precio_estimado DECIMAL(6,2) NOT NULL
+    unidad VARCHAR(50) NOT NULL
 )";
 
 mysqli_query($conexion, $sql);
@@ -207,17 +208,11 @@ mysqli_query($conexion, "INSERT INTO productos (nombre, categoria, unidad, preci
 ");
 
 
-
-
-
-
-
 $sql = "CREATE TABLE IF NOT EXISTS listacompra_productos (
     id INT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     id_lista_compra INT(20) UNSIGNED NOT NULL,
     id_producto INT(20) UNSIGNED NOT NULL,
     cantidad DECIMAL(6,2) NOT NULL,
-    comprado BOOLEAN NOT NULL DEFAULT 0,
     FOREIGN KEY (id_lista_compra) REFERENCES lista_compra(id),
     FOREIGN KEY (id_producto) REFERENCES productos(id)
 )";
