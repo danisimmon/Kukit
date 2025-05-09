@@ -4,51 +4,52 @@ include_once 'conecta-mysql.php';
 
 $sql = "CREATE TABLE IF NOT EXISTS usuario (
     id INT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL,
     password VARCHAR(100) NOT NULL
     )";
 
 mysqli_query($conexion, $sql);
 
-// Insertamos usuarios por defecto
+// Insertamos usuarios
 $password = password_hash('TrenZapato@81', PASSWORD_DEFAULT);
-$sql = "INSERT INTO usuario (email, password) VALUES ('pepeviyuela@gmail.com', '$password')";
+$sql = "INSERT INTO usuario (nombre, email, password) VALUES ('Pepe Viyuela', 'pepeviyuela@gmail.com', '$password')";
 mysqli_query($conexion, $sql);
 
 $password = password_hash('FuegoTijera@37', PASSWORD_DEFAULT);
-$sql = "INSERT INTO usuario (email, password) VALUES ('penelopecruz@hotmail.es', '$password')";
+$sql = "INSERT INTO usuario (nombre, email, password) VALUES ('Penélope Cruz', 'penelopecruz@hotmail.es', '$password')";
 mysqli_query($conexion, $sql);
 
 $password = password_hash('MonoTrampa#48', PASSWORD_DEFAULT);
-$sql = "INSERT INTO usuario (email, password) VALUES ('koisevilla@gmail.com', '$password')";
+$sql = "INSERT INTO usuario (nombre, email, password) VALUES ('Koi Sevilla', 'koisevilla@gmail.com', '$password')";
 mysqli_query($conexion, $sql);
 
 $password = password_hash('GuitarraRosa+77', PASSWORD_DEFAULT);
-$sql = "INSERT INTO usuario (email, password) VALUES ('farrukito@outlook.com', '$password')";
+$sql = "INSERT INTO usuario (nombre, email, password) VALUES ('Farrukito', 'farrukito@outlook.com', '$password')";
 mysqli_query($conexion, $sql);
 
 $password = password_hash('PezCereza#66', PASSWORD_DEFAULT);
-$sql = "INSERT INTO usuario (email, password) VALUES ('elxokas@yahoo.es', '$password')";
+$sql = "INSERT INTO usuario (nombre, email, password) VALUES ('El Xokas', 'elxokas@yahoo.es', '$password')";
 mysqli_query($conexion, $sql);
 
 $password = password_hash('SillaCometa@19', PASSWORD_DEFAULT);
-$sql = "INSERT INTO usuario (email, password) VALUES ('jamorant@hotmail.com', '$password')";
+$sql = "INSERT INTO usuario (nombre, email, password) VALUES ('Ja Morant', 'jamorant@hotmail.com', '$password')";
 mysqli_query($conexion, $sql);
 
 $password = password_hash('ToroMochila#08', PASSWORD_DEFAULT);
-$sql = "INSERT INTO usuario (email, password) VALUES ('andylucas@hotmail.com', '$password')";
+$sql = "INSERT INTO usuario (nombre, email, password) VALUES ('Andy y Lucas', 'andylucas@hotmail.com', '$password')";
 mysqli_query($conexion, $sql);
 
 $password = password_hash('RanaVelcro@33', PASSWORD_DEFAULT);
-$sql = "INSERT INTO usuario (email, password) VALUES ('operacioncamaron@gmail.es', '$password')";
+$sql = "INSERT INTO usuario (nombre, email, password) VALUES ('Operación Camarón', 'operacioncamaron@gmail.es', '$password')";
 mysqli_query($conexion, $sql);
 
 $password = password_hash('CieloGalleta_96', PASSWORD_DEFAULT);
-$sql = "INSERT INTO usuario (email, password) VALUES ('badbunny@yahoo.com', '$password')";
+$sql = "INSERT INTO usuario (nombre, email, password) VALUES ('Bad Bunny', 'badbunny@yahoo.com', '$password')";
 mysqli_query($conexion, $sql);
 
 $password = password_hash('TrucoSombra$74', PASSWORD_DEFAULT);
-$sql = "INSERT INTO usuario (email, password) VALUES ('fernandoalonso@hotmail.es', '$password')";
+$sql = "INSERT INTO usuario (nombre, email, password) VALUES ('Fernando Alonso', 'fernandoalonso@hotmail.es', '$password')";
 mysqli_query($conexion, $sql);
 
 
@@ -68,6 +69,7 @@ $sql = "CREATE TABLE IF NOT EXISTS password_reset (
 // $id_tutor3 = $id_tutor1 + 2;
 // $id_tutor4 = $id_tutor1 + 3;
 
+//Tabla lista compra
 $sql = "CREATE TABLE IF NOT EXISTS lista_compra (
     id INT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     id_usuario INT(20) UNSIGNED NOT NULL,
@@ -90,22 +92,33 @@ $sql = "CREATE TABLE IF NOT EXISTS productos (
     id INT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
     categoria VARCHAR(100) NOT NULL,
-    unidad VARCHAR(50) NOT NULL,
-    precio_estimado DECIMAL(6,2) NOT NULL
+    unidad VARCHAR(50) NOT NULL
 )";
 
 mysqli_query($conexion, $sql);
 
-mysqli_query($conexion, "INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Tomate', 'Alimentación seca', 'kg', 2.11);
-INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Lechuga', 'Bebidas', 'litros', 2.25);
-INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Cebolla', 'Verduras', 'unidad', 1.52);
-INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Zanahoria', 'Carne', 'unidad', 5.01);
-INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Pimiento', 'Fruta', 'kg', 1.87);
-INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Judías verdes', 'Despensa', 'unidad', 3.82);
-INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Espinacas', 'Despensa', 'unidad', 5.81);
-INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Acelgas', 'Alimentación seca', 'pack', 2.67);
-INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Pepino', 'Panadería', 'unidad', 3.11);
-INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Brócoli', 'Pescado', 'kg', 4.03);
+mysqli_query($conexion, "INSERT INTO productos (nombre, categoria, unidad) VALUES
+('Tomate', 'Alimentación seca', 'kg'),
+('Lechuga', 'Verduras', 'unidad'),
+('Cebolla', 'Verduras', 'unidad'),
+('Zanahoria', 'Carne', 'unidad'),
+('Pimiento', 'Fruta', 'kg'),
+('Judías verdes', 'Despensa', 'unidad'),
+('Espinacas', 'Despensa', 'unidad'),
+('Acelgas', 'Alimentación seca', 'pack'),
+('Pepino', 'Panadería', 'unidad'),
+('Brócoli', 'Pescado', 'kg')",
+('Lentejas', 'Legumbres', 'kg'),
+('Garbanzos', 'Panadería', 'unidad'),
+('Alubias blancas', 'Lácteos', 'litros'),
+('Soja', 'Lácteos', 'unidad'),
+('Judión', 'Fruta', 'kg'),
+('Carne picada', 'Huevos', 'docena'),
+('Filete de ternera', 'Verduras', 'kg'),
+('Pollo entero', 'Fruta', 'unidad'),
+('Muslos de pollo', 'Huevos', 'docena'),
+('Chuletas de cerdo', 'Carne', 'unidad')");
+// MIRAR API
 INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Lentejas', 'Legumbres', 'kg', 2.95);
 INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Garbanzos', 'Panadería', 'unidad', 4.75);
 INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Alubias blancas', 'Lácteos', 'litros', 1.44);
@@ -203,49 +216,54 @@ INSERT INTO productos (nombre, categoria, unidad, precio_estimado) VALUES ('Pan 
 ");
 
 
-
-
-
-
-
 $sql = "CREATE TABLE IF NOT EXISTS listacompra_productos (
     id INT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     id_lista_compra INT(20) UNSIGNED NOT NULL,
     id_producto INT(20) UNSIGNED NOT NULL,
     cantidad DECIMAL(6,2) NOT NULL,
-    comprado BOOLEAN NOT NULL DEFAULT 0,
     FOREIGN KEY (id_lista_compra) REFERENCES lista_compra(id),
     FOREIGN KEY (id_producto) REFERENCES productos(id)
 )";
 mysqli_query($conexion, $sql);
 
-$sql = "INSERT INTO listacompra_productos (id_lista_compra, id_producto, cantidad, comprado) VALUES
-(1, 1, 1, false),
-(1, 2, 2, true),
-(1, 3, 1, false),
-(1, 4, 1, false),
-(1, 5, 6, true),
-(1, 6, 1, false),
-(2, 26, 1, false),
-(2, 16, 2, true),
-(2, 18, 1, true),
-(2, 14, 1, true),
-(2, 27, 1, false),
-(2, 35, 1, true),
-(2, 10, 0.5, false),
-(3, 8, 2, true),
-(3, 42, 2, false),
-(3, 38, 1, true),
-(3, 15, 1, false),
-(3, 3, 2, true),
-(3, 9, 1, false),
-(4, 43, 2, true),
-(4, 38, 2, true),
-(4, 51, 1, false),
-(4, 48, 2, true),
-(4, 12, 2, true),
-(4, 33, 1, false),
-(4, 52, 2, true),
-(4, 50, 1, false)";
+$sql = "INSERT INTO listacompra_productos (id_lista_compra, id_producto, cantidad) VALUES
+(1, 1, 1),
+(1, 2, 2),
+(1, 3, 1),
+(1, 4, 1),
+(1, 5, 6),
+(1, 6, 1),
+(2, 26, 1),
+(2, 16, 2),
+(2, 18, 1),
+(2, 14, 1),
+(2, 27, 1),
+(2, 35, 1),
+(2, 10, 0.5),
+(3, 8, 2),
+(3, 42, 2),
+(3, 38, 1),
+(3, 15, 1),
+(3, 3, 2),
+(3, 9, 1),
+(4, 43, 2),
+(4, 38, 2),
+(4, 51, 1),
+(4, 48, 2),
+(4, 12, 2),
+(4, 33, 1),
+(4, 52, 2),
+(4, 50, 1);
+
+
+mysqli_query($conexion, $sql);
+
+// recetas guardas con id usuario, id documento MongoDB
+$sql = "CREATE TABLE IF NOT EXISTS recetas_guardadas (
+    id INT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT(20) UNSIGNED NOT NULL,
+    id_receta VARCHAR(100) NOT NULL,
+    FOREIGN KEY (id_usuario) REFERENCES usuario(id)
+)";
 
 mysqli_query($conexion, $sql);
