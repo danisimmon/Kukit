@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit;
     }
 
-    $sql = "SELECT * FROM usuarios WHERE correo = ?";
+    $sql = "SELECT * FROM usuario WHERE email = ?";
     $stmt = mysqli_prepare($conexion, $sql);
     $stmt->bind_param("s", $input['correo']);
     $stmt->execute();
@@ -28,10 +28,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (password_verify($input['password'], $user['password'])) {
             // Iniciar sesión y devolver el usuario
             session_start();
-            $_SESSION['user'] = $user;
+            $_SESSION['user']['id'] = $user['id'];
+            $_SESSION['user']['correo'] = $user['email'];
             $data['success'] = true;
             $data['message'] = "Inicio de sesión exitoso.";
-            $data['user'] = $user; // Devolver el usuario
+            $data['user'] = [
+                'correo' => $user['email'],
+            ];
         } else {
             $data['message'] = "Contraseña incorrecta.";
         }
@@ -41,4 +44,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 } else {
     $data['message'] = "Método no permitido.";
 }
+
+echo json_encode($data);
 

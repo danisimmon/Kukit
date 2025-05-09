@@ -1,6 +1,6 @@
 <?php 
 
-$host = "localhost";
+$host = "kukit_mysql";
 $username = "root";
 $password = "root";
 
@@ -8,6 +8,8 @@ $conexion = mysqli_connect($host, $username, $password);
 if(!$conexion){
     die("Error al conectar con la base de datos: " . mysqli_connect_error());
 } 
+
+date_default_timezone_set('Europe/Madrid');
 
 $sql = "SHOW DATABASES LIKE 'kukit'";
 $result = mysqli_query($conexion, $sql);

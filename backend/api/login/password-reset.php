@@ -10,10 +10,10 @@ if (!$input || empty($input['correo'])) {
     exit;
 }
 
-if($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $correo = $input['correo'];
 
-    $sql = "SELECT * FROM usuarios WHERE email = ?";
+    $sql = "SELECT * FROM usuario WHERE email = ?";
     $sql = $conexion->prepare($sql);
     $sql->bind_param("s", $correo);
     $sql->execute();
@@ -21,17 +21,48 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($query > 0) {
         $token = bin2hex(random_bytes(32));
-        $codigo_verificacion = bin2hex(random_bytes(4));
+        $codigo_verificacion = rand(100000, 999999); // Genera un código de verificación de 6 dígitos
 
-        $sql = "INSERT INTO password_reset (email, token, codigo_verificacion) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE token = ?, fecha = NOW()";
+        $sql = "INSERT INTO password_reset (email, token, codigo_verificacion, fecha) VALUES (?, ?, ?, ?) ON DUPLICATE KEY UPDATE token = ?, fecha = NOW()";
         $sql = $conexion->prepare($sql);
-        $sql->bind_param("ssss", $correo, $token, $codigo_verificacion, $token);
+        $fecha_actual = date("Y-m-d H:i:s"); // formato DATETIME de MySQL
+
+        $sql->bind_param("sssss", $correo, $token, $codigo_verificacion, $fecha_actual, $token);
         $sql->execute();
+
+        require_once '../../email-config.php'; // importa la función crearMailer
+
+        $reset_link = "localhost/restablecer.php?token=$token"; // crea enlace
+
+    //     try {
+    //         $mail = crearMailer();
+    //         $mail->addAddress($correo);
+    //         $mail->Subject = "Recupera tu contraseña";
+    //         $mail->Body = "
+    //     <h3>Solicitud de recuperación</h3>
+    //     <p>Tu código de verificación es: <strong>$codigo_verificacion</strong></p>
+    //     <p>Haz clic en el siguiente enlace para restablecer tu contraseña:</p>
+    //     <a href='$reset_link'>Restablece tu contraseña</a>
+    // ";
+    //         $mail->AltBody = "Código: $codigo_verificacion. Enlace: $reset_link";
+    //         $mail->send();
+
+    //         echo json_encode([
+    //             "success" => true,
+    //             "message" => "Se ha enviado un correo con las instrucciones para recuperar tu contraseña"
+    //         ]);
+    //     } catch (Exception $e) {
+    //         echo json_encode([
+    //             "success" => false,
+    //             "message" => "No se pudo enviar el correo. Error: " . $mail->ErrorInfo
+    //         ]);
+    //     }
 
         $reset_link = $token;
 
+
         echo json_encode([
-            "success" => true, 
+            "success" => true,
             "message" => "Se ha enviado un correo con las instrucciones para recuperar tu contraseña",
             "token" => $reset_link,
             "codigo_verificacion" => $codigo_verificacion
