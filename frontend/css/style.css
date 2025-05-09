@@ -538,23 +538,25 @@ footer hr {
     /* color de la línea */
 }
 
-.numero-recetas{
+.numero-recetas {
     color: var(--primary-color)
 }
 
-.container{
+.container {
     display: flex;
     flex-direction: column;
     align-items: center;
     height: 100vh;
 }
-.tarjetas{
+
+.tarjetas {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
     justify-content: center;
 }
-.tarjeta{
+
+.tarjeta {
     width: 250px;
     height: auto;
     background-color: var(--background-color);
@@ -567,38 +569,44 @@ footer hr {
     transition: transform 0.2s;
     cursor: pointer;
 }
-.tarjeta:hover{
+
+.tarjeta:hover {
     transform: scale(1.05);
 }
-.imagen-receta-tarjeta{
+
+.imagen-receta-tarjeta {
     width: 100%;
     height: auto;
     border-radius: 10px;
 }
+
 /* .tarjeta img{
     width: 100%;
     height: auto;
     border-radius: 10px;
 } */
-.tarjeta h3{
+.tarjeta h3 {
     margin: 10px 0;
     font-size: 1.2em;
     text-align: center;
     margin-right: 60%;
 }
-.tarjeta p{
+
+.tarjeta p {
     font-size: 0.9em;
     text-align: center;
 }
-.tarjeta a{
+
+.tarjeta a {
     text-decoration: none;
     color: #C33333;
     font-weight: bold;
     margin-top: 10px;
 }
-.tarjeta a:hover{
+
+.tarjeta a:hover {
     text-decoration: underline;
-    
+
 }
 
 .icono-bookmark {
@@ -612,23 +620,23 @@ footer hr {
     height: 24px;
     transition: all 0.3s ease;
     background-image: url("img/bookmark.png");
-  }
-  
+}
+
 .icono-bookmark:hover {
     background-image: url("img/bookmark-relleno.png");
 }
 
 /* Lista de la compra */
 
-.linea-separacion-compra{
-    
+.linea-separacion-compra {
+
     height: 5px;
     /* largo de la línea */
     background-color: var(--primary-color);
     /* color de la línea */
 }
 
-.offcanvas-body li{
+.offcanvas-body li {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -638,7 +646,8 @@ footer hr {
     background-color: var(--background-color);
     border-radius: 8px;
 }
-.offcanvas-body h3{
+
+.offcanvas-body h3 {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -648,7 +657,8 @@ footer hr {
     background-color: var(--background-color);
     border-radius: 8px;
 }
-.offcanvas-body li:hover{
+
+.offcanvas-body li:hover {
     background-color: var(--primary-color);
     color: var(--background-color);
     cursor: pointer;
@@ -666,19 +676,77 @@ footer hr {
 
 .botones-lista-compra {
     display: flex;
-    flex-direction: column; /* Coloca los botones en columna */
-    align-items: center; /* Centra horizontalmente */
-    gap: 12px; /* Espacio vertical entre botones */
+    flex-direction: column;
+    /* Coloca los botones en columna */
+    align-items: center;
+    /* Centra horizontalmente */
+    gap: 12px;
+    /* Espacio vertical entre botones */
     margin-top: 20px;
-  }
+}
 
 .botones-inversos {
     background-color: var(--background-color);
     color: var(--text-color);
     border: 1px solid var(--primary-color);
 }
-.botones-inversos:hover{
+
+.botones-inversos:hover {
     background-color: var(--background-color);
     color: var(--primary-colorext-color);
     border: 1px solid var(--primary-color);
+}
+
+/* Apartado Perfil */
+.titulo-pagina ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 2.5rem;
+    align-items: center;
+}
+
+.tarjeta-perfil {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 40vw;
+    height: 70vh;
+    flex-shrink: 0;
+    border-radius: 20px;
+    background: #FFF;
+    box-shadow: 4px 0px 40px 0px rgba(0, 0, 0, 0.25);
+}
+
+/* .info-perfil {
+    gap: 10px;
+} */
+
+.contenedores-info-perfil {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 30vw;
+    gap: 10px;
+    padding: 10px;
+    background-color: var(--background-color);
+    border: var(--primary-color) solid 1px;
+    border-radius: 15px;
+}
+
+.botones-perfil {
+  display: flex;
+  gap: 10vw; /* Espacio entre los botones */
+  justify-content: center; /* Centra los botones si quieres */
+  margin-top: 20px; /* Opcional, separación del contenido superior */
+}
+
+.titulos-perfil{
+    color: var(--primary-color);
+    /* font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 30px; */
 }
