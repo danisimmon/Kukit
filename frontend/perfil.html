@@ -118,15 +118,15 @@
                 </li>
                 <div class="linea-vertical"></div>
                 <li>
-                    <h4>Recetas creadas</h4>
+                    <h4 class="numero-recetas">Recetas creadas</h4>
                 </li>
                 <div class="linea-vertical"></div>
                 <li>
-                    <h4>Crear Receta</h4>
+                    <h4 class="numero-recetas">Crear Receta</h4>
                 </li>
             </ul>
         </div>
-        <div class="tarjeta-perfil">
+        <!-- <div class="tarjeta-perfil">
             <h1 class="titulos-perfil">Mi Perfil</h1>
             <div class="info-perfil">
                 <div class="contenedores-info-perfil">
@@ -152,7 +152,10 @@
                 <button>Editar Perfil</button>
                 <button class="botones-inversos">Eliminar Cuenta</button>
             </div>
-        </div>
+        </div> -->
+
+        <!-- CONTENEDOR RECETAS GUARDADAS -->
+
         <!-- <div class="tarjetas">
             <div class="tarjeta">
                 <img src="img/comida.jpg" class="imagen-receta-tarjeta" alt="Receta 1">
@@ -180,8 +183,57 @@
                 <img src="img/bookmark.png" class="icono-bookmark" alt="Guardar">
             </div>
         </div> -->
+        <!-- CREAR RECETA -->
+
+        <div class="crear-receta">
+            <div class="crear-receta-info">
+                <h3>Nombre de la Receta</h3>
+                <div class="info-basica-receta">
+                    <div class="apartado-dificultad">
+                        <h5>Dificultad</h5>
+                        <img src="" alt="grado de dificultad">
+                        <h5>Selecciona la dificultad</h5>
+                        <select name="nivel-dificultad" id="nivel-dificultad">
+                            <option value="facil">Fácil</option>
+                            <option value="intermedio">Intermedio</option>
+                            <option value="dificil">Difícil</option>
+                        </select>
+                    </div>
+                    <div class="apartado-tiempo">
+                        <h5>Tiempo</h5>
+                        <img src="" alt="tiempo">
+                        <h5>Selecciona el tiempo</h5>
+                        <input type="text" name="tiempo" id="tiempo">
+                    </div>
+                </div>
+            </div>
+            <div class="racion-ingredientes">
+                        <h5>Ración</h5>
+                        <h2>1</h2>
+                    </div>
+            <div class="ingredientes-pasos">
+                <div class="ingredientes-crear-receta">
+                    
+                    <div class="contenedor-ingredientes">
+                        <h5>INGREDIENTES</h5>
+                        <div class="rellenar-ingrediente">Nombre Ingrediente <span>Cantidad</span></div>
+                        <div class="anadir-ingrediente">Añadir Ingrediente <img src="" alt="icono-más"></div>
+                    </div>
+                </div>
+                <div class="pasos-crear-receta">
+                    <h5>PASOS</h5>
+                    <div class="rellenar-pasos">Paso 1</div>
+                    <div class="anadir-pasos">Añadir Paso <img src="" alt="icono-más"></div>
+                </div>
+            </div>
+            <div class="botones-crear-receta">
+                <button class="boton-crear-receta" id="terminar-receta">Terminar</button>
+                <button class="botones-inversos" id="cancelar-receta">Cancelar</button>
+            </div>
+        </div>
     </div>
 
+    <!-- RESUMEN DE RECETA SELECCIONADA -->
 
     <!-- <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
         <div class="offcanvas-header">
@@ -218,6 +270,10 @@
             </div>
         </div>
     </div> -->
+
+
+
+    <!-- LISTA DE LA COMPRA -->
 
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
         <div class="offcanvas-header">
