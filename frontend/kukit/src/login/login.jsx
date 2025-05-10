@@ -22,7 +22,7 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const respuesta = await axios.post('localhost/backend/api/login/login.php', formData, {
+      const respuesta = await axios.post('localhost/api/login/login.php', formData, {
         headers: {
           'Content-Type': 'application/json'
         },
