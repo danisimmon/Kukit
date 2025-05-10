@@ -539,7 +539,8 @@ footer hr {
 }
 
 .numero-recetas {
-    color: var(--primary-color)
+    color: var(--primary-color);
+    cursor: pointer;
 }
 
 .container {
@@ -738,15 +739,58 @@ footer hr {
 }
 
 .botones-perfil {
-  display: flex;
-  gap: 10vw; /* Espacio entre los botones */
-  justify-content: center; /* Centra los botones si quieres */
-  margin-top: 20px; /* Opcional, separación del contenido superior */
+    display: flex;
+    gap: 10vw;
+    /* Espacio entre los botones */
+    justify-content: center;
+    /* Centra los botones si quieres */
+    margin-top: 20px;
+    /* Opcional, separación del contenido superior */
 }
 
-.titulos-perfil{
+.titulos-perfil {
     color: var(--primary-color);
     /* font-size: 24px;
     font-weight: 700;
     margin-bottom: 30px; */
+}
+
+/* Apartado Crear Receta */
+
+.crear-receta {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 40vw;
+    height: auto;
+    flex-shrink: 0;
+    border-radius: 20px;
+    padding: 5vw;
+    background: #FFF;
+    box-shadow: 4px 0px 40px 0px rgba(0, 0, 0, 0.25);
+}
+
+.info-basica-receta {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.info-basica-receta h3 {
+    margin-bottom: 10px;
+}
+
+.apartado-dificultad,
+.apartado-tiempo {
+    flex: 1;
+}
+
+/* Contenedor horizontal para dificultad y tiempo */
+.info-basica-receta>.apartado-dificultad,
+.info-basica-receta>.apartado-tiempo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
