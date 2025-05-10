@@ -68,7 +68,7 @@ const Registro = () => {
             required
           />
         </div>
-        <button type="submit">Iniciar Sesión</button>
+        <button type="submit">Registrarse</button>
       </form>
       {mensaje && (
         <div style={{ color: exito ? 'green' : 'red' }}>

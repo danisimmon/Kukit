@@ -57,7 +57,7 @@ const PasswordReset = () => {
             required
           />
         </div>
-        <button type="submit">Iniciar Sesión</button>
+        <button type="submit">Restablecer contraseña</button>
       </form>
       {mensaje && (
         <div style={{ color: exito ? 'green' : 'red' }}>
