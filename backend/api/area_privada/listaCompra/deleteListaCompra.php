@@ -14,24 +14,19 @@ if (!$input || empty($input['id_producto']) || empty($input['cantidad'])) {
     exit();
 }
 
-if($_SERVER['REQUES_METHOD'] == 'POST'){
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $id_producto = $input['id_producto'];
     $cantidad = $input['cantidad'];
     $id_usuario = $_SESSION['user']['id'];
 
-    $query = "DELETE FROM lista_compra WHERE id_producto = ? AND id_usuario = ?";
+    $query = "DELETE FROM listacompra_productos WHERE id_producto = ? AND id_usuario = ?";
     $stmt = $conexion->prepare($query);
     $stmt->bind_param("ii", $id_producto, $id_usuario);
     $stmt->execute();
-    $queryBorrar = $stmt->get_result();
-
-    if ($queryBorrar->num_rows> 0) {
-        echo json_encode(array("success" => "false", "message" => "Error en la consulta SQL."));
-        exit();
-    }
-    if ($stmt->execute()) {
-        echo json_encode(array("success" => "true", "message" => "Producto eliminado de la lista de compra."));
+    //Comprobar si se ha eliminado correctamente
+    if ($stmt->affected_rows > 0) {
+        echo json_encode(array("success" => "true", "message" => "Producto eliminado de la lista de compra"));
     } else {
-        echo json_encode(array("success" => "false", "message" => "Error al eliminar el producto de la lista de compra."));
+        echo json_encode(array("success" => "false", "message" => "Error al eliminar el producto de la lista de compra"));
     }
 }

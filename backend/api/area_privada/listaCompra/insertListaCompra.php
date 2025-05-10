@@ -20,7 +20,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     $id_usuario = $_SESSION['user']['id'];
 
     // Verificar si el producto ya está en la lista de compra
-    $sql = "SELECT * FROM lista_compra WHERE id_producto = ? AND id_usuario = ?";
+    $sql = "SELECT * FROM listacompra_productos WHERE id_producto = ? AND id_usuario = ?";
     $stmt = $conexion->prepare($sql);
     $stmt->bind_param("ii", $id_producto, $id_usuario);
     $stmt->execute();
@@ -32,7 +32,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // Insertar el producto en la lista de compra
-    $sql = "INSERT INTO lista_compra (id_producto, id_usuario, cantidad) VALUES (?, ?, ?)";
+    $sql = "INSERT INTO listacompra_productos (id_producto, id_usuario, cantidad) VALUES (?, ?, ?)";
     $stmt = $conexion->prepare($sql);
     $stmt->bind_param("iii", $id_producto, $id_usuario, $cantidad);
 
