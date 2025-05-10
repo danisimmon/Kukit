@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const Login = () => {
+const Registro = () => {
   const [formData, setFormData] = useState({
     correo: '',
     password: '' 
@@ -20,9 +20,8 @@ const Login = () => {
 
   const manejarEnvio = async (e) => {
     e.preventDefault();
-
     try {
-      const respuesta = await axios.post('http://localhost/api/login/login.php', formData, {
+      const respuesta = await axios.post('http://localhost/api/login/registro/registro.php', formData, {
         headers: {
           'Content-Type': 'application/json'
         },
@@ -80,4 +79,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Registro;

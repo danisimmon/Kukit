@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const Login = () => {
+const PasswordReset = () => {
   const [formData, setFormData] = useState({
-    correo: '',
-    password: '' 
+    correo: ''
   });
 
   const [mensaje, setMensaje] = useState('');
@@ -22,7 +21,7 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const respuesta = await axios.post('http://localhost/api/login/login.php', formData, {
+      const respuesta = await axios.post('http://localhost/api/login/password-reset/password-reset.php', formData, {
         headers: {
           'Content-Type': 'application/json'
         },
@@ -58,17 +57,6 @@ const Login = () => {
             required
           />
         </div>
-        <div>
-          <label htmlFor="password">Contraseña:</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={formData.password}
-            onChange={manejarCambio}
-            required
-          />
-        </div>
         <button type="submit">Iniciar Sesión</button>
       </form>
       {mensaje && (
@@ -80,4 +68,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default PasswordReset;
