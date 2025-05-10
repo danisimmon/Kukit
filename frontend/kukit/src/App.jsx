@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Login from './login/Login';
 import PasswordReset from './login/restablecer-password/password-reset';
 import Registro from './login/registro/registro';
+import EditarPerfil from './area-privada/editar-perfil/editar-perfil'
 // import Home from './Home';
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/login/restablecimiento-password" element={<PasswordReset />} />
         <Route path="/login/registro" element={<Registro />} />
+        <Route path="/area-privada/editar-perfil" element={<EditarPerfil />} />
       </Routes>
     </BrowserRouter>
   );

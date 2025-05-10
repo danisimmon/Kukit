@@ -1,5 +1,5 @@
 <?php
-include '../conecta-mysql.php';
+include '../../conecta-mysql.php';
 
 header('Content-Type: application/json');
 $input = json_decode(file_get_contents('php://input'), true);
@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $sql->bind_param("sssss", $correo, $token, $codigo_verificacion, $fecha_actual, $token);
         $sql->execute();
 
-        require_once '../../email-config.php'; // importa la función crearMailer
+        // require_once '../../email-config.php'; // importa la función crearMailer
 
         $reset_link = "localhost/restablecer.php?token=$token"; // crea enlace
 

@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const Registro = () => {
+const EditarPerfil = () => {
   const [formData, setFormData] = useState({
     usuario: '',
     correo: '',
-    password: '' 
+    password: ''
   });
 
   const [mensaje, setMensaje] = useState('');
@@ -19,10 +19,37 @@ const Registro = () => {
     });
   };
 
+  // Recibir datos del usuario
+  const obtenerDatosUsuario = async () => {
+    try {
+      const respuesta = await axios.get('http://localhost/api/area_privada/editar-perfil/get_editar-perfil.php', {
+        withCredentials: true
+      });
+      if (respuesta.data.success) {
+        setFormData({
+          usuario: respuesta.data.usuario || '',
+          correo: respuesta.data.correo || '',
+          password: respuesta.data.password || ''
+        });
+      } else {
+        setMensaje(respuesta.data.message);
+      }
+    } catch (error) {
+      setMensaje('Hubo un error al cargar los datos del usuario.');
+      console.error('Error:', error);
+    }
+  };
+
+  // Cargar los datos del usuario al montar el componente
+  React.useEffect(() => {
+    obtenerDatosUsuario();
+  }, []);
+
+  // Manejar el envío del formulario
   const manejarEnvio = async (e) => {
     e.preventDefault();
     try {
-      const respuesta = await axios.post('http://localhost/api/login/registro/registro.php', formData, {
+      const respuesta = await axios.post('http://localhost/api/area_privada/editar-perfil/editar-perfil.php', formData, {
         headers: {
           'Content-Type': 'application/json'
         },
@@ -44,8 +71,9 @@ const Registro = () => {
     }
   };
 
-  return (
+   return (
     <div>
+      <h2>Editar Perfil</h2>
       <form onSubmit={manejarEnvio}>
         <div>
           <label htmlFor="usuario">Usuario:</label>
@@ -80,7 +108,7 @@ const Registro = () => {
             required
           />
         </div>
-        <button type="submit">Registrarse</button>
+        <button type="submit">Actualizar perfil</button>
       </form>
       {mensaje && (
         <div style={{ color: exito ? 'green' : 'red' }}>
@@ -91,4 +119,4 @@ const Registro = () => {
   );
 };
 
-export default Registro;
+export default EditarPerfil;

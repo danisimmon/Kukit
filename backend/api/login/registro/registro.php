@@ -11,6 +11,7 @@ if (!$input || empty($input['correo']) || empty($input['password'])) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $usuario = $input['usuario'];
     $correo = $input['correo'];
     $password = password_hash($input['password'], PASSWORD_DEFAULT);
 
@@ -25,9 +26,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit;
     } else {
         // Insertar nuevo usuario
-        $sql = "INSERT INTO usuario (email, password) VALUES (?, ?)";
+        $sql = "INSERT INTO usuario (nombre, email, password) VALUES (?, ?, ?)";
         $sql = $conexion->prepare($sql);
-        $sql->bind_param("ss", $correo, $password);
+        $sql->bind_param("sss", $usuario, $correo, $password);
         if ($sql->execute()) {
             echo json_encode(["success" => true, "message" => "Registro exitoso"]);
         } else {
