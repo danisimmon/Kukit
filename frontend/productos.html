@@ -29,7 +29,7 @@
         <nav>
             <ul>
                 <li><a href="productos.html">Recetas</a></li>
-                <li><a class="btn" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
+                <li><a class="btn" data-bs-toggle="offcanvas" href="#lista-offcanvasExample" role="button"
                         aria-controls="offcanvasExample">Lista de la compra</a></li>
                 <li><a href="">Plan de alimentación</a></li>
             </ul>
@@ -118,36 +118,53 @@
         </div>
 
         <div class="tarjetas">
-            <div class="tarjeta">
+            <div class="tarjeta" class="btn" data-bs-toggle="offcanvas" href="#receta-offcanvasExample" role="button"
+                    aria-controls="offcanvasExample">
                 <img src="img/comida.jpg" class="imagen-receta-tarjeta" alt="Receta 1">
                 <h3>Receta 1</h3>
-                <a class="btn" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
-                    aria-controls="offcanvasExample">Ver receta</a>
+                <p class="likesNumero">160</p>
+                <img src="./img/megusta.png" alt="like" class="like">
+                <img src="img/bookmark.png" class="icono-bookmark" alt="Guardar">
+                <p class="duracion">20min</p>
+                <p class=""></p>
+                <!-- <a class="btn" data-bs-toggle="offcanvas" href="#receta-offcanvasExample" role="button"
+                    aria-controls="offcanvasExample">Ver receta</a> -->
+            </div>
+
+            <div class="tarjeta" class="btn" data-bs-toggle="offcanvas" href="#receta-offcanvasExample" role="button"
+                    aria-controls="offcanvasExample">
+                <img src="img/comida.jpg" class="imagen-receta-tarjeta" alt="Receta 1">
+                <h3>Receta 2</h3>
+                <p class="likesNumero">160</p>
+                <img src="./img/megusta.png" alt="like" class="like">
+                <p class="duracion">40min</p>
                 <img src="img/bookmark.png" class="icono-bookmark" alt="Guardar">
             </div>
 
-            <div class="tarjeta">
+            <div class="tarjeta" class="btn" data-bs-toggle="offcanvas" href="#receta-offcanvasExample" role="button"
+                    aria-controls="offcanvasExample">
                 <img src="img/comida.jpg" class="imagen-receta-tarjeta" alt="Receta 1">
-                <h3>Receta 1</h3>
+                <h3>Receta 3</h3>
+                <p class="likesNumero">160</p>
+                <img src="./img/megusta.png" alt="like" class="like">
+                <p class="duracion">1h</p>
                 <img src="img/bookmark.png" class="icono-bookmark" alt="Guardar">
             </div>
 
-            <div class="tarjeta">
+            <div class="tarjeta" class="btn" data-bs-toggle="offcanvas" href="#receta-offcanvasExample" role="button"
+                    aria-controls="offcanvasExample">
                 <img src="img/comida.jpg" class="imagen-receta-tarjeta" alt="Receta 1">
-                <h3>Receta 1</h3>
-                <img src="img/bookmark.png" class="icono-bookmark" alt="Guardar">
-            </div>
-
-            <div class="tarjeta">
-                <img src="img/comida.jpg" class="imagen-receta-tarjeta" alt="Receta 1">
-                <h3>Receta 1</h3>
+                <h3>Receta 4</h3>
+                <p class="likesNumero">160</p>
+                <p class="duracion">2h 30min</p>
+                <img src="./img/megusta.png" alt="like" class="like">
                 <img src="img/bookmark.png" class="icono-bookmark" alt="Guardar">
             </div>
         </div>
     </div>
 
 
-    <!-- <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="receta-offcanvasExample" aria-labelledby="offcanvasExampleLabel">
         <div class="offcanvas-header">
             <h5 class="offcanvas-title" id="offcanvasExampleLabel">Información de la receta</h5>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -181,9 +198,9 @@
                 </button>
             </div>
         </div>
-    </div> -->
+    </div>
 
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="lista-offcanvasExample" aria-labelledby="offcanvasExampleLabel">
         <div class="offcanvas-header">
             <h2 class="offcanvas-title" id="offcanvasExampleLabel">Lista de la Compra</h2>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
