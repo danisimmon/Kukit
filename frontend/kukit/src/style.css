@@ -479,8 +479,9 @@ footer .footer-info div a img {
     height: 32px !important;
 }
 
-footer hr {
-    border: none;
+footer hr { 
+    /* border: 1px solid var(--brand-color); */
+    /* border: none; */
     background-color: var(--background-color);
     width: 100%;
     height: 1px;
@@ -958,14 +959,14 @@ footer hr {
     left: 0;
     right: 0;
     height: 1rem;
-    background: var(--footer-background);
+    background: var(--primary-color);
     filter: url("#blob");
 }
 
 .footer .bubble {
     position: absolute;
     left: var(--position, 50%);
-    background: var(--footer-background);
+    background: var(--primary-color);
     border-radius: 100%;
     animation: bubble-size var(--time, 4s) ease-in infinite var(--delay, 0s),
                bubble-move var(--time, 4s) ease-in infinite var(--delay, 0s);
@@ -978,7 +979,7 @@ footer hr {
     grid-template-columns: 1fr auto;
     grid-gap: 4rem;
     padding: 2rem;
-    background: var(--footer-background);
+    background: var(--primary-color);
 }
 
 .footer .content a,

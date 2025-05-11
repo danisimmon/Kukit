@@ -1,5 +1,7 @@
 // src/pages/Home.jsx
 import React, { useEffect, useState } from 'react';
+import logo from '../img/logo_kukit.png';
+import hero from '../img/Hero.jpg';
 
 function Home() {
   const [showLogin, setShowLogin] = useState(false);
@@ -20,7 +22,7 @@ function Home() {
     <>
       <header>
         <a href="/" id="logo-header">
-          <img src="img/logo_kukit.png" alt="" id="logo-header" />
+          <img src={logo} alt="" id="logo-header" />
         </a>
         <button id="hamburger-menu">
           <span></span>
@@ -49,7 +51,7 @@ function Home() {
           </div>
           <div className="fondo">
             <figure>
-              <img src="img/Hero.jpg" alt="" className="img-hero" />
+              <img src={hero} alt="" className="img-hero" />
             </figure>
           </div>
         </div>
