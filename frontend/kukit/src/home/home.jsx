@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import logo from '../img/logo_kukit.png';
 import hero from '../img/Hero.jpg';
 import Login from '../login/login';
+import Registro from '../login/registro/registro';
 
 function Home() {
   const [showLogin, setShowLogin] = useState(false);
@@ -45,6 +46,7 @@ function Home() {
       <div id="pop-up-sign-in" style={{ display: showLogin ? 'flex' : 'none' }} onClick={() => setShowLogin(false)}>
         <div className="modal-content" onClick={e => e.stopPropagation()}>
           <Login />
+          <Registro />
           <button onClick={() => setShowLogin(false)}>Cerrar</button>
         </div>
       </div>

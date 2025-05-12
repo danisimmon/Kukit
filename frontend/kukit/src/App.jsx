@@ -18,6 +18,7 @@ function App() {
       <Routes>
         <Route path="/home" element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/Registro" element={<Registro />} />
         <Route path="/login/restablecimiento-password" element={<PasswordReset />} />
         <Route path="/login/restablecer-password/nueva-password" element={<NuevaPassword />} />
         <Route path="/login/registro" element={<Registro />} />
