@@ -1,6 +1,6 @@
 // App.jsx
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Login from './login';
+import Login from './login/login';
 import PasswordReset from './login/restablecer-password/password-reset';
 import NuevaPassword from './login/restablecer-password/nueva-password';
 import Registro from './login/registro/registro';

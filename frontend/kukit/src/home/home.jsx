@@ -46,6 +46,11 @@ function Home() {
       <div id="pop-up-sign-in" style={{ display: showLogin ? 'flex' : 'none' }} onClick={() => setShowLogin(false)}>
         <div className="modal-content" onClick={e => e.stopPropagation()}>
           <Login />
+          <button onClick={() => setShowLogin(false)}>Cerrar</button>
+        </div>
+      </div>
+      <div id="pop-up-sign-up" style={{ display: showLogin ? 'flex' : 'none' }} onClick={() => setShowLogin(false)}>
+        <div className="modal-content-2" onClick={e => e.stopPropagation()}>
           <Registro />
           <button onClick={() => setShowLogin(false)}>Cerrar</button>
         </div>
