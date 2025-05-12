@@ -9,7 +9,6 @@ const Login = () => {
 
   const [mensaje, setMensaje] = useState('');
   const [exito, setExito] = useState(false);
-  const [showLogin, setShowLogin] = useState(false);
 
   const manejarCambio = (e) => {
     const { name, value } = e.target;
@@ -43,13 +42,6 @@ const Login = () => {
       setMensaje('Hubo un error al procesar la solicitud.');
       console.error('Error:', error);
     }
-  };
-  const handleShowLogin = () => {
-    setShowLogin(true); // Muestra el pop-up
-  };
-
-  const handleCloseLogin = () => {
-    setShowLogin(false); // Oculta el pop-up
   };
 
   return (

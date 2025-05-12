@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import logo from '../img/logo_kukit.png';
 import hero from '../img/Hero.jpg';
+import Login from '../login/login';
 
 function Home() {
   const [showLogin, setShowLogin] = useState(false);
@@ -37,161 +38,166 @@ function Home() {
           </ul>
         </nav>
         <div className="contenedor-header">
-        <button className="sign-in" onClick={() => setShowLogin(true)}>Iniciar sesión</button>          
-      <button className="sign-up" id="sign-up">Regístrate</button>
+          <button className="sign-in" onClick={() => setShowLogin(true)}>Iniciar sesión</button>
+          <button className="sign-up" id="sign-up">Regístrate</button>
         </div>
-        <div id="pop-up"></div>
       </header>
-
-      <main>
-        <div className="hero">
-          <div className="textos-hero">
-            <h1>ORGANIZA LO QUE COMES SIN COMERTE LA CABEZA</h1>
-            <button className="btn-reservation">DESCUBRE UN NUEVO MUNDO CULINARIO</button>
-          </div>
-          <div className="fondo">
-            <figure>
-              <img src={hero} alt="" className="img-hero" />
-            </figure>
-          </div>
+      <div id="pop-up-sign-in" style={{ display: showLogin ? 'flex' : 'none' }} onClick={() => setShowLogin(false)}>
+        <div className="modal-content" onClick={e => e.stopPropagation()}>
+          <Login />
+          <button onClick={() => setShowLogin(false)}>Cerrar</button>
         </div>
+      </div>
 
-        <section>
-          <div className="contenendor-home" id="contenedor-recetas">
-            <div className="recetas">
-              <h2>Recetas</h2>
-              <div className="tarjetas-recetas" id="tarjetas-recetas">
-                {/* Aquí se generarán las tarjetas de recetas */}
-              </div>
-              <button className="recetas">+ Recetas</button>
+        <main>
+          <div className="hero">
+            <div className="textos-hero">
+              <h1>ORGANIZA LO QUE COMES SIN COMERTE LA CABEZA</h1>
+              <button className="btn-reservation">DESCUBRE UN NUEVO MUNDO CULINARIO</button>
+            </div>
+            <div className="fondo">
+              <figure>
+                <img src={hero} alt="" className="img-hero" />
+              </figure>
             </div>
           </div>
 
-          <div className="contenedor-home" id="contenedor-imprescindibles-novedades">
-            <h2>Imprescindibles Kukit</h2>
-            <h2>Novedades de la semana</h2>
-          </div>
-
-          <div className="contenedor-home" id="contenedor-lista-compra">
-            <h2>Añade tus recetas y crea tu lista de la compra</h2>
-            <div className="contenedor-lista-compra-elementos">
-              <div className="contenedor-home-checks"></div>
-              <div className="contenedor-lista-compra-texto">
-                <h3>Organiza tu compra de manera rápida y sencilla con solo un clic.</h3>
-                <p>
-                  Ahora, con nuestra nueva funcionalidad, podrás buscar fácilmente tus recetas favoritas y añadir
-                  los ingredientes directamente a tu lista. Cuando te guste una receta, haz clic en "Añadir a la
-                  lista" y los ingredientes necesarios se agregarán a tu lista de la compra.
-                  Esto te permitirá ahorrar tiempo en tus compras y asegurarte de tener todo lo necesario para
-                  tus platos. ¡Cocinar nunca fue tan fácil!
-                </p>
+          <section>
+            <div className="contenendor-home" id="contenedor-recetas">
+              <div className="recetas">
+                <h2>Recetas</h2>
+                <div className="tarjetas-recetas" id="tarjetas-recetas">
+                  {/* Aquí se generarán las tarjetas de recetas */}
+                </div>
+                <button className="recetas">+ Recetas</button>
               </div>
             </div>
-          </div>
 
-          <div className="contenedor-home" id="contenedor-filtros-recetas">
-            <h2>Filtra, Elige y Cocina tu próxima receta</h2>
-            <div className="contenedor-lista-compra-elementos">
-              <div className="contenedor-home-checks"></div>
-              <div className="contenedor-lista-compra-texto">
-                <h3>Busca por país, ingredientes o necesidades especiales</h3>
-                <p>
-                  En Kukit te lo ponemos fácil para encontrar la receta perfecta. Explora platos según su país
-                  de origen, filtra por los ingredientes que tienes en casa o elige opciones que se adapten a tus
-                  necesidades: sin gluten, veganas, bajas en carbohidratos y mucho más. Así ahorras tiempo y
-                  disfrutas justo lo que necesitas, sin complicaciones.
-                </p>
+            <div className="contenedor-home" id="contenedor-imprescindibles-novedades">
+              <h2>Imprescindibles Kukit</h2>
+              <h2>Novedades de la semana</h2>
+            </div>
+
+            <div className="contenedor-home" id="contenedor-lista-compra">
+              <h2>Añade tus recetas y crea tu lista de la compra</h2>
+              <div className="contenedor-lista-compra-elementos">
+                <div className="contenedor-home-checks"></div>
+                <div className="contenedor-lista-compra-texto">
+                  <h3>Organiza tu compra de manera rápida y sencilla con solo un clic.</h3>
+                  <p>
+                    Ahora, con nuestra nueva funcionalidad, podrás buscar fácilmente tus recetas favoritas y añadir
+                    los ingredientes directamente a tu lista. Cuando te guste una receta, haz clic en "Añadir a la
+                    lista" y los ingredientes necesarios se agregarán a tu lista de la compra.
+                    Esto te permitirá ahorrar tiempo en tus compras y asegurarte de tener todo lo necesario para
+                    tus platos. ¡Cocinar nunca fue tan fácil!
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div className="contenedor-home" id="contenedor-calendario">
-            <h2>Filtra tus recetas y descubre tu próxima receta</h2>
-            <div className="contenedor-lista-compra-elementos">
-              <div className="contenedor-home-checks"></div>
-              <div className="contenedor-lista-compra-texto">
-                <h3>¿Cómo hacerlo?</h3>
-                <p>
-                  En Kukit te lo ponemos fácil para encontrar la receta perfecta. Explora platos según su país
-                  de origen, filtra por los ingredientes que tienes en casa o elige opciones que se adapten a tus
-                  necesidades: sin gluten, veganas, bajas en carbohidratos y mucho más. Así ahorras tiempo y
-                  disfrutas justo lo que necesitas, sin complicaciones.
-                </p>
+            <div className="contenedor-home" id="contenedor-filtros-recetas">
+              <h2>Filtra, Elige y Cocina tu próxima receta</h2>
+              <div className="contenedor-lista-compra-elementos">
+                <div className="contenedor-home-checks"></div>
+                <div className="contenedor-lista-compra-texto">
+                  <h3>Busca por país, ingredientes o necesidades especiales</h3>
+                  <p>
+                    En Kukit te lo ponemos fácil para encontrar la receta perfecta. Explora platos según su país
+                    de origen, filtra por los ingredientes que tienes en casa o elige opciones que se adapten a tus
+                    necesidades: sin gluten, veganas, bajas en carbohidratos y mucho más. Así ahorras tiempo y
+                    disfrutas justo lo que necesitas, sin complicaciones.
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-        </section>
-      </main>
 
-      <footer>
-        <div className="main"></div>
-        <div className="footer">
-          <div className="bubbles"></div>
-          <div className="content">
-            <div>
+            <div className="contenedor-home" id="contenedor-calendario">
+              <h2>Filtra tus recetas y descubre tu próxima receta</h2>
+              <div className="contenedor-lista-compra-elementos">
+                <div className="contenedor-home-checks"></div>
+                <div className="contenedor-lista-compra-texto">
+                  <h3>¿Cómo hacerlo?</h3>
+                  <p>
+                    En Kukit te lo ponemos fácil para encontrar la receta perfecta. Explora platos según su país
+                    de origen, filtra por los ingredientes que tienes en casa o elige opciones que se adapten a tus
+                    necesidades: sin gluten, veganas, bajas en carbohidratos y mucho más. Así ahorras tiempo y
+                    disfrutas justo lo que necesitas, sin complicaciones.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </main>
+
+        <footer>
+          <div className="main"></div>
+          <div className="footer">
+            <div className="bubbles"></div>
+            <div className="content">
               <div>
-                <b>Eldew</b>
-                <a href="#">Secuce</a>
-                <a href="#">Drupand</a>
-                <a href="#">Oceash</a>
-                <a href="#">Ugefe</a>
-                <a href="#">Babed</a>
+                <div>
+                  <b>Eldew</b>
+                  <a href="#">Secuce</a>
+                  <a href="#">Drupand</a>
+                  <a href="#">Oceash</a>
+                  <a href="#">Ugefe</a>
+                  <a href="#">Babed</a>
+                </div>
+                <div>
+                  <b>Spotha</b>
+                  <a href="#">Miskasa</a>
+                  <a href="#">Agithe</a>
+                  <a href="#">Scesha</a>
+                  <a href="#">Lulle</a>
+                </div>
+                <div>
+                  <b>Chashakib</b>
+                  <a href="#">Chogauw</a>
+                  <a href="#">Phachuled</a>
+                  <a href="#">Tiebeft</a>
+                  <a href="#">Ocid</a>
+                  <a href="#">Izom</a>
+                  <a href="#">Ort</a>
+                </div>
+                <div>
+                  <b>Athod</b>
+                  <a href="#">Pamuz</a>
+                  <a href="#">Vapert</a>
+                  <a href="#">Neesk</a>
+                  <a href="#">Omemanen</a>
+                </div>
               </div>
               <div>
-                <b>Spotha</b>
-                <a href="#">Miskasa</a>
-                <a href="#">Agithe</a>
-                <a href="#">Scesha</a>
-                <a href="#">Lulle</a>
+                <a
+                  className="image"
+                  href="https://codepen.io/z-"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    backgroundImage: "url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/199011/happy.svg')"
+                  }}
+                ></a>
+                <p>©2019 Not Really</p>
               </div>
-              <div>
-                <b>Chashakib</b>
-                <a href="#">Chogauw</a>
-                <a href="#">Phachuled</a>
-                <a href="#">Tiebeft</a>
-                <a href="#">Ocid</a>
-                <a href="#">Izom</a>
-                <a href="#">Ort</a>
-              </div>
-              <div>
-                <b>Athod</b>
-                <a href="#">Pamuz</a>
-                <a href="#">Vapert</a>
-                <a href="#">Neesk</a>
-                <a href="#">Omemanen</a>
-              </div>
-            </div>
-            <div>
-              <a
-                className="image"
-                href="https://codepen.io/z-"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  backgroundImage: "url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/199011/happy.svg')"
-                }}
-              ></a>
-              <p>©2019 Not Really</p>
             </div>
           </div>
-        </div>
 
-        <svg style={{ position: 'fixed', top: '100vh' }}>
-          <defs>
-            <filter id="blob">
-              <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
-              <feColorMatrix
-                in="blur"
-                mode="matrix"
-                values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9"
-                result="blob"
-              />
-            </filter>
-          </defs>
-        </svg>
-      </footer>
-    </>
-  );
+          <svg style={{ position: 'fixed', top: '100vh' }}>
+            <defs>
+              <filter id="blob">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+                <feColorMatrix
+                  in="blur"
+                  mode="matrix"
+                  values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9"
+                  result="blob"
+                />
+              </filter>
+            </defs>
+          </svg>
+        </footer>
+      </>
+      );
 }
 
-export default Home;
+      export default Home;
