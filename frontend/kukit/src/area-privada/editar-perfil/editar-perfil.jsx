@@ -101,7 +101,78 @@ const EditarPerfil = () => {
           <button className="sign-in" id="sign-in">Iniciar sesión</button>
           <button className="sign-up" id="sign-up">Regístrate</button>
         </div>
-        <div id="pop-up"></div>
+        <div id="pop-up">
+          {/* <div class="pop-up-sign-up" id="pop-up-sign-up">
+            <section class="contenedor-sign-up" id="contenedor-sign-up">
+                <figure>
+                    <a href=""><img src="img/logo_kukit.png" alt="logo de kukit"></a>
+                </figure>
+
+                <h1>CREAR CUENTA</h1>
+                <hr class="linea-inicio-sesion">
+                <form action="" id="sign-up-form">
+
+                    <div>
+                        <label for="email-sign-up">Correo electrónico:</label>
+                        <input type="email" name="email-sign-up" id="email-sign-up">
+                    </div>
+
+                    <div>
+                        <label for="password-sign-up">Contraseña:</label>
+                        <input type="password" name="password-sign-up" id="password-sign-up">
+                    </div>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="recordarme" id="recordarme">
+                        <span>Recordarme</span>
+                    </label>
+
+                    <p class="aceptar-terminos">
+                        Al hacer clic en «Aceptar y crear cuenta», aceptas las <b><u>Condiciones de
+                                uso</u></b>, la <b><u>Política de privacidad</u></b> y la <b><u>Política de
+                                cookies</u></b> de Kukit
+                    </p>
+
+                    <button type="submit" class="botones-inicio-sesion">Aceptar y crear cuenta</button>
+                </form>
+                <p>¿Ya tienes cuenta?</p>
+                <button class="botones-inicio-sesion" id="inicio-google">Iniciar sesión</button>
+
+                <hr>
+
+            </section>
+        </div> */}
+
+          {/* <div class="pop-up-sign-in" id="pop-up-sign-in">
+            <section class="contenedor-sign-in" id="contenedor-sign-in">
+                <figure>
+                    <a href="index.html"><img src="img/logo_kukit.png" alt="Logo de Kukit"></a>
+                </figure>
+
+                <h1>INICIAR SESIÓN</h1>
+                <hr class="linea-inicio-sesion">
+
+                <hr>
+
+                <form>
+                    <div class="contenedor-email-password">
+                        <label for="email-sign-in" id="mail" class="mail">Correo electrónico:</label>
+                        <input type="email" name="email-sign-in" id="email-sign-in">
+                        <span id="errorEmail"></span>
+                    </div>
+
+                    <div class="contenedor-email-password">
+                        <label for="password-sign-in" class="password-sign-in">Contraseña:</label>
+                        <input type="password" name="password-sign-in" id="password-sign-in">
+                        <span id="errorPassword"></span>
+                    </div>
+
+                    <button class="botones-inicio-sesion">Iniciar sesión</button>
+
+                </form>
+                <button class="botones-inicio-sesion" id="inicio-google">Iniciar sesión con Google</button>
+            </section>
+        </div> */}
+        </div>
       </header>
 
       <div className="container">
@@ -114,6 +185,64 @@ const EditarPerfil = () => {
             <li><h4 className="numero-recetas">Crear Receta</h4></li>
           </ul>
         </div>
+
+      {/* Apartado Perfil Usuario */}
+      {/* <div class="tarjeta-perfil">
+            <h1 class="titulos-perfil">Mi Perfil</h1>
+            <div class="info-perfil">
+                <div class="contenedores-info-perfil">
+                    <h3 class="titulos-perfil">Usuario</h3>
+                    <h3>Kletus</h3>
+                </div>
+            </div>
+
+            <div class="info-perfil">
+                <div class="contenedores-info-perfil">
+                    <h3 class="titulos-perfil">Correo Electrónico</h3>
+                    <h3>Kletus</h3>
+                </div>
+            </div>
+
+            <div class="info-perfil">
+                <div class="contenedores-info-perfil">
+                    <h3 class="titulos-perfil">Contraseña</h3>
+                    <h3>******</h3>
+                </div>
+            </div>
+            <div class="botones-perfil">
+                <button>Editar Perfil</button>
+                <button class="botones-inversos">Eliminar Cuenta</button>
+            </div>
+        </div> */}
+
+      {/* {CONTENEDOR RECETAS GUARDADAS} */}
+      {/* <div class="tarjetas">
+            <div class="tarjeta">
+                <img src="img/comida.jpg" class="imagen-receta-tarjeta" alt="Receta 1">
+                <h3>Receta 1</h3>
+                <a class="btn" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
+                    aria-controls="offcanvasExample">Ver receta</a>
+                <img src="img/bookmark.png" class="icono-bookmark" alt="Guardar">
+            </div>
+
+            <div class="tarjeta">
+                <img src="img/comida.jpg" class="imagen-receta-tarjeta" alt="Receta 1">
+                <h3>Receta 1</h3>
+                <img src="img/bookmark.png" class="icono-bookmark" alt="Guardar">
+            </div>
+
+            <div class="tarjeta">
+                <img src="img/comida.jpg" class="imagen-receta-tarjeta" alt="Receta 1">
+                <h3>Receta 1</h3>
+                <img src="img/bookmark.png" class="icono-bookmark" alt="Guardar">
+            </div>
+
+            <div class="tarjeta">
+                <img src="img/comida.jpg" class="imagen-receta-tarjeta" alt="Receta 1">
+                <h3>Receta 1</h3>
+                <img src="img/bookmark.png" class="icono-bookmark" alt="Guardar">
+            </div>
+        </div> */}
 
         <div className="crear-receta">
           <div className="crear-receta-info">
@@ -166,33 +295,34 @@ const EditarPerfil = () => {
       </div>
 
       {/* Offcanvas para Lista de la compra */}
-      <div className="offcanvas offcanvas-end" tabIndex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-        <div className="offcanvas-header">
-          <h2 className="offcanvas-title" id="offcanvasExampleLabel">Lista de la Compra</h2>
-          <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div className="offcanvas-body">
-          <div>
-            <div>
-              <h3>Ingredientes</h3>
-              <ul>
-                <li>1 kg de carne de res</li>
-                <li>2 cebollas</li>
-                <li>1 pimiento rojo</li>
-                <li>2 dientes de ajo</li>
-                <li>1 cucharadita de comino</li>
-                <li>Sal y pimienta al gusto</li>
-                <li>12 tortillas de maíz</li>
-              </ul>
-            </div>
-          </div>
-          <div className="botones-lista-compra">
-            <button>Vaciar Lista</button>
-            <button className="botones-inversos">Ir a recetas</button>
-          </div>
-        </div>
-      </div>
-
+      {
+        // <div className="offcanvas offcanvas-end" tabIndex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+        //   <div className="offcanvas-header">
+        //     <h2 className="offcanvas-title" id="offcanvasExampleLabel">Lista de la Compra</h2>
+        //     <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        //   </div>
+        //   <div className="offcanvas-body">
+        //     <div>
+        //       <div>
+        //         <h3>Ingredientes</h3>
+        //         <ul>
+        //           <li>1 kg de carne de res</li>
+        //           <li>2 cebollas</li>
+        //           <li>1 pimiento rojo</li>
+        //           <li>2 dientes de ajo</li>
+        //           <li>1 cucharadita de comino</li>
+        //           <li>Sal y pimienta al gusto</li>
+        //           <li>12 tortillas de maíz</li>
+        //         </ul>
+        //       </div>
+        //     </div>
+        //     <div className="botones-lista-compra">
+        //       <button>Vaciar Lista</button>
+        //       <button className="botones-inversos">Ir a recetas</button>
+        //     </div>
+        //   </div>
+        // </div>
+      }
     </>
 
 
