@@ -7,6 +7,7 @@ import Registro from '../login/registro/registro';
 
 function Home() {
   const [showLogin, setShowLogin] = useState(false);
+  const [showRegistro, setShowRegistro] = useState(false);
 
   useEffect(() => {
     const container = document.querySelector('.bubbles');
@@ -40,19 +41,17 @@ function Home() {
         </nav>
         <div className="contenedor-header">
           <button className="sign-in" onClick={() => setShowLogin(true)}>Iniciar sesión</button>
-          <button className="sign-up" id="sign-up">Regístrate</button>
+          <button className="sign-up" onClick={() => setShowRegistro(true)} id="sign-up">Regístrate</button>
         </div>
       </header>
       <div id="pop-up-sign-in" style={{ display: showLogin ? 'flex' : 'none' }} onClick={() => setShowLogin(false)}>
         <div className="modal-content" onClick={e => e.stopPropagation()}>
-          <Login />
-          <button onClick={() => setShowLogin(false)}>Cerrar</button>
+          <Login setShowLogin={setShowLogin}/>
         </div>
       </div>
-      <div id="pop-up-sign-up" style={{ display: showLogin ? 'flex' : 'none' }} onClick={() => setShowLogin(false)}>
+      <div id="pop-up-sign-up" style={{ display: showRegistro ? 'flex' : 'none' }} onClick={() => setShowRegistro(false)}>
         <div className="modal-content-2" onClick={e => e.stopPropagation()}>
-          <Registro />
-          <button onClick={() => setShowLogin(false)}>Cerrar</button>
+          <Registro setShowRegistro={setShowRegistro}/>
         </div>
       </div>
 

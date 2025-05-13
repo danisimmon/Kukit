@@ -293,6 +293,7 @@ const EditarPerfil = () => {
           <div className="crear-receta">
             <div className="crear-receta-info">
               <h3>Nombre de la Receta</h3>
+              <input type="text" className='nombre-receta-nueva'/>
               <div className="info-basica-receta">
                 <div className="apartado-dificultad">
                   <h5>Dificultad</h5>
