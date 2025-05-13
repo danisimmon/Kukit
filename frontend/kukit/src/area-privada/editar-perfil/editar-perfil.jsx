@@ -3,7 +3,7 @@ import axios from 'axios';
 import logo from '../../img/logo_kukit.png';
 import comida from "../../img/comida.jpg";
 import bookmark from "../../img/bookmark.png";
-
+import Footer from '../../footer/footer';
 
 
 const EditarPerfil = () => {
@@ -372,6 +372,7 @@ const EditarPerfil = () => {
         //   </div>
         // </div>
       }
+      <Footer />
     </>
 
 

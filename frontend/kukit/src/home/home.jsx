@@ -4,6 +4,7 @@ import logo from '../img/logo_kukit.png';
 import hero from '../img/Hero.jpg';
 import Login from '../login/login';
 import Registro from '../login/registro/registro';
+import Footer from '../footer/footer';
 
 function Home() {
   const [showLogin, setShowLogin] = useState(false);
@@ -135,7 +136,7 @@ function Home() {
           </section>
         </main>
 
-        <footer>
+        {/* <footer>
           <div className="main"></div>
           <div className="footer">
             <div className="bubbles"></div>
@@ -201,7 +202,8 @@ function Home() {
               </filter>
             </defs>
           </svg>
-        </footer>
+        </footer> */}
+        <Footer />
       </>
       );
 }
