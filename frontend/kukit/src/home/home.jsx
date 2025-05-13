@@ -4,6 +4,7 @@ import logo from '../img/logo_kukit.png';
 import hero from '../img/Hero.jpg';
 import Login from '../login/login';
 import Registro from '../login/registro/registro';
+import { useNavigate } from 'react-router-dom';
 
 function Home() {
   const [showLogin, setShowLogin] = useState(false);
@@ -19,6 +20,13 @@ function Home() {
       }
     }
   }, []);
+//Código prueba Manu
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+  localStorage.removeItem('token'); // O lo que uses para identificar la sesión
+  navigate('/home'); // O redirige a '/login' si tienes una ruta específica
+};
 
   return (
     <>
@@ -136,73 +144,76 @@ function Home() {
           </section>
         </main>
 
-        <footer>
-          <div className="main"></div>
-          <div className="footer">
-            <div className="bubbles"></div>
-            <div className="content">
-              <div>
-                <div>
-                  <b>Eldew</b>
-                  <a href="#">Secuce</a>
-                  <a href="#">Drupand</a>
-                  <a href="#">Oceash</a>
-                  <a href="#">Ugefe</a>
-                  <a href="#">Babed</a>
-                </div>
-                <div>
-                  <b>Spotha</b>
-                  <a href="#">Miskasa</a>
-                  <a href="#">Agithe</a>
-                  <a href="#">Scesha</a>
-                  <a href="#">Lulle</a>
-                </div>
-                <div>
-                  <b>Chashakib</b>
-                  <a href="#">Chogauw</a>
-                  <a href="#">Phachuled</a>
-                  <a href="#">Tiebeft</a>
-                  <a href="#">Ocid</a>
-                  <a href="#">Izom</a>
-                  <a href="#">Ort</a>
-                </div>
-                <div>
-                  <b>Athod</b>
-                  <a href="#">Pamuz</a>
-                  <a href="#">Vapert</a>
-                  <a href="#">Neesk</a>
-                  <a href="#">Omemanen</a>
-                </div>
-              </div>
-              <div>
-                <a
-                  className="image"
-                  href="https://codepen.io/z-"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{
-                    backgroundImage: "url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/199011/happy.svg')"
-                  }}
-                ></a>
-                <p>©2019 Not Really</p>
-              </div>
+    <footer className="section bg-footer">
+      <div className="container-footer">
+        <div className="row">
+          <div className="col-lg-3">
+            <div>
+              <h6 className="footer-heading text-uppercase text-white">Visita nuestras secciones</h6>
+              <ul className="list-unstyled footer-link mt-4">
+                <li><a href="#" className="enlace-footer">Recetas</a></li>
+                <li><a href="#" className="enlace-footer">Lista de la compra</a></li>
+                <li><a href="#" className="enlace-footer">Plan de alimentación</a></li>
+              </ul>
             </div>
           </div>
 
-          <svg style={{ position: 'fixed', top: '100vh' }}>
-            <defs>
-              <filter id="blob">
-                <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
-                <feColorMatrix
-                  in="blur"
-                  mode="matrix"
-                  values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9"
-                  result="blob"
-                />
-              </filter>
-            </defs>
-          </svg>
-        </footer>
+          <div className="col-lg-3">
+            <div>
+              <h6 className="footer-heading text-uppercase text-white">Información Corporativa</h6>
+              <ul className="list-unstyled footer-link mt-4">
+                <li><a href="#" className="enlace-footer">Sobre Kukit</a></li>
+                <li><a href="#" className="enlace-footer">Partners o Colaboradores</a></li>
+                <li><a href="#" className="enlace-footer">Términos y condiciones</a></li>
+                <li><a href="#" className="enlace-footer">Aviso legal</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="col-lg-3">
+            <div>
+              <h6 className="footer-heading text-uppercase text-white">Empieza con Kukit</h6>
+              <ul className="list-unstyled footer-link mt-4">
+                <li><a href="#" className="enlace-footer">Iniciar Sesión</a></li>
+                <li><a href="#" className="enlace-footer">Crear Cuenta</a></li>
+                <li><a href="#" className="enlace-footer">¿Olvidaste tu contraseña?</a></li>
+                <li><a href="#" className="enlace-footer">Ver mi perfil</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="col-lg-3">
+            <div>
+              <h6 className="footer-heading text-uppercase text-white">Contáctanos</h6>
+              <p className="contact-info mt-4">Contacta con nosotros si necesitas ayuda</p>
+              <p className="contact-info">kukit@kukit.com</p>
+              <div className="mt-5">
+                <ul className="list-inline">
+                  <li className="list-inline-item">
+                    <a href="#"><i className="fab facebook footer-social-icon fa-facebook-f"></i></a>
+                  </li>
+                  <li className="list-inline-item">
+                    <a href="#"><i className="fab twitter footer-social-icon fa-twitter"></i></a>
+                  </li>
+                  <li className="list-inline-item">
+                    <a href="#"><i className="fab google footer-social-icon fa-google"></i></a>
+                  </li>
+                  <li className="list-inline-item">
+                    <a href="#"><i className="fab apple footer-social-icon fa-apple"></i></a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="text-center mt-5">
+        <p className="footer-alt mb-0 f-14">
+          2025 © Ainhoa Blanca, Manuel Gómez, Rubén Peña, Daniel Simón. All Rights Reserved
+        </p>
+      </div>
+    </footer>
       </>
       );
 }
