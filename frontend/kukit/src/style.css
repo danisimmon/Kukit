@@ -405,7 +405,7 @@ header .contenedor-header .sign-up:hover {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
-footer {
+/* footer {
     display: flex;
     flex-direction: column;
     width: 99vw;
@@ -482,10 +482,10 @@ footer .footer-info div a img {
 footer hr { 
     /* border: 1px solid var(--brand-color); */
     /* border: none; */
-    background-color: var(--background-color);
+    /* background-color: var(--background-color);
     width: 100%;
     height: 1px;
-}
+} */ 
 
 .hero {
     display: flex;
@@ -1056,51 +1056,46 @@ footer.section.bg-footer {
     --footer-background: #ED5565;
     display: grid;
     position: relative;
-    min-height: 12rem;
+    padding-bottom: 12px;
 }
 
-.footer .bubbles {
+.footer-heading:after {
+    content: '';
+    width: 25px;
+    border-bottom: 1px solid #FFF;
     position: absolute;
-    top: 0;
     left: 0;
-    right: 0;
-    height: 1rem;
-    background: var(--primary-color);
-    filter: url("#blob");
+    bottom: 0;
+    display: block;
+    border-bottom: 1px solid #1bbc9b;
 }
 
-.footer .bubble {
-    position: absolute;
-    left: var(--position, 50%);
-    background: var(--primary-color);
-    border-radius: 100%;
-    animation: bubble-size var(--time, 4s) ease-in infinite var(--delay, 0s),
-               bubble-move var(--time, 4s) ease-in infinite var(--delay, 0s);
-    transform: translate(-50%, 100%);
+.container-footer {
+    max-height: 13em;
 }
 
-.footer .content {
-    z-index: 2;
-    display: grid;
-    grid-template-columns: 1fr auto;
-    grid-gap: 4rem;
-    padding: 2rem;
-    background: var(--primary-color);
+footer.section.bg-footer {
+    padding:1em;
 }
 
-.footer .content a,
-.footer .content p {
-    color: #F5F7FA;
+.enlace-footer {
+    color: var(--background-color);
     text-decoration: none;
 }
 
-.footer .content b {
-    color: white;
+.enlace-footer a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #ff6b6b;
+    transition: width 0.3s;
 }
 
-.footer .content p {
-    margin: 0;
-    font-size: .75rem;
+.enlace-footer a:hover {
+    color: #fff;
 }
 
 .footer .content > div {
@@ -1144,4 +1139,7 @@ footer.section.bg-footer {
     100% {
         bottom: var(--distance, 10rem);
     }
+}
+.enlace-footer a:hover::after {
+    width: 100%;
 }
