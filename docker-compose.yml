@@ -21,7 +21,6 @@ services:
     container_name: kukit_frontend
     volumes:
       - ./frontend/kukit:/app
-      - /app/node_modules
     ports:
       - "5173:5173"
     networks:
