@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import logo from '../img/logo_kukit.png';
-import Home from '../home/home';
 
 const Login = ({ setShowLogin }) => {
   const [formData, setFormData] = useState({
@@ -13,6 +13,8 @@ const Login = ({ setShowLogin }) => {
   const [errorPassword, setErrorPassword] = useState('');
   const [mensaje, setMensaje] = useState('');
   const [exito, setExito] = useState(false);
+
+  const navigate = useNavigate(); // Hook para redirección
 
   const manejarCambio = (e) => {
     const { name, value } = e.target;
@@ -46,6 +48,7 @@ const Login = ({ setShowLogin }) => {
         setExito(true);
         setMensaje(respuesta.data.message);
         console.log('Usuario:', respuesta.data.user);
+        navigate('/recetas');
       } else {
         setExito(false);
         setMensaje(respuesta.data.message);

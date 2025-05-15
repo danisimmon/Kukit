@@ -7,6 +7,7 @@ import Registro from '../login/registro/registro';
 import Footer from '../footer/footer';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import Organiza from '../img/ChatGPT Image 15 may 2025, 18_09_34.png'
 
 function Home() {
   const [showLogin, setShowLogin] = useState(false);
@@ -97,7 +98,9 @@ function Home() {
             <div className="contenedor-home" id="contenedor-lista-compra">
               <h2>Añade tus recetas y crea tu lista de la compra</h2>
               <div className="contenedor-lista-compra-elementos">
-                <div className="contenedor-home-checks"></div>
+                <div className="contenedor-home-checks">
+                  {/* <img src={Organiza} alt="" className="img-hero" /> */}
+                </div>
                 <div className="contenedor-lista-compra-texto">
                   <h3>Organiza tu compra de manera rápida y sencilla con solo un clic.</h3>
                   <p>
