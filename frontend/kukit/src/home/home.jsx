@@ -67,7 +67,9 @@ function Home() {
           <Registro setShowRegistro={setShowRegistro} />
         </div>
       </div>
-      <ListaCompra showListaCompra={showListaCompra} />
+      {showListaCompra && (
+        <ListaCompra showListaCompra={showListaCompra} setListaCompra={setListaCompra} />
+      )}
       <main>
         <div className="hero">
           <div className="textos-hero">
@@ -97,24 +99,24 @@ function Home() {
             <h2>Novedades de la semana</h2>
           </div>
 
-            <div className="contenedor-home" id="contenedor-lista-compra">
-              <h2>Añade tus recetas y crea tu lista de la compra</h2>
-              <div className="contenedor-lista-compra-elementos">
-                <div className="contenedor-home-checks">
-                  {/* <img src={Organiza} alt="" className="img-hero" /> */}
-                </div>
-                <div className="contenedor-lista-compra-texto">
-                  <h3>Organiza tu compra de manera rápida y sencilla con solo un clic.</h3>
-                  <p>
-                    Ahora, con nuestra nueva funcionalidad, podrás buscar fácilmente tus recetas favoritas y añadir
-                    los ingredientes directamente a tu lista. Cuando te guste una receta, haz clic en "Añadir a la
-                    lista" y los ingredientes necesarios se agregarán a tu lista de la compra.
-                    Esto te permitirá ahorrar tiempo en tus compras y asegurarte de tener todo lo necesario para
-                    tus platos. ¡Cocinar nunca fue tan fácil!
-                  </p>
-                </div>
+          <div className="contenedor-home" id="contenedor-lista-compra">
+            <h2>Añade tus recetas y crea tu lista de la compra</h2>
+            <div className="contenedor-lista-compra-elementos">
+              <div className="contenedor-home-checks">
+                {/* <img src={Organiza} alt="" className="img-hero" /> */}
+              </div>
+              <div className="contenedor-lista-compra-texto">
+                <h3>Organiza tu compra de manera rápida y sencilla con solo un clic.</h3>
+                <p>
+                  Ahora, con nuestra nueva funcionalidad, podrás buscar fácilmente tus recetas favoritas y añadir
+                  los ingredientes directamente a tu lista. Cuando te guste una receta, haz clic en "Añadir a la
+                  lista" y los ingredientes necesarios se agregarán a tu lista de la compra.
+                  Esto te permitirá ahorrar tiempo en tus compras y asegurarte de tener todo lo necesario para
+                  tus platos. ¡Cocinar nunca fue tan fácil!
+                </p>
               </div>
             </div>
+          </div>
 
           <div className="contenedor-home" id="contenedor-filtros-recetas">
             <h2>Filtra, Elige y Cocina tu próxima receta</h2>

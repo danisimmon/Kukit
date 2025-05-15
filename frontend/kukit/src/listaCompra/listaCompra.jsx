@@ -1,17 +1,33 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom"; 
 import axios from "axios";
 
 const ListaCompra = ({ showListaCompra }) => {
+  const navigate = useNavigate(); 
   const offcanvasRef = useRef();
+  const bsOffcanvasRef = useRef(null);
 
   useEffect(() => {
-    if (showListaCompra && offcanvasRef.current) {
-      const bsOffcanvas = new window.bootstrap.Offcanvas(offcanvasRef.current);
-      bsOffcanvas.show();
+    if (!offcanvasRef.current || !window.bootstrap?.Offcanvas) return;
+
+    // Solo inicializamos una vez
+    if (!bsOffcanvasRef.current) {
+      bsOffcanvasRef.current = new window.bootstrap.Offcanvas(offcanvasRef.current);
+
+      // Listener que se dispara cuando se cierra el offcanvas
+      offcanvasRef.current.addEventListener("hidden.bs.offcanvas", () => {
+        setListaCompra(false);
+      });
     }
+
+    // Mostrar el offcanvas solo cuando cambia a true
+    if (showListaCompra) {
+      bsOffcanvasRef.current.show();
+    }
+
   }, [showListaCompra]);
 
-  const [listaCompra, setListaCompra] = useState([]); // Lista de la compra
+  const [listaCompra, setLista] = useState([]); // Lista de la compra
   const [nuevoProducto, setNuevoProducto] = useState({
     id_producto: "",
     cantidad: "",
@@ -45,36 +61,8 @@ const ListaCompra = ({ showListaCompra }) => {
     }
   };
 
-  // Insertar un producto en la lista de la compra
-  const insertListaCompra = async () => {
-    try {
-      const response = await axios.post(
-        "http://localhost/api/area_privada/listaCompra/insertListaCompra.php",
-        nuevoProducto,
-        {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: true,
-        }
-      );
-      if (response.data.success === "true") {
-        setMensaje(
-          response.data.message || "Producto añadido correctamente."
-        );
-        setExito(true);
-        getListaCompra(); // Actualizar la lista
-      } else {
-        setMensaje(response.data.message || "Error al añadir el producto.");
-        setExito(false);
-      }
-    } catch (error) {
-      setMensaje("Error al añadir el producto.");
-      setExito(false);
-      console.error(error);
-    }
-  };
-
   // Eliminar un producto de la lista de la compra
-  const deleteListaCompra = async (id_producto) => {
+  const deleteListaCompra = async (id_producto, cantidad) => {
     try {
       const response = await axios.post(
         "http://localhost/api/area_privada/listaCompra/deleteListaCompra.php",
@@ -105,7 +93,7 @@ const ListaCompra = ({ showListaCompra }) => {
   const vaciarListaCompra = async () => {
     try {
       for (const producto of listaCompra) {
-        await deleteListaCompra(producto.id_producto);
+        await deleteListaCompra(producto.id_producto, producto.cantidad);
       }
       setMensaje("Lista de la compra vaciada correctamente.");
       setExito(true);
@@ -161,7 +149,9 @@ const ListaCompra = ({ showListaCompra }) => {
                 <li key={producto.id_producto}>
                   {producto.nombre} - Cantidad: {producto.cantidad}
                   <button
-                    onClick={() => deleteListaCompra(producto.id_producto, producto.cantidad)}
+                    onClick={() =>
+                      deleteListaCompra(producto.id_producto, producto.cantidad)
+                    }
                     className="btn btn-danger btn-sm mx-2"
                   >
                     Eliminar
@@ -171,13 +161,15 @@ const ListaCompra = ({ showListaCompra }) => {
             </ul>
           </div>
           <div className="botones-lista-compra">
-            <button
-              className="btn btn-danger"
-              onClick={vaciarListaCompra}
-            >
+            <button className="btn btn-danger" onClick={vaciarListaCompra}>
               Vaciar Lista
             </button>
-            <button className="btn btn-secondary">Ir a recetas</button>
+            <button
+              className="btn btn-secondary"
+              onClick={() => navigate("/recetas")}
+            >
+              Ir a recetas
+            </button>
           </div>
         </div>
       </div>
