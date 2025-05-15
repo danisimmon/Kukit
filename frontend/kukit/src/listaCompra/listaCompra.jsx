@@ -115,76 +115,103 @@ const ListaCompra = () => {
   }, []);
 
   return (
-    <div>
-      <div className="offcanvas-header">
-        <h2 className="offcanvas-title">Lista de la Compra</h2>
-        <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-      </div>
-      <div className="offcanvas-body">
-        <div>
-          <div>
-            <h3>Ingredientes</h3>
-            <ul>
-              {listaCompra.map((producto) => (
-                <li key={producto.id_producto}>
-                  {producto.nombre} - Cantidad: {producto.cantidad}
-                  <button
-                    onClick={() => deleteListaCompra(producto.id_producto, producto.cantidad)}
-                    className="btn btn-danger btn-sm mx-2"
-                  >
-                    Eliminar
-                  </button>
-                  <button
-                    onClick={() =>
-                      updateListaCompra(
-                        producto.id_producto,
-                        prompt("Nueva cantidad:", producto.cantidad)
-                      )
-                    }
-                    className="btn btn-primary btn-sm"
-                  >
-                    Actualizar
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
+     <div class="offcanvas offcanvas-end ${mostrarListaCompra ? 'show' : ''}" tabindex="-1" id="lista-offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas-header">
+            <h2 class="offcanvas-title" id="offcanvasExampleLabel">Lista de la Compra</h2>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
-        <div className="botones-lista-compra">
-          <button
-            className="btn btn-danger"
-            onClick={() => listaCompra.forEach((producto) => deleteListaCompra(producto.id_producto, producto.cantidad))}
-          >
-            Vaciar Lista
-          </button>
-          <button className="btn btn-secondary">Ir a recetas</button>
+        <div class="offcanvas-body">
+            <div>
+                <div>
+                    <h3>Ingredientes</h3>
+                    <ul>
+                        <li>1 kg de carne de res</li>
+                        <li>2 cebollas</li>
+                        <li>1 pimiento rojo</li>
+                        <li>2 dientes de ajo</li>
+                        <li>1 cucharadita de comino</li>
+                        <li>Sal y pimienta al gusto</li>
+                        <li>12 tortillas de maíz</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="botones-lista-compra">
+                <button>Vaciar Lista</button>
+                <button class="botones-inversos">Ir a recetas</button>
+            </div>
         </div>
-        <div>
-          <h3 className="mt-3">Añadir Producto</h3>
-          <input
-            type="text"
-            className="form-control mb-2"
-            placeholder="ID del Producto"
-            value={nuevoProducto.id_producto}
-            onChange={(e) =>
-              setNuevoProducto({ ...nuevoProducto, id_producto: e.target.value })
-            }
-          />
-          <input
-            type="number"
-            className="form-control mb-2"
-            placeholder="Cantidad"
-            value={nuevoProducto.cantidad}
-            onChange={(e) =>
-              setNuevoProducto({ ...nuevoProducto, cantidad: e.target.value })
-            }
-          />
-          <button onClick={insertListaCompra} className="btn btn-success">
-            Añadir
-          </button>
-        </div>
-      </div>
     </div>
+    // <div>
+    //   <div className="offcanvas-header">
+    //     <h2 className="offcanvas-title">Lista de la Compra</h2>
+    //     <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    //   </div>
+    //   <div className="offcanvas-body">
+    //     <div>
+    //       <div>
+    //         <h3>Ingredientes</h3>
+    //         <ul>
+    //           {listaCompra.map((producto) => (
+    //             <li key={producto.id_producto}>
+    //               {producto.nombre} - Cantidad: {producto.cantidad}
+    //               <button
+    //                 onClick={() => deleteListaCompra(producto.id_producto, producto.cantidad)}
+    //                 className="btn btn-danger btn-sm mx-2"
+    //               >
+    //                 Eliminar
+    //               </button>
+    //               <button
+    //                 onClick={() =>
+    //                   updateListaCompra(
+    //                     producto.id_producto,
+    //                     prompt("Nueva cantidad:", producto.cantidad)
+    //                   )
+    //                 }
+    //                 className="btn btn-primary btn-sm"
+    //               >
+    //                 Actualizar
+    //               </button>
+    //             </li>
+    //           ))}
+    //         </ul>
+    //       </div>
+    //     </div>
+    //     <div className="botones-lista-compra">
+    //       <button
+    //         className="btn btn-danger"
+    //         onClick={() => listaCompra.forEach((producto) => deleteListaCompra(producto.id_producto, producto.cantidad))}
+    //       >
+    //         Vaciar Lista
+    //       </button>
+    //       <button className="btn btn-secondary">Ir a recetas</button>
+    //     </div>
+    //     <div>
+    //       <h3 className="mt-3">Añadir Producto</h3>
+    //       <input
+    //         type="text"
+    //         className="form-control mb-2"
+    //         placeholder="ID del Producto"
+    //         value={nuevoProducto.id_producto}
+    //         onChange={(e) =>
+    //           setNuevoProducto({ ...nuevoProducto, id_producto: e.target.value })
+    //         }
+    //       />
+    //       <input
+    //         type="number"
+    //         className="form-control mb-2"
+    //         placeholder="Cantidad"
+    //         value={nuevoProducto.cantidad}
+    //         onChange={(e) =>
+    //           setNuevoProducto({ ...nuevoProducto, cantidad: e.target.value })
+    //         }
+    //       />
+    //       <button onClick={insertListaCompra} className="btn btn-success">
+    //         Añadir
+    //       </button>
+    //     </div>
+    //   </div>
+    // </div>
+    
   );
 };
 
