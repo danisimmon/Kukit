@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import Home from '../../home/home';
+import logo from '../../img/logo_kukit.png';
 
-const Registro = () => {
+const Registro = ({setShowRegistro}) => {
   const [formData, setFormData] = useState({
     usuario: '',
     correo: '',
@@ -48,7 +50,7 @@ const Registro = () => {
       <section className="contenedor-sign-up">
         <figure>
         <a href="/">
-          <img src="img/logo_kukit.png" alt="Logo de Kukit" />
+          <img src={logo} alt="Logo de Kukit" />
         </a>
       </figure>
 
@@ -105,6 +107,7 @@ const Registro = () => {
         <p>¿Ya tienes cuenta?</p>
         <button className="botones-inicio-sesion" id="inicio-google">Iniciar sesión</button>
         <hr />
+        <button onClick={() => setShowRegistro(false)}>Cerrar</button>
       </section>
     </div>
   );

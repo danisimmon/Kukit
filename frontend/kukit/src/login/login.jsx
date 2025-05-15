@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import logo from '../img/logo_kukit.png';
+import Home from '../home/home';
 
-const Login = () => {
+const Login = ({ setShowLogin }) => {
   const [formData, setFormData] = useState({
     correo: '',
     password: ''
@@ -56,55 +58,58 @@ const Login = () => {
   };
 
   return (
-    <section className="contenedor-sign-in" id="contenedor-sign-in">
-      <figure>
-        <a href="/">
-          <img src="img/logo_kukit.png" alt="Logo de Kukit" />
-        </a>
-      </figure>
+    <div className="pop-up-sign-up">
+      <section className="contenedor-sign-in" id="contenedor-sign-in">
+        <figure>
+          <a href="/">
+            <img src={logo} alt="Logo de Kukit" />
+          </a>
+        </figure>
 
-      <h1>INICIAR SESIÓN</h1>
-      <hr className="linea-inicio-sesion" />
-      <hr />
+        <h1>INICIAR SESIÓN</h1>
+        <hr className="linea-inicio-sesion" />
+        <hr />
 
-      <form onSubmit={manejarEnvio}>
-        <div className="contenedor-email-password">
-          <label htmlFor="correo" className="mail">Correo electrónico:</label>
-          <input
-            type="email"
-            name="correo"
-            id="correo"
-            value={formData.correo}
-            onChange={manejarCambio}
-          />
-          <span className="error">{errorEmail}</span>
-        </div>
+        <form onSubmit={manejarEnvio}>
+          <div className="contenedor-email-password">
+            <label htmlFor="correo" className="mail">Correo electrónico:</label>
+            <input
+              type="email"
+              name="correo"
+              id="correo"
+              value={formData.correo}
+              onChange={manejarCambio}
+            />
+            <span className="error">{errorEmail}</span>
+          </div>
 
-        <div className="contenedor-email-password">
-          <label htmlFor="password" className="password-sign-in">Contraseña:</label>
-          <input
-            type="password"
-            name="password"
-            id="password"
-            value={formData.password}
-            onChange={manejarCambio}
-          />
-          <span className="error">{errorPassword}</span>
-        </div>
+          <div className="contenedor-email-password">
+            <label htmlFor="password" className="password-sign-in">Contraseña:</label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              value={formData.password}
+              onChange={manejarCambio}
+            />
+            <span className="error">{errorPassword}</span>
+          </div>
 
-        <button type="submit" className="botones-inicio-sesion">
-          Iniciar sesión
+          <button type="submit" className="botones-inicio-sesion">
+            Iniciar sesión
+          </button>
+        </form>
+
+        <button className="botones-inicio-sesion" id="inicio-google">
+          Iniciar sesión con Google
         </button>
-      </form>
 
-      <button className="botones-inicio-sesion" id="inicio-google">
-        Iniciar sesión con Google
-      </button>
-
-      {mensaje && (
-        <p style={{ color: exito ? 'green' : 'red', marginTop: '1rem' }}>{mensaje}</p>
-      )}
-    </section>
+        {mensaje && (
+          <p style={{ color: exito ? 'green' : 'red', marginTop: '1rem' }}>{mensaje}</p>
+        )}
+        <button onClick={() => setShowLogin(false)}>Cerrar</button>
+      </section>
+    </div>
   );
 };
 

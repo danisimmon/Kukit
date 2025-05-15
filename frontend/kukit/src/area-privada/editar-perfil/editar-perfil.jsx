@@ -3,7 +3,7 @@ import axios from 'axios';
 import logo from '../../img/logo_kukit.png';
 import comida from "../../img/comida.jpg";
 import bookmark from "../../img/bookmark.png";
-
+import Footer from '../../footer/footer';
 
 
 const EditarPerfil = () => {
@@ -293,6 +293,7 @@ const EditarPerfil = () => {
           <div className="crear-receta">
             <div className="crear-receta-info">
               <h3>Nombre de la Receta</h3>
+              <input type="text" className='nombre-receta-nueva'/>
               <div className="info-basica-receta">
                 <div className="apartado-dificultad">
                   <h5>Dificultad</h5>
@@ -371,6 +372,7 @@ const EditarPerfil = () => {
         //   </div>
         // </div>
       }
+      <Footer />
     </>
 
 

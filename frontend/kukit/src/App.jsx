@@ -13,6 +13,7 @@ import './style.css';
 import hero from './img/hero.jpg';
 import Recetas from './area-privada/recetas';
 
+
 function App() {
   return (
     <BrowserRouter>
@@ -20,7 +21,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/Registro" element={<Registro />} />
-        <Route path="/login/restablecimiento-password" element={<PasswordReset />} />
+        <Route path="/login/restablecer-password" element={<PasswordReset />} />
         <Route path="/login/restablecer-password/nueva-password" element={<NuevaPassword />} />
         <Route path="/recetas" element={<Recetas />} />
         <Route path="/area-privada/editar-perfil" element={<EditarPerfil />} />
