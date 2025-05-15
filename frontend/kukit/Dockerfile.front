@@ -5,7 +5,7 @@ WORKDIR /app
 COPY package*.json ./
 
 RUN npm install && \
-    npm install react-router-dom axios
+    npm install react-router-dom axios bootstrap@5.3.6
 
 COPY . .
 

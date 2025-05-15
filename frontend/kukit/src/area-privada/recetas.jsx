@@ -44,7 +44,7 @@ const recetas = () => {
               />
               {/* 
               <a className="btn" data-bs-toggle="offcanvas" href="#receta-offcanvasExample" role="button"
-                 aria-controls="offcanvasExample">Ver receta</a>
+                aria-controls="offcanvasExample">Ver receta</a>
               */}
             </div>
           ))}

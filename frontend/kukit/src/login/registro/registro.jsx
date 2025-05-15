@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import Home from '../../home/home';
 import logo from '../../img/logo_kukit.png';
 
-const Registro = ({setShowRegistro}) => {
+const Registro = ({ setShowRegistro }) => {
   const [formData, setFormData] = useState({
     usuario: '',
     correo: '',
-    password: '' 
+    password: ''
   });
 
   const [mensaje, setMensaje] = useState('');
   const [exito, setExito] = useState(false);
+
+  const navigate = useNavigate();
 
   const manejarCambio = (e) => {
     const { name, value } = e.target;
@@ -35,6 +37,8 @@ const Registro = ({setShowRegistro}) => {
         setExito(true);
         setMensaje(respuesta.data.message);
         console.log('Usuario:', respuesta.data.user);
+
+        navigate('/recetas');
       } else {
         setExito(false);
         setMensaje(respuesta.data.message);
@@ -45,14 +49,15 @@ const Registro = ({setShowRegistro}) => {
       console.error('Error:', error);
     }
   };
+
   return (
     <div className="pop-up-sign-up">
       <section className="contenedor-sign-up">
         <figure>
-        <a href="/">
-          <img src={logo} alt="Logo de Kukit" />
-        </a>
-      </figure>
+          <a href="/">
+            <img src={logo} alt="Logo de Kukit" />
+          </a>
+        </figure>
 
         <h1>CREAR CUENTA</h1>
         <hr className="linea-inicio-sesion" />
