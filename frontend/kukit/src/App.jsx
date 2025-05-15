@@ -25,7 +25,7 @@ function App() {
         <Route path="/login/restablecer-password/nueva-password" element={<NuevaPassword />} />
         <Route path="/recetas" element={<Recetas />} />
         <Route path="/area-privada/editar-perfil" element={<EditarPerfil />} />
-        <Route path="/listaCompra/listaCompra" element={<ListaCompra />} />
+        <Route path="/listaCompra" element={<ListaCompra />} />
       </Routes>
     </BrowserRouter>
   );
