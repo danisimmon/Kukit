@@ -1,38 +1,72 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import logo from '../img/logo_kukit.png';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
 
-const recetas = () => {
-
-  //Funcionalidad de JS /axios 
+const Recetas = () => {
   const [recetas, setRecetas] = useState([]);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
+  const [n_recetas, setN_recetas] = useState(0);
+  const [recetaSeleccionada, setRecetaSeleccionada] = useState(null);
+  const offcanvasRef = useRef(null);
 
   useEffect(() => {
     const obtenerRecetas = async () => {
       try {
         const respuesta = await axios.get('http://localhost/api/area_privada/recetas/getRecetas.php');
-        console.log("Respuesta del servidor: ", respuesta.data.recetas);
+        setN_recetas(respuesta.data.n_recetas);
         setRecetas(respuesta.data.recetas);
         setCargando(false);
       } catch (err) {
-        setError('Error al cargar las recetas');
+        setError('Error al cargar las recetas', err);
         setCargando(false);
       }
     };
     obtenerRecetas();
   }, []);
 
+  const abrirReceta = (receta) => {
+    console.log('Abriendo receta:', receta.nombre);
+    setRecetaSeleccionada(receta);
+    const offcanvasElement = offcanvasRef.current;
+    if (offcanvasElement) {
+      const bsOffcanvas = new bootstrap.Offcanvas(offcanvasElement);
+      bsOffcanvas.show();
+      console.log('Offcanvas mostrado.');
+    } else {
+      console.error('Elemento offcanvas no encontrado.');
+    }
+  };
+
+  const cerrarOffcanvas = () => {
+    console.log('Cerrando offcanvas.');
+    setRecetaSeleccionada(null);
+    const offcanvasElement = offcanvasRef.current;
+    if (offcanvasElement) {
+      const bsOffcanvas = bootstrap.Offcanvas.getInstance(offcanvasElement);
+      if (bsOffcanvas) {
+        bsOffcanvas.hide();
+      }
+    }
+  };
+
+  // Agrega un log para ver cuándo cambia recetaSeleccionada
+  useEffect(() => {
+    console.log('recetaSeleccionada cambió a:', recetaSeleccionada);
+  }, [recetaSeleccionada]);
+
   if (cargando) return <p>Cargando recetas...</p>;
   if (error) return <p>{error}</p>;
+
   return (
     <>
       <div className="container">
         <div className="titulo-pagina">
           <h2>Recetas</h2>
           <div className="linea-vertical"></div>
-          <h2 className="numero-recetas">4 recetas</h2>
+          <h2 className="numero-recetas">{`${n_recetas} recetas`}</h2>
         </div>
 
         <div className="tarjetas">
@@ -40,36 +74,19 @@ const recetas = () => {
             <div
               key={receta._id}
               className="tarjeta btn"
-              data-bs-toggle="offcanvas"
-              href="#receta-offcanvasExample"
               role="button"
-              aria-controls="offcanvasExample"
+              onClick={() => abrirReceta(receta)}
             >
               <img
                 src="img/comida.jpg"
                 className="imagen-receta-tarjeta"
                 alt={`Receta ${receta._id}`}
               />
-              <h3>{`Receta ${receta._id}`}</h3>
-              <p className="likesNumero">${receta._id}</p>
-              <img
-                src="./img/megusta.png"
-                alt="like"
-                className="like"
-              />
-              <p className="duracion">
-                ${receta._id}
-              </p>
-              {/* {num === 1 && <p className=""></p>} */}
-              <img
-                src="img/bookmark.png"
-                className="icono-bookmark"
-                alt="Guardar"
-              />
-              {/* 
-              <a className="btn" data-bs-toggle="offcanvas" href="#receta-offcanvasExample" role="button"
-                aria-controls="offcanvasExample">Ver receta</a>
-              */}
+              <h3>{receta.nombre}</h3>
+              <p className="likesNumero">{receta.likes || 0}</p>
+              <img src="./img/megusta.png" alt="like" className="like" />
+              <p className="duracion">{receta.duracion || 'N/A'} min</p>
+              <img src="img/bookmark.png" className="icono-bookmark" alt="Guardar" />
             </div>
           ))}
         </div>
@@ -81,56 +98,43 @@ const recetas = () => {
         tabIndex="-1"
         id="receta-offcanvasExample"
         aria-labelledby="offcanvasExampleLabel"
+        ref={offcanvasRef}
       >
         <div className="offcanvas-header">
           <h5 className="offcanvas-title" id="offcanvasExampleLabel">
-            Información de la receta
+            {recetaSeleccionada ? recetaSeleccionada.nombre : 'Información de la receta'}
           </h5>
           <button
             type="button"
             className="btn-close"
             data-bs-dismiss="offcanvas"
             aria-label="Close"
+            onClick={cerrarOffcanvas}
           ></button>
         </div>
         <div className="offcanvas-body">
-          <div>
-            <div>
+          {recetaSeleccionada ? (
+            <>
               <h3>Ingredientes</h3>
               <ul>
-                <li>1 kg de carne de res</li>
-                <li>2 cebollas</li>
-                <li>1 pimiento rojo</li>
-                <li>2 dientes de ajo</li>
-                <li>1 cucharadita de comino</li>
-                <li>Sal y pimienta al gusto</li>
-                <li>12 tortillas de maíz</li>
+                {recetaSeleccionada.ingredientes?.map((ing, index) => (
+                  <li key={index}>
+                    {ing.cantidad && `${ing.cantidad} `}
+                    {ing.unidad && `${ing.unidad} `}
+                    {ing.nombre}
+                  </li>
+                ))}
               </ul>
               <h3>Instrucciones</h3>
               <ol>
-                <li>
-                  En una sartén grande, calienta un poco de aceite y sofríe la
-                  cebolla y el ajo picados.
-                </li>
-                <li>Agrega la carne y cocina hasta que esté dorada.</li>
-                <li>
-                  Incorpora el pimiento rojo y el comino, y cocina por unos
-                  minutos más.
-                </li>
-                <li>Calienta las tortillas en otra sartén.</li>
-                <li>Sirve la carne en las tortillas y disfruta.</li>
+                {recetaSeleccionada.pasos?.map((paso, index) => (
+                  <li key={index}>{paso}</li>
+                ))}
               </ol>
-            </div>
-          </div>
-          <div className="dropdown mt-3">
-            <button
-              className="btn btn-secondary dropdown-toggle"
-              type="button"
-              data-bs-toggle="dropdown"
-            >
-              Ver instrucciones
-            </button>
-          </div>
+            </>
+          ) : (
+            <p>Selecciona una receta para ver los detalles.</p>
+          )}
         </div>
       </div>
 
@@ -154,19 +158,16 @@ const recetas = () => {
         </div>
         <div className="offcanvas-body">
           <div>
-            <div>
-              <h3>Ingredientes</h3>
-              <ul>
-                <li>1 kg de carne de res</li>
-                {/* <hr className="linea-separacion-compra" /> */}
-                <li>2 cebollas</li>
-                <li>1 pimiento rojo</li>
-                <li>2 dientes de ajo</li>
-                <li>1 cucharadita de comino</li>
-                <li>Sal y pimienta al gusto</li>
-                <li>12 tortillas de maíz</li>
-              </ul>
-            </div>
+            <h3>Ingredientes</h3>
+            <ul>
+              <li>1 kg de carne de res</li>
+              <li>2 cebollas</li>
+              <li>1 pimiento rojo</li>
+              <li>2 dientes de ajo</li>
+              <li>1 cucharadita de comino</li>
+              <li>Sal y pimienta al gusto</li>
+              <li>12 tortillas de maíz</li>
+            </ul>
           </div>
           <div className="botones-lista-compra">
             <button>Vaciar Lista</button>
@@ -178,4 +179,4 @@ const recetas = () => {
   );
 };
 
-export default recetas;
+export default Recetas;

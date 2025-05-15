@@ -23,7 +23,7 @@ foreach ($recetas as $receta) {
 }
 
 if (count($recetasArray) > 0) {
-    echo json_encode(["success" => true, "recetas" => $recetasArray]);
+    echo json_encode(["success" => true, "recetas" => $recetasArray, "n_recetas" => count($recetasArray)]);
 } else {
     echo json_encode(["success" => false, "message" => "No se encontraron recetas"]);
 }
