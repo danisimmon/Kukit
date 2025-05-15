@@ -1,17 +1,31 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 
-const ListaCompra = ({ showListaCompra }) => {
+const ListaCompra = ({ showListaCompra, setListaCompra }) => {
   const offcanvasRef = useRef();
+  const bsOffcanvasRef = useRef(null);
 
   useEffect(() => {
-    if (showListaCompra && offcanvasRef.current) {
-      const bsOffcanvas = new window.bootstrap.Offcanvas(offcanvasRef.current);
-      bsOffcanvas.show();
+    if (!offcanvasRef.current || !window.bootstrap?.Offcanvas) return;
+
+    // Solo inicializamos una vez
+    if (!bsOffcanvasRef.current) {
+      bsOffcanvasRef.current = new window.bootstrap.Offcanvas(offcanvasRef.current);
+
+      // Listener que se dispara cuando se cierra el offcanvas
+      offcanvasRef.current.addEventListener("hidden.bs.offcanvas", () => {
+        setListaCompra(false);
+      });
     }
+
+    // Mostrar el offcanvas solo cuando cambia a true
+    if (showListaCompra) {
+      bsOffcanvasRef.current.show();
+    }
+
   }, [showListaCompra]);
 
-  const [listaCompra, setListaCompra] = useState([]); // Lista de la compra
+  const [listaCompra, setLista] = useState([]); // Lista de la compra
   const [nuevoProducto, setNuevoProducto] = useState({
     id_producto: "",
     cantidad: "",
