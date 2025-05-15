@@ -6,6 +6,7 @@ import Login from '../login/login';
 import Registro from '../login/registro/registro';
 import Footer from '../footer/footer';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function Home() {
   const [showLogin, setShowLogin] = useState(false);
@@ -43,8 +44,8 @@ function Home() {
         </button>
         <nav>
           <ul>
-            <li><a href="../area-privada/recetas.jsx">Recetas</a></li>
-            <li><a href="/lista-compra">Lista de la compra</a></li>
+            <li><Link to="/recetas">Recetas</Link></li>            
+            <li><Link to="/listaCompra">Lista de la Compra</Link></li>            
             <li><a href="/plan-alimentacion">Plan de alimentación</a></li>
           </ul>
         </nav>
