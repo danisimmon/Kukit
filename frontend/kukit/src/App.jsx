@@ -11,6 +11,7 @@ import Home from './home/home';
 import './style.css';
 //importo las imagenes de la carpeta img
 import hero from './img/hero.jpg';
+import Recetas from './area-privada/recetas';
 
 function App() {
   return (
@@ -21,7 +22,7 @@ function App() {
         <Route path="/Registro" element={<Registro />} />
         <Route path="/login/restablecimiento-password" element={<PasswordReset />} />
         <Route path="/login/restablecer-password/nueva-password" element={<NuevaPassword />} />
-        <Route path="/login/registro" element={<Registro />} />
+        <Route path="/recetas" element={<Recetas />} />
         <Route path="/area-privada/editar-perfil" element={<EditarPerfil />} />
         <Route path="/listaCompra/listaCompra" element={<ListaCompra />} />
       </Routes>

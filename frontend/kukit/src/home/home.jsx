@@ -4,6 +4,7 @@ import logo from '../img/logo_kukit.png';
 import hero from '../img/Hero.jpg';
 import Login from '../login/login';
 import Registro from '../login/registro/registro';
+import Recetas from '../area-privada/recetas';
 
 function Home() {
   const [showLogin, setShowLogin] = useState(false);
@@ -33,7 +34,7 @@ function Home() {
         </button>
         <nav>
           <ul>
-            <li><a href="/productos">Recetas</a></li>
+            <li><a href="../area-privada/recetas.jsx">Recetas</a></li>
             <li><a href="/lista-compra">Lista de la compra</a></li>
             <li><a href="/plan-alimentacion">Plan de alimentación</a></li>
           </ul>
