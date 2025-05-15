@@ -1,7 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
+// import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/js/bootstrap.bundle.min.js'; // Esto incluye Offcanvas y demás
 
-const ListaCompra = () => {
+const ListaCompra = ({ showListaCompra }) => {
+
+  const offcanvasRef = useRef();
+
+  useEffect(() => {
+    if (showListaCompra && offcanvasRef.current) {
+      const bsOffcanvas = new window.bootstrap.Offcanvas(offcanvasRef.current);
+      bsOffcanvas.show();
+    }
+  }, [showListaCompra]);
   const [listaCompra, setListaCompra] = useState([]); // Lista de la compra
   const [nuevoProducto, setNuevoProducto] = useState({
     id_producto: "",
@@ -115,32 +126,44 @@ const ListaCompra = () => {
   }, []);
 
   return (
-     <div class="offcanvas offcanvas-end ${mostrarListaCompra ? 'show' : ''}" tabindex="-1" id="lista-offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-        <div class="offcanvas-header">
-            <h2 class="offcanvas-title" id="offcanvasExampleLabel">Lista de la Compra</h2>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    <>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" rel="stylesheet"></link>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"
+        defer></script>
+
+
+      <div ref={offcanvasRef} className="offcanvas offcanvas-end" tabIndex="-1" id="lista-offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+        <div className="offcanvas-header">
+          <h2 className="offcanvas-title" id="offcanvasExampleLabel">Lista de la Compra</h2>
+          <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
-        <div class="offcanvas-body">
+        <div className="offcanvas-body">
+          <div>
             <div>
-                <div>
-                    <h3>Ingredientes</h3>
-                    <ul>
-                        <li>1 kg de carne de res</li>
-                        <li>2 cebollas</li>
-                        <li>1 pimiento rojo</li>
-                        <li>2 dientes de ajo</li>
-                        <li>1 cucharadita de comino</li>
-                        <li>Sal y pimienta al gusto</li>
-                        <li>12 tortillas de maíz</li>
-                    </ul>
-                </div>
+              <h3>Ingredientes</h3>
+              <ul>
+                <li>1 kg de carne de res</li>
+                {/* <hr class="linea-separacion-compra">  */}
+                <li>2 cebollas</li>
+                <li>1 pimiento rojo</li>
+                <li>2 dientes de ajo</li>
+                <li>1 cucharadita de comino</li>
+                <li>Sal y pimienta al gusto</li>
+                <li>12 tortillas de maíz</li>
+              </ul>
             </div>
-            <div class="botones-lista-compra">
-                <button>Vaciar Lista</button>
-                <button class="botones-inversos">Ir a recetas</button>
-            </div>
+          </div>
+          <div className="botones-lista-compra">
+            <button>Vaciar Lista</button>
+            <button className="botones-inversos">Ir a recetas</button>
+          </div>
         </div>
-    </div>
+      </div>
+
+    </>
+
+
     // <div>
     //   <div className="offcanvas-header">
     //     <h2 className="offcanvas-title">Lista de la Compra</h2>
@@ -211,7 +234,7 @@ const ListaCompra = () => {
     //     </div>
     //   </div>
     // </div>
-    
+
   );
 };
 

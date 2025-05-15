@@ -12,6 +12,11 @@ import './style.css';
 //importo las imagenes de la carpeta img
 import hero from './img/hero.jpg';
 import Recetas from './area-privada/recetas';
+// import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+// import '../node_modules/bootstrap-icons/font/bootstrap-icons.css';
+// import '../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js';
+// import './bootstrap/dist/js/bootstrap.bundle.min.js';
+
 
 
 function App() {

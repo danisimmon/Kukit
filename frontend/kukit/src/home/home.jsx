@@ -5,12 +5,14 @@ import hero from '../img/Hero.jpg';
 import Login from '../login/login';
 import Registro from '../login/registro/registro';
 import Footer from '../footer/footer';
+import ListaCompra from '../listaCompra/listaCompra';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 function Home() {
   const [showLogin, setShowLogin] = useState(false);
   const [showRegistro, setShowRegistro] = useState(false);
+  const [showListaCompra, setListaCompra] = useState(false);
 
   useEffect(() => {
     const container = document.querySelector('.bubbles');
@@ -23,13 +25,13 @@ function Home() {
       }
     }
   }, []);
-//Código prueba Manu
+  //Código prueba Manu
   const navigate = useNavigate();
 
   const handleLogout = () => {
-  localStorage.removeItem('token'); // O lo que uses para identificar la sesión
-  navigate('/home'); // O redirige a '/login' si tienes una ruta específica
-};
+    localStorage.removeItem('token'); // O lo que uses para identificar la sesión
+    navigate('/home'); // O redirige a '/login' si tienes una ruta específica
+  };
 
   return (
     <>
@@ -44,8 +46,8 @@ function Home() {
         </button>
         <nav>
           <ul>
-            <li><Link to="/recetas">Recetas</Link></li>            
-            <li><Link to="/listaCompra">Lista de la Compra</Link></li>            
+            <li><Link to="/recetas">Recetas</Link></li>
+            <li onClick={() => setListaCompra(true)}>Lista de la Compra</li>
             <li><a href="/plan-alimentacion">Plan de alimentación</a></li>
           </ul>
         </nav>
@@ -56,96 +58,96 @@ function Home() {
       </header>
       <div id="pop-up-sign-in" style={{ display: showLogin ? 'flex' : 'none' }} onClick={() => setShowLogin(false)}>
         <div className="modal-content" onClick={e => e.stopPropagation()}>
-          <Login setShowLogin={setShowLogin}/>
+          <Login setShowLogin={setShowLogin} />
         </div>
       </div>
       <div id="pop-up-sign-up" style={{ display: showRegistro ? 'flex' : 'none' }} onClick={() => setShowRegistro(false)}>
         <div className="modal-content-2" onClick={e => e.stopPropagation()}>
-          <Registro setShowRegistro={setShowRegistro}/>
+          <Registro setShowRegistro={setShowRegistro} />
         </div>
       </div>
+      <ListaCompra showListaCompra={showListaCompra} />
+      <main>
+        <div className="hero">
+          <div className="textos-hero">
+            <h1>ORGANIZA LO QUE COMES SIN COMERTE LA CABEZA</h1>
+            <button className="btn-reservation">DESCUBRE UN NUEVO MUNDO CULINARIO</button>
+          </div>
+          <div className="fondo">
+            <figure>
+              <img src={hero} alt="" className="img-hero" />
+            </figure>
+          </div>
+        </div>
 
-        <main>
-          <div className="hero">
-            <div className="textos-hero">
-              <h1>ORGANIZA LO QUE COMES SIN COMERTE LA CABEZA</h1>
-              <button className="btn-reservation">DESCUBRE UN NUEVO MUNDO CULINARIO</button>
-            </div>
-            <div className="fondo">
-              <figure>
-                <img src={hero} alt="" className="img-hero" />
-              </figure>
+        <section>
+          <div className="contenendor-home" id="contenedor-recetas">
+            <div className="recetas">
+              <h2>Recetas</h2>
+              <div className="tarjetas-recetas" id="tarjetas-recetas">
+                {/* Aquí se generarán las tarjetas de recetas */}
+              </div>
+              <button className="recetas">+ Recetas</button>
             </div>
           </div>
 
-          <section>
-            <div className="contenendor-home" id="contenedor-recetas">
-              <div className="recetas">
-                <h2>Recetas</h2>
-                <div className="tarjetas-recetas" id="tarjetas-recetas">
-                  {/* Aquí se generarán las tarjetas de recetas */}
-                </div>
-                <button className="recetas">+ Recetas</button>
+          <div className="contenedor-home" id="contenedor-imprescindibles-novedades">
+            <h2>Imprescindibles Kukit</h2>
+            <h2>Novedades de la semana</h2>
+          </div>
+
+          <div className="contenedor-home" id="contenedor-lista-compra">
+            <h2>Añade tus recetas y crea tu lista de la compra</h2>
+            <div className="contenedor-lista-compra-elementos">
+              <div className="contenedor-home-checks"></div>
+              <div className="contenedor-lista-compra-texto">
+                <h3>Organiza tu compra de manera rápida y sencilla con solo un clic.</h3>
+                <p>
+                  Ahora, con nuestra nueva funcionalidad, podrás buscar fácilmente tus recetas favoritas y añadir
+                  los ingredientes directamente a tu lista. Cuando te guste una receta, haz clic en "Añadir a la
+                  lista" y los ingredientes necesarios se agregarán a tu lista de la compra.
+                  Esto te permitirá ahorrar tiempo en tus compras y asegurarte de tener todo lo necesario para
+                  tus platos. ¡Cocinar nunca fue tan fácil!
+                </p>
               </div>
             </div>
+          </div>
 
-            <div className="contenedor-home" id="contenedor-imprescindibles-novedades">
-              <h2>Imprescindibles Kukit</h2>
-              <h2>Novedades de la semana</h2>
-            </div>
-
-            <div className="contenedor-home" id="contenedor-lista-compra">
-              <h2>Añade tus recetas y crea tu lista de la compra</h2>
-              <div className="contenedor-lista-compra-elementos">
-                <div className="contenedor-home-checks"></div>
-                <div className="contenedor-lista-compra-texto">
-                  <h3>Organiza tu compra de manera rápida y sencilla con solo un clic.</h3>
-                  <p>
-                    Ahora, con nuestra nueva funcionalidad, podrás buscar fácilmente tus recetas favoritas y añadir
-                    los ingredientes directamente a tu lista. Cuando te guste una receta, haz clic en "Añadir a la
-                    lista" y los ingredientes necesarios se agregarán a tu lista de la compra.
-                    Esto te permitirá ahorrar tiempo en tus compras y asegurarte de tener todo lo necesario para
-                    tus platos. ¡Cocinar nunca fue tan fácil!
-                  </p>
-                </div>
+          <div className="contenedor-home" id="contenedor-filtros-recetas">
+            <h2>Filtra, Elige y Cocina tu próxima receta</h2>
+            <div className="contenedor-lista-compra-elementos">
+              <div className="contenedor-home-checks"></div>
+              <div className="contenedor-lista-compra-texto">
+                <h3>Busca por país, ingredientes o necesidades especiales</h3>
+                <p>
+                  En Kukit te lo ponemos fácil para encontrar la receta perfecta. Explora platos según su país
+                  de origen, filtra por los ingredientes que tienes en casa o elige opciones que se adapten a tus
+                  necesidades: sin gluten, veganas, bajas en carbohidratos y mucho más. Así ahorras tiempo y
+                  disfrutas justo lo que necesitas, sin complicaciones.
+                </p>
               </div>
             </div>
+          </div>
 
-            <div className="contenedor-home" id="contenedor-filtros-recetas">
-              <h2>Filtra, Elige y Cocina tu próxima receta</h2>
-              <div className="contenedor-lista-compra-elementos">
-                <div className="contenedor-home-checks"></div>
-                <div className="contenedor-lista-compra-texto">
-                  <h3>Busca por país, ingredientes o necesidades especiales</h3>
-                  <p>
-                    En Kukit te lo ponemos fácil para encontrar la receta perfecta. Explora platos según su país
-                    de origen, filtra por los ingredientes que tienes en casa o elige opciones que se adapten a tus
-                    necesidades: sin gluten, veganas, bajas en carbohidratos y mucho más. Así ahorras tiempo y
-                    disfrutas justo lo que necesitas, sin complicaciones.
-                  </p>
-                </div>
+          <div className="contenedor-home" id="contenedor-calendario">
+            <h2>Filtra tus recetas y descubre tu próxima receta</h2>
+            <div className="contenedor-lista-compra-elementos">
+              <div className="contenedor-home-checks"></div>
+              <div className="contenedor-lista-compra-texto">
+                <h3>¿Cómo hacerlo?</h3>
+                <p>
+                  En Kukit te lo ponemos fácil para encontrar la receta perfecta. Explora platos según su país
+                  de origen, filtra por los ingredientes que tienes en casa o elige opciones que se adapten a tus
+                  necesidades: sin gluten, veganas, bajas en carbohidratos y mucho más. Así ahorras tiempo y
+                  disfrutas justo lo que necesitas, sin complicaciones.
+                </p>
               </div>
             </div>
+          </div>
+        </section>
+      </main>
 
-            <div className="contenedor-home" id="contenedor-calendario">
-              <h2>Filtra tus recetas y descubre tu próxima receta</h2>
-              <div className="contenedor-lista-compra-elementos">
-                <div className="contenedor-home-checks"></div>
-                <div className="contenedor-lista-compra-texto">
-                  <h3>¿Cómo hacerlo?</h3>
-                  <p>
-                    En Kukit te lo ponemos fácil para encontrar la receta perfecta. Explora platos según su país
-                    de origen, filtra por los ingredientes que tienes en casa o elige opciones que se adapten a tus
-                    necesidades: sin gluten, veganas, bajas en carbohidratos y mucho más. Así ahorras tiempo y
-                    disfrutas justo lo que necesitas, sin complicaciones.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </section>
-        </main>
-
-        {/* <footer>
+      {/* <footer>
           <div className="main"></div>
           <div className="footer">
             <div className="bubbles"></div>
@@ -212,9 +214,9 @@ function Home() {
             </defs>
           </svg>
         </footer> */}
-        <Footer />
-      </>
-      );
+      <Footer />
+    </>
+  );
 }
 
-      export default Home;
+export default Home;
