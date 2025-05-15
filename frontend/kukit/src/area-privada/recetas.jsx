@@ -1,7 +1,31 @@
-import React from "react";
-
+import React, { useState, useEffect} from 'react';
+import axios from 'axios';
+import logo from '../img/logo_kukit.png';
 
 const recetas = () => {
+
+  //Funcionalidad de JS /axios 
+  const [recetas, setRecetas] = useState([]);
+  const [cargando, setCargando] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const obtenerRecetas = async () => {
+      try {
+        const respuesta = await axios.get('http://localhost/api/area_privada/recetas/getRecetas.php');
+        console.log("Respuesta del servidor: ", respuesta.data.recetas);
+        setRecetas(respuesta.data.recetas);
+        setCargando(false);
+      } catch (err) {
+        setError('Error al cargar las recetas');
+        setCargando(false);
+      }
+    };
+    obtenerRecetas();
+  }, []);
+
+  if (cargando) return <p>Cargando recetas...</p>;
+  if (error) return <p>{error}</p>;
   return (
     <>
       <div className="container">
@@ -12,9 +36,9 @@ const recetas = () => {
         </div>
 
         <div className="tarjetas">
-          {[1, 2, 3, 4].map((num) => (
+          {recetas.map((receta) => (
             <div
-              key={num}
+              key={receta._id}
               className="tarjeta btn"
               data-bs-toggle="offcanvas"
               href="#receta-offcanvasExample"
@@ -24,19 +48,19 @@ const recetas = () => {
               <img
                 src="img/comida.jpg"
                 className="imagen-receta-tarjeta"
-                alt={`Receta ${num}`}
+                alt={`Receta ${receta._id}`}
               />
-              <h3>{`Receta ${num}`}</h3>
-              <p className="likesNumero">160</p>
+              <h3>{`Receta ${receta._id}`}</h3>
+              <p className="likesNumero">${receta._id}</p>
               <img
                 src="./img/megusta.png"
                 alt="like"
                 className="like"
               />
               <p className="duracion">
-                {num === 1 ? "20min" : num === 2 ? "40min" : num === 3 ? "1h" : "2h 30min"}
+                ${receta._id}
               </p>
-              {num === 1 && <p className=""></p>}
+              {/* {num === 1 && <p className=""></p>} */}
               <img
                 src="img/bookmark.png"
                 className="icono-bookmark"

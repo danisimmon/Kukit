@@ -18,6 +18,7 @@ $recetas = $collection->find();
 // }
 $recetasArray = [];
 foreach ($recetas as $receta) {
+    $receta['_id'] = (string)$receta['_id'];
     $recetasArray[] = $receta;
 }
 
