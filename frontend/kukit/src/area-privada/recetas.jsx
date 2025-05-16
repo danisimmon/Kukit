@@ -3,6 +3,10 @@ import axios from 'axios';
 import logo from '../img/logo_kukit.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
+import Login from '../login/login';
+import Registro from '../login/registro/registro';
+import Footer from '../footer/footer';
+
 
 const Recetas = () => {
   const [recetas, setRecetas] = useState([]);
@@ -11,6 +15,10 @@ const Recetas = () => {
   const [n_recetas, setN_recetas] = useState(0);
   const [recetaSeleccionada, setRecetaSeleccionada] = useState(null);
   const offcanvasRef = useRef(null);
+  const [showListaCompra, setListaCompra] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
+  const [showRegistro, setShowRegistro] = useState(false);
+
 
   useEffect(() => {
     const obtenerRecetas = async () => {
@@ -62,6 +70,42 @@ const Recetas = () => {
 
   return (
     <>
+      <header>
+        <a href="/" id="logo-header">
+          <img src={logo} alt="" id="logo-header" />
+        </a>
+        <button id="hamburger-menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <nav>
+          <ul>
+            <li>Recetas</li>
+            <li onClick={() => setListaCompra(true)}>Lista de la Compra</li>
+            <li><a href="/plan-alimentacion">Plan de alimentación</a></li>
+          </ul>
+        </nav>
+        <div className="contenedor-header">
+          <button className="sign-in" onClick={() => setShowLogin(true)}>Iniciar sesión</button>
+          <button className="sign-up" onClick={() => setShowRegistro(true)} id="sign-up">Regístrate</button>
+        </div>
+      </header>
+
+      <div id="pop-up-sign-in" style={{ display: showLogin ? 'flex' : 'none' }} onClick={() => setShowLogin(false)}>
+        <div className="modal-content" onClick={e => e.stopPropagation()}>
+          <Login setShowLogin={setShowLogin} />
+        </div>
+      </div>
+      <div id="pop-up-sign-up" style={{ display: showRegistro ? 'flex' : 'none' }} onClick={() => setShowRegistro(false)}>
+        <div className="modal-content-2" onClick={e => e.stopPropagation()}>
+          <Registro setShowRegistro={setShowRegistro} />
+        </div>
+      </div>
+      {showListaCompra && (
+        <ListaCompra showListaCompra={showListaCompra} setListaCompra={setListaCompra} />
+      )}
+
       <div className="container">
         <div className="titulo-pagina">
           <h2>Recetas</h2>
@@ -175,6 +219,7 @@ const Recetas = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };
