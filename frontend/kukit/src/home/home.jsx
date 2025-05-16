@@ -1,7 +1,7 @@
 // src/pages/Home.jsx
 import React, { useEffect, useState } from 'react';
 import logo from '../img/logo_kukit.png';
-import hero from '../img/Hero.jpg';
+import hero from '../img/mesa-de-cocina-con-platos-preparados-e-ingredientes.jpg';
 import Login from '../login/login';
 import Registro from '../login/registro/registro';
 import Footer from '../footer/footer';

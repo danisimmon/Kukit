@@ -33,6 +33,7 @@ button {
 
 
 
+
 /* hover de .btn-reservation */
 button:hover {
     background-color: var(--primary-color);
