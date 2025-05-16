@@ -7,7 +7,6 @@ import Login from '../login/login';
 import Registro from '../login/registro/registro';
 import Footer from '../footer/footer';
 
-
 const Recetas = () => {
   const [recetas, setRecetas] = useState([]);
   const [cargando, setCargando] = useState(true);
@@ -19,6 +18,8 @@ const Recetas = () => {
   const [showLogin, setShowLogin] = useState(false);
   const [showRegistro, setShowRegistro] = useState(false);
 
+  const [paginaActual, setPaginaActual] = useState(1);
+  const recetasPorPagina = 6;
 
   useEffect(() => {
     const obtenerRecetas = async () => {
@@ -36,20 +37,15 @@ const Recetas = () => {
   }, []);
 
   const abrirReceta = (receta) => {
-    console.log('Abriendo receta:', receta.nombre);
     setRecetaSeleccionada(receta);
     const offcanvasElement = offcanvasRef.current;
     if (offcanvasElement) {
       const bsOffcanvas = new bootstrap.Offcanvas(offcanvasElement);
       bsOffcanvas.show();
-      console.log('Offcanvas mostrado.');
-    } else {
-      console.error('Elemento offcanvas no encontrado.');
     }
   };
 
   const cerrarOffcanvas = () => {
-    console.log('Cerrando offcanvas.');
     setRecetaSeleccionada(null);
     const offcanvasElement = offcanvasRef.current;
     if (offcanvasElement) {
@@ -60,14 +56,20 @@ const Recetas = () => {
     }
   };
 
-  // Agrega un log para ver cuándo cambia recetaSeleccionada
-  useEffect(() => {
-    console.log('recetaSeleccionada cambió a:', recetaSeleccionada);
-  }, [recetaSeleccionada]);
+  const indexUltima = paginaActual * recetasPorPagina;
+  const indexPrimera = indexUltima - recetasPorPagina;
+  const recetasActuales = recetas.slice(indexPrimera, indexUltima);
+  const totalPaginas = Math.ceil(recetas.length / recetasPorPagina);
 
-  if (cargando) return <div class="spinner-border text-primary" role="status">
-    <span class="visually-hidden">Loading...</span>
-  </div>
+  const cambiarPagina = (numero) => {
+    if (numero >= 1 && numero <= totalPaginas) {
+      setPaginaActual(numero);
+    }
+  };
+
+  if (cargando) return <div className="spinner-border text-primary" role="status">
+    <span className="visually-hidden">Loading...</span>
+  </div>;
   if (error) return <p>{error}</p>;
 
   return (
@@ -116,7 +118,7 @@ const Recetas = () => {
         </div>
 
         <div className="tarjetas">
-          {recetas.map((receta) => (
+          {recetasActuales.map((receta) => (
             <div
               key={receta._id}
               className="tarjeta btn"
@@ -135,6 +137,31 @@ const Recetas = () => {
               <img src="img/bookmark.png" className="icono-bookmark" alt="Guardar" />
             </div>
           ))}
+        </div>
+
+        {/* Paginación */}
+        <div className="paginacion d-flex justify-content-center mt-4">
+          <nav>
+            <ul className="pagination">
+              <li className={`page-item ${paginaActual === 1 ? 'disabled' : ''}`}>
+                <button className="page-link" onClick={() => cambiarPagina(paginaActual - 1)}>
+                  Anterior
+                </button>
+              </li>
+              {[...Array(totalPaginas)].map((_, index) => (
+                <li key={index} className={`page-item ${paginaActual === index + 1 ? 'active' : ''}`}>
+                  <button className="page-link" onClick={() => cambiarPagina(index + 1)}>
+                    {index + 1}
+                  </button>
+                </li>
+              ))}
+              <li className={`page-item ${paginaActual === totalPaginas ? 'disabled' : ''}`}>
+                <button className="page-link" onClick={() => cambiarPagina(paginaActual + 1)}>
+                  Siguiente
+                </button>
+              </li>
+            </ul>
+          </nav>
         </div>
       </div>
 
@@ -184,43 +211,6 @@ const Recetas = () => {
         </div>
       </div>
 
-      {/* Offcanvas de lista de compra */}
-      <div
-        className="offcanvas offcanvas-end"
-        tabIndex="-1"
-        id="lista-offcanvasExample"
-        aria-labelledby="offcanvasExampleLabel"
-      >
-        <div className="offcanvas-header">
-          <h2 className="offcanvas-title" id="offcanvasExampleLabel">
-            Lista de la Compra
-          </h2>
-          <button
-            type="button"
-            className="btn-close"
-            data-bs-dismiss="offcanvas"
-            aria-label="Close"
-          ></button>
-        </div>
-        <div className="offcanvas-body">
-          <div>
-            <h3>Ingredientes</h3>
-            <ul>
-              <li>1 kg de carne de res</li>
-              <li>2 cebollas</li>
-              <li>1 pimiento rojo</li>
-              <li>2 dientes de ajo</li>
-              <li>1 cucharadita de comino</li>
-              <li>Sal y pimienta al gusto</li>
-              <li>12 tortillas de maíz</li>
-            </ul>
-          </div>
-          <div className="botones-lista-compra">
-            <button>Vaciar Lista</button>
-            <button className="botones-inversos">Ir a recetas</button>
-          </div>
-        </div>
-      </div>
       <Footer />
     </>
   );
