@@ -19,7 +19,7 @@ const Recetas = () => {
   const [showRegistro, setShowRegistro] = useState(false);
 
   const [paginaActual, setPaginaActual] = useState(1);
-  const recetasPorPagina = 6;
+  const recetasPorPagina = 8;
 
   useEffect(() => {
     const obtenerRecetas = async () => {
@@ -85,7 +85,7 @@ const Recetas = () => {
         </button>
         <nav>
           <ul>
-            <li><Link to="/Recetas">Recetas</Link></li>
+            <li>Recetas</li>
             <li onClick={() => setListaCompra(true)}>Lista de la Compra</li>
             <li><a href="/plan-alimentacion">Plan de alimentación</a></li>
           </ul>
