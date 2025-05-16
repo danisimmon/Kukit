@@ -32,8 +32,6 @@ button {
 }
 
 
-
-
 /* hover de .btn-reservation */
 button:hover {
     background-color: var(--primary-color);
@@ -503,6 +501,8 @@ footer hr {
     height: 450px;
     object-fit: cover;
     border-radius: 8px;
+    /* oscurecemos la imagen un poquito */
+    filter: brightness(0.6);
 }
 
 .textos-hero {
