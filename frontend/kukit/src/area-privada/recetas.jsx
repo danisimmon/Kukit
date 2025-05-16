@@ -65,7 +65,9 @@ const Recetas = () => {
     console.log('recetaSeleccionada cambió a:', recetaSeleccionada);
   }, [recetaSeleccionada]);
 
-  if (cargando) return <p>Cargando recetas...</p>;
+  if (cargando) return <div class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
   if (error) return <p>{error}</p>;
 
   return (
