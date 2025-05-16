@@ -73,7 +73,7 @@ function Home() {
       <main>
         <div className="hero">
           <div className="textos-hero">
-            <h1>ORGANIZA LO QUE COMES SIN COMERTE LA CABEZA</h1>
+            <h1 className='rojopasion'>ORGANIZA LO QUE COMES SIN COMERTE LA CABEZA</h1>
             <button className="btn-reservation">DESCUBRE UN NUEVO MUNDO CULINARIO</button>
           </div>
           <div className="fondo">
