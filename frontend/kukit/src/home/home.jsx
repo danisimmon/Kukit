@@ -8,6 +8,9 @@ import Footer from '../footer/footer';
 import ListaCompra from '../listaCompra/listaCompra';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import imgHome1 from '../img/imgHome1.png';
+import imgHome2 from '../img/imgHome2.jpg';
+import imgHome3 from '../img/imgHome3.jpg';
 import Organiza from '../img/ChatGPT Image 15 may 2025, 18_09_34.png'
 
 function Home() {
@@ -37,7 +40,7 @@ function Home() {
   return (
     <>
       <header>
-        <a href="/" id="logo-header">
+        <a href="/home" id="logo-header">
           <img src={logo} alt="" id="logo-header" />
         </a>
         <button id="hamburger-menu">
@@ -102,7 +105,8 @@ function Home() {
           <div className="contenedor-home" id="contenedor-lista-compra">
             <h2>Añade tus recetas y crea tu lista de la compra</h2>
             <div className="contenedor-lista-compra-elementos">
-              <div className="contenedor-home-checks">
+              <div className="contenedor-home-checks" id='contenedor-img1'>
+                <img src={imgHome1} alt="imgHome1" className='imgHome1' />
                 {/* <img src={Organiza} alt="" className="img-hero" /> */}
               </div>
               <div className="contenedor-lista-compra-texto">
@@ -114,14 +118,20 @@ function Home() {
                   Esto te permitirá ahorrar tiempo en tus compras y asegurarte de tener todo lo necesario para
                   tus platos. ¡Cocinar nunca fue tan fácil!
                 </p>
+                <div class="registro-animado" onClick={() => setShowRegistro(true)}>
+                  🚀 ¡Accede a tu espacio de recetas personalizadas! Regístrate gratis.
+                </div>
               </div>
             </div>
           </div>
+          
 
           <div className="contenedor-home" id="contenedor-filtros-recetas">
             <h2>Filtra, Elige y Cocina tu próxima receta</h2>
             <div className="contenedor-lista-compra-elementos">
-              <div className="contenedor-home-checks"></div>
+              <div className="contenedor-home-checks" id='contenedor-img2'>
+                <img src={imgHome2} alt="imgHome2" className='imgHome2' />
+              </div>
               <div className="contenedor-lista-compra-texto">
                 <h3>Busca por país, ingredientes o necesidades especiales</h3>
                 <p>
@@ -130,22 +140,25 @@ function Home() {
                   necesidades: sin gluten, veganas, bajas en carbohidratos y mucho más. Así ahorras tiempo y
                   disfrutas justo lo que necesitas, sin complicaciones.
                 </p>
+                <span class="registro-pill" onClick={() => setShowRegistro(true)}>
+  🔐 Solo para usuarios registrados
+</span>
               </div>
             </div>
           </div>
 
           <div className="contenedor-home" id="contenedor-calendario">
-            <h2>Filtra tus recetas y descubre tu próxima receta</h2>
-            <div className="contenedor-lista-compra-elementos">
-              <div className="contenedor-home-checks"></div>
+            <h2>Tu semana, tus recetas: Planifica y disfruta</h2>
+            <div className="contenedor-lista-compra-elementos id='contenedor-img3'>">
+              <div className="contenedor-home-checks">
+                <img src={imgHome3} alt="imgHome3" className='imgHome3' />
+              </div>
               <div className="contenedor-lista-compra-texto">
                 <h3>¿Cómo hacerlo?</h3>
                 <p>
-                  En Kukit te lo ponemos fácil para encontrar la receta perfecta. Explora platos según su país
-                  de origen, filtra por los ingredientes que tienes en casa o elige opciones que se adapten a tus
-                  necesidades: sin gluten, veganas, bajas en carbohidratos y mucho más. Así ahorras tiempo y
-                  disfrutas justo lo que necesitas, sin complicaciones.
+                  Organiza tus comidas con facilidad y encuentra inspiración para cada día. Con nuestro calendario semanal, podrás agregar recetas, adaptar tu menú y gestionar tu alimentación de manera práctica. Convierte la planificación en una experiencia sencilla y deliciosa.
                 </p>
+                <p class="mensaje-subrayado" onClick={() => setShowRegistro(true)}>Crea tu cuenta y descubre todo lo que Kukit tiene preparado para ti.</p>
               </div>
             </div>
           </div>

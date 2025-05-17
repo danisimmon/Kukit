@@ -6,6 +6,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 import Login from '../login/login';
 import Registro from '../login/registro/registro';
 import Footer from '../footer/footer';
+import ListaCompra from '../listaCompra/listaCompra';
 
 const Recetas = () => {
   const [recetas, setRecetas] = useState([]);
@@ -75,7 +76,7 @@ const Recetas = () => {
   return (
     <>
       <header>
-        <a href="/" id="logo-header">
+        <a href="/home" id="logo-header">
           <img src={logo} alt="" id="logo-header" />
         </a>
         <button id="hamburger-menu">
