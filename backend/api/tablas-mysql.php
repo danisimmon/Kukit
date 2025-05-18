@@ -222,11 +222,9 @@ mysqli_query($conexion, $sql);
 $sql = "CREATE TABLE IF NOT EXISTS favoritos (
     id INT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     id_usuario INT(20) UNSIGNED NOT NULL,
-    id_receta INT(20) UNSIGNED NOT NULL,
+    id_receta VARCHAR(100) NOT NULL,
     fecha_favorito DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (id_usuario) REFERENCES usuario(id),
-    FOREIGN KEY (id_receta) REFERENCES recetas(id),
-    UNIQUE (id_usuario, id_receta)
+    FOREIGN KEY (id_usuario) REFERENCES usuario(id)
 )";
 mysqli_query($conexion, $sql);
 

@@ -11,7 +11,7 @@ import Registro from '../login/registro/registro';
 import Footer from '../footer/footer';
 import ListaCompra from '../listaCompra/listaCompra';
 
-const Recetas = ({ idUsuario }) => {
+const Recetas = () => {
   const [recetas, setRecetas] = useState([]);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
@@ -23,6 +23,7 @@ const Recetas = ({ idUsuario }) => {
   const [showRegistro, setShowRegistro] = useState(false);
   const [likes, setLikes] = useState({});
   const [liked, setLiked] = useState({});
+  const [favoritos, setFavoritos] = useState({}); // Estado para almacenar el estado de favorito de cada receta
 
   const [paginaActual, setPaginaActual] = useState(1);
   const recetasPorPagina = 8;
@@ -53,12 +54,16 @@ const Recetas = ({ idUsuario }) => {
         const respuesta = await axios.get('http://localhost/api/area_privada/recetas/getRecetas.php');
         setN_recetas(respuesta.data.n_recetas);
         setRecetas(respuesta.data.recetas);
-        // Inicializa los likes
+        console.log(respuesta);
+        // Inicializa los likes y favoritos
         const likesIniciales = {};
+        const favoritosIniciales = {};
         respuesta.data.recetas.forEach(r => {
           likesIniciales[r._id] = r.likes || 0;
+          favoritosIniciales[r._id] = r.favorito || false; // Usa el campo favorito del backend
         });
         setLikes(likesIniciales);
+        setFavoritos(favoritosIniciales);
         setCargando(false);
       } catch (err) {
         setError('Error al cargar las recetas', err);
@@ -67,26 +72,29 @@ const Recetas = ({ idUsuario }) => {
     };
     obtenerRecetas();
   }, []);
+
   const guardarFavorito = async (idReceta) => {
     try {
-      if (!idUsuario) {
-        alert('Debes iniciar sesión para guardar recetas');
-        return;
-      }
-
-      const respuesta = await axios.post('http://localhost/api/area_privada/favoritos/guardarFavorito.php', {
-        id_usuario: idUsuario,
-        id_receta: idReceta
+      const esFavoritoActual = favoritos[idReceta] || false;
+      const respuesta = await axios.post('http://localhost/api/area_privada/recetas/favoritas/guardarFavorito.php', {
+        id_receta: idReceta,
+        accion: esFavoritoActual ? 'eliminar' : 'guardar' // Enviar la acción al backend
       });
 
       if (respuesta.data.success) {
-        alert('Receta guardada en favoritos');
+        alert(esFavoritoActual ? 'Receta eliminada de favoritos' : 'Receta guardada en favoritos');
+        // Actualiza el estado de favoritos
+        setFavoritos(prevFavoritos => ({
+          ...prevFavoritos,
+          [idReceta]: !esFavoritoActual, // Invierte el estado de favorito
+        }));
       } else {
-        alert('Error al guardar favorito');
+        alert(esFavoritoActual? 'Error al eliminar de favoritos' : 'Error al guardar favorito');
+        console.error('Error al guardar/eliminar favorito:', respuesta.data.message);
       }
     } catch (error) {
-      console.error('Error al guardar favorito:', error);
-      alert('Hubo un problema al guardar en favoritos');
+      console.error('Error al guardar/eliminar favorito:', error);
+      alert('Hubo un problema al guardar/eliminar en favoritos');
     }
   };
 
@@ -202,10 +210,15 @@ const Recetas = ({ idUsuario }) => {
                 alt="Guardar"
                 onClick={(e) => {
                   e.stopPropagation();
-                  guardarFavorito(receta._id);
+                  guardarFavorito(receta._id); // Llama a guardarFavorito con el ID
                 }}
                 style={{ cursor: 'pointer' }}
               />
+              {favoritos[receta._id] ? (
+                <p>En favoritos</p>
+              ) : (
+                <p>No en favoritos</p>
+              )}
             </div>
           ))}
         </div>
@@ -288,3 +301,4 @@ const Recetas = ({ idUsuario }) => {
 };
 
 export default Recetas;
+

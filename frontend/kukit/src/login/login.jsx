@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import logo from '../img/logo_kukit.png';
 
-const Login = ({ setShowLogin, setIdUsuario }) => {
+const Login = ({ setShowLogin }) => {
   const [formData, setFormData] = useState({
     correo: '',
     password: ''
@@ -48,7 +48,6 @@ const Login = ({ setShowLogin, setIdUsuario }) => {
         setExito(true);
         setMensaje(respuesta.data.message);
         console.log('Usuario:', respuesta.data.user);
-        setIdUsuario(respuesta.data.user.id);
         navigate('/recetas');
       } else {
         setExito(false);
