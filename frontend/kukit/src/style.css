@@ -1,15 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Germania+One&display=swap');
+
 body {
     font-family: "Germania One", system-ui;
-  font-weight: 400;
-  font-style: normal;
+    font-weight: 400;
+    font-style: normal;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
+
 :root {
     --primary-color: #C33333;
     --dark-primary-color: #922020;
     --secondary-color: #D9D9D9;
     --background-color: #FFFFFF;
     --text-color: #000000;
+}
+
+main {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 button {
@@ -479,11 +490,11 @@ footer .footer-info div a img {
 
 footer hr { 
     /* border: 1px solid var(--brand-color); */
-    /* border: none; */
-    /* background-color: var(--background-color);
+/* border: none; */
+/* background-color: var(--background-color);
     width: 100%;
     height: 1px;
-} */ 
+} */
 
 .hero {
     display: flex;
@@ -562,9 +573,11 @@ footer hr {
     gap: 20px;
     justify-content: center;
 }
+
 .likesNumero {
     margin-right: 10vw;
 }
+
 .like {
     width: 9%;
     margin-top: -2vw;
@@ -836,6 +849,7 @@ footer hr {
     flex-shrink: 0;
     border-radius: 20px;
     padding: 5vw;
+    z-index: 200;
 }
 
 .contenedor-ingredientes,
@@ -949,6 +963,7 @@ footer hr {
     background-color: #33383c;
     padding: 50px 0 30px;
 }
+
 .footer-heading {
     letter-spacing: 2px;
 }
@@ -1024,7 +1039,7 @@ footer hr {
 }
 
 footer.section.bg-footer {
-    padding:1em;
+    padding: 1em;
 }
 
 .enlace-footer {
@@ -1122,10 +1137,13 @@ footer.section.bg-footer {
 } */
 
 @keyframes bubble-size {
-    0%, 75% {
+
+    0%,
+    75% {
         width: var(--size, 4rem);
         height: var(--size, 4rem);
     }
+
     100% {
         width: 0rem;
         height: 0rem;
@@ -1136,10 +1154,12 @@ footer.section.bg-footer {
     0% {
         bottom: -4rem;
     }
+
     100% {
         bottom: var(--distance, 10rem);
     }
 }
+
 .enlace-footer a:hover::after {
     width: 100%;
 }
@@ -1198,104 +1218,112 @@ footer.section.bg-footer {
 }
 
 .franja-registro {
-  display: inline-block;
-  background-color: var(--primary-color);
-  color: white;
-  padding: 0.75rem 1.5rem;
-  border-radius: 999px;
-  font-weight: bold;
-  font-size: 1rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  text-align: center;
-  margin: 1rem auto;
-  transition: transform 0.2s ease;
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 999px;
+    font-weight: bold;
+    font-size: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    margin: 1rem auto;
+    transition: transform 0.2s ease;
 }
 
 .franja-registro:hover {
-  transform: scale(1.05);
-  cursor: pointer; /* opcional, para que parezca interactivo */
+    transform: scale(1.05);
+    cursor: pointer;
+    /* opcional, para que parezca interactivo */
 }
 
 .franja-icono {
-  background-color: #fff0f0;
-  color: var(--primary-color);
-  padding: 0.75rem 1rem;
-  border-left: 5px solid var(--primary-color);
-  font-weight: 500;
-  border-radius: 0.5rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin: 1rem 0;
+    background-color: #fff0f0;
+    color: var(--primary-color);
+    padding: 0.75rem 1rem;
+    border-left: 5px solid var(--primary-color);
+    font-weight: 500;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 1rem 0;
 }
 
 .franja-icono .icono {
-  font-size: 1.2rem;
+    font-size: 1.2rem;
 }
 
 .mensaje-subrayado {
-  text-align: center;
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: var(--primary-color);
-  position: relative;
-  display: inline-block;
-  margin: 2rem auto;
-  padding-bottom: 0.2rem;
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    position: relative;
+    display: inline-block;
+    margin: 2rem auto;
+    padding-bottom: 0.2rem;
 }
 
 .mensaje-subrayado::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 3px;
-  background-color: var(--primary-color);
-  left: 0;
-  bottom: 0;
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.3s ease;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    background-color: var(--primary-color);
+    left: 0;
+    bottom: 0;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
 }
 
 .mensaje-subrayado:hover::after {
-  transform: scaleX(1);
+    transform: scaleX(1);
 }
 
 
 .registro-pill {
-  background: linear-gradient(to right,#C33333, #ff5a5a);
-  color: white;
-  padding: 0.4rem 1rem;
-  font-size: 0.9rem;
-  border-radius: 50px;
-  font-weight: 500;
-  display: inline-block;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
-  cursor: pointer;
-  transition: transform 0.2s ease;
+    background: linear-gradient(to right, #C33333, #ff5a5a);
+    color: white;
+    padding: 0.4rem 1rem;
+    font-size: 0.9rem;
+    border-radius: 50px;
+    font-weight: 500;
+    display: inline-block;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: transform 0.2s ease;
 }
 
 .registro-pill:hover {
-  transform: scale(1.05);
+    transform: scale(1.05);
 }
 
 .registro-animado {
-  background: linear-gradient(270deg, #C33333, #ff6666, #C33333);
-  background-size: 600% 600%;
-  color: white;
-  padding: 1rem 1.5rem;
-  border-radius: 1rem;
-  font-weight: bold;
-  text-align: center;
-  animation: movimientoFondo 5s ease infinite;
-  max-width: 500px;
-  margin: 2rem auto;
-  cursor: pointer;
+    background: linear-gradient(270deg, #C33333, #ff6666, #C33333);
+    background-size: 600% 600%;
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 1rem;
+    font-weight: bold;
+    text-align: center;
+    animation: movimientoFondo 5s ease infinite;
+    max-width: 500px;
+    margin: 2rem auto;
+    cursor: pointer;
 }
 
 @keyframes movimientoFondo {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
+    0% {
+        background-position: 0% 50%;
+    }
 
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
