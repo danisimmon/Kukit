@@ -3,12 +3,15 @@ import axios from 'axios';
 import logo from '../img/logo_kukit.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
+import CorazonRelleno from '../img/corazonRelleno.png'
+import CorazonSinRelleno from '../img/corazonSinRelleno.png'
+import Favoritos from '../img/bookmark.png'
 import Login from '../login/login';
 import Registro from '../login/registro/registro';
 import Footer from '../footer/footer';
 import ListaCompra from '../listaCompra/listaCompra';
 
-const Recetas = () => {
+const Recetas = ({ idUsuario }) => {
   const [recetas, setRecetas] = useState([]);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
@@ -18,9 +21,31 @@ const Recetas = () => {
   const [showListaCompra, setListaCompra] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
   const [showRegistro, setShowRegistro] = useState(false);
+  const [likes, setLikes] = useState({});
+  const [liked, setLiked] = useState({});
 
   const [paginaActual, setPaginaActual] = useState(1);
   const recetasPorPagina = 8;
+
+  const manejarLike = (idReceta) => {
+    const yaLeGusta = liked[idReceta];
+
+    // Alternar el estado del like
+    setLiked((prev) => ({
+      ...prev,
+      [idReceta]: !yaLeGusta,
+    }));
+
+    // Sumar o restar 1 al contador de likes
+    setLikes((prev) => ({
+      ...prev,
+      [idReceta]: yaLeGusta
+        ? Math.max((prev[idReceta] || 0) - 1, 0)
+        : (prev[idReceta] || 0) + 1,
+    }));
+  };
+
+
 
   useEffect(() => {
     const obtenerRecetas = async () => {
@@ -28,6 +53,12 @@ const Recetas = () => {
         const respuesta = await axios.get('http://localhost/api/area_privada/recetas/getRecetas.php');
         setN_recetas(respuesta.data.n_recetas);
         setRecetas(respuesta.data.recetas);
+        // Inicializa los likes
+        const likesIniciales = {};
+        respuesta.data.recetas.forEach(r => {
+          likesIniciales[r._id] = r.likes || 0;
+        });
+        setLikes(likesIniciales);
         setCargando(false);
       } catch (err) {
         setError('Error al cargar las recetas', err);
@@ -36,6 +67,29 @@ const Recetas = () => {
     };
     obtenerRecetas();
   }, []);
+  const guardarFavorito = async (idReceta) => {
+    try {
+      if (!idUsuario) {
+        alert('Debes iniciar sesión para guardar recetas');
+        return;
+      }
+
+      const respuesta = await axios.post('http://localhost/api/area_privada/favoritos/guardarFavorito.php', {
+        id_usuario: idUsuario,
+        id_receta: idReceta
+      });
+
+      if (respuesta.data.success) {
+        alert('Receta guardada en favoritos');
+      } else {
+        alert('Error al guardar favorito');
+      }
+    } catch (error) {
+      console.error('Error al guardar favorito:', error);
+      alert('Hubo un problema al guardar en favoritos');
+    }
+  };
+
 
   const abrirReceta = (receta) => {
     setRecetaSeleccionada(receta);
@@ -132,10 +186,26 @@ const Recetas = () => {
                 alt={`Receta ${receta._id}`}
               />
               <h3>{receta.nombre}</h3>
-              <p className="likesNumero">{receta.likes || 0}</p>
-              <img src="./img/megusta.png" alt="like" className="like" />
+              <div className="like-container" onClick={(e) => { e.stopPropagation(); manejarLike(receta._id); }}>
+                <img
+                  src={liked[receta._id] ? CorazonRelleno : CorazonSinRelleno}
+                  alt="like"
+                  className="like"
+                  style={{ cursor: 'pointer' }}
+                />
+                <p className="likesNumero">{likes[receta._id] || 0}</p>
+              </div>
               <p className="duracion">{receta.duracion || 'N/A'} min</p>
-              <img src="img/bookmark.png" className="icono-bookmark" alt="Guardar" />
+              <img
+                src={Favoritos}
+                className="icono-bookmark"
+                alt="Guardar"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  guardarFavorito(receta._id);
+                }}
+                style={{ cursor: 'pointer' }}
+              />
             </div>
           ))}
         </div>

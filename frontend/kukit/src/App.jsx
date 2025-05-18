@@ -15,6 +15,7 @@ import Recetas from './area-privada/recetas';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 // import '../node_modules/bootstrap-icons/font/bootstrap-icons.css';
 import '../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js';
+import Favoritos from './favoritos/favoritos.jsx';
 // import './bootstrap/dist/js/bootstrap.bundle.min.js';
 
 
@@ -31,6 +32,7 @@ function App() {
         <Route path="/recetas" element={<Recetas />} />
         <Route path="/area-privada/editar-perfil" element={<EditarPerfil />} />
         <Route path="/listaCompra" element={<ListaCompra />} />
+        <Route path="/Favoritos" element={<Favoritos />} />
       </Routes>
     </BrowserRouter>
   );

@@ -219,6 +219,17 @@ $sql = "CREATE TABLE IF NOT EXISTS listacompra_productos (
 )";
 mysqli_query($conexion, $sql);
 
+$sql = "CREATE TABLE IF NOT EXISTS favoritos (
+    id INT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT(20) UNSIGNED NOT NULL,
+    id_receta INT(20) UNSIGNED NOT NULL,
+    fecha_favorito DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_usuario) REFERENCES usuario(id),
+    FOREIGN KEY (id_receta) REFERENCES recetas(id),
+    UNIQUE (id_usuario, id_receta)
+)";
+mysqli_query($conexion, $sql);
+
 // $sql = "INSERT INTO listacompra_productos (id_lista_compra, id_producto, cantidad, comprado) VALUES
 // (1, 1, 1, false),
 // (1, 2, 2, true),
