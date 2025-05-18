@@ -1,5 +1,5 @@
 // src/pages/Home.jsx
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import logo from '../img/logo_kukit.png';
 import hero from '../img/mesa-de-cocina-con-platos-preparados-e-ingredientes.jpg';
 import Login from '../login/login';
@@ -8,12 +8,18 @@ import Footer from '../footer/footer';
 import ListaCompra from '../listaCompra/listaCompra';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import imgHome1 from '../img/imgHome1.png';
+import imgHome2 from '../img/imgHome2.jpg';
+import imgHome3 from '../img/imgHome3.jpg';
 import Organiza from '../img/ChatGPT Image 15 may 2025, 18_09_34.png'
 
 function Home() {
   const [showLogin, setShowLogin] = useState(false);
   const [showRegistro, setShowRegistro] = useState(false);
   const [showListaCompra, setListaCompra] = useState(false);
+  const [recetas, setRecetas] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const intervalRef = useRef(null);
 
   useEffect(() => {
     const container = document.querySelector('.bubbles');
@@ -26,13 +32,35 @@ function Home() {
       }
     }
   }, []);
-  //Código prueba Manu
-  const navigate = useNavigate();
 
-  const handleLogout = () => {
-    localStorage.removeItem('token'); // O lo que uses para identificar la sesión
-    navigate('/home'); // O redirige a '/login' si tienes una ruta específica
+  useEffect(() => {
+    const fetchRecetas = async () => {
+      try {
+        const response = await fetch('http://localhost/api/area_privada/recetas/getRecetas.php');
+        const data = await response.json();
+        // Ordena las recetas por algún criterio fijo si necesitas que siempre sean las mismas
+        // Ejemplo: por nombre (alfabéticamente), por id, o similar.
+        const recetasOrdenadas = [...data.recetas].sort((a, b) => a.nombre.localeCompare(b.nombre));
+        setRecetas(recetasOrdenadas.slice(0, 4));
+      } catch (error) {
+        console.error('Error cargando recetas:', error);
+      }
+    };
+
+    fetchRecetas();
+  }, []);
+  // Navegar a la siguiente receta
+  const handleNext = () => {
+    setCurrentIndex((prev) => (prev + 1) % recetas.length);
   };
+
+  // Navegar a la receta anterior
+  const handlePrev = () => {
+    setCurrentIndex((prev) => (prev - 1 + recetas.length) % recetas.length);
+  };
+
+  // Solo mostrar la receta actual
+  const receta = recetas[currentIndex];
 
   return (
     <>
@@ -96,7 +124,22 @@ function Home() {
           </div>
 
           <div className="contenedor-home" id="contenedor-imprescindibles-novedades">
-            <h2>Imprescindibles Kukit</h2>
+            <div className="contenedor-home" id="contenedor-imprescindibles-novedades">
+              <h2>Imprescindibles Kukit</h2>
+              <div className="imprescindibles-kukit-recetas" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                {receta && (
+                  <div className="tarjeta-receta" key={receta._id || currentIndex}>
+                    <img src={receta.imagen || 'img/comida.jpg'} alt={receta.nombre} />
+                    <h3>{receta.nombre}</h3>
+                    <p>{receta.descripcion}</p>
+                  </div>
+                )}
+                <div className='contenedor-boton'>
+                <button onClick={handlePrev} disabled={recetas.length === 0}>&lt;</button>
+                <button onClick={handleNext} disabled={recetas.length === 0}>&gt;</button>
+                </div>
+              </div>
+            </div>
             <h2>Novedades de la semana</h2>
           </div>
 
@@ -104,7 +147,7 @@ function Home() {
             <h2>Añade tus recetas y crea tu lista de la compra</h2>
             <div className="contenedor-lista-compra-elementos">
               <div className="contenedor-home-checks">
-                {/* <img src={Organiza} alt="" className="img-hero" /> */}
+                <img src={imgHome1} alt="imgHome1" className='imgHome1' />
               </div>
               <div className="contenedor-lista-compra-texto">
                 <h3>Organiza tu compra de manera rápida y sencilla con solo un clic.</h3>
@@ -122,7 +165,9 @@ function Home() {
           <div className="contenedor-home" id="contenedor-filtros-recetas">
             <h2>Filtra, Elige y Cocina tu próxima receta</h2>
             <div className="contenedor-lista-compra-elementos">
-              <div className="contenedor-home-checks"></div>
+              <div className="contenedor-home-checks">
+                <img src={imgHome2} alt="imgHome2" className='imgHome2' />
+              </div>
               <div className="contenedor-lista-compra-texto">
                 <h3>Busca por país, ingredientes o necesidades especiales</h3>
                 <p>
@@ -138,7 +183,9 @@ function Home() {
           <div className="contenedor-home" id="contenedor-calendario">
             <h2>Filtra tus recetas y descubre tu próxima receta</h2>
             <div className="contenedor-lista-compra-elementos">
-              <div className="contenedor-home-checks"></div>
+              <div className="contenedor-home-checks">
+                <img src={imgHome3} alt="imgHome3" className='imgHome3' />
+              </div>
               <div className="contenedor-lista-compra-texto">
                 <h3>¿Cómo hacerlo?</h3>
                 <p>
