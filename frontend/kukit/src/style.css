@@ -344,6 +344,7 @@ header .contenedor-header .sign-up:hover {
     background-color: var(--background-color);
     border-radius: 8px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    flex-direction: column;
 }
 
 #contenedor-lista-compra {
@@ -1390,17 +1391,17 @@ footer.section.bg-footer {
     color: #333;
     font-size: 1rem;
 }
-/* Contenedor de los botones debajo de la tarjeta */
-.navegacion-botones-receta {
+/* Contenedor para los botones uno al lado del otro con separación */
+.contenedor-boton {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  gap: 0.5rem;
-  margin-top: 0.5rem;
+  gap: 10px; /* Espacio entre los botones, puedes aumentar si quieres más separación */
+  margin-top: 0.7rem;
 }
 
 /* Botones pequeños y redondeados */
-.btn-navegacion-receta {
+.contenedor-boton button {
   font-size: 1rem;
   width: 24px;
   height: 24px;
@@ -1412,14 +1413,14 @@ footer.section.bg-footer {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.2s, box-shadow 0.2s;
   padding: 0;
+  transition: background 0.2s, box-shadow 0.2s;
 }
-.btn-navegacion-receta:disabled {
+.contenedor-boton button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
-.btn-navegacion-receta:hover:not(:disabled) {
+.contenedor-boton button:hover:not(:disabled) {
   background: #f4f4f4;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }

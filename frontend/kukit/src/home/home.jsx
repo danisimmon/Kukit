@@ -123,7 +123,6 @@ function Home() {
             <div className="contenedor-home" id="contenedor-imprescindibles-novedades">
               <h2>Imprescindibles Kukit</h2>
               <div className="imprescindibles-kukit-recetas" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <button onClick={handlePrev} disabled={recetas.length === 0} style={{ fontSize: '2rem', marginRight: '1rem' }}>&lt;</button>
                 {receta && (
                   <div className="tarjeta-receta" key={receta._id || currentIndex}>
                     <img src={receta.imagen || 'img/comida.jpg'} alt={receta.nombre} />
@@ -131,7 +130,10 @@ function Home() {
                     <p>{receta.descripcion}</p>
                   </div>
                 )}
-                <button onClick={handleNext} disabled={recetas.length === 0} style={{ fontSize: '2rem', marginLeft: '1rem' }}>&gt;</button>
+                <div className='contenedor-boton'>
+                <button onClick={handlePrev} disabled={recetas.length === 0}>&lt;</button>
+                <button onClick={handleNext} disabled={recetas.length === 0}>&gt;</button>
+                </div>
               </div>
             </div>
             <h2>Novedades de la semana</h2>
