@@ -13,7 +13,15 @@ const EditarPerfil = () => {
     password: ''
   });
 
-  const [ingredientes, setIngredientes] = useState([{ nombre: '', cantidad: '' }]);
+  const [formRecetaNueva, setRecetaNueva] = useState({
+    nombre: '',
+    dificultad: '',
+    tiempo: '',
+    ingredientes: [],
+    pasos: []
+  });
+
+  const [ingredientes, setIngredientes] = useState([{ nombre: '', cantidad: '', unidad: '' }]);
 
   const [pasos, setPasos] = useState(['']);
 
@@ -34,6 +42,15 @@ const EditarPerfil = () => {
   const [mensaje, setMensaje] = useState('');
   const [exito, setExito] = useState(false);
   const [seccionActiva, setSeccionActiva] = useState("perfil");
+
+  const manejarCambioReceta = (e) => {
+    const { name, value } = e.target;
+    setRecetaNueva({
+      ...formRecetaNueva,
+      [name]: value
+    });
+  };
+
   const manejarCambio = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -215,7 +232,12 @@ const EditarPerfil = () => {
               <div class="info-perfil">
                 <div class="contenedores-info-perfil">
                   <h3 class="titulos-perfil">Usuario</h3>
-                  <h3>Kletus</h3>
+                  <h3 type="text"
+                    id="usuario"
+                    name="usuario"
+                    value={formData.usuario}
+                    onChange={manejarCambio}
+                    required>Kletus</h3>
                 </div>
               </div>
 
@@ -244,21 +266,42 @@ const EditarPerfil = () => {
               <div class="info-perfil">
                 <div class="contenedores-info-perfil">
                   <h3 class="titulos-perfil">Usuario</h3>
-                  <input type="text" />
+                  <input
+                    type="text"
+                    id="usuario"
+                    name="usuario"
+                    value={formData.usuario}
+                    onChange={manejarCambio}
+                    required
+                  />
                 </div>
               </div>
 
               <div class="info-perfil">
                 <div class="contenedores-info-perfil">
                   <h3 class="titulos-perfil">Correo Electrónico</h3>
-                  <input type="text" />
+                  <input
+                    type="email"
+                    id="correo"
+                    name="correo"
+                    value={formData.correo}
+                    onChange={manejarCambio}
+                    required
+                  />
                 </div>
               </div>
 
               <div class="info-perfil">
                 <div class="contenedores-info-perfil">
                   <h3 class="titulos-perfil">Contraseña</h3>
-                  <input type="password" name="" id="" />
+                  <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    value={formData.password}
+                    onChange={manejarCambio}
+                    required
+                  />
                 </div>
               </div>
               <div class="botones-perfil">
@@ -312,13 +355,23 @@ const EditarPerfil = () => {
             <div className="crear-receta">
               <div className="crear-receta-info">
                 <h3>Nombre de la Receta</h3>
-                <input type="text" className='nombre-receta-nueva' />
+                <input
+                  type="text"
+                  id="nombre-receta-nueva"
+                  name="nombre-receta-nueva"
+                  value={formRecetaNueva.nombre}
+                  onChange={manejarCambioReceta}
+                  required
+                />
                 <div className="info-basica-receta">
                   <div className="apartado-dificultad">
                     <h5>Dificultad</h5>
                     <img src="" alt="grado de dificultad" />
                     <h5>Selecciona la dificultad</h5>
-                    <select name="nivel-dificultad" id="nivel-dificultad">
+                    <select name="nivel-dificultad" id="nivel-dificultad"
+                      value={formRecetaNueva.dificultadnombre}
+                      onChange={manejarCambioReceta}
+                      required>
                       <option value="facil">Fácil</option>
                       <option value="intermedio">Intermedio</option>
                       <option value="dificil">Difícil</option>
@@ -328,7 +381,9 @@ const EditarPerfil = () => {
                     <h5>Tiempo</h5>
                     <img src="" alt="tiempo" />
                     <h5>Selecciona el tiempo</h5>
-                    <input type="text" name="tiempo" id="tiempo" />
+                    <input type="text" name="tiempo" id="tiempo" value={formRecetaNueva.tiempo}
+                      onChange={manejarCambioReceta}
+                      required />
                   </div>
                 </div>
               </div>
@@ -361,6 +416,16 @@ const EditarPerfil = () => {
                           onChange={(e) => {
                             const newIngredientes = [...ingredientes];
                             newIngredientes[index].cantidad = e.target.value;
+                            setIngredientes(newIngredientes);
+                          }}
+                        />
+                        <span>Unidad</span>
+                        <input
+                          type="number"
+                          value={ing.unidad}
+                          onChange={(e) => {
+                            const newIngredientes = [...ingredientes];
+                            newIngredientes[index].unidad = e.target.value;
                             setIngredientes(newIngredientes);
                           }}
                         />
