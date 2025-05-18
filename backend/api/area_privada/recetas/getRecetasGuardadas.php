@@ -30,17 +30,29 @@ if (empty($favoritosIds)) {
     exit;
 }
 
-// Buscar recetas en MongoDB que estén en la lista de favoritos (por ID string)
-$collection = $db->recetas;
-$cursor = $collection->find([
-    '_id' => ['$in' => $favoritosIds]
-]);
+// Buscar recetas en MongoDB que estén en la lista de favoritos
+$collection = $db->selectCollection('recetas');
+$objectIds = [];
+foreach ($favoritosIds as $id) {
+    try {
+        $objectIds[] = new MongoDB\BSON\ObjectId($id);
+    } catch (\MongoDB\Driver\Exception\InvalidArgumentException $e) {
+        // Si el ID no es un ObjectId válido, lo ignoramos o logueamos el error
+        error_log("ID de favorito no válido: " . $id);
+    }
+}
 
 $recetasArray = [];
-foreach ($cursor as $receta) {
-    $receta['_id'] = (string)$receta['_id'];
-    $receta['favorito'] = true; // todas son favoritas
-    $recetasArray[] = $receta;
+if (!empty($objectIds)) {
+    $cursor = $collection->find([
+        '_id' => ['$in' => $objectIds]
+    ]);
+
+    foreach ($cursor as $receta) {
+        $receta['_id'] = (string)$receta['_id'];
+        $receta['favorito'] = true; // todas son favoritas
+        $recetasArray[] = $receta;
+    }
 }
 
 echo json_encode([

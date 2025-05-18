@@ -149,6 +149,7 @@ const Recetas = () => {
         <nav>
           <ul>
             <li>Recetas</li>
+            <li><a href="/recetas/recetasguardadas">Recetas Guardadas</a></li>
             <li onClick={() => setListaCompra(true)}>Lista de la Compra</li>
             <li><a href="/plan-alimentacion">Plan de alimentación</a></li>
           </ul>

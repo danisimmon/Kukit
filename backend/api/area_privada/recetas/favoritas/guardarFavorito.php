@@ -1,4 +1,4 @@
-<?php 
+<?php
 include "../../../conecta-mysql.php";
 
 header('Content-Type: application/json');
@@ -19,9 +19,22 @@ if (!isset($input['id_receta']) || empty($input['id_receta'])) {
 $usuario = $_SESSION['user']['id'];
 $receta = $input['id_receta'];
 
+// Si $receta es un objeto, intenta acceder a su propiedad $oid o convertirlo a string
+if (is_object($receta)) {
+    if (isset($receta->{'$oid'})) {
+        $recetaIdString = $receta->{'$oid'};
+    } else {
+        // Si el objeto no tiene la propiedad $oid, podrías intentar convertirlo a string de otra manera
+        $recetaIdString = (string) $receta; //esto puede dar problemas si el objeto no tiene una representación de cadena útil
+    }
+} else {
+    $recetaIdString = $receta;
+}
+
+
 $sql = "SELECT * FROM favoritos WHERE id_usuario = ? AND id_receta = ?";
 $stmt = $conexion->prepare($sql);
-$stmt->bind_param("is", $usuario, $receta);
+$stmt->bind_param("is", $usuario, $recetaIdString);
 $stmt->execute();
 $result = $stmt->get_result();
 
@@ -29,7 +42,7 @@ if ($result->num_rows > 0) {
     // La receta ya está en favoritos, eliminarla
     $sql = "DELETE FROM favoritos WHERE id_usuario = ? AND id_receta = ?";
     $stmt = $conexion->prepare($sql);
-    $stmt->bind_param("is", $usuario, $receta);
+    $stmt->bind_param("is", $usuario, $recetaIdString);
     if ($stmt->execute()) {
         echo json_encode(array('success' => true, 'message' => 'Receta eliminada de favoritos'));
     } else {
@@ -39,10 +52,11 @@ if ($result->num_rows > 0) {
     // La receta no está en favoritos, agregarla
     $sql = "INSERT INTO favoritos (id_usuario, id_receta) VALUES (?, ?)";
     $stmt = $conexion->prepare($sql);
-    $stmt->bind_param("is", $usuario, $receta);
+    $stmt->bind_param("is", $usuario, $recetaIdString);
     if ($stmt->execute()) {
         echo json_encode(array('success' => true, 'message' => 'Receta añadida a favoritos'));
     } else {
         echo json_encode(array('success' => false, 'message' => 'Error al añadir la receta a favoritos'));
     }
 }
+?>

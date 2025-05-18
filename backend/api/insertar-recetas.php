@@ -5,7 +5,6 @@ $collection = $db->selectCollection('recetas');
 
 $recetas = [
     [
-        "_id" => "receta001",
         "nombre" => "Pasta al pesto",
         "ingredientes" => [
             ["nombre" => "Pasta", "cantidad" => 200, "unidad" => "g"],
@@ -37,7 +36,6 @@ $recetas = [
         "informacionNutricional" => ["calorias" => 350, "proteinas" => 12, "carbohidratos" => 50, "grasas" => 10]
     ],
     [
-        "_id" => "receta002",
         "nombre" => "Tacos de pollo",
         "ingredientes" => [
             ["nombre" => "Tortillas", "cantidad" => 3, "unidad" => "unidad"],
@@ -75,7 +73,6 @@ $recetas = [
         "informacionNutricional" => ["calorias" => 400, "proteinas" => 25, "carbohidratos" => 35, "grasas" => 15]
     ],
     [
-        "_id" => "receta003",
         "nombre" => "Sushi vegetal",
         "ingredientes" => [
             ["nombre" => "Arroz para sushi", "cantidad" => 100, "unidad" => "g"],
@@ -115,7 +112,6 @@ $recetas = [
         "informacionNutricional" => ["calorias" => 250, "proteinas" => 6, "carbohidratos" => 40, "grasas" => 5]
     ],
     [
-        "_id" => "receta004",
         "nombre" => "Gazpacho andaluz",
         "ingredientes" => [
             ["nombre" => "Tomate", "cantidad" => 1, "unidad" => "kg"],
@@ -162,7 +158,6 @@ $recetas = [
         "informacionNutricional" => ["calorias" => 120, "proteinas" => 2, "carbohidratos" => 10, "grasas" => 5]
     ],
     [
-        "_id" => "receta005",
         "nombre" => "Curry de garbanzos",
         "ingredientes" => [
             ["nombre" => "Garbanzos cocidos", "cantidad" => 250, "unidad" => "g"],
@@ -209,7 +204,6 @@ $recetas = [
         "informacionNutricional" => ["calorias" => 420, "proteinas" => 14, "carbohidratos" => 35, "grasas" => 18]
     ],
     [
-        "_id" => "receta006",
         "nombre" => "Pollo al horno con patatas",
         "ingredientes" => [
             ["nombre" => "Muslos de pollo", "cantidad" => 4, "unidad" => "unidad"],
@@ -251,7 +245,6 @@ $recetas = [
         "informacionNutricional" => ["calorias" => 500, "proteinas" => 35, "carbohidratos" => 30, "grasas" => 20]
     ],
     [
-        "_id" => "receta007",
         "nombre" => "Arroz frito con verduras",
         "ingredientes" => [
             ["nombre" => "Arroz", "cantidad" => 200, "unidad" => "g"],
@@ -300,7 +293,6 @@ $recetas = [
         "informacionNutricional" => ["calorias" => 300, "proteinas" => 5, "carbohidratos" => 45, "grasas" => 7]
     ],
     [
-        "_id" => "receta008",
         "nombre" => "Crepes dulces",
         "ingredientes" => [
             ["nombre" => "Harina de trigo", "cantidad" => 250, "unidad" => "g"],
@@ -351,7 +343,6 @@ $recetas = [
         "informacionNutricional" => ["calorias" => 250, "proteinas" => 6, "carbohidratos" => 35, "grasas" => 8]
     ],
     [
-        "_id" => "receta009",
         "nombre" => "Salteado de tofu",
         "ingredientes" => [
             ["nombre" => "Tofu firme", "cantidad" => 200, "unidad" => "g"],
@@ -398,7 +389,6 @@ $recetas = [
         "informacionNutricional" => ["calorias" => 280, "proteinas" => 15, "carbohidratos" => 10, "grasas" => 14]
     ],
     [
-        "_id" => "receta010",
         "nombre" => "Pizza margarita casera",
         "ingredientes" => [
             ["nombre" => "Harina de trigo", "cantidad" => 250, "unidad" => "g"],

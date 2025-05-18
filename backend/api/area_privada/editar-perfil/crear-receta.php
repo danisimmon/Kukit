@@ -1,55 +1,75 @@
 <?php
+// Incluye el archivo de conexión a la base de datos
 include '../../conecta-mongo.php';
 
 header('Content-Type: application/json');
-$input = json_decode(file_get_contents('php://input'), true);
 
-if (!$input || empty($input['nombre-receta-nueva']) || empty($input['dificultad']) || empty($input['tiempo']) || empty($input['cantidad']) || empty($input['ingredientes']) || empty($input['pasos'])) {
-    $data = ["success" => false, "message" => "Todos los campos son obligatorios."];
-    echo json_encode($data);
+// Verifica que la solicitud sea POST
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    http_response_code(405); // Método no permitido
+    echo json_encode(["success" => false, "message" => "Método no permitido. Se espera una solicitud POST."]);
     exit;
 }
 
-session_start();
+// Obtiene los datos del cuerpo de la la solicitud en formato JSON
+$input = json_decode(file_get_contents('php://input'), true);
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $nombrereceta = $input['nombre-receta-nueva'];
-    $dificultad = $input['dificultad'];
-    $tiempo = $input['tiempo'];
-    $id = $_SESSION['user']['id'];
+// Verifica que los datos se hayan recibido correctamente
+if (!$input) {
+    http_response_code(400); // Bad Request
+    echo json_encode(["success" => false, "message" => "No se recibieron datos o el formato no es válido. Se espera un JSON."]);
+    exit;
+}
 
-    // Agregar la receta a la base de datos de MongoDB en la colección de recetas
-    $ingredientes = $input['ingredientes'];
-    $instrucciones = $input['instrucciones'];
-    $ingredientes = implode(", ", $ingredientes);
-    $instrucciones = implode(", ", $instrucciones);
-
-    // Agregamos a Mongo la receta
-    $bulk = new MongoDB\Driver\BulkWrite;
-    $bulk->insert([
-        'nombre' => $nombrereceta,
-        'dificultad' => $dificultad,
-        'tiempo' => $tiempo,
-        'cantidad' => $input['cantidad'],
-        'ingredientes' => $ingredientes,
-        'instrucciones' => $instrucciones,
-        'id_usuario' => $id
-    ]);
-    
-    try {
-        $result = $client->executeBulkWrite('recetas.recetas', $bulk);
-        if ($result->getInsertedCount() > 0) {
-            echo json_encode(["success" => true, "message" => "Receta creada correctamente"]);
-        } else {
-            echo json_encode(["success" => false, "message" => "Error al crear la receta"]);
-        }
-    } catch (MongoDB\Driver\Exception\Exception $e) {
-        echo json_encode(["success" => false, "message" => "Error: " . $e->getMessage()]);
-    }
-
-    if ($stmt->execute()) {
-        echo json_encode(["success" => true, "message" => "Perfil actualizado correctamente"]);
-    } else {
-        echo json_encode(["success" => false, "message" => "Error al actualizar el perfil"]);
+// Valida que todos los campos requeridos estén presentes
+$campos_requeridos = ['nombre', 'dificultad', 'tiempo', 'ingredientes', 'pasos'];
+foreach ($campos_requeridos as $campo) {
+    if (empty($input[$campo])) {
+        http_response_code(400); // Bad Request
+        echo json_encode(["success" => false, "message" => "El campo '$campo' es obligatorio."]);
+        exit;
     }
 }
+
+// Inicia la sesión para obtener el ID del usuario
+session_start();
+if (!isset($_SESSION['user']['id'])) {
+    http_response_code(401); // Unauthorized
+    echo json_encode(["success" => false, "message" => "Usuario no autenticado."]);
+    exit;
+}
+$id_usuario = $_SESSION['user']['id'];
+
+// Procesa los datos de la receta
+$nombre = $input['nombre'];
+$dificultad = $input['dificultad'];
+$tiempo = $input['tiempo'];
+$ingredientes = $input['ingredientes']; // Ya es un array desde el frontend
+$pasos = $input['pasos']; // Ya es un array desde el frontend
+
+// Agregamos a Mongo la receta
+$receta = [
+    'nombre' => $nombre,
+    'dificultad' => $dificultad,
+    'tiempo' => $tiempo,
+    'ingredientes' => $ingredientes,
+    'pasos' => $pasos,
+    'id_usuario' => $id_usuario
+];
+
+try {
+    // Accede a la variable $db desde el ámbito global, ya que conecta-mongo.php la define
+    global $db;
+    $coleccionRecetas = $db->selectCollection('recetas');
+    $result = $coleccionRecetas->insertOne($receta);
+    if ($result->getInsertedCount() > 0) {
+        echo json_encode(["success" => true, "message" => "Receta creada correctamente"]);
+    } else {
+        http_response_code(500); // Internal Server Error
+        echo json_encode(["success" => false, "message" => "Error al crear la receta en la base de datos."]);
+    }
+} catch (MongoDB\Driver\Exception\Exception $e) {
+    http_response_code(500); // Internal Server Error
+    echo json_encode(["success" => false, "message" => "Error de MongoDB: " . $e->getMessage()]);
+}
+?>
