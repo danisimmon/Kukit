@@ -13,6 +13,24 @@ const EditarPerfil = () => {
     password: ''
   });
 
+  const [ingredientes, setIngredientes] = useState([{ nombre: '', cantidad: '' }]);
+
+  const [pasos, setPasos] = useState(['']);
+
+  const handleAddPaso = () => {
+    setPasos([...pasos, '']);
+  };
+
+  const handlePasoChange = (index, value) => {
+    const newPasos = [...pasos];
+    newPasos[index] = value;
+    setPasos(newPasos);
+  };
+
+  const handleAddIngrediente = () => {
+    setIngredientes([...ingredientes, { nombre: '', cantidad: '' }]);
+  };
+
   const [mensaje, setMensaje] = useState('');
   const [exito, setExito] = useState(false);
   const [seccionActiva, setSeccionActiva] = useState("perfil");
@@ -178,169 +196,205 @@ const EditarPerfil = () => {
         </div>
       </header>
 
-      <div className="container">
-        <div className="titulo-pagina">
-          <ul>
-            <li onClick={() => setSeccionActiva("perfil")}><h4 className="numero-recetas">Mi Perfil</h4></li>
-            <div className="linea-vertical"></div>
-            <li onClick={() => setSeccionActiva("recetas")}><h4 className="numero-recetas">Recetas creadas</h4></li>
-            <div className="linea-vertical"></div>
-            <li onClick={() => setSeccionActiva("crear")}><h4 className="numero-recetas">Crear Receta</h4></li>
-          </ul>
+      <main>
+        <div className="container">
+          <div className="titulo-pagina">
+            <ul>
+              <li onClick={() => setSeccionActiva("perfil")}><h4 className="numero-recetas">Mi Perfil</h4></li>
+              <div className="linea-vertical"></div>
+              <li onClick={() => setSeccionActiva("recetas")}><h4 className="numero-recetas">Recetas creadas</h4></li>
+              <div className="linea-vertical"></div>
+              <li onClick={() => setSeccionActiva("crear")}><h4 className="numero-recetas">Crear Receta</h4></li>
+            </ul>
+          </div>
+
+          {/* Apartado Perfil Usuario */}
+          {seccionActiva === "perfil" && (
+            <div class="tarjeta-perfil">
+              <h1 class="titulos-perfil">Mi Perfil</h1>
+              <div class="info-perfil">
+                <div class="contenedores-info-perfil">
+                  <h3 class="titulos-perfil">Usuario</h3>
+                  <h3>Kletus</h3>
+                </div>
+              </div>
+
+              <div class="info-perfil">
+                <div class="contenedores-info-perfil">
+                  <h3 class="titulos-perfil">Correo Electrónico</h3>
+                  <h3>Kletus</h3>
+                </div>
+              </div>
+
+              <div class="info-perfil">
+                <div class="contenedores-info-perfil">
+                  <h3 class="titulos-perfil">Contraseña</h3>
+                  <h3>******</h3>
+                </div>
+              </div>
+              <div class="botones-perfil">
+                <button onClick={() => setSeccionActiva("editar-perfil")}>Editar Perfil</button>
+                <button class="botones-inversos">Eliminar Cuenta</button>
+              </div>
+            </div>
+          )}
+          {seccionActiva === "editar-perfil" && (
+            <div class="tarjeta-perfil">
+              <h1 class="titulos-perfil">Mi Perfil</h1>
+              <div class="info-perfil">
+                <div class="contenedores-info-perfil">
+                  <h3 class="titulos-perfil">Usuario</h3>
+                  <input type="text" />
+                </div>
+              </div>
+
+              <div class="info-perfil">
+                <div class="contenedores-info-perfil">
+                  <h3 class="titulos-perfil">Correo Electrónico</h3>
+                  <input type="text" />
+                </div>
+              </div>
+
+              <div class="info-perfil">
+                <div class="contenedores-info-perfil">
+                  <h3 class="titulos-perfil">Contraseña</h3>
+                  <input type="password" name="" id="" />
+                </div>
+              </div>
+              <div class="botones-perfil">
+                <button onClick={() => setSeccionActiva("perfil")}>Guardar</button>
+                <button class="botones-inversos">Cancelar</button>
+              </div>
+            </div>
+          )}
+
+
+          {/* {CONTENEDOR RECETAS GUARDADAS} */}
+          {seccionActiva === "recetas" && (
+            <div className="tarjetas">
+              <div className="tarjeta">
+                <img src={comida} className="imagen-receta-tarjeta" alt="Receta 1" />
+                <h3>Receta 1</h3>
+                <a
+                  className="btn"
+                  data-bs-toggle="offcanvas"
+                  href="#offcanvasExample"
+                  role="button"
+                  aria-controls="offcanvasExample"
+                >
+                  Ver receta
+                </a>
+                <img src={bookmark} className="icono-bookmark" alt="Guardar" />
+              </div>
+
+              <div className="tarjeta">
+                <img src={comida} className="imagen-receta-tarjeta" alt="Receta 1" />
+                <h3>Receta 1</h3>
+                <img src={bookmark} className="icono-bookmark" alt="Guardar" />
+              </div>
+
+              <div className="tarjeta">
+                <img src={comida} className="imagen-receta-tarjeta" alt="Receta 1" />
+                <h3>Receta 1</h3>
+                <img src={bookmark} className="icono-bookmark" alt="Guardar" />
+              </div>
+
+              <div className="tarjeta">
+                <img src={comida} className="imagen-receta-tarjeta" alt="Receta 1" />
+                <h3>Receta 1</h3>
+                <img src={bookmark} className="icono-bookmark" alt="Guardar" />
+              </div>
+            </div>
+          )}
+
+
+          {seccionActiva === "crear" && (
+            <div className="crear-receta">
+              <div className="crear-receta-info">
+                <h3>Nombre de la Receta</h3>
+                <input type="text" className='nombre-receta-nueva' />
+                <div className="info-basica-receta">
+                  <div className="apartado-dificultad">
+                    <h5>Dificultad</h5>
+                    <img src="" alt="grado de dificultad" />
+                    <h5>Selecciona la dificultad</h5>
+                    <select name="nivel-dificultad" id="nivel-dificultad">
+                      <option value="facil">Fácil</option>
+                      <option value="intermedio">Intermedio</option>
+                      <option value="dificil">Difícil</option>
+                    </select>
+                  </div>
+                  <div className="apartado-tiempo">
+                    <h5>Tiempo</h5>
+                    <img src="" alt="tiempo" />
+                    <h5>Selecciona el tiempo</h5>
+                    <input type="text" name="tiempo" id="tiempo" />
+                  </div>
+                </div>
+              </div>
+
+              <div className="racion-ingredientes">
+                <h5>Ración</h5>
+                <h2>1</h2>
+              </div>
+
+              <div className="ingredientes-pasos">
+                <div className="ingredientes-crear-receta">
+                  <div className="contenedor-ingredientes">
+                    <h5>INGREDIENTES</h5>
+                    {ingredientes.map((ing, index) => (
+                      <div key={index} className="rellenar-ingrediente">
+                        Nombre Ingrediente:
+                        <input
+                          type="text"
+                          value={ing.nombre}
+                          onChange={(e) => {
+                            const newIngredientes = [...ingredientes];
+                            newIngredientes[index].nombre = e.target.value;
+                            setIngredientes(newIngredientes);
+                          }}
+                        />
+                        <span>Cantidad</span>
+                        <input
+                          type="number"
+                          value={ing.cantidad}
+                          onChange={(e) => {
+                            const newIngredientes = [...ingredientes];
+                            newIngredientes[index].cantidad = e.target.value;
+                            setIngredientes(newIngredientes);
+                          }}
+                        />
+                      </div>
+                    ))}
+                    <div className="anadir-ingrediente" onClick={handleAddIngrediente}>Añadir Ingrediente <img src="" alt="icono-más" /></div>
+                  </div>
+                </div>
+                <div className="pasos-crear-receta">
+                  <h5>PASOS</h5>
+                  {pasos.map((paso, index) => (
+                    <div key={index} className="rellenar-pasos">
+                      Paso {index + 1}
+                      <input
+                        type="text"
+                        value={paso}
+                        onChange={(e) => handlePasoChange(index, e.target.value)}
+                      />
+                    </div>
+                  ))}
+                  <div className="anadir-pasos" onClick={handleAddPaso}>Añadir Paso <img src="" alt="icono-más" /></div>
+                </div>
+              </div>
+
+              <div className="botones-crear-receta">
+                <button className="boton-crear-receta" id="terminar-receta">Terminar</button>
+                <button className="botones-inversos" id="cancelar-receta">Cancelar</button>
+              </div>
+            </div>
+          )}
         </div>
-
-        {/* Apartado Perfil Usuario */}
-        {seccionActiva === "perfil" && (
-          <div class="tarjeta-perfil">
-            <h1 class="titulos-perfil">Mi Perfil</h1>
-            <div class="info-perfil">
-              <div class="contenedores-info-perfil">
-                <h3 class="titulos-perfil">Usuario</h3>
-                <h3>Kletus</h3>
-              </div>
-            </div>
-
-            <div class="info-perfil">
-              <div class="contenedores-info-perfil">
-                <h3 class="titulos-perfil">Correo Electrónico</h3>
-                <h3>Kletus</h3>
-              </div>
-            </div>
-
-            <div class="info-perfil">
-              <div class="contenedores-info-perfil">
-                <h3 class="titulos-perfil">Contraseña</h3>
-                <h3>******</h3>
-              </div>
-            </div>
-            <div class="botones-perfil">
-              <button onClick={() => setSeccionActiva("editar-perfil")}>Editar Perfil</button>
-              <button class="botones-inversos">Eliminar Cuenta</button>
-            </div>
-          </div>
-        )}
-        {seccionActiva === "editar-perfil" && (
-          <div class="tarjeta-perfil">
-            <h1 class="titulos-perfil">Mi Perfil</h1>
-            <div class="info-perfil">
-              <div class="contenedores-info-perfil">
-                <h3 class="titulos-perfil">Usuario</h3>
-                <input type="text" />
-              </div>
-            </div>
-
-            <div class="info-perfil">
-              <div class="contenedores-info-perfil">
-                <h3 class="titulos-perfil">Correo Electrónico</h3>
-                <input type="text" />
-              </div>
-            </div>
-
-            <div class="info-perfil">
-              <div class="contenedores-info-perfil">
-                <h3 class="titulos-perfil">Contraseña</h3>
-                <input type="password" name="" id="" />
-              </div>
-            </div>
-            <div class="botones-perfil">
-              <button onClick={() => setSeccionActiva("perfil")}>Guardar</button>
-              <button class="botones-inversos">Cancelar</button>
-            </div>
-          </div>
-        )}
+      </main>
 
 
-        {/* {CONTENEDOR RECETAS GUARDADAS} */}
-        {seccionActiva === "recetas" && (
-          <div className="tarjetas">
-            <div className="tarjeta">
-              <img src={comida} className="imagen-receta-tarjeta" alt="Receta 1" />
-              <h3>Receta 1</h3>
-              <a
-                className="btn"
-                data-bs-toggle="offcanvas"
-                href="#offcanvasExample"
-                role="button"
-                aria-controls="offcanvasExample"
-              >
-                Ver receta
-              </a>
-              <img src={bookmark} className="icono-bookmark" alt="Guardar" />
-            </div>
-
-            <div className="tarjeta">
-              <img src={comida} className="imagen-receta-tarjeta" alt="Receta 1" />
-              <h3>Receta 1</h3>
-              <img src={bookmark} className="icono-bookmark" alt="Guardar" />
-            </div>
-
-            <div className="tarjeta">
-              <img src={comida} className="imagen-receta-tarjeta" alt="Receta 1" />
-              <h3>Receta 1</h3>
-              <img src={bookmark} className="icono-bookmark" alt="Guardar" />
-            </div>
-
-            <div className="tarjeta">
-              <img src={comida} className="imagen-receta-tarjeta" alt="Receta 1" />
-              <h3>Receta 1</h3>
-              <img src={bookmark} className="icono-bookmark" alt="Guardar" />
-            </div>
-          </div>
-        )}
-
-
-        {seccionActiva === "crear" && (
-          <div className="crear-receta">
-            <div className="crear-receta-info">
-              <h3>Nombre de la Receta</h3>
-              <input type="text" className='nombre-receta-nueva'/>
-              <div className="info-basica-receta">
-                <div className="apartado-dificultad">
-                  <h5>Dificultad</h5>
-                  <img src="" alt="grado de dificultad" />
-                  <h5>Selecciona la dificultad</h5>
-                  <select name="nivel-dificultad" id="nivel-dificultad">
-                    <option value="facil">Fácil</option>
-                    <option value="intermedio">Intermedio</option>
-                    <option value="dificil">Difícil</option>
-                  </select>
-                </div>
-                <div className="apartado-tiempo">
-                  <h5>Tiempo</h5>
-                  <img src="" alt="tiempo" />
-                  <h5>Selecciona el tiempo</h5>
-                  <input type="text" name="tiempo" id="tiempo" />
-                </div>
-              </div>
-            </div>
-
-            <div className="racion-ingredientes">
-              <h5>Ración</h5>
-              <h2>1</h2>
-            </div>
-
-            <div className="ingredientes-pasos">
-              <div className="ingredientes-crear-receta">
-                <div className="contenedor-ingredientes">
-                  <h5>INGREDIENTES</h5>
-                  <div className="rellenar-ingrediente">Nombre Ingrediente <span>Cantidad</span></div>
-                  <div className="anadir-ingrediente">Añadir Ingrediente <img src="" alt="icono-más" /></div>
-                </div>
-              </div>
-              <div className="pasos-crear-receta">
-                <h5>PASOS</h5>
-                <div className="rellenar-pasos">Paso 1</div>
-                <div className="anadir-pasos">Añadir Paso <img src="" alt="icono-más" /></div>
-              </div>
-            </div>
-
-            <div className="botones-crear-receta">
-              <button className="boton-crear-receta" id="terminar-receta">Terminar</button>
-              <button className="botones-inversos" id="cancelar-receta">Cancelar</button>
-            </div>
-          </div>
-        )}
-      </div>
 
 
       {/* Offcanvas para Lista de la compra */}
