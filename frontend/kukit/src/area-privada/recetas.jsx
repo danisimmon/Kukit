@@ -5,7 +5,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import CorazonRelleno from '../img/corazonRelleno.png'
 import CorazonSinRelleno from '../img/corazonSinRelleno.png'
-import Favoritos from '../img/bookmark.png'
+import NoFavorito from '../img/bookmark.png'
+import Favorito from '../img/bookmark-relleno.png'
 import Login from '../login/login';
 import Registro from '../login/registro/registro';
 import Footer from '../footer/footer';
@@ -89,7 +90,7 @@ const Recetas = () => {
           [idReceta]: !esFavoritoActual, // Invierte el estado de favorito
         }));
       } else {
-        alert(esFavoritoActual? 'Error al eliminar de favoritos' : 'Error al guardar favorito');
+        alert(esFavoritoActual ? 'Error al eliminar de favoritos' : 'Error al guardar favorito');
         console.error('Error al guardar/eliminar favorito:', respuesta.data.message);
       }
     } catch (error) {
@@ -203,22 +204,22 @@ const Recetas = () => {
                 />
                 <p className="likesNumero">{likes[receta._id] || 0}</p>
               </div>
-              <p className="duracion">{receta.duracion || 'N/A'} min</p>
+              {/* <p className="duracion">{receta.duracion || 'N/A'} min</p> */}
               <img
-                src={Favoritos}
+                src={favoritos[receta._id] ? Favorito : NoFavorito}
+                alt={favoritos[receta._id] ? "En favoritos" : "No en favoritos"}
                 className="icono-bookmark"
-                alt="Guardar"
                 onClick={(e) => {
                   e.stopPropagation();
-                  guardarFavorito(receta._id); // Llama a guardarFavorito con el ID
+                  guardarFavorito(receta._id);
                 }}
                 style={{ cursor: 'pointer' }}
               />
-              {favoritos[receta._id] ? (
+              {/* {favoritos[receta._id] ? (
                 <p>En favoritos</p>
               ) : (
                 <p>No en favoritos</p>
-              )}
+              )} */}
             </div>
           ))}
         </div>

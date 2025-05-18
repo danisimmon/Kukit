@@ -1,5 +1,5 @@
 // src/pages/Home.jsx
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import logo from '../img/logo_kukit.png';
 import hero from '../img/mesa-de-cocina-con-platos-preparados-e-ingredientes.jpg';
 import Login from '../login/login';
@@ -14,6 +14,9 @@ function Home() {
   const [showLogin, setShowLogin] = useState(false);
   const [showRegistro, setShowRegistro] = useState(false);
   const [showListaCompra, setListaCompra] = useState(false);
+  const [recetas, setRecetas] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const intervalRef = useRef(null);
 
   useEffect(() => {
     const container = document.querySelector('.bubbles');
@@ -26,13 +29,35 @@ function Home() {
       }
     }
   }, []);
-  //Código prueba Manu
-  const navigate = useNavigate();
 
-  const handleLogout = () => {
-    localStorage.removeItem('token'); // O lo que uses para identificar la sesión
-    navigate('/home'); // O redirige a '/login' si tienes una ruta específica
+  useEffect(() => {
+    const fetchRecetas = async () => {
+      try {
+        const response = await fetch('http://localhost/api/area_privada/recetas/getRecetas.php');
+        const data = await response.json();
+        // Ordena las recetas por algún criterio fijo si necesitas que siempre sean las mismas
+        // Ejemplo: por nombre (alfabéticamente), por id, o similar.
+        const recetasOrdenadas = [...data.recetas].sort((a, b) => a.nombre.localeCompare(b.nombre));
+        setRecetas(recetasOrdenadas.slice(0, 4));
+      } catch (error) {
+        console.error('Error cargando recetas:', error);
+      }
+    };
+
+    fetchRecetas();
+  }, []);
+  // Navegar a la siguiente receta
+  const handleNext = () => {
+    setCurrentIndex((prev) => (prev + 1) % recetas.length);
   };
+
+  // Navegar a la receta anterior
+  const handlePrev = () => {
+    setCurrentIndex((prev) => (prev - 1 + recetas.length) % recetas.length);
+  };
+
+  // Solo mostrar la receta actual
+  const receta = recetas[currentIndex];
 
   return (
     <>
@@ -95,7 +120,20 @@ function Home() {
           </div>
 
           <div className="contenedor-home" id="contenedor-imprescindibles-novedades">
-            <h2>Imprescindibles Kukit</h2>
+            <div className="contenedor-home" id="contenedor-imprescindibles-novedades">
+              <h2>Imprescindibles Kukit</h2>
+              <div className="imprescindibles-kukit-recetas" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <button onClick={handlePrev} disabled={recetas.length === 0} style={{ fontSize: '2rem', marginRight: '1rem' }}>&lt;</button>
+                {receta && (
+                  <div className="tarjeta-receta" key={receta._id || currentIndex}>
+                    <img src={receta.imagen || 'img/comida.jpg'} alt={receta.nombre} />
+                    <h3>{receta.nombre}</h3>
+                    <p>{receta.descripcion}</p>
+                  </div>
+                )}
+                <button onClick={handleNext} disabled={recetas.length === 0} style={{ fontSize: '2rem', marginLeft: '1rem' }}>&gt;</button>
+              </div>
+            </div>
             <h2>Novedades de la semana</h2>
           </div>
 
