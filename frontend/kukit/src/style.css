@@ -1166,7 +1166,8 @@ footer.section.bg-footer {
 
 
 .imgHome1 {
-    width: 30%;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     border-radius: 8px;
 }
@@ -1183,7 +1184,8 @@ footer.section.bg-footer {
 }
 
 .imgHome2 {
-    width: 30%;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     border-radius: 8px;
 }

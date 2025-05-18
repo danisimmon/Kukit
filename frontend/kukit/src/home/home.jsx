@@ -8,6 +8,9 @@ import Footer from '../footer/footer';
 import ListaCompra from '../listaCompra/listaCompra';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import imgHome1 from '../img/imgHome1.png';
+import imgHome2 from '../img/imgHome2.jpg';
+import imgHome3 from '../img/imgHome3.jpg';
 import Organiza from '../img/ChatGPT Image 15 may 2025, 18_09_34.png'
 
 function Home() {
@@ -141,7 +144,7 @@ function Home() {
             <h2>Añade tus recetas y crea tu lista de la compra</h2>
             <div className="contenedor-lista-compra-elementos">
               <div className="contenedor-home-checks">
-                {/* <img src={Organiza} alt="" className="img-hero" /> */}
+                <img src={imgHome1} alt="imgHome1" className='imgHome1' />
               </div>
               <div className="contenedor-lista-compra-texto">
                 <h3>Organiza tu compra de manera rápida y sencilla con solo un clic.</h3>
@@ -159,7 +162,9 @@ function Home() {
           <div className="contenedor-home" id="contenedor-filtros-recetas">
             <h2>Filtra, Elige y Cocina tu próxima receta</h2>
             <div className="contenedor-lista-compra-elementos">
-              <div className="contenedor-home-checks"></div>
+              <div className="contenedor-home-checks">
+                <img src={imgHome2} alt="imgHome2" className='imgHome2' />
+              </div>
               <div className="contenedor-lista-compra-texto">
                 <h3>Busca por país, ingredientes o necesidades especiales</h3>
                 <p>
@@ -175,7 +180,9 @@ function Home() {
           <div className="contenedor-home" id="contenedor-calendario">
             <h2>Filtra tus recetas y descubre tu próxima receta</h2>
             <div className="contenedor-lista-compra-elementos">
-              <div className="contenedor-home-checks"></div>
+              <div className="contenedor-home-checks">
+                <img src={imgHome3} alt="imgHome3" className='imgHome3' />
+              </div>
               <div className="contenedor-lista-compra-texto">
                 <h3>¿Cómo hacerlo?</h3>
                 <p>
