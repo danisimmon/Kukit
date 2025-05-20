@@ -109,6 +109,24 @@ const ListaCompra = ({ showListaCompra, setListaCompra }) => {
     getListaCompra();
   }, []);
 
+  const [mostrarConfirmacion, setMostrarConfirmacion] = useState(false);
+
+  // Mostrar la confirmación
+  const handleMostrarConfirmacion = () => {
+    setMostrarConfirmacion(true);
+  };
+
+  // Ocultar sin vaciar
+  const handleCancelarVaciado = () => {
+    setMostrarConfirmacion(false);
+  };
+
+  // Confirmar y vaciar la lista
+  const handleConfirmarVaciado = async () => {
+    await vaciarListaCompra();
+    setMostrarConfirmacion(false); // Ocultamos después
+  };
+
   return (
     <>
       <link
@@ -157,16 +175,25 @@ const ListaCompra = ({ showListaCompra, setListaCompra }) => {
                 </li>
               ))}
             </ul>
+            {mostrarConfirmacion && (
+              <div className="confirmacion-vaciar">
+                <h1>¿Seguro que quieres vaciar tu lista de la compra?</h1>
+                <div className="botones-lista-compra">
+                  <button className="btn btn-danger" onClick={handleConfirmarVaciado}>Vaciar</button>
+                  <button className="btn btn-secondary" onClick={handleCancelarVaciado}>Cancelar</button>
+                </div>
+              </div>
+            )}
           </div>
           <div className="botones-lista-compra">
-            <button className="btn btn-danger" onClick={vaciarListaCompra}>
+            <button className="btn btn-danger" onClick={handleMostrarConfirmacion}>
               Vaciar Lista
             </button>
             <button
-            className="btn btn-secondary"
-              onClick={() => navigate("/recetas")} 
+              className="btn btn-secondary"
+              onClick={() => navigate("/recetas")}
             >Ir a recetas</button>
-                       </div>
+          </div>
         </div>
       </div>
     </>
