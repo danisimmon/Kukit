@@ -24,21 +24,25 @@ const Recetas = () => {
   const [showRegistro, setShowRegistro] = useState(false);
   const [likes, setLikes] = useState({});
   const [liked, setLiked] = useState({});
-  const [favoritos, setFavoritos] = useState({}); // Estado para almacenar el estado de favorito de cada receta
+  const [favoritos, setFavoritos] = useState({});
 
   const [paginaActual, setPaginaActual] = useState(1);
   const recetasPorPagina = 8;
 
+  // Paginación de instrucciones (1 paso por página)
+  const [paginaInstrucciones, setPaginaInstrucciones] = useState(1);
+  const pasosPorPagina = 1;
+
+  useEffect(() => {
+    setPaginaInstrucciones(1); // Reset paginación de instrucciones al abrir una nueva receta
+  }, [recetaSeleccionada]);
+
   const manejarLike = (idReceta) => {
     const yaLeGusta = liked[idReceta];
-
-    // Alternar el estado del like
     setLiked((prev) => ({
       ...prev,
       [idReceta]: !yaLeGusta,
     }));
-
-    // Sumar o restar 1 al contador de likes
     setLikes((prev) => ({
       ...prev,
       [idReceta]: yaLeGusta
@@ -47,21 +51,18 @@ const Recetas = () => {
     }));
   };
 
-
-
   useEffect(() => {
     const obtenerRecetas = async () => {
       try {
         const respuesta = await axios.get('http://localhost/api/area_privada/recetas/getRecetas.php');
         setN_recetas(respuesta.data.n_recetas);
         setRecetas(respuesta.data.recetas);
-        console.log(respuesta);
         // Inicializa los likes y favoritos
         const likesIniciales = {};
         const favoritosIniciales = {};
         respuesta.data.recetas.forEach(r => {
           likesIniciales[r._id] = r.likes || 0;
-          favoritosIniciales[r._id] = r.favorito || false; // Usa el campo favorito del backend
+          favoritosIniciales[r._id] = r.favorito || false;
         });
         setLikes(likesIniciales);
         setFavoritos(favoritosIniciales);
@@ -79,15 +80,14 @@ const Recetas = () => {
       const esFavoritoActual = favoritos[idReceta] || false;
       const respuesta = await axios.post('http://localhost/api/area_privada/recetas/favoritas/guardarFavorito.php', {
         id_receta: idReceta,
-        accion: esFavoritoActual ? 'eliminar' : 'guardar' // Enviar la acción al backend
+        accion: esFavoritoActual ? 'eliminar' : 'guardar'
       });
 
       if (respuesta.data.success) {
         alert(esFavoritoActual ? 'Receta eliminada de favoritos' : 'Receta guardada en favoritos');
-        // Actualiza el estado de favoritos
         setFavoritos(prevFavoritos => ({
           ...prevFavoritos,
-          [idReceta]: !esFavoritoActual, // Invierte el estado de favorito
+          [idReceta]: !esFavoritoActual,
         }));
       } else {
         alert(esFavoritoActual ? 'Error al eliminar de favoritos' : 'Error al guardar favorito');
@@ -99,12 +99,11 @@ const Recetas = () => {
     }
   };
 
-
   const abrirReceta = (receta) => {
     setRecetaSeleccionada(receta);
     const offcanvasElement = offcanvasRef.current;
     if (offcanvasElement) {
-      const bsOffcanvas = new bootstrap.Offcanvas(offcanvasElement);
+      const bsOffcanvas = new window.bootstrap.Offcanvas(offcanvasElement);
       bsOffcanvas.show();
     }
   };
@@ -113,7 +112,7 @@ const Recetas = () => {
     setRecetaSeleccionada(null);
     const offcanvasElement = offcanvasRef.current;
     if (offcanvasElement) {
-      const bsOffcanvas = bootstrap.Offcanvas.getInstance(offcanvasElement);
+      const bsOffcanvas = window.bootstrap.Offcanvas.getInstance(offcanvasElement);
       if (bsOffcanvas) {
         bsOffcanvas.hide();
       }
@@ -129,6 +128,57 @@ const Recetas = () => {
     if (numero >= 1 && numero <= totalPaginas) {
       setPaginaActual(numero);
     }
+  };
+
+  // ---- Lógica de paginación de instrucciones ----
+  let pasos = recetaSeleccionada?.pasos || [];
+  const totalPaginasPasos = Math.ceil(pasos.length / pasosPorPagina);
+  const indexUltimoPaso = paginaInstrucciones * pasosPorPagina;
+  const indexPrimerPaso = indexUltimoPaso - pasosPorPagina;
+  const pasoActual = pasos[indexPrimerPaso];
+
+  const cambiarPaginaInstrucciones = (numero) => {
+    if (numero >= 1 && numero <= totalPaginasPasos) {
+      setPaginaInstrucciones(numero);
+    }
+  };
+
+  // Sliding window para paginación de pasos
+  const renderPaginasPasos = () => {
+    const ventana = 3;
+    let start = Math.max(1, paginaInstrucciones - 1);
+    let end = Math.min(totalPaginasPasos, start + ventana - 1);
+
+    // Si llegamos al final, ajusta el inicio
+    if (end - start < ventana - 1) {
+      start = Math.max(1, end - ventana + 1);
+    }
+
+    const items = [];
+    if (start > 1) {
+      items.push(
+        <li key="start-ellipsis" className="page-item disabled">
+          <span className="page-link">...</span>
+        </li>
+      );
+    }
+    for (let i = start; i <= end; i++) {
+      items.push(
+        <li key={i} className={`page-item ${paginaInstrucciones === i ? 'active' : ''}`}>
+          <button className="page-link" onClick={() => cambiarPaginaInstrucciones(i)}>
+            {i}
+          </button>
+        </li>
+      );
+    }
+    if (end < totalPaginasPasos) {
+      items.push(
+        <li key="end-ellipsis" className="page-item disabled">
+          <span className="page-link">...</span>
+        </li>
+      );
+    }
+    return items;
   };
 
   if (cargando) return <div className="spinner-border text-primary" role="status">
@@ -205,7 +255,6 @@ const Recetas = () => {
                 />
                 <p className="likesNumero">{likes[receta._id] || 0}</p>
               </div>
-              {/* <p className="duracion">{receta.duracion || 'N/A'} min</p> */}
               <img
                 src={favoritos[receta._id] ? Favorito : NoFavorito}
                 alt={favoritos[receta._id] ? "En favoritos" : "No en favoritos"}
@@ -216,22 +265,17 @@ const Recetas = () => {
                 }}
                 style={{ cursor: 'pointer' }}
               />
-              {/* {favoritos[receta._id] ? (
-                <p>En favoritos</p>
-              ) : (
-                <p>No en favoritos</p>
-              )} */}
             </div>
           ))}
         </div>
 
-        {/* Paginación */}
+        {/* Paginación principal */}
         <div className="paginacion d-flex justify-content-center mt-4">
           <nav>
             <ul className="pagination">
               <li className={`page-item ${paginaActual === 1 ? 'disabled' : ''}`}>
                 <button className="page-link" onClick={() => cambiarPagina(paginaActual - 1)}>
-                  Anterior
+                  &lt;
                 </button>
               </li>
               {[...Array(totalPaginas)].map((_, index) => (
@@ -243,7 +287,7 @@ const Recetas = () => {
               ))}
               <li className={`page-item ${paginaActual === totalPaginas ? 'disabled' : ''}`}>
                 <button className="page-link" onClick={() => cambiarPagina(paginaActual + 1)}>
-                  Siguiente
+                  &gt;
                 </button>
               </li>
             </ul>
@@ -285,11 +329,32 @@ const Recetas = () => {
                 ))}
               </ul>
               <h3>Instrucciones</h3>
-              <ol>
-                {recetaSeleccionada.pasos?.map((paso, index) => (
-                  <li key={index}>{paso}</li>
-                ))}
+              <ol start={indexPrimerPaso + 1}>
+                {pasoActual && (
+                  <li key={indexPrimerPaso}>{pasoActual}</li>
+                )}
               </ol>
+              {/* Paginación de instrucciones tipo sliding window */}
+              {totalPaginasPasos > 1 && (
+                <nav className="mb-3">
+                  <ul className="pagination justify-content-center">
+                    {/* Botón anterior */}
+                    <li className={`page-item ${paginaInstrucciones === 1 ? 'disabled' : ''}`}>
+                      <button className="page-link" onClick={() => cambiarPaginaInstrucciones(paginaInstrucciones - 1)}>
+                        &lt;
+                      </button>
+                    </li>
+                    {/* Sliding window */}
+                    {renderPaginasPasos()}
+                    {/* Botón siguiente */}
+                    <li className={`page-item ${paginaInstrucciones === totalPaginasPasos ? 'disabled' : ''}`}>
+                      <button className="page-link" onClick={() => cambiarPaginaInstrucciones(paginaInstrucciones + 1)}>
+                        &gt;
+                      </button>
+                    </li>
+                  </ul>
+                </nav>
+              )}
             </>
           ) : (
             <p>Selecciona una receta para ver los detalles.</p>
@@ -303,4 +368,3 @@ const Recetas = () => {
 };
 
 export default Recetas;
-
