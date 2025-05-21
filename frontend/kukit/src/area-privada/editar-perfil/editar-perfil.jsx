@@ -4,6 +4,7 @@ import logo from '../../img/logo_kukit.png';
 import comida from "../../img/comida.jpg";
 import bookmark from "../../img/bookmark.png";
 import Footer from '../../footer/footer';
+import Header from '../../header/header';
 
 const EditarPerfil = () => {
   const [formData, setFormData] = useState({
@@ -169,106 +170,7 @@ const EditarPerfil = () => {
 
   return (
     <>
-      <header>
-        <a href="./index.html" id="logo-header">
-          <img src={logo} alt="Logo Kukit" id="logo-header" />
-        </a>
-        <button id="hamburger-menu">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-
-        <nav>
-          <ul>
-            <li><a href="productos.html">Recetas</a></li>
-            <li>
-              <a className="btn" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
-                Lista de la compra
-              </a>
-            </li>
-            <li><a href="#">Plan de alimentación</a></li>
-          </ul>
-        </nav>
-
-        <div className="contenedor-header">
-          <button className="sign-in" id="sign-in">Iniciar sesión</button>
-          <button className="sign-up" id="sign-up">Regístrate</button>
-        </div>
-        <div id="pop-up">
-          {/* <div class="pop-up-sign-up" id="pop-up-sign-up">
-            <section class="contenedor-sign-up" id="contenedor-sign-up">
-              <figure>
-                <a href=""><img src="img/logo_kukit.png" alt="logo de kukit"></a>
-              </figure>
-
-              <h1>CREAR CUENTA</h1>
-              <hr class="linea-inicio-sesion">
-              <form action="" id="sign-up-form">
-
-                <div>
-                  <label for="email-sign-up">Correo electrónico:</label>
-                  <input type="email" name="email-sign-up" id="email-sign-up">
-                </div>
-
-                <div>
-                  <label for="password-sign-up">Contraseña:</label>
-                  <input type="password" name="password-sign-up" id="password-sign-up">
-                </div>
-                <label class="checkbox-label">
-                  <input type="checkbox" name="recordarme" id="recordarme">
-                  <span>Recordarme</span>
-                </label>
-
-                <p class="aceptar-terminos">
-                  Al hacer clic en «Aceptar y crear cuenta», aceptas las <b><u>Condiciones de
-                    uso</u></b>, la <b><u>Política de privacidad</u></b> y la <b><u>Política de
-                    cookies</u></b> de Kukit
-                </p>
-
-                <button type="submit" class="botones-inicio-sesion">Aceptar y crear cuenta</button>
-              </form>
-              <p>¿Ya tienes cuenta?</p>
-              <button class="botones-inicio-sesion" id="inicio-google">Iniciar sesión</button>
-
-              <hr>
-
-            </section>
-        </div> */}
-
-          {/* <div class="pop-up-sign-in" id="pop-up-sign-in">
-            <section class="contenedor-sign-in" id="contenedor-sign-in">
-              <figure>
-                <a href="index.html"><img src="img/logo_kukit.png" alt="Logo de Kukit"></a>
-              </figure>
-
-              <h1>INICIAR SESIÓN</h1>
-              <hr class="linea-inicio-sesion">
-
-              <hr>
-
-              <form>
-                <div class="contenedor-email-password">
-                  <label for="email-sign-in" id="mail" class="mail">Correo electrónico:</label>
-                  <input type="email" name="email-sign-in" id="email-sign-in">
-                  <span id="errorEmail"></span>
-                </div>
-
-                <div class="contenedor-email-password">
-                  <label for="password-sign-in" class="password-sign-in">Contraseña:</label>
-                  <input type="password" name="password-sign-in" id="password-sign-in">
-                  <span id="errorPassword"></span>
-                </div>
-
-                <button class="botones-inicio-sesion">Iniciar sesión</button>
-
-              </form>
-              <button class="botones-inicio-sesion" id="inicio-google">Iniciar sesión con Google</button>
-            </section>
-        </div> */}
-        </div>
-      </header>
-
+      <Header />
       <main>
         <div className="container">
           <div className="titulo-pagina">

@@ -11,6 +11,7 @@ import Login from '../login/login';
 import Registro from '../login/registro/registro';
 import Footer from '../footer/footer';
 import ListaCompra from '../listaCompra/listaCompra';
+import Header from '../header/header';
 
 const Recetas = () => {
   const [recetas, setRecetas] = useState([]);
@@ -188,39 +189,7 @@ const Recetas = () => {
 
   return (
     <>
-      <header>
-        <a href="/home" id="logo-header">
-          <img src={logo} alt="" id="logo-header" />
-        </a>
-        <button id="hamburger-menu">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-        <nav>
-          <ul>
-            <li>Recetas</li>
-            <li><a href="/recetas/recetasguardadas">Recetas Guardadas</a></li>
-            <li onClick={() => setListaCompra(true)}>Lista de la Compra</li>
-            <li><a href="/plan-alimentacion">Plan de alimentación</a></li>
-          </ul>
-        </nav>
-        <div className="contenedor-header">
-          <button className="sign-in" onClick={() => setShowLogin(true)}>Iniciar sesión</button>
-          <button className="sign-up" onClick={() => setShowRegistro(true)} id="sign-up">Regístrate</button>
-        </div>
-      </header>
-
-      <div id="pop-up-sign-in" style={{ display: showLogin ? 'flex' : 'none' }} onClick={() => setShowLogin(false)}>
-        <div className="modal-content" onClick={e => e.stopPropagation()}>
-          <Login setShowLogin={setShowLogin} />
-        </div>
-      </div>
-      <div id="pop-up-sign-up" style={{ display: showRegistro ? 'flex' : 'none' }} onClick={() => setShowRegistro(false)}>
-        <div className="modal-content-2" onClick={e => e.stopPropagation()}>
-          <Registro setShowRegistro={setShowRegistro} />
-        </div>
-      </div>
+      <Header />
       {showListaCompra && (
         <ListaCompra showListaCompra={showListaCompra} setListaCompra={setListaCompra} />
       )}
