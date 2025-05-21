@@ -12,6 +12,7 @@ import imgHome1 from '../img/imgHome1.png';
 import imgHome2 from '../img/imgHome2.jpg';
 import imgHome3 from '../img/imgHome3.jpg';
 import Organiza from '../img/ChatGPT Image 15 may 2025, 18_09_34.png'
+import Header from '../header/header';
 
 function Home() {
   const [showLogin, setShowLogin] = useState(false);
@@ -64,41 +65,7 @@ function Home() {
 
   return (
     <>
-      <header>
-        <a href="/" id="logo-header">
-          <img src={logo} alt="" id="logo-header" />
-        </a>
-        <button id="hamburger-menu">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-        <nav>
-          <ul>
-            <li><Link to="/recetas">Recetas</Link></li>
-            <li><Link to="/recetas/recetasguardadas">Recetas Guardadas</Link></li>
-            <li onClick={() => setListaCompra(true)}>Lista de la Compra</li>
-            <li><a href="/plan-alimentacion">Plan de alimentación</a></li>
-          </ul>
-        </nav>
-        <div className="contenedor-header">
-          <button className="sign-in" onClick={() => setShowLogin(true)}>Iniciar sesión</button>
-          <button className="sign-up" onClick={() => setShowRegistro(true)} id="sign-up">Regístrate</button>
-        </div>
-      </header>
-      <div id="pop-up-sign-in" style={{ display: showLogin ? 'flex' : 'none' }} onClick={() => setShowLogin(false)}>
-        <div className="modal-content" onClick={e => e.stopPropagation()}>
-          <Login setShowLogin={setShowLogin} />
-        </div>
-      </div>
-      <div id="pop-up-sign-up" style={{ display: showRegistro ? 'flex' : 'none' }} onClick={() => setShowRegistro(false)}>
-        <div className="modal-content-2" onClick={e => e.stopPropagation()}>
-          <Registro setShowRegistro={setShowRegistro} />
-        </div>
-      </div>
-      {showListaCompra && (
-        <ListaCompra showListaCompra={showListaCompra} setListaCompra={setListaCompra} />
-      )}
+      <Header />
       <main>
         <div className="hero">
           <div className="textos-hero">
