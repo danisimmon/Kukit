@@ -1478,3 +1478,48 @@ footer.section.bg-footer {
         background-position: 0% 50%;
     }
 }
+
+
+/* Sección Mi perfil */
+
+.perfil-menu {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 20px;
+  width: 220px;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  font-family: Arial, sans-serif;
+}
+
+.perfil-titulo {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 5px;
+}
+
+.perfil-opciones {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.perfil-opciones li {
+  padding: 10px 12px;
+  background-color: #f7f7f7;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.perfil-opciones li:hover {
+  background-color: #e0e0e0;
+}
