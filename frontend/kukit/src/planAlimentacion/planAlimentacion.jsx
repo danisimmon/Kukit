@@ -16,7 +16,8 @@ function PlanificacionSemanal() {
   const [plan, setPlan] = useState([]);
   const [semanaActualVisualizada, setSemanaActualVisualizada] = useState(0); // Índice de la semana
   const [slotSeleccionado, setSlotSeleccionado] = useState(null); // { semanaIndex, diaIndex, tipoComidaKey }
-  const [recetasDisponibles, setRecetasDisponibles] = useState([]);
+  const [recetasGuardadas, setRecetasGuardadas] = useState([]); // Estado para las recetas guardadas
+  const [recetasCreadas, setRecetasCreadas] = useState([]); // Nuevo estado para las recetas creadas
   const [slotParaEliminar, setSlotParaEliminar] = useState(null);
 
   // Refs para Offcanvas y Modal de Bootstrap
@@ -25,7 +26,7 @@ function PlanificacionSemanal() {
   const confirmDeleteModalRef = useRef(null);
   const confirmDeleteModalInstance = useRef(null);
 
-  // Inicializar el plan y cargar recetas
+  // Inicializar el plan y cargar recetas guardadas y creadas por separado
   useEffect(() => {
     const planInicial = Array(NUMERO_SEMANAS_PLAN).fill(null).map(() =>
       Array(DIAS_SEMANA.length).fill(null).map(() => ({
@@ -38,39 +39,52 @@ function PlanificacionSemanal() {
     );
     setPlan(planInicial);
 
-    const cargarRecetas = async () => {
+    const cargarRecetasGuardadas = async () => {
       try {
         const response = await axios.get('http://localhost/api/area_privada/recetas/getRecetasGuardadas.php');
-        console.log(response)
-        const data = response.data.n_recetas;
-        console.log("Datos recibidos del backend:", data);
-         if (data && Array.isArray(data.recetas)) {
-          setRecetasDisponibles(data.recetas); // Usamos el array de recetas
-         }
-          if (data.recetas.length === 0) {
-            console.log("El backend devolvió un array de 'recetas' vacío.");
-          } else {
-          console.error("Error: Los datos recibidos del backend no son un array. Datos recibidos:", data);
-          setRecetasDisponibles([]);
+        console.log("Respuesta de recetas guardadas:", response);
+        const data = response.data;
+        if (Array.isArray(data)) {
+          setRecetasGuardadas(data);
+        } else if (data && Array.isArray(data.recetas)) {
+          setRecetasGuardadas(data.recetas);
+        } else if (data && data.n_recetas && Array.isArray(data.n_recetas)) {
+          setRecetasGuardadas(data.n_recetas);
+        } else {
+          console.error("Error al cargar recetas guardadas: la respuesta no tiene la estructura esperada.", data);
+          setRecetasGuardadas([]);
         }
       } catch (error) {
-        console.error("Error al cargar las recetas desde el backend:", error);
-        if (error.response) {
-          console.error("Datos del error:", error.response.data);
-          console.error("Estado del error:", error.response.status);
-          console.error("Cabeceras del error:", error.response.headers);
-        } else if (error.request) {
-          console.error("Error en la solicitud:", error.request);
-        } else {
-          console.error("Error:", error.message);
-        }
-        setRecetasDisponibles([]);
+        console.error("Error al cargar recetas guardadas:", error);
+        setRecetasGuardadas([]);
       }
     };
-    cargarRecetas();
+
+    const cargarRecetasCreadas = async () => {
+      try {
+        const response = await axios.get('http://localhost/api/area_privada/recetas/getRecetasCreadas.php'); // Reemplaza con la URL correcta
+        console.log("Respuesta de recetas creadas:", response);
+        const data = response.data;
+        if (Array.isArray(data)) {
+          setRecetasCreadas(data);
+        } else if (data && Array.isArray(data.recetas)) {
+          setRecetasCreadas(data.recetas);
+        } else if (data && data.n_recetas && Array.isArray(data.n_recetas)) {
+          setRecetasCreadas(data.n_recetas);
+        } else {
+          console.error("Error al cargar recetas creadas: la respuesta no tiene la estructura esperada.", data);
+          setRecetasCreadas([]);
+        }
+      } catch (error) {
+        console.error("Error al cargar recetas creadas:", error);
+        setRecetasCreadas([]);
+      }
+    };
+
+    cargarRecetasGuardadas();
+    cargarRecetasCreadas();
 
     // Inicializar instancias de Bootstrap Offcanvas y Modal
-    // Import bootstrap dynamically if not available globally
     import('bootstrap/dist/js/bootstrap.bundle.min.js').then(bootstrap => {
       if (recipeSelectorOffcanvasRef.current && !recipeSelectorOffcanvasInstance.current) {
         recipeSelectorOffcanvasInstance.current = new bootstrap.Offcanvas(recipeSelectorOffcanvasRef.current);
@@ -228,35 +242,35 @@ function PlanificacionSemanal() {
                         ? semanaVisible[diaIndex][tipoComida.key]
                         : null;
                     return (
-                      <td key={`${diaNombre}-${tipoComida.key}`} style={{ verticalAlign: 'middle' }}>                      
-                      {comidaPlanificada ? (
-                        <div>
-                          <span>{comidaPlanificada.nombre}</span>
-                          <div className="mt-1">
-                            <button
-                              className="btn btn-sm btn-outline-secondary me-1"
-                              onClick={() =>abrirSelectorRecetas(semanaActualVisualizada,diaIndex,tipoComida.key)}
-                              title="Cambiar receta"
-                            >
-                              ✏️
-                            </button>
-                            <button
-                              className="btn btn-sm btn-outline-danger"
-                              onClick={() => iniciarEliminacionComida(semanaActualVisualizada, diaIndex, tipoComida.key)}
-                              title="Eliminar receta"
-                            >
-                              🗑️
-                            </button>
+                      <td key={`${diaNombre}-${tipoComida.key}`} style={{ verticalAlign: 'middle' }}>
+                        {comidaPlanificada ? (
+                          <div>
+                            <span>{comidaPlanificada.nombre}</span>
+                            <div className="mt-1">
+                              <button
+                                className="btn btn-sm btn-outline-secondary me-1"
+                                onClick={() =>abrirSelectorRecetas(semanaActualVisualizada,diaIndex,tipoComida.key)}
+                                title="Cambiar receta"
+                              >
+                                ✏️
+                              </button>
+                              <button
+                                className="btn btn-sm btn-outline-danger"
+                                onClick={() => iniciarEliminacionComida(semanaActualVisualizada, diaIndex, tipoComida.key)}
+                                title="Eliminar receta"
+                              >
+                                🗑️
+                              </button>
+                            </div>
                           </div>
-                        </div>
-                      ) : (
-                        <button
-                          className="btn btn-light btn-sm"
-                          onClick={() => abrirSelectorRecetas(semanaActualVisualizada, diaIndex, tipoComida.key)}
-                        >
-                          + Añadir
-                        </button>
-                      )}
+                        ) : (
+                          <button
+                            className="btn btn-light btn-sm"
+                            onClick={() => abrirSelectorRecetas(semanaActualVisualizada, diaIndex, tipoComida.key)}
+                          >
+                            + Añadir
+                          </button>
+                        )}
                       </td>
                     );
                   })}
@@ -291,34 +305,40 @@ function PlanificacionSemanal() {
             </p>
           )}
           <hr />
-          <h6>Recetas Favoritas</h6>
+          <h6>Recetas Guardadas</h6>
           <ul className="list-group mb-3">
-            {recetasDisponibles.filter(r => r.tipo === 'favorita').map(receta => (
-              <li
-                key={receta.id}
-                className="list-group-item list-group-item-action"
-                style={{ cursor: 'pointer' }}
-                onClick={() => seleccionarRecetaParaSlot(receta)}
-              >
-                {receta.nombre}
-              </li>
-            ))}
-            {recetasDisponibles.filter(r => r.tipo === 'favorita').length === 0 && <li className="list-group-item">No tienes recetas favoritas.</li>}
+            {recetasGuardadas.length > 0 ? (
+              recetasGuardadas.map(receta => (
+                <li
+                  key={receta.id_receta || receta.id}
+                  className="list-group-item list-group-item-action"
+                  style={{ cursor: 'pointer' }}
+                  onClick={() => seleccionarRecetaParaSlot(receta)}
+                >
+                  {receta.nombre}
+                </li>
+              ))
+            ) : (
+              <li className="list-group-item">No tienes recetas guardadas.</li>
+            )}
           </ul>
 
           <h6>Mis Recetas Creadas</h6>
           <ul className="list-group">
-            {recetasDisponibles.filter(r => r.tipo === 'creada').map(receta => (
-              <li
-                key={receta.id}
-                className="list-group-item list-group-item-action"
-                style={{ cursor: 'pointer' }}
-                onClick={() => seleccionarRecetaParaSlot(receta)}
-              >
-                {receta.nombre}
-              </li>
-            ))}
-            {recetasDisponibles.filter(r => r.tipo === 'creada').length === 0 && <li className="list-group-item">No has creado recetas.</li>}
+            {recetasCreadas.length > 0 ? (
+              recetasCreadas.map(receta => (
+                <li
+                  key={receta.id}
+                  className="list-group-item list-group-item-action"
+                  style={{ cursor: 'pointer' }}
+                  onClick={() => seleccionarRecetaParaSlot(receta)}
+                >
+                  {receta.nombre}
+                </li>
+              ))
+            ) : (
+              <li className="list-group-item">No has creado recetas.</li>
+            )}
           </ul>
         </div>
       </div>
