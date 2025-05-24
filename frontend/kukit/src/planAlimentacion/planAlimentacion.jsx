@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
+import Footer from '../footer/footer';
+import Header from '../header/header';
+
 
 const DIAS_SEMANA = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
 const TIPOS_COMIDA = [
@@ -201,6 +204,7 @@ function PlanificacionSemanal() {
 
   return (
     <>
+      <Header />
       <div className="container mt-4">
         <h2 className="mb-4 text-center">Planificación Semanal de Comidas</h2>
 
@@ -373,6 +377,7 @@ function PlanificacionSemanal() {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 }

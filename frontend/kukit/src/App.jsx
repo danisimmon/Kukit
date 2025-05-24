@@ -32,10 +32,10 @@ function App() {
         <Route path="/login/restablecer-password/nueva-password" element={<NuevaPassword />} />
         <Route path="/recetas" element={<Recetas />} />
         <Route path="/recetas/recetasguardadas" element={<RecetasGuardadas />} />
-        <Route path="/recetas/recetasguardadas/verreceta" element={<VerReceta />} />
         <Route path="/area-privada/editar-perfil" element={<EditarPerfil />} />
         <Route path="/listaCompra" element={<ListaCompra />} />
         <Route path="/planAlimentacion" element={<PlanificacionSemanal />} />
+        <Route path="/area-privada/verreceta/:recetaId" element={<VerReceta />} />
       </Routes>
     </BrowserRouter>
   );
