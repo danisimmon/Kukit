@@ -87,7 +87,7 @@ const VerReceta = () => {
         return items;
     };
 
-
+    console.log(receta);
 
 
     if (!receta) return <p className="text-center mt-5">Cargando receta...</p>;
@@ -100,7 +100,7 @@ const VerReceta = () => {
 
                 <div className="d-flex flex-column flex-md-row gap-4 mt-4">
                     <div className="text-center">
-                        <img src={receta.imagen_url} alt={receta.nombre} className="img-fluid rounded shadow" style={{ maxWidth: '300px' }} />
+                        <img src={receta.href} alt={receta.nombre} className="img-fluid rounded shadow" style={{ maxWidth: '300px' }} />
                         <div className="d-flex justify-content-center align-items-center gap-3 mt-3">
                             <button className="btn btn-danger" onClick={() => ajustarRaciones(-1)}>-</button>
                             <span className="fs-4">{raciones}</span>
@@ -120,7 +120,7 @@ const VerReceta = () => {
                             <div>
                                 <p className="mb-1 fw-bold">Tiempo</p>
                                 <img src={tiempoIcon} alt="Icono de tiempo" />
-                                <p>{receta.tiempo}</p>
+                                <p>{receta.tiempo_estimado}</p>
                             </div>
                         </div>
 
@@ -130,12 +130,18 @@ const VerReceta = () => {
                                 <div className="mb-4">
                                     <h5>INGREDIENTES</h5>
                                     <div className="d-flex flex-column gap-3">
-                                        {receta.ingredientes.map((ing, idx) => (
-                                            <div key={idx} className="bg-white rounded shadow-sm p-3">
-                                                {ing.nombre}: {ing.cantidad * raciones / receta.raciones_originales || ing.cantidad} {ing.unidad} 
-                                                {/* Asumiendo que receta.raciones_originales existe o es un valor base como 2 */}
-                                            </div>
-                                        ))}
+                                        {receta.ingredientes.map((ing, idx) => {
+                                            const cantidadBase = ing.cantidad || 0;
+                                            const racionesBase = receta.raciones_originales || 1;
+                                            const cantidadFinal = (cantidadBase * raciones) / racionesBase;
+
+                                            return (
+                                                <div key={idx} className="bg-white rounded shadow-sm p-3">
+                                                    {ing.nombre}: {cantidadFinal.toFixed(2)} {ing.unidad}
+                                                </div>
+                                            );
+                                        })}
+                                        {/* Asumiendo que receta.raciones_originales existe o es un valor base como 1 */}
                                     </div>
                                 </div>
 
@@ -201,7 +207,7 @@ const VerReceta = () => {
                     </div>
                 </div>
             </div>
-            {/* <Footer /> */}
+            <Footer />
         </>
     );
 };
