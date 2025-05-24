@@ -33,7 +33,8 @@ $recetas = [
         "tiempo_estimado" => "15 min",
         "dificultad" => "fácil",
         "likes" => 5,
-        "informacionNutricional" => ["calorias" => 350, "proteinas" => 12, "carbohidratos" => 50, "grasas" => 10]
+        "informacionNutricional" => ["calorias" => 350, "proteinas" => 12, "carbohidratos" => 50, "grasas" => 10],
+        "href" => "http://localhost/api/img/recetas/pasta-al-pesto.jpg"
     ],
     [
         "nombre" => "Tacos de pollo",
