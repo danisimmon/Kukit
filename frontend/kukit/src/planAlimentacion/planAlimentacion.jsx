@@ -1,11 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import axios from 'axios';
 
 const DIAS_SEMANA = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
 const TIPOS_COMIDA = [
   { key: 'desayuno', nombre: 'Desayuno' },
+  { key: 'almuerzo', nombre: 'Almuerzo' },
   { key: 'comida', nombre: 'Comida' },
-  { key: 'cena', nombre: 'Cena' }
+  { key: 'merienda', nombre: 'Merienda' },
+  { key: 'cena', nombre: 'Cena' },
 ];
 const NUMERO_SEMANAS_PLAN = 4; // El usuario puede planificar para 4 semanas
 
@@ -27,7 +30,9 @@ function PlanificacionSemanal() {
     const planInicial = Array(NUMERO_SEMANAS_PLAN).fill(null).map(() =>
       Array(DIAS_SEMANA.length).fill(null).map(() => ({
         desayuno: null,
+        almuerzo: null,
         comida: null,
+        merienda: null,
         cena: null,
       }))
     );
@@ -35,14 +40,31 @@ function PlanificacionSemanal() {
 
     const cargarRecetas = async () => {
       try {
-        const response = await fetch('http://localhost/api/area_privada/recetas/getRecetasGuardadas.php');
-        if (!response.ok) {
-          throw new Error(`Error HTTP: ${response.status} - ${response.statusText}`);
+        const response = await axios.get('http://localhost/api/area_privada/recetas/getRecetasGuardadas.php');
+        console.log(response)
+        const data = response.data.n_recetas;
+        console.log("Datos recibidos del backend:", data);
+         if (data && Array.isArray(data.recetas)) {
+          setRecetasDisponibles(data.recetas); // Usamos el array de recetas
+         }
+          if (data.recetas.length === 0) {
+            console.log("El backend devolvió un array de 'recetas' vacío.");
+          } else {
+          console.error("Error: Los datos recibidos del backend no son un array. Datos recibidos:", data);
+          setRecetasDisponibles([]);
         }
-        const data = await response.json(); // Asumimos que el backend devuelve JSON
-        setRecetasDisponibles(data);
       } catch (error) {
         console.error("Error al cargar las recetas desde el backend:", error);
+        if (error.response) {
+          console.error("Datos del error:", error.response.data);
+          console.error("Estado del error:", error.response.status);
+          console.error("Cabeceras del error:", error.response.headers);
+        } else if (error.request) {
+          console.error("Error en la solicitud:", error.request);
+        } else {
+          console.error("Error:", error.message);
+        }
+        setRecetasDisponibles([]);
       }
     };
     cargarRecetas();
@@ -57,7 +79,7 @@ function PlanificacionSemanal() {
         confirmDeleteModalInstance.current = new bootstrap.Modal(confirmDeleteModalRef.current);
       }
     }).catch(err => console.error("Failed to load Bootstrap JS", err));
-  
+
     // Cleanup function for Bootstrap instances when component unmounts
     return () => {
       if (recipeSelectorOffcanvasInstance.current) {
@@ -192,46 +214,49 @@ function PlanificacionSemanal() {
           <table className="table table-bordered text-center">
             <thead>
               <tr>
-                <th>Día</th>
-                {TIPOS_COMIDA.map(tc => <th key={tc.key}>{tc.nombre}</th>)}
+                <th>Comida</th>
+                {DIAS_SEMANA.map(dia => <th key={dia}>{dia}</th>)}
               </tr>
             </thead>
             <tbody>
-              {DIAS_SEMANA.map((diaNombre, diaIndex) => (
-                <tr key={diaIndex}>
-                  <td><strong>{diaNombre}</strong></td>
-                  {TIPOS_COMIDA.map(tipoComida => {
-                    const comidaPlanificada = semanaVisible && semanaVisible[diaIndex] ? semanaVisible[diaIndex][tipoComida.key] : null;
+              {TIPOS_COMIDA.map(tipoComida => (
+                <tr key={tipoComida.key}>
+                  <td><strong>{tipoComida.nombre}</strong></td>
+                  {DIAS_SEMANA.map((diaNombre, diaIndex) => {
+                    const comidaPlanificada =
+                      semanaVisible && semanaVisible[diaIndex]
+                        ? semanaVisible[diaIndex][tipoComida.key]
+                        : null;
                     return (
-                      <td key={tipoComida.key} style={{ verticalAlign: 'middle' }}>
-                        {comidaPlanificada ? (
-                          <div>
-                            <span>{comidaPlanificada.nombre}</span>
-                            <div className="mt-1">
-                              <button
-                                className="btn btn-sm btn-outline-secondary me-1"
-                                onClick={() => abrirSelectorRecetas(semanaActualVisualizada, diaIndex, tipoComida.key)}
-                                title="Cambiar receta"
-                              >
-                                ✏️
-                              </button>
-                              <button
-                                className="btn btn-sm btn-outline-danger"
-                                onClick={() => iniciarEliminacionComida(semanaActualVisualizada, diaIndex, tipoComida.key)}
-                                title="Eliminar receta"
-                              >
-                                🗑️
-                              </button>
-                            </div>
+                      <td key={`${diaNombre}-${tipoComida.key}`} style={{ verticalAlign: 'middle' }}>                      
+                      {comidaPlanificada ? (
+                        <div>
+                          <span>{comidaPlanificada.nombre}</span>
+                          <div className="mt-1">
+                            <button
+                              className="btn btn-sm btn-outline-secondary me-1"
+                              onClick={() =>abrirSelectorRecetas(semanaActualVisualizada,diaIndex,tipoComida.key)}
+                              title="Cambiar receta"
+                            >
+                              ✏️
+                            </button>
+                            <button
+                              className="btn btn-sm btn-outline-danger"
+                              onClick={() => iniciarEliminacionComida(semanaActualVisualizada, diaIndex, tipoComida.key)}
+                              title="Eliminar receta"
+                            >
+                              🗑️
+                            </button>
                           </div>
-                        ) : (
-                          <button
-                            className="btn btn-light btn-sm"
-                            onClick={() => abrirSelectorRecetas(semanaActualVisualizada, diaIndex, tipoComida.key)}
-                          >
-                            + Añadir
-                          </button>
-                        )}
+                        </div>
+                      ) : (
+                        <button
+                          className="btn btn-light btn-sm"
+                          onClick={() => abrirSelectorRecetas(semanaActualVisualizada, diaIndex, tipoComida.key)}
+                        >
+                          + Añadir
+                        </button>
+                      )}
                       </td>
                     );
                   })}
