@@ -210,9 +210,11 @@ const Recetas = () => {
               onClick={() => abrirReceta(receta)}
             >
               <img
-                src="img/comida.jpg"
+                src={receta.imagen} // Usa la imagen de la receta o una por defecto
                 className="imagen-receta-tarjeta"
-                alt={`Receta ${receta._id}`}
+                alt={receta.nombre || `Receta ${receta._id}`} // Alt text más descriptivo
+                // Opcional: Manejador de error si la imagen específica no carga
+                onError={(e) => { e.target.onerror = null; e.target.src = "/img/comida_default.jpg"; }}
               />
               <h3>{receta.nombre}</h3>
               <div className="like-container" onClick={(e) => { e.stopPropagation(); manejarLike(receta._id); }}>

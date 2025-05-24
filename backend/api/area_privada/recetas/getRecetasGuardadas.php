@@ -5,6 +5,7 @@ session_start();
 
 header('Content-Type: application/json');
 
+
 if (!isset($_SESSION['user']['id'])) {
     echo json_encode(["success" => false, "message" => "No estás autenticado"]);
     exit;
