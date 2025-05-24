@@ -13,6 +13,7 @@ import './style.css';
 import hero from './img/hero.jpg';
 import RecetasGuardadas from './area-privada/recetasguardadas/recetasguardadas.jsx';
 import Recetas from './area-privada/recetas';
+import VerReceta from './area-privada/verreceta.jsx';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 // import '../node_modules/bootstrap-icons/font/bootstrap-icons.css';
 import '../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js';
@@ -31,6 +32,7 @@ function App() {
         <Route path="/login/restablecer-password/nueva-password" element={<NuevaPassword />} />
         <Route path="/recetas" element={<Recetas />} />
         <Route path="/recetas/recetasguardadas" element={<RecetasGuardadas />} />
+        <Route path="/recetas/recetasguardadas/verreceta" element={<VerReceta />} />
         <Route path="/area-privada/editar-perfil" element={<EditarPerfil />} />
         <Route path="/listaCompra" element={<ListaCompra />} />
         <Route path="/planAlimentacion" element={<PlanificacionSemanal />} />
