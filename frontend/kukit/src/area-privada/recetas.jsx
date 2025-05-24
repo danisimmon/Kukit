@@ -210,9 +210,9 @@ const Recetas = () => {
               onClick={() => abrirReceta(receta)}
             >
               <img
-                src="img/comida.jpg"
+                src={receta.href}
                 className="imagen-receta-tarjeta"
-                alt={`Receta ${receta._id}`}
+                alt={`Receta ${receta.nombre}`}
               />
               <h3>{receta.nombre}</h3>
               <div className="like-container" onClick={(e) => { e.stopPropagation(); manejarLike(receta._id); }}>
