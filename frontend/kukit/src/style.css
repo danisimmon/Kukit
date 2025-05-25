@@ -816,7 +816,7 @@ footer hr {
     box-shadow: 4px 0px 40px 0px rgba(0, 0, 0, 0.25);
 }
 
-.info-basica-receta {
+/* .info-basica-receta {
     display: flex;
     flex-direction: row;
     gap: 20px;
@@ -824,12 +824,100 @@ footer hr {
 
 .info-basica-receta h3 {
     margin-bottom: 10px;
+} */
+.info-basica-receta {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* dos columnas: dificultad y tiempo */
+    gap: 20px;
+    width: 40vw; /* asegúrate que tenga un ancho fijo, si no puede colapsar */
+    box-sizing: border-box;
 }
 
-.apartado-dificultad,
+/* .apartado-dificultad,
 .apartado-tiempo {
     flex: 1;
+    max-height: 10vh;
+} */
+
+.info-basica-receta > .apartado-dificultad,
+.info-basica-receta > .apartado-tiempo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
+
+.apartado-pais {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.apartado-pais h5 {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.apartado-pais label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 0 0 calc(33.333% - 10px); /* 3 por fila con espacio entre ellos */
+  box-sizing: border-box;
+}
+
+.apartado-gluten {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.apartado-vegetariana {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.apartado-lactosa {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.apartado-vegana {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+
+/* .apartado-pais select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.62);
+    background: #FFF;
+    font-size: 14px;
+    color: #000;
+    font-weight: 400;
+} */
+
+
 
 /* Contenedor horizontal para dificultad y tiempo */
 .info-basica-receta>.apartado-dificultad,
