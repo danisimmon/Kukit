@@ -48,25 +48,28 @@ const EditarPerfil = () => {
   const [mensaje, setMensaje] = useState('');
   const [exito, setExito] = useState(false);
   const [seccionActiva, setSeccionActiva] = useState("perfil");
+  const [recetasCreadas, setRecetasCreadas] = useState([]);
+  const [loadingRecetas, setLoadingRecetas] = useState(false);
+  const [errorRecetas, setErrorRecetas] = useState('');
 
   // Manejadores para Ingredientes
-    const handleIngredienteChange = (index, field, value) => {
-        const newIngredientes = [...ingredientes];
-        newIngredientes[index] = {
-            ...newIngredientes[index],
-            [field]: value,
-        };
-        setIngredientes(newIngredientes);
+  const handleIngredienteChange = (index, field, value) => {
+    const newIngredientes = [...ingredientes];
+    newIngredientes[index] = {
+      ...newIngredientes[index],
+      [field]: value,
     };
+    setIngredientes(newIngredientes);
+  };
 
-    const handleAddIngrediente = () => {
-        setIngredientes([...ingredientes, { nombre: '', cantidad: '', unidad: '' }]);
-    };
+  const handleAddIngrediente = () => {
+    setIngredientes([...ingredientes, { nombre: '', cantidad: '', unidad: '' }]);
+  };
 
-    const handleRemoveIngrediente = (index) => {
-        const newIngredientes = ingredientes.filter((_, i) => i !== index);
-        setIngredientes(newIngredientes);
-    };
+  const handleRemoveIngrediente = (index) => {
+    const newIngredientes = ingredientes.filter((_, i) => i !== index);
+    setIngredientes(newIngredientes);
+  };
 
   // Manejadores para Pasos
   const handlePasoChange = (index, value) => {
@@ -79,10 +82,10 @@ const EditarPerfil = () => {
     setPasos([...pasos, '']);
   };
 
-    const handleRemovePaso = (index) => {
-        const newPasos = pasos.filter((_, i) => i !== index);
-        setPasos(newPasos);
-    };
+  const handleRemovePaso = (index) => {
+    const newPasos = pasos.filter((_, i) => i !== index);
+    setPasos(newPasos);
+  };
 
   const manejarCambioReceta = (e) => {
     const { name, value } = e.target;
@@ -121,10 +124,38 @@ const EditarPerfil = () => {
     }
   };
 
+  // Recibir datos de las recetas creadas
+  const obtenerRecetasCreadas = async () => {
+    setLoadingRecetas(true);
+    setErrorRecetas('');
+    try {
+      const respuesta = await axios.get('http://localhost/api/area_privada/recetas/getRecetasCreadas.php', {
+        withCredentials: true,
+      });
+      if (respuesta.data.success) {
+        setRecetasCreadas(respuesta.data.recetas);
+      } else {
+        setErrorRecetas(respuesta.data.message || 'Error al cargar las recetas creadas.');
+      }
+    } catch (error) {
+      setErrorRecetas('Hubo un error al conectar con el servidor para obtener las recetas.');
+      console.error('Error fetching created recipes:', error);
+    } finally {
+      setLoadingRecetas(false);
+    }
+  };
+
   // Cargar los datos del usuario al montar el componente
   useEffect(() => {
     obtenerDatosUsuario();
   }, []);
+
+  // Cargar las recetas creadas cuando la sección "recetas" esté activa
+  useEffect(() => {
+    if (seccionActiva === "recetas") {
+      obtenerRecetasCreadas();
+    }
+  }, [seccionActiva]);
 
   // Manejar el envío del formulario de perfil
   const manejarEnvio = async (e) => {
@@ -151,59 +182,59 @@ const EditarPerfil = () => {
       console.error('Error:', error);
     }
   };
-console.log({
-  ...formRecetaNueva,
-  ingredientes: ingredientes,
-  pasos: pasos,
-});
+  console.log({
+    ...formRecetaNueva,
+    ingredientes: ingredientes,
+    pasos: pasos,
+  });
 
   // Manejar el envio de la receta
-    const manejarEnvioReceta = async (e) => {
-        e.preventDefault();
-        try {
-            const respuesta = await axios.post(
-                'http://localhost/api/area_privada/editar-perfil/crear-receta.php',
-                {
-                    ...formRecetaNueva,
-                    ingredientes: ingredientes,
-                    pasos: pasos,
-                },
-                {
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    withCredentials: true,
-                }
-            );
-
-            if (respuesta.data.success) {
-                setExito(true);
-                setMensaje(respuesta.data.message);
-                console.log('Receta:', respuesta.data.receta);
-                setRecetaNueva({
-                    nombre: '',
-                    dificultad: '',
-                    tiempo: '',
-                    ingredientes: [],
-                    pais: '',
-                    gluten: false,
-                    vegetariana: false,
-                    lactosa: false,
-                    vegana: false,
-                    pasos: []
-                });
-                setIngredientes([{ nombre: '', cantidad: '', unidad: '' }]);
-                setPasos(['']);
-            } else {
-                setExito(false);
-                setMensaje(respuesta.data.message);
-            }
-        } catch (error) {
-            setExito(false);
-            setMensaje('Hubo un error al procesar la solicitud.');
-            console.error('Error:', error);
+  const manejarEnvioReceta = async (e) => {
+    e.preventDefault();
+    try {
+      const respuesta = await axios.post(
+        'http://localhost/api/area_privada/editar-perfil/crear-receta.php',
+        {
+          ...formRecetaNueva,
+          ingredientes: ingredientes,
+          pasos: pasos,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          withCredentials: true,
         }
-    };
+      );
+
+      if (respuesta.data.success) {
+        setExito(true);
+        setMensaje(respuesta.data.message);
+        console.log('Receta:', respuesta.data.receta);
+        setRecetaNueva({
+          nombre: '',
+          dificultad: '',
+          tiempo: '',
+          ingredientes: [],
+          pais: '',
+          gluten: false,
+          vegetariana: false,
+          lactosa: false,
+          vegana: false,
+          pasos: []
+        });
+        setIngredientes([{ nombre: '', cantidad: '', unidad: '' }]);
+        setPasos(['']);
+      } else {
+        setExito(false);
+        setMensaje(respuesta.data.message);
+      }
+    } catch (error) {
+      setExito(false);
+      setMensaje('Hubo un error al procesar la solicitud.');
+      console.error('Error:', error);
+    }
+  };
 
   return (
     <>
@@ -311,391 +342,384 @@ console.log({
           {/* {CONTENEDOR RECETAS GUARDADAS} */}
           {seccionActiva === "recetas" && (
             <div className="tarjetas">
-              <div className="tarjeta">
-                <img src={comida} className="imagen-receta-tarjeta" alt="Receta 1" />
-                <h3>Receta 1</h3>
-                <a
-                  className="btn"
-                  data-bs-toggle="offcanvas"
-                  href="#offcanvasExample"
-                  role="button"
-                  aria-controls="offcanvasExample"
-                >
-                  Ver receta
-                </a>
-                <img src={bookmark} className="icono-bookmark" alt="Guardar" />
-              </div>
-
-              <div className="tarjeta">
-                <img src={comida} className="imagen-receta-tarjeta" alt="Receta 1" />
-                <h3>Receta 1</h3>
-                <img src={bookmark} className="icono-bookmark" alt="Guardar" />
-              </div>
-
-              <div className="tarjeta">
-                <img src={comida} className="imagen-receta-tarjeta" alt="Receta 1" />
-                <h3>Receta 1</h3>
-                <img src={bookmark} className="icono-bookmark" alt="Guardar" />
-              </div>
-
-              <div className="tarjeta">
-                <img src={comida} className="imagen-receta-tarjeta" alt="Receta 1" />
-                <h3>Receta 1</h3>
-                <img src={bookmark} className="icono-bookmark" alt="Guardar" />
-              </div>
+              {loadingRecetas && <p>Cargando tus recetas...</p>}
+              {errorRecetas && <p style={{ color: 'red' }}>{errorRecetas}</p>}
+              {!loadingRecetas && !errorRecetas && recetasCreadas.length === 0 && (
+                <p>Aún no has creado ninguna receta. ¡Anímate a crear la primera!</p>
+              )}
+              {!loadingRecetas && !errorRecetas && recetasCreadas.map((receta) => (
+                <div className="tarjeta" key={receta._id}>
+                  <img
+                    src={receta.imagen || comida} 
+                    className="imagen-receta-tarjeta"
+                    alt={receta.nombre}
+                  />
+                  <h3>{receta.nombre}</h3>
+                  <a
+                    className="btn"
+                    data-bs-toggle="offcanvas"
+                    href="#offcanvasExample" 
+                    role="button"
+                    aria-controls="offcanvasExample"
+                  >
+                    Ver receta
+                  </a>
+                  <img src={bookmark} className="icono-bookmark" alt="Guardar" />
+                </div>
+              ))}
             </div>
           )}
 
 
-        {seccionActiva === "crear" && (
-          <div className="crear-receta">
-            <div className="crear-receta-info">
-              <h3>Nombre de la Receta</h3>
-              <input
-                type="text"
-                id="nombre-receta-nueva"
-                name="nombre"
-                value={formRecetaNueva.nombre}
-                onChange={manejarCambioReceta}
-                required
-              />
-              <div className="info-basica-receta">
-                <div className="apartado-dificultad">
-                  <h5>Dificultad</h5>
-                  <h5>Selecciona la dificultad</h5>
-                  <select
-                    name="dificultad"
-                    id="nivel-dificultad"
-                    value={formRecetaNueva.dificultad}
-                    onChange={manejarCambioReceta}
-                    required
-                  >
-                    <option value="" disabled>
-                      Selecciona una dificultad
-                    </option>
-                    <option value="facil">Fácil</option>
-                    <option value="intermedio">Intermedio</option>
-                    <option value="dificil">Difícil</option>
-                  </select>
+          {seccionActiva === "crear" && (
+            <div className="crear-receta">
+              <div className="crear-receta-info">
+                <h3>Nombre de la Receta</h3>
+                <input
+                  type="text"
+                  id="nombre-receta-nueva"
+                  name="nombre"
+                  value={formRecetaNueva.nombre}
+                  onChange={manejarCambioReceta}
+                  required
+                />
+                <div className="info-basica-receta">
+                  <div className="apartado-dificultad">
+                    <h5>Dificultad</h5>
+                    <h5>Selecciona la dificultad</h5>
+                    <select
+                      name="dificultad"
+                      id="nivel-dificultad"
+                      value={formRecetaNueva.dificultad}
+                      onChange={manejarCambioReceta}
+                      required
+                    >
+                      <option value="" disabled>
+                        Selecciona una dificultad
+                      </option>
+                      <option value="facil">Fácil</option>
+                      <option value="intermedio">Intermedio</option>
+                      <option value="dificil">Difícil</option>
+                    </select>
+                  </div>
+                  <div className="apartado-tiempo">
+                    <h5>Tiempo</h5>
+                    <h5>Selecciona el tiempo</h5>
+                    <input
+                      type="text"
+                      name="tiempo"
+                      id="tiempo"
+                      value={formRecetaNueva.tiempo}
+                      onChange={manejarCambioReceta}
+                      required
+                    />
+                  </div>
+
+                  <div className="apartado-pais">
+                    <h5>Selecciona el país</h5>
+                    <label>
+                      <input
+                        type="radio"
+                        name="pais"
+                        value="Italia"
+                        checked={formRecetaNueva.pais === "Italia"}
+                        onChange={manejarCambioPais}
+                      />
+                      Italia
+                    </label>
+                    <label>
+                      <input
+                        type="radio"
+                        name="pais"
+                        value="México"
+                        checked={formRecetaNueva.pais === 'México'}
+                        onChange={manejarCambioPais}
+                      />
+                      México
+                    </label><br />
+                    <label>
+                      <input
+                        type="radio"
+                        name="pais"
+                        value="Japón"
+                        checked={formRecetaNueva.pais === 'Japón'}
+                        onChange={manejarCambioPais}
+                      /> Japón
+                    </label><br />
+                    <label>
+                      <input
+                        type="radio"
+                        name="pais"
+                        value="España"
+                        checked={formRecetaNueva.pais === 'España'}
+                        onChange={manejarCambioPais}
+                      /> España
+                    </label><br />
+                    <label>
+                      <input
+                        type="radio"
+                        name="pais"
+                        value="India"
+                        checked={formRecetaNueva.pais === 'India'}
+                        onChange={manejarCambioPais}
+                      /> India
+                    </label><br />
+                    <label>
+                      <input
+                        type="radio"
+                        name="pais"
+                        value="Francia"
+                        checked={formRecetaNueva.pais === 'Francia'}
+                        onChange={manejarCambioPais}
+                      /> Francia
+                    </label><br />
+                    <label>
+                      <input
+                        type="radio"
+                        name="pais"
+                        value="Alemania"
+                        checked={formRecetaNueva.pais === 'Alemania'}
+                        onChange={manejarCambioPais}
+                      /> Alemania
+                    </label><br />
+                    <label>
+                      <input
+                        type="radio"
+                        name="pais"
+                        value="Estados Unidos"
+                        checked={formRecetaNueva.pais === 'Estados Unidos'}
+                        onChange={manejarCambioPais}
+                      /> Estados Unidos
+                    </label><br />
+                    <label>
+                      <input
+                        type="radio"
+                        name="pais"
+                        value="China"
+                        checked={formRecetaNueva.pais === 'China'}
+                        onChange={manejarCambioPais}
+                      /> China
+                    </label><br />
+                    <label>
+                      <input
+                        type="radio"
+                        name="pais"
+                        value="Brasil"
+                        checked={formRecetaNueva.pais === 'Brasil'}
+                        onChange={manejarCambioPais}
+                      /> Brasil
+                    </label><br />
+                    <label>
+                      <input
+                        type="radio"
+                        name="pais"
+                        value="Tailandia"
+                        checked={formRecetaNueva.pais === 'Tailandia'}
+                        onChange={manejarCambioPais}
+                      /> Tailandia
+                    </label><br />
+                    <label>
+                      <input
+                        type="radio"
+                        name="pais"
+                        value="Grecia"
+                        checked={formRecetaNueva.pais === 'Grecia'}
+                        onChange={manejarCambioPais}
+                      /> Grecia
+                    </label><br />
+                    <label>
+                      <input
+                        type="radio"
+                        name="pais"
+                        value="Turquía"
+                        checked={formRecetaNueva.pais === 'Turquía'}
+                        onChange={manejarCambioPais}
+                      /> Turquía
+                    </label><br />
+                    <label>
+                      <input
+                        type="radio"
+                        name="pais"
+                        value="Corea del Sur"
+                        checked={formRecetaNueva.pais === 'Corea del Sur'}
+                        onChange={manejarCambioPais}
+                      /> Corea del Sur
+                    </label><br />
+                    <label>
+                      <input
+                        type="radio"
+                        name="pais"
+                        value="Libano"
+                        checked={formRecetaNueva.pais === 'Libano'}
+                        onChange={manejarCambioPais}
+                      /> Líbano
+                    </label><br />
+                    <div className="apartado-gluten">
+                      <h5>¿Contiene gluten?</h5>
+                      <label>
+                        <input
+                          type="radio"
+                          name="gluten"
+                          value="sí"
+                          //checked={formRecetaNueva.gluten === true}
+                          onChange={manejarCambioOpcionBooleanaReceta}
+                        /> Sí
+                      </label><br />
+                      <label>
+                        <input
+                          type="radio"
+                          name="gluten"
+                          value="no"
+                          //checked={formRecetaNueva.gluten === false}
+                          onChange={manejarCambioOpcionBooleanaReceta}
+                        /> No
+                      </label>
+                    </div>
+
+                    <div className="apartado-vegetariana">
+                      <h5>¿Es vegetariana?</h5>
+                      <label>
+                        <input
+                          type="radio"
+                          name="vegetariana"
+                          value="sí"
+                          //checked={formRecetaNueva.vegetariana === true}
+                          onChange={manejarCambioOpcionBooleanaReceta}
+                        /> Sí
+                      </label><br />
+                      <label>
+                        <input
+                          type="radio"
+                          name="vegetariana"
+                          value="no"
+                          //checked={formRecetaNueva.vegetariana === false}
+                          onChange={manejarCambioOpcionBooleanaReceta}
+                        /> No
+                      </label>
+                    </div>
+                    <div className="apartado-lactosa">
+                      <h5>¿Contiene lactosa?</h5>
+                      <label>
+                        <input
+                          type="radio"
+                          name="lactosa"
+                          value="sí"
+                          //checked={formRecetaNueva.lactosa === true}
+                          onChange={manejarCambioOpcionBooleanaReceta}
+                        /> Sí
+                      </label><br />
+                      <label>
+                        <input
+                          type="radio"
+                          name="lactosa"
+                          value="no"
+                          //checked={formRecetaNueva.lactosa === false}
+                          onChange={manejarCambioOpcionBooleanaReceta}
+                        /> No
+                      </label>
+                    </div>
+
+                    <div className="vegana">
+                      <h5>¿Es vegana?</h5>
+                      <label>
+                        <input
+                          type="radio"
+                          name="vegana"
+                          value="sí"
+                          //checked={formRecetaNueva.vegana === true}
+                          onChange={manejarCambioOpcionBooleanaReceta}
+                        /> Sí
+                      </label><br />
+                      <label>
+                        <input
+                          type="radio"
+                          name="vegana"
+                          value="no"
+                          //checked={formRecetaNueva.vegana === false}
+                          onChange={manejarCambioOpcionBooleanaReceta}
+                        /> No
+                      </label>
+                    </div>
+
+                  </div>
+
                 </div>
-                <div className="apartado-tiempo">
-                  <h5>Tiempo</h5>
-                  <h5>Selecciona el tiempo</h5>
-                  <input
-                    type="text"
-                    name="tiempo"
-                    id="tiempo"
-                    value={formRecetaNueva.tiempo}
-                    onChange={manejarCambioReceta}
-                    required
-                  />
-                </div>
-                
-                <div className="apartado-pais">
-                <h5>Selecciona el país</h5>
-    <label>
-    <input
-      type="radio"
-      name="pais"
-      value="Italia"
-      checked={formRecetaNueva.pais === "Italia"}
-      onChange={manejarCambioPais}
-    />
-    Italia
-  </label>
-    <label>
-    <input
-      type="radio"
-      name="pais"
-      value="México"
-      checked={formRecetaNueva.pais === 'México'}
-      onChange={manejarCambioPais}
-    />
-    México
-  </label><br />
-    <label>
-      <input
-        type="radio"
-        name="pais"
-        value="Japón"
-        checked={formRecetaNueva.pais ==='Japón'}
-        onChange={manejarCambioPais}
-      /> Japón
-    </label><br />
-    <label>
-      <input
-        type="radio"
-        name="pais"
-        value="España"
-        checked={formRecetaNueva.pais ==='España'}
-        onChange={manejarCambioPais}
-      /> España
-    </label><br />
-    <label>
-      <input
-        type="radio"
-        name="pais"
-        value="India"
-        checked={formRecetaNueva.pais === 'India'}
-        onChange={manejarCambioPais}
-      /> India
-    </label><br />
-    <label>
-      <input
-        type="radio"
-        name="pais"
-        value="Francia"
-        checked={formRecetaNueva.pais ==='Francia'}
-        onChange={manejarCambioPais}
-      /> Francia
-    </label><br />
-    <label>
-      <input
-        type="radio"
-        name="pais"
-        value="Alemania"
-        checked={formRecetaNueva.pais === 'Alemania'}
-        onChange={manejarCambioPais}
-      /> Alemania
-    </label><br />
-    <label>
-      <input
-        type="radio"
-        name="pais"
-        value="Estados Unidos"
-        checked={formRecetaNueva.pais ==='Estados Unidos'}
-        onChange={manejarCambioPais}
-      /> Estados Unidos
-    </label><br />
-    <label>
-      <input
-        type="radio"
-        name="pais"
-        value="China"
-        checked={formRecetaNueva.pais ==='China'}
-        onChange={manejarCambioPais}
-      /> China
-    </label><br />
-    <label>
-      <input
-        type="radio"
-        name="pais"
-        value="Brasil"
-        checked={formRecetaNueva.pais === 'Brasil'}
-        onChange={manejarCambioPais}
-      /> Brasil
-    </label><br />
-    <label>
-      <input
-        type="radio"
-        name="pais"
-        value="Tailandia"
-        checked={formRecetaNueva.pais ==='Tailandia'}
-        onChange={manejarCambioPais}
-      /> Tailandia
-    </label><br />
-    <label>
-      <input
-        type="radio"
-        name="pais"
-        value="Grecia"
-        checked={formRecetaNueva.pais ==='Grecia'}
-        onChange={manejarCambioPais}
-      /> Grecia
-    </label><br />
-    <label>
-      <input
-        type="radio"
-        name="pais"
-        value="Turquía"
-        checked={formRecetaNueva.pais ==='Turquía'}
-        onChange={manejarCambioPais}
-      /> Turquía
-    </label><br />
-    <label>
-      <input
-        type="radio"
-        name="pais"
-        value="Corea del Sur"
-        checked={formRecetaNueva.pais ==='Corea del Sur'}
-        onChange={manejarCambioPais}
-      /> Corea del Sur
-    </label><br />
-    <label>
-      <input
-        type="radio"
-        name="pais"
-        value="Libano"
-        checked={formRecetaNueva.pais ==='Libano'}
-        onChange={manejarCambioPais}
-      /> Líbano
-    </label><br />
-    <div className="apartado-gluten">
-    <h5>¿Contiene gluten?</h5>
-    <label>
-      <input
-        type="radio"
-        name="gluten"
-        value="sí"
-        //checked={formRecetaNueva.gluten === true}
-        onChange={manejarCambioOpcionBooleanaReceta}
-      /> Sí
-    </label><br />
-    <label>
-      <input
-        type="radio"
-        name="gluten"
-        value="no"
-        //checked={formRecetaNueva.gluten === false}
-        onChange={manejarCambioOpcionBooleanaReceta}
-      /> No
-    </label>
-  </div>
-
-  <div className="apartado-vegetariana">
-    <h5>¿Es vegetariana?</h5>
-    <label>
-      <input
-        type="radio"
-        name="vegetariana"
-        value="sí"
-        //checked={formRecetaNueva.vegetariana === true}
-        onChange={manejarCambioOpcionBooleanaReceta}
-      /> Sí
-    </label><br />
-    <label>
-      <input
-        type="radio"
-        name="vegetariana"
-        value="no"
-        //checked={formRecetaNueva.vegetariana === false}
-        onChange={manejarCambioOpcionBooleanaReceta}
-      /> No
-    </label>
-  </div>
-    <div className="apartado-lactosa">
-      <h5>¿Contiene lactosa?</h5>
-      <label>
-        <input
-          type="radio"
-          name="lactosa"
-          value="sí"
-          //checked={formRecetaNueva.lactosa === true}
-          onChange={manejarCambioOpcionBooleanaReceta}
-        /> Sí
-      </label><br />
-      <label>
-      <input
-        type="radio"
-        name="lactosa"
-        value="no"
-        //checked={formRecetaNueva.lactosa === false}
-        onChange={manejarCambioOpcionBooleanaReceta}
-      /> No
-    </label>
-    </div>
-
-  <div className="vegana">
-    <h5>¿Es vegana?</h5>
-    <label>
-      <input
-        type="radio"
-        name="vegana"
-        value="sí"
-        //checked={formRecetaNueva.vegana === true}
-        onChange={manejarCambioOpcionBooleanaReceta}
-      /> Sí
-    </label><br />
-    <label>
-      <input
-        type="radio"
-        name="vegana"
-        value="no"
-        //checked={formRecetaNueva.vegana === false}
-        onChange={manejarCambioOpcionBooleanaReceta}
-      /> No
-    </label>
-  </div>
-                
-  </div>
-
               </div>
-            </div>
 
-            <div className="racion-ingredientes">
-              <h5>Ración</h5>
-              <h2>1</h2>
-            </div>
+              <div className="racion-ingredientes">
+                <h5>Ración</h5>
+                <h2>1</h2>
+              </div>
 
-            <div className="ingredientes-pasos">
-              <div className="ingredientes-crear-receta">
-                <div className="contenedor-ingredientes">
-                  <h5>INGREDIENTES</h5>
-                  {ingredientes.map((ing, index) => (
-                    <div key={index} className="rellenar-ingrediente">
-                      Nombre Ingrediente:
+              <div className="ingredientes-pasos">
+                <div className="ingredientes-crear-receta">
+                  <div className="contenedor-ingredientes">
+                    <h5>INGREDIENTES</h5>
+                    {ingredientes.map((ing, index) => (
+                      <div key={index} className="rellenar-ingrediente">
+                        Nombre Ingrediente:
+                        <input
+                          type="text"
+                          value={ing.nombre}
+                          onChange={(e) => handleIngredienteChange(index, 'nombre', e.target.value)}
+                        />
+                        <span>Cantidad</span>
+                        <input
+                          type="number"
+                          value={ing.cantidad}
+                          onChange={(e) => handleIngredienteChange(index, 'cantidad', e.target.value)}
+                        />
+                        <span>Unidad</span>
+                        <input
+                          type="text"
+                          value={ing.unidad}
+                          onChange={(e) => handleIngredienteChange(index, 'unidad', e.target.value)}
+                        />
+                        <button type="button" onClick={() => handleRemoveIngrediente(index)}>
+                          Eliminar
+                        </button>
+                      </div>
+                    ))}
+                    <div className="anadir-ingrediente" onClick={handleAddIngrediente}>
+                      Añadir Ingrediente
+                    </div>
+                  </div>
+                </div>
+                <div className="pasos-crear-receta">
+                  <h5>PASOS</h5>
+                  {pasos.map((paso, index) => (
+                    <div key={index} className="rellenar-pasos">
+                      Paso {index + 1}
                       <input
                         type="text"
-                        value={ing.nombre}
-                        onChange={(e) => handleIngredienteChange(index, 'nombre', e.target.value)}
+                        value={paso}
+                        onChange={(e) => handlePasoChange(index, e.target.value)}
                       />
-                      <span>Cantidad</span>
-                      <input
-                        type="number"
-                        value={ing.cantidad}
-                        onChange={(e) => handleIngredienteChange(index, 'cantidad', e.target.value)}
-                      />
-                      <span>Unidad</span>
-                      <input
-                        type="text"
-                        value={ing.unidad}
-                        onChange={(e) => handleIngredienteChange(index, 'unidad', e.target.value)}
-                      />
-                      <button type="button" onClick={() => handleRemoveIngrediente(index)}>
+                      <button type="button" onClick={() => handleRemovePaso(index)}>
                         Eliminar
                       </button>
                     </div>
                   ))}
-                  <div className="anadir-ingrediente" onClick={handleAddIngrediente}>
-                    Añadir Ingrediente
+                  <div className="anadir-pasos" onClick={handleAddPaso}>
+                    Añadir Paso
                   </div>
                 </div>
               </div>
-              <div className="pasos-crear-receta">
-                <h5>PASOS</h5>
-                {pasos.map((paso, index) => (
-                  <div key={index} className="rellenar-pasos">
-                    Paso {index + 1}
-                    <input
-                      type="text"
-                      value={paso}
-                      onChange={(e) => handlePasoChange(index, e.target.value)}
-                    />
-                     <button type="button" onClick={() => handleRemovePaso(index)}>
-                        Eliminar
-                      </button>
-                  </div>
-                ))}
-                <div className="anadir-pasos" onClick={handleAddPaso}>
-                  Añadir Paso
-                </div>
-              </div>
-            </div>
 
-            <div className="botones-crear-receta">
-              <button
-                className="boton-crear-receta"
-                id="terminar-receta"
-                onClick={manejarEnvioReceta}
-              >
-                Terminar
-              </button>
-              <button className="botones-inversos" id="cancelar-receta">
-                Cancelar
-              </button>
+              <div className="botones-crear-receta">
+                <button
+                  className="boton-crear-receta"
+                  id="terminar-receta"
+                  onClick={manejarEnvioReceta}
+                >
+                  Terminar
+                </button>
+                <button className="botones-inversos" id="cancelar-receta">
+                  Cancelar
+                </button>
+              </div>
             </div>
-          </div>
-        )}
+          )}
         </div>
       </main>
 
@@ -779,4 +803,3 @@ console.log({
 };
 
 export default EditarPerfil;
-

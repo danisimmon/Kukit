@@ -74,6 +74,14 @@ try {
     $result = $coleccionRecetas->insertOne($receta);
     if ($result->getInsertedCount() > 0) {
         echo json_encode(["success" => true, "message" => "Receta creada correctamente"]);
+        // aqui necesuitamos el ID de la receta creada en MySQL para que se pueda relacionar con el usuario
+        $id_receta = (string)$result->getInsertedId();
+        // Ahora insertamos la relación en MySQL
+        include '../../conecta-mysql.php';
+        $sql = "INSERT INTO recetas_creadas (id_receta, id_usuario) VALUES (?, ?)";
+        $stmt = $conexion->prepare($sql);
+        $stmt->bind_param("si", $id_receta, $id_usuario);
+        $stmt->execute();
     } else {
         http_response_code(500); // Internal Server Error
         echo json_encode(["success" => false, "message" => "Error al crear la receta en la base de datos."]);
