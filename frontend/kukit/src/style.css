@@ -18,7 +18,7 @@ body {
 }
 
 main {
-    min-height: 100vh;
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
 }
@@ -565,7 +565,7 @@ footer hr {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100vh;
+    width: 100%;
 }
 
 .tarjetas {
@@ -1611,4 +1611,12 @@ footer.section.bg-footer {
 
 .perfil-opciones li:hover {
   background-color: #e0e0e0;
+}
+
+/* PRUEBA FOOTER EDITAR-PERFIL */
+.page-container-editar-perfil {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* Crucial para que este contenedor se expanda dentro del <main> global */
+  width: 100%; /* Opcional, pero bueno para asegurar que ocupe todo el ancho */
 }

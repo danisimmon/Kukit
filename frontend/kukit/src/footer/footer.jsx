@@ -1,14 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+
 function Footer() {
     const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setCurrentYear(new Date().getFullYear());
-        }, 1000);
-
-        return () => clearInterval(interval);
-    }, []);
 
     return (
         <>
@@ -83,7 +76,7 @@ function Footer() {
 
                 <div className="text-center mt-5">
                     <p className="footer-alt mb-0 f-14">
-                        2025 © Ainhoa Blanca, Manuel Gómez, Rubén Peña, Daniel Simón. All Rights Reserved
+                        {currentYear} © Ainhoa Blanca, Manuel Gómez, Rubén Peña, Daniel Simón. All Rights Reserved
                     </p>
                 </div>
             </footer>
