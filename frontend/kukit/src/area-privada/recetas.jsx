@@ -12,31 +12,22 @@ import Registro from '../login/registro/registro';
 import Footer from '../footer/footer';
 import ListaCompra from '../listaCompra/listaCompra';
 import Header from '../header/header';
+import { useNavigate } from 'react-router-dom';
 
 const Recetas = () => {
   const [recetas, setRecetas] = useState([]);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
-  const [n_recetas, setN_recetas] = useState(0);
-  const [recetaSeleccionada, setRecetaSeleccionada] = useState(null);
-  const offcanvasRef = useRef(null);
+  const [n_recetas, setN_recetas] = useState(0);  
   const [showListaCompra, setListaCompra] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
   const [showRegistro, setShowRegistro] = useState(false);
   const [likes, setLikes] = useState({});
   const [liked, setLiked] = useState({});
   const [favoritos, setFavoritos] = useState({});
-
+  const navigate = useNavigate();
   const [paginaActual, setPaginaActual] = useState(1);
   const recetasPorPagina = 8;
-
-  // Paginación de instrucciones (1 paso por página)
-  const [paginaInstrucciones, setPaginaInstrucciones] = useState(1);
-  const pasosPorPagina = 1;
-
-  useEffect(() => {
-    setPaginaInstrucciones(1); // Reset paginación de instrucciones al abrir una nueva receta
-  }, [recetaSeleccionada]);
 
   const manejarLike = (idReceta) => {
     const yaLeGusta = liked[idReceta];
@@ -101,85 +92,17 @@ const Recetas = () => {
   };
 
   const abrirReceta = (receta) => {
-    setRecetaSeleccionada(receta);
-    const offcanvasElement = offcanvasRef.current;
-    if (offcanvasElement) {
-      const bsOffcanvas = new window.bootstrap.Offcanvas(offcanvasElement);
-      bsOffcanvas.show();
-    }
-  };
-
-  const cerrarOffcanvas = () => {
-    setRecetaSeleccionada(null);
-    const offcanvasElement = offcanvasRef.current;
-    if (offcanvasElement) {
-      const bsOffcanvas = window.bootstrap.Offcanvas.getInstance(offcanvasElement);
-      if (bsOffcanvas) {
-        bsOffcanvas.hide();
-      }
-    }
+    navigate(`/area-privada/verreceta/${receta._id}`);
   };
 
   const indexUltima = paginaActual * recetasPorPagina;
   const indexPrimera = indexUltima - recetasPorPagina;
   const recetasActuales = recetas.slice(indexPrimera, indexUltima);
   const totalPaginas = Math.ceil(recetas.length / recetasPorPagina);
-
   const cambiarPagina = (numero) => {
     if (numero >= 1 && numero <= totalPaginas) {
       setPaginaActual(numero);
     }
-  };
-
-  // ---- Lógica de paginación de instrucciones ----
-  let pasos = recetaSeleccionada?.pasos || [];
-  const totalPaginasPasos = Math.ceil(pasos.length / pasosPorPagina);
-  const indexUltimoPaso = paginaInstrucciones * pasosPorPagina;
-  const indexPrimerPaso = indexUltimoPaso - pasosPorPagina;
-  const pasoActual = pasos[indexPrimerPaso];
-
-  const cambiarPaginaInstrucciones = (numero) => {
-    if (numero >= 1 && numero <= totalPaginasPasos) {
-      setPaginaInstrucciones(numero);
-    }
-  };
-
-  // Sliding window para paginación de pasos
-  const renderPaginasPasos = () => {
-    const ventana = 3;
-    let start = Math.max(1, paginaInstrucciones - 1);
-    let end = Math.min(totalPaginasPasos, start + ventana - 1);
-
-    // Si llegamos al final, ajusta el inicio
-    if (end - start < ventana - 1) {
-      start = Math.max(1, end - ventana + 1);
-    }
-
-    const items = [];
-    if (start > 1) {
-      items.push(
-        <li key="start-ellipsis" className="page-item disabled">
-          <span className="page-link">...</span>
-        </li>
-      );
-    }
-    for (let i = start; i <= end; i++) {
-      items.push(
-        <li key={i} className={`page-item ${paginaInstrucciones === i ? 'active' : ''}`}>
-          <button className="page-link" onClick={() => cambiarPaginaInstrucciones(i)}>
-            {i}
-          </button>
-        </li>
-      );
-    }
-    if (end < totalPaginasPasos) {
-      items.push(
-        <li key="end-ellipsis" className="page-item disabled">
-          <span className="page-link">...</span>
-        </li>
-      );
-    }
-    return items;
   };
 
   if (cargando) return <div className="spinner-border text-primary" role="status">
@@ -261,73 +184,6 @@ const Recetas = () => {
               </li>
             </ul>
           </nav>
-        </div>
-      </div>
-
-      {/* Offcanvas de receta */}
-      <div
-        className="offcanvas offcanvas-end"
-        tabIndex="-1"
-        id="receta-offcanvasExample"
-        aria-labelledby="offcanvasExampleLabel"
-        ref={offcanvasRef}
-      >
-        <div className="offcanvas-header">
-          <h5 className="offcanvas-title" id="offcanvasExampleLabel">
-            {recetaSeleccionada ? recetaSeleccionada.nombre : 'Información de la receta'}
-          </h5>
-          <button
-            type="button"
-            className="btn-close"
-            data-bs-dismiss="offcanvas"
-            aria-label="Close"
-            onClick={cerrarOffcanvas}
-          ></button>
-        </div>
-        <div className="offcanvas-body">
-          {recetaSeleccionada ? (
-            <>
-              <h3>Ingredientes</h3>
-              <ul>
-                {recetaSeleccionada.ingredientes?.map((ing, index) => (
-                  <li key={index}>
-                    {ing.cantidad && `${ing.cantidad} `}
-                    {ing.unidad && `${ing.unidad} `}
-                    {ing.nombre}
-                  </li>
-                ))}
-              </ul>
-              <h3>Instrucciones</h3>
-              <ol start={indexPrimerPaso + 1}>
-                {pasoActual && (
-                  <li key={indexPrimerPaso}>{pasoActual}</li>
-                )}
-              </ol>
-              {/* Paginación de instrucciones tipo sliding window */}
-              {totalPaginasPasos > 1 && (
-                <nav className="mb-3">
-                  <ul className="pagination justify-content-center">
-                    {/* Botón anterior */}
-                    <li className={`page-item ${paginaInstrucciones === 1 ? 'disabled' : ''}`}>
-                      <button className="page-link" onClick={() => cambiarPaginaInstrucciones(paginaInstrucciones - 1)}>
-                        &lt;
-                      </button>
-                    </li>
-                    {/* Sliding window */}
-                    {renderPaginasPasos()}
-                    {/* Botón siguiente */}
-                    <li className={`page-item ${paginaInstrucciones === totalPaginasPasos ? 'disabled' : ''}`}>
-                      <button className="page-link" onClick={() => cambiarPaginaInstrucciones(paginaInstrucciones + 1)}>
-                        &gt;
-                      </button>
-                    </li>
-                  </ul>
-                </nav>
-              )}
-            </>
-          ) : (
-            <p>Selecciona una receta para ver los detalles.</p>
-          )}
         </div>
       </div>
 

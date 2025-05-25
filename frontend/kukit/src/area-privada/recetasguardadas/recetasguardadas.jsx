@@ -67,7 +67,9 @@ const RecetasGuardadas = () => {
         setFavoritos(favoritosIniciales);
         setCargando(false);
       } catch (err) {
-        setError('Error al cargar las recetas', err);
+        // setError('Error al cargar las recetas', err);
+        console.error('Error al cargar las recetas:', err); // Log full error for debugging
+        setError(`Error al cargar las recetas. ${err.message ? err.message : 'Inténtelo de nuevo más tarde.'}`);
         setCargando(false);
       }
     };
@@ -150,19 +152,25 @@ const RecetasGuardadas = () => {
           <h2 className="numero-recetas">{`${n_recetas} recetas`}</h2>
         </div>
 
-        <div className="tarjetas">
-          {recetasActuales.map((receta) => (
-            <div
-              key={receta._id}
-              className="tarjeta btn"
-              role="button"
-              onClick={() => abrirReceta(receta)}
-            >
+        {recetas.length === 0 && !cargando ? (
+          <div className="alert alert-info mt-4" role="alert">
+            Aún no tienes recetas guardadas. ¡Explora y guarda tus favoritas!
+          </div>
+        ) : (
+          <div className="tarjetas">
+            {recetasActuales.map((receta) => (
+              <div
+                key={receta._id}
+                className="tarjeta btn"
+                role="button"
+                onClick={() => abrirReceta(receta)}
+              >
               <img
-                src="img/comida.jpg"
+                src={receta.imagen || "/img/comida_default.jpg"} // Usa la imagen de la receta o una por defecto
                 className="imagen-receta-tarjeta"
-                alt={`Receta ${receta._id}`}
-              />
+                alt={receta.nombre || `Receta ${receta._id}`} // Alt text más descriptivo
+                onError={(e) => { e.target.onerror = null; e.target.src = "/img/comida_default.jpg"; }} // Fallback si la imagen no carga
+               />
               <h3>{receta.nombre}</h3>
               <div className="like-container" onClick={(e) => { e.stopPropagation(); manejarLike(receta._id); }}>
                 <img
@@ -192,7 +200,7 @@ const RecetasGuardadas = () => {
             </div>
           ))}
         </div>
-
+        )}
         {/* Paginación */}
         <div className="paginacion d-flex justify-content-center mt-4">
           <nav>
