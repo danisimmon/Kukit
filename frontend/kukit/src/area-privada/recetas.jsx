@@ -155,8 +155,8 @@ const Recetas = () => {
   const recetasFiltradas = recetas.filter(receta => {
     const matchesSearchTerm = receta.nombre.toLowerCase().includes(searchTerm.toLowerCase());
     // const matchesDificultad = selectedDificultad ? receta.dificultad === selectedDificultad : true;
-    const matchesDificultad = selectedDificultad 
-      ? (receta.dificultad || '').trim().toLowerCase() === selectedDificultad 
+    const matchesDificultad = selectedDificultad
+      ? (receta.dificultad || '').trim().toLowerCase() === selectedDificultad
       : true;
     const matchesPais = selectedPais ? receta.pais === selectedPais : true;
     const matchesTiempo = filterTiempo ? (receta.tiempo || '').toLowerCase().includes(filterTiempo.toLowerCase()) : true;
@@ -171,16 +171,16 @@ const Recetas = () => {
     const matchesLactosa = checkBooleanFilter(filterLactosa, receta.lactosa);
     const matchesVegana = checkBooleanFilter(filterVegana, receta.vegana);
 
-//     console.log({
-//   matchesSearchTerm,
-//   matchesDificultad,
-//   matchesPais,
-//   matchesTiempo,
-//   matchesGluten,
-//   matchesVegetariana,
-//   matchesLactosa,
-//   matchesVegana
-// });
+    //     console.log({
+    //   matchesSearchTerm,
+    //   matchesDificultad,
+    //   matchesPais,
+    //   matchesTiempo,
+    //   matchesGluten,
+    //   matchesVegetariana,
+    //   matchesLactosa,
+    //   matchesVegana
+    // });
 
     return matchesSearchTerm && matchesDificultad && matchesPais && matchesTiempo && matchesGluten && matchesVegetariana && matchesLactosa && matchesVegana;
   });
@@ -193,176 +193,178 @@ const Recetas = () => {
   // Calcular el total de páginas basado en las recetas filtradas
   const totalPaginas = Math.ceil(recetasFiltradas.length / recetasPorPagina);
 
-  
 
-if (cargando) return (
-  <div className="d-flex justify-content-center mt-5">
-    <div className="spinner-border text-primary" role="status" ><span className="visually-hidden">Loading...</span></div>
-  </div>);
-if (error) return <p>{error}</p>;
 
-return (
-  <>
-    <Header />
-    {showListaCompra && (
-      <ListaCompra showListaCompra={showListaCompra} setListaCompra={setListaCompra} />
-    )}
+  if (cargando) return (
+    <div className="d-flex justify-content-center mt-5">
+      <div className="spinner-border text-primary" role="status" ><span className="visually-hidden">Loading...</span></div>
+    </div>);
+  if (error) return <p>{error}</p>;
 
-    <div className="container">
-      <div className="titulo-pagina">
-        <h2>Recetas</h2>
-        <div className="linea-vertical"></div>
-        <h2 className="numero-recetas">{`${n_recetas} recetas`}</h2>
-      </div>
+  return (
+    <>
+      <Header />
+      {showListaCompra && (
+        <ListaCompra showListaCompra={showListaCompra} setListaCompra={setListaCompra} />
+      )}
+      <main>
 
-      {/* Barra de búsqueda */}
-      <div className="mb-4">
-        <input
-          type="text"
-          className="form-control"
-          placeholder="Buscar recetas por nombre..."
-          value={searchTerm}
-          onChange={handleSearchChange}
-        />
-      </div>
 
-      {/* Sección de Filtros Adicionales */}
-      <div className="filtros-adicionales mb-4 p-3 border rounded">
-        <h5 className="mb-3">Filtros Adicionales</h5>
-        <div className="row">
-          <div className="col-md-3 mb-3">
-            <label htmlFor="filtroDificultad" className="form-label">Dificultad</label>
-            <select id="filtroDificultad" className="form-select" value={selectedDificultad} onChange={handleFilterChange(setSelectedDificultad)}>
-              <option value="">Cualquiera</option>
-              {DIFICULTADES.map(d => <option key={d.value} value={d.value}>{d.label}</option>)}
-            </select>
+        <div className="container">
+          <div className="titulo-pagina">
+            <h2>Recetas</h2>
+            <div className="linea-vertical"></div>
+            <h2 className="numero-recetas">{`${n_recetas} recetas`}</h2>
           </div>
-          <div className="col-md-3 mb-3">
-            <label htmlFor="filtroPais" className="form-label">País</label>
-            <select id="filtroPais" className="form-select" value={selectedPais} onChange={handleFilterChange(setSelectedPais)}>
-              <option value="">Cualquiera</option>
-              {PAISES_FILTRO.map(p => <option key={p} value={p}>{p}</option>)}
-            </select>
-          </div>
-          <div className="col-md-3 mb-3">
-            <label htmlFor="filtroTiempo" className="form-label">Tiempo (ej: "30 min")</label>
+
+          {/* Barra de búsqueda */}
+          <div className="mb-4">
             <input
               type="text"
-              id="filtroTiempo"
               className="form-control"
-              value={filterTiempo}
-              onChange={handleFilterChange(setFilterTiempo)}
-              placeholder="Ej: 30 min"
+              placeholder="Buscar recetas por nombre..."
+              value={searchTerm}
+              onChange={handleSearchChange}
             />
           </div>
-        </div>
-        <div className="row">
-          <div className="col-md-3 mb-3">
-            <label htmlFor="filtroGluten" className="form-label">Sin Gluten</label>
-            <select id="filtroGluten" className="form-select" value={filterGluten} onChange={handleFilterChange(setFilterGluten)}>
-              <option value="">Cualquiera</option>
-              {OPCIONES_BOOLEANAS.map(op => <option key={`gluten-${op.value}`} value={op.value}>{op.label}</option>)}
-            </select>
-          </div>
-          <div className="col-md-3 mb-3">
-            <label htmlFor="filtroVegetariana" className="form-label">Vegetariana</label>
-            <select id="filtroVegetariana" className="form-select" value={filterVegetariana} onChange={handleFilterChange(setFilterVegetariana)}>
-              <option value="">Cualquiera</option>
-              {OPCIONES_BOOLEANAS.map(op => <option key={`vegetariana-${op.value}`} value={op.value}>{op.label}</option>)}
-            </select>
-          </div>
-          <div className="col-md-3 mb-3">
-            <label htmlFor="filtroLactosa" className="form-label">Sin Lactosa</label>
-            <select id="filtroLactosa" className="form-select" value={filterLactosa} onChange={handleFilterChange(setFilterLactosa)}>
-              <option value="">Cualquiera</option>
-              {OPCIONES_BOOLEANAS.map(op => <option key={`lactosa-${op.value}`} value={op.value}>{op.label}</option>)}
-            </select>
-          </div>
-          <div className="col-md-3 mb-3">
-            <label htmlFor="filtroVegana" className="form-label">Vegana</label>
-            <select id="filtroVegana" className="form-select" value={filterVegana} onChange={handleFilterChange(setFilterVegana)}>
-              <option value="">Cualquiera</option>
-              {OPCIONES_BOOLEANAS.map(op => <option key={`vegana-${op.value}`} value={op.value}>{op.label}</option>)}
-            </select>
-          </div>
-        </div>
-        <button className="btn btn-secondary mt-2" onClick={resetFilters}>Limpiar Filtros</button>
-      </div>
 
-      {/* Mensaje cuando no hay resultados con los filtros aplicados */}
-      {recetasFiltradas.length === 0 && !cargando && (
-        <div className="alert alert-info" role="alert">
-          No se encontraron recetas con los filtros aplicados. Prueba con otros criterios o limpia los filtros.
-        </div>
-      )}
-
-      <div className="tarjetas">
-        {recetasActuales.map((receta) => (
-          <div
-            key={receta._id}
-            className="tarjeta btn"
-            role="button"
-            onClick={() => abrirReceta(receta)}
-          >
-            <img
-              src={receta.href}
-              className="imagen-receta-tarjeta"
-              alt={`Receta ${receta.nombre}`}
-            />
-            <h3>{receta.nombre}</h3>
-            <div className="like-container" onClick={(e) => { e.stopPropagation(); manejarLike(receta._id); }}>
-              <img
-                src={liked[receta._id] ? CorazonRelleno : CorazonSinRelleno}
-                alt="like"
-                className="like"
-                style={{ cursor: 'pointer' }}
-              />
-              <p className="likesNumero">{likes[receta._id] || 0}</p>
+          {/* Sección de Filtros Adicionales */}
+          <div className="filtros-adicionales mb-4 p-3 border rounded">
+            <h5 className="mb-3">Filtros Adicionales</h5>
+            <div className="row">
+              <div className="col-md-3 mb-3">
+                <label htmlFor="filtroDificultad" className="form-label">Dificultad</label>
+                <select id="filtroDificultad" className="form-select" value={selectedDificultad} onChange={handleFilterChange(setSelectedDificultad)}>
+                  <option value="">Cualquiera</option>
+                  {DIFICULTADES.map(d => <option key={d.value} value={d.value}>{d.label}</option>)}
+                </select>
+              </div>
+              <div className="col-md-3 mb-3">
+                <label htmlFor="filtroPais" className="form-label">País</label>
+                <select id="filtroPais" className="form-select" value={selectedPais} onChange={handleFilterChange(setSelectedPais)}>
+                  <option value="">Cualquiera</option>
+                  {PAISES_FILTRO.map(p => <option key={p} value={p}>{p}</option>)}
+                </select>
+              </div>
+              <div className="col-md-3 mb-3">
+                <label htmlFor="filtroTiempo" className="form-label">Tiempo (ej: "30 min")</label>
+                <input
+                  type="text"
+                  id="filtroTiempo"
+                  className="form-control"
+                  value={filterTiempo}
+                  onChange={handleFilterChange(setFilterTiempo)}
+                  placeholder="Ej: 30 min"
+                />
+              </div>
             </div>
-            <img
-              src={favoritos[receta._id] ? Favorito : NoFavorito}
-              alt={favoritos[receta._id] ? "En favoritos" : "No en favoritos"}
-              className="icono-bookmark"
-              onClick={(e) => {
-                e.stopPropagation();
-                guardarFavorito(receta._id);
-              }}
-              style={{ cursor: 'pointer' }}
-            />
+            <div className="row">
+              <div className="col-md-3 mb-3">
+                <label htmlFor="filtroGluten" className="form-label">Sin Gluten</label>
+                <select id="filtroGluten" className="form-select" value={filterGluten} onChange={handleFilterChange(setFilterGluten)}>
+                  <option value="">Cualquiera</option>
+                  {OPCIONES_BOOLEANAS.map(op => <option key={`gluten-${op.value}`} value={op.value}>{op.label}</option>)}
+                </select>
+              </div>
+              <div className="col-md-3 mb-3">
+                <label htmlFor="filtroVegetariana" className="form-label">Vegetariana</label>
+                <select id="filtroVegetariana" className="form-select" value={filterVegetariana} onChange={handleFilterChange(setFilterVegetariana)}>
+                  <option value="">Cualquiera</option>
+                  {OPCIONES_BOOLEANAS.map(op => <option key={`vegetariana-${op.value}`} value={op.value}>{op.label}</option>)}
+                </select>
+              </div>
+              <div className="col-md-3 mb-3">
+                <label htmlFor="filtroLactosa" className="form-label">Sin Lactosa</label>
+                <select id="filtroLactosa" className="form-select" value={filterLactosa} onChange={handleFilterChange(setFilterLactosa)}>
+                  <option value="">Cualquiera</option>
+                  {OPCIONES_BOOLEANAS.map(op => <option key={`lactosa-${op.value}`} value={op.value}>{op.label}</option>)}
+                </select>
+              </div>
+              <div className="col-md-3 mb-3">
+                <label htmlFor="filtroVegana" className="form-label">Vegana</label>
+                <select id="filtroVegana" className="form-select" value={filterVegana} onChange={handleFilterChange(setFilterVegana)}>
+                  <option value="">Cualquiera</option>
+                  {OPCIONES_BOOLEANAS.map(op => <option key={`vegana-${op.value}`} value={op.value}>{op.label}</option>)}
+                </select>
+              </div>
+            </div>
+            <button className="btn btn-secondary mt-2" onClick={resetFilters}>Limpiar Filtros</button>
           </div>
-        ))}
-      </div>
 
-      {/* Paginación principal */}
-      {/* <div className="paginacion d-flex justify-content-center mt-4"> */}
-      {totalPaginas > 1 && ( // Mostrar paginación solo si hay más de una página
-        <nav>
-          <ul className="pagination">
-            <li className={`page-item ${paginaActual === 1 ? 'disabled' : ''}`}>
-              <button className="page-link" onClick={() => cambiarPagina(paginaActual - 1)}>
-                &lt;
-              </button>
-            </li>
-            {[...Array(totalPaginas)].map((_, index) => (
-              <li key={index} className={`page-item ${paginaActual === index + 1 ? 'active' : ''}`}>
-                <button className="page-link" onClick={() => cambiarPagina(index + 1)}>
-                  {index + 1}
-                </button>
-              </li>
+          {/* Mensaje cuando no hay resultados con los filtros aplicados */}
+          {recetasFiltradas.length === 0 && !cargando && (
+            <div className="alert alert-info" role="alert">
+              No se encontraron recetas con los filtros aplicados. Prueba con otros criterios o limpia los filtros.
+            </div>
+          )}
+
+          <div className="tarjetas">
+            {recetasActuales.map((receta) => (
+              <div
+                key={receta._id}
+                className="tarjeta btn"
+                role="button"
+                onClick={() => abrirReceta(receta)}
+              >
+                <img
+                  src={receta.href}
+                  className="imagen-receta-tarjeta"
+                  alt={`Receta ${receta.nombre}`}
+                />
+                <h3>{receta.nombre}</h3>
+                <div className="like-container" onClick={(e) => { e.stopPropagation(); manejarLike(receta._id); }}>
+                  <img
+                    src={liked[receta._id] ? CorazonRelleno : CorazonSinRelleno}
+                    alt="like"
+                    className="like"
+                    style={{ cursor: 'pointer' }}
+                  />
+                  <p className="likesNumero">{likes[receta._id] || 0}</p>
+                </div>
+                <img
+                  src={favoritos[receta._id] ? Favorito : NoFavorito}
+                  alt={favoritos[receta._id] ? "En favoritos" : "No en favoritos"}
+                  className="icono-bookmark"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    guardarFavorito(receta._id);
+                  }}
+                  style={{ cursor: 'pointer' }}
+                />
+              </div>
             ))}
-            <li className={`page-item ${paginaActual === totalPaginas ? 'disabled' : ''}`}>
-              <button className="page-link" onClick={() => cambiarPagina(paginaActual + 1)}>
-                &gt;
-              </button>
-            </li>
-          </ul>
-        </nav>)}
-    </div>
+          </div>
 
+          {/* Paginación principal */}
+          {/* <div className="paginacion d-flex justify-content-center mt-4"> */}
+          {totalPaginas > 1 && ( // Mostrar paginación solo si hay más de una página
+            <nav>
+              <ul className="pagination">
+                <li className={`page-item ${paginaActual === 1 ? 'disabled' : ''}`}>
+                  <button className="page-link" onClick={() => cambiarPagina(paginaActual - 1)}>
+                    &lt;
+                  </button>
+                </li>
+                {[...Array(totalPaginas)].map((_, index) => (
+                  <li key={index} className={`page-item ${paginaActual === index + 1 ? 'active' : ''}`}>
+                    <button className="page-link" onClick={() => cambiarPagina(index + 1)}>
+                      {index + 1}
+                    </button>
+                  </li>
+                ))}
+                <li className={`page-item ${paginaActual === totalPaginas ? 'disabled' : ''}`}>
+                  <button className="page-link" onClick={() => cambiarPagina(paginaActual + 1)}>
+                    &gt;
+                  </button>
+                </li>
+              </ul>
+            </nav>)}
+        </div>
+      </main>
 
-    <Footer />
-  </>
-);
+      <Footer />
+    </>
+  );
 };
 
 export default Recetas;
