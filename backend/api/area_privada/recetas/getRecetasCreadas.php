@@ -20,13 +20,13 @@ $stmt->bind_param("i", $usuario);
 $stmt->execute();
 $result = $stmt->get_result();
 
-$favoritosIds = [];
+$creadasIDs = [];
 while ($row = $result->fetch_assoc()) {
-    $favoritosIds[] = $row['id_receta'];
+    $creadasIDs[] = $row['id_receta'];
 }
 
 // Si no hay favoritos, devolvemos vacío
-if (empty($favoritosIds)) {
+if (empty($creadasIDs)) {
     echo json_encode(["success" => true, "recetas" => [], "n_recetas" => 0]);
     exit;
 }
@@ -34,7 +34,7 @@ if (empty($favoritosIds)) {
 // Buscar recetas en MongoDB que estén en la lista de favoritos
 $collection = $db->selectCollection('recetas');
 $objectIds = [];
-foreach ($favoritosIds as $id) {
+foreach ($creadasIDs as $id) {
     try {
         $objectIds[] = new MongoDB\BSON\ObjectId($id);
     } catch (\MongoDB\Driver\Exception\InvalidArgumentException $e) {

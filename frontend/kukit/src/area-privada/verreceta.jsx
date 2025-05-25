@@ -1,16 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import logo from '../img/logo_kukit.png';
+// import logo from '../img/logo_kukit.png'; // No usado directamente en el JSX visible
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-import CorazonRelleno from '../img/corazonRelleno.png'
-import CorazonSinRelleno from '../img/corazonSinRelleno.png'
-import NoFavorito from '../img/bookmark.png'
-import Favorito from '../img/bookmark-relleno.png'
+// import CorazonRelleno from '../img/corazonRelleno.png'; // No usado
+// import CorazonSinRelleno from '../img/corazonSinRelleno.png'; // No usado
+// import NoFavorito from '../img/bookmark.png'; // No usado
+// import Favorito from '../img/bookmark-relleno.png'; // No usado
 import dificultadIcon from '../img/velocidad.png';
 import tiempoIcon from '../img/tiempo.png';
-import Login from '../login/login';
-import Registro from '../login/registro/registro';
+// import Login from '../login/login'; // No usado
+// import Registro from '../login/registro/registro'; // No usado
 import Footer from '../footer/footer';
 import ListaCompra from '../listaCompra/listaCompra';
 import Header from '../header/header';
@@ -22,6 +22,9 @@ const VerReceta = () => {
     const [raciones, setRaciones] = useState(2);
     // Estado para la paginación de los pasos
     const [paginaPasosActual, setPaginaPasosActual] = useState(1);
+    const [mensajeListaCompra, setMensajeListaCompra] = useState('');
+    const [mostrarListaCompraLocal, setMostrarListaCompraLocal] = useState(false); // Estado para mostrar ListaCompra desde VerReceta
+    const [itemsParaListaLocal, setItemsParaListaLocal] = useState([]); // Estado para los ítems añadidos desde esta vista
     const PASOS_POR_PAGINA = 1; // Mostrar un paso a la vez
 
     const { recetaId } = useParams(); // Obtener recetaId de los parámetros de la URL
@@ -33,6 +36,9 @@ const VerReceta = () => {
                 if (res.data.success) {
                     const recetaSeleccionada = res.data.recetas.find(r => r._id === recetaId);
                     setReceta(recetaSeleccionada);
+                    if (!recetaSeleccionada) {
+                        console.warn(`Receta con ID ${recetaId} no encontrada.`);
+                    }
                 }
             })
             .catch(err => {
@@ -94,6 +100,25 @@ const VerReceta = () => {
         }
     };
 
+    const handleAddToShoppingList = (nombreIngrediente, cantidad, unidad) => {
+        const nuevoItem = {
+            id: Date.now(), // ID único simple
+            nombre: nombreIngrediente,
+            cantidad: cantidad.toFixed(1), // Aseguramos que la cantidad sea string con 1 decimal
+            unidad: unidad,
+            comprado: false // Estado inicial
+        };
+
+        setItemsParaListaLocal(prevItems => [...prevItems, nuevoItem]);
+
+        const mensaje = `${nuevoItem.nombre} (${nuevoItem.cantidad} ${nuevoItem.unidad}) añadido a la lista de la compra.`;
+        console.log(mensaje);
+        setMensajeListaCompra(mensaje);
+        setTimeout(() => {
+            setMensajeListaCompra('');
+        }, 3000);
+        setMostrarListaCompraLocal(true); // Mostrar el componente ListaCompra
+    };
 
     if (!receta) return <p className="text-center mt-5">Cargando receta...</p>;
     // Eliminamos el console.log(receta) que estaba aquí para limpiar.
@@ -107,7 +132,13 @@ const VerReceta = () => {
         <>
             <Header />
             <div className="container mt-4">
-                <h4>Recetas Guardadas <span className="text-danger">| {receta.nombre}</span></h4>
+                <h4>Recetas <span className="text-danger">| {receta.nombre}</span></h4>
+                {mensajeListaCompra && (
+                    <div className="alert alert-success alert-dismissible fade show" role="alert">
+                        {mensajeListaCompra}
+                        <button type="button" className="btn-close" onClick={() => setMensajeListaCompra('')} aria-label="Close"></button>
+                    </div>
+                )}
 
                 <button
                     className="btn btn-outline-secondary mt-2 mb-3"
@@ -118,7 +149,9 @@ const VerReceta = () => {
 
                 <div className="d-flex flex-column flex-md-row gap-4 mt-4">
                     <div className="text-center">
-                        <img src={receta.href} alt={receta.nombre} className="img-fluid rounded shadow" style={{ maxWidth: '300px' }} />
+                        {receta.href && (
+                           <img src={receta.href} alt={receta.nombre} className="img-fluid rounded shadow mb-3" style={{ maxWidth: '300px', maxHeight: '300px', objectFit: 'cover' }} />
+                        )}
                         <div className="d-flex justify-content-center align-items-center gap-3 mt-3">
                             <button className="btn btn-danger" onClick={() => ajustarRaciones(-1)}>-</button>
                             <span className="fs-4">{raciones}</span>
@@ -128,17 +161,22 @@ const VerReceta = () => {
                     </div>
 
                     <div className="flex-fill">
-                        <h3>{receta.nombre}</h3>
+                        {/* El título ya está arriba, se puede omitir aquí si se prefiere */}
+                        {/* <h3>{receta.nombre}</h3> */}
                         <div className="d-flex gap-4">
                             <div>
                                 <p className="mb-1 fw-bold">Dificultad</p>
-                                <img src={dificultadIcon} alt="Icono de dificultad" />
-                                <p>{receta.dificultad}</p>
+                                <div className="d-flex align-items-center">
+                                    <img src={dificultadIcon} alt="Icono de dificultad" style={{ width: '20px', marginRight: '5px' }} />
+                                    <span>{receta.dificultad}</span>
+                                </div>
                             </div>
                             <div>
                                 <p className="mb-1 fw-bold">Tiempo</p>
-                                <img src={tiempoIcon} alt="Icono de tiempo" />
-                                <p>{receta.tiempo_estimado}</p>
+                                <div className="d-flex align-items-center">
+                                    <img src={tiempoIcon} alt="Icono de tiempo" style={{ width: '20px', marginRight: '5px' }} />
+                                    <span>{receta.tiempo_estimado}</span>
+                                </div>
                             </div>
                         </div>
 
@@ -153,13 +191,22 @@ const VerReceta = () => {
                                             const racionesBase = receta.raciones_originales || 1;
                                             const cantidadFinal = (cantidadBase * raciones) / racionesBase;
 
-                                            return (
-                                                <div key={idx} className="bg-white rounded shadow-sm p-3">
-                                                    {ing.nombre}: {cantidadFinal.toFixed(2)} {ing.unidad}
+                                            return ( // Contenedor para el ingrediente y el botón
+                                                <div key={idx} className="d-flex justify-content-between align-items-center bg-white rounded shadow-sm p-3">
+                                                    <span>
+                                                        {ing.nombre}: {cantidadFinal.toFixed(1)} {ing.unidad}
+                                                    </span>
+                                                    <button
+                                                        className="btn btn-outline-success btn-sm py-0 px-1"
+                                                        onClick={() => handleAddToShoppingList(ing.nombre, cantidadFinal, ing.unidad)}
+                                                        title={`Añadir ${ing.nombre} a la lista`}
+                                                        style={{ lineHeight: '1', fontSize: '0.9rem', padding: '0.2rem 0.4rem' }}
+                                                    >
+                                                        +
+                                                    </button>
                                                 </div>
                                             );
                                         })}
-                                        {/* Asumiendo que receta.raciones_originales existe o es un valor base como 1 */}
                                     </div>
                                 </div>
 
@@ -225,6 +272,14 @@ const VerReceta = () => {
                     </div>
                 </div>
             </div>
+            {/* Renderizar ListaCompra cuando mostrarListaCompraLocal sea true */}
+            {mostrarListaCompraLocal && (
+                <ListaCompra
+                    showListaCompra={mostrarListaCompraLocal}
+                    setListaCompra={setMostrarListaCompraLocal}
+                    initialItems={itemsParaListaLocal} // Pasamos los ítems a ListaCompra
+                />
+            )}
             <Footer />
         </>
     );
