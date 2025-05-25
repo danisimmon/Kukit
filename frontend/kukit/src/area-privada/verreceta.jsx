@@ -131,6 +131,7 @@ const VerReceta = () => {
     return (
         <>
             <Header />
+            <main>
             <div className="container mt-4">
                 <h4>Recetas <span className="text-danger">| {receta.nombre}</span></h4>
                 {mensajeListaCompra && (
@@ -280,6 +281,7 @@ const VerReceta = () => {
                     initialItems={itemsParaListaLocal} // Pasamos los ítems a ListaCompra
                 />
             )}
+            </main>
             <Footer />
         </>
     );

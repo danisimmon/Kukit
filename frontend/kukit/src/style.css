@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Germania+One&display=swap');
 
+html, body, #root { /* Aseguramos que #root también pueda ocupar toda la altura */
+    height: 100%; /* Asegura que html ocupe toda la altura si body usa % */
+    margin: 0; /* Buena práctica para resetear márgenes */
+    padding: 0;
+}
+
 body {
     font-family: "Germania One", system-ui;
     font-weight: 400;
@@ -7,6 +13,13 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    margin: 0;
+}
+
+#root {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%; /* O 100vh si body no tuviera min-height: 100vh */
 }
 
 :root {
@@ -1451,6 +1464,7 @@ footer.section.bg-footer {
     background: #f4f4f4;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
+
 
 /* Tarjeta de receta centrada */
 .tarjeta-receta {

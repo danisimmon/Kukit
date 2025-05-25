@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'; // useRef eliminado
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'; // Importar useNavigate
-import logo from '../../img/logo_kukit.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import CorazonRelleno from '../../img/corazonRelleno.png'
@@ -61,7 +60,7 @@ const RecetasGuardadas = () => {
         const favoritosIniciales = {};
         respuesta.data.recetas.forEach(r => {
           likesIniciales[r._id] = r.likes || 0;
-          favoritosIniciales[r._id] = r.favorito || false; 
+          favoritosIniciales[r._id] = r.favorito || false;
         });
         setLikes(likesIniciales);
         setFavoritos(favoritosIniciales);
@@ -90,7 +89,7 @@ const RecetasGuardadas = () => {
           [idReceta]: !esFavoritoActual,
         }));
       } else {
-        alert(esFavoritoActual? 'Error al eliminar de favoritos' : 'Error al guardar favorito');
+        alert(esFavoritoActual ? 'Error al eliminar de favoritos' : 'Error al guardar favorito');
         console.error('Error al guardar/eliminar favorito:', respuesta.data.message);
       }
     } catch (error) {
@@ -127,19 +126,16 @@ const RecetasGuardadas = () => {
       {/* {showListaCompra && (
         <ListaCompra showListaCompra={showListaCompra} setListaCompra={setListaCompra} />
       )} */}
+      <main>
 
-      <div className="container">
-        <div className="titulo-pagina">
-          <h2>Recetas Guardadas</h2>
-          <div className="linea-vertical"></div>
-          <h2 className="numero-recetas">{`${n_recetas} recetas`}</h2>
-        </div>
 
-        {recetas.length === 0 && !cargando ? (
-          <div className="alert alert-info mt-4" role="alert">
-            Aún no tienes recetas guardadas. ¡Explora y guarda tus favoritas!
-          </div>
-        ) : (
+        <div className="container">
+          <div className="titulo-pagina">
+            <h2>Recetas Guardadas</h2>
+            <div className="linea-vertical"></div>
+            <h2 className="numero-recetas">{`${n_recetas} recetas`}</h2>
+          </div> {/* Cierre correcto del div titulo-pagina */}
+          {recetasActuales.length > 0 ? (
           <div className="tarjetas">
             {recetasActuales.map((receta) => (
               <div
@@ -182,26 +178,32 @@ const RecetasGuardadas = () => {
               ) : (
                 <p>No en favoritos</p>
               )} */}
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-        )}
-        {/* Paginación */}
-        <div className="paginacion d-flex justify-content-center mt-4">
-          <nav>
-            <ul className="pagination">
-              <li className={`page-item ${paginaActual === 1 ? 'disabled' : ''}`}>
-                <button className="page-link" onClick={() => cambiarPagina(paginaActual - 1)}>
-                  Anterior
-                </button>
-              </li>
-              {[...Array(totalPaginas)].map((_, index) => (
-                <li key={index} className={`page-item ${paginaActual === index + 1 ? 'active' : ''}`}>
-                  <button className="page-link" onClick={() => cambiarPagina(index + 1)}>
-                    {index + 1}
+          ) : (
+            <p className="text-center mt-4">No tienes recetas guardadas todavía.</p>
+          )}
+          {/* Paginación */}
+          <div className="paginacion d-flex justify-content-center mt-4">
+            <nav>
+              <ul className="pagination">
+                <li className={`page-item ${paginaActual === 1 ? 'disabled' : ''}`}>
+                  <button className="page-link" onClick={() => cambiarPagina(paginaActual - 1)}>
+                    Anterior
                   </button>
                 </li>
-              ))}
+                {/* Generar los números de página */}
+                {Array.from({ length: totalPaginas }, (_, i) => i + 1).map(numero => (
+                  <li
+                    key={numero}
+                    className={`page-item ${paginaActual === numero ? 'active' : ''}`}
+                  >
+                    <button className="page-link" onClick={() => cambiarPagina(numero)}>
+                      {numero}
+                    </button>
+                  </li>
+                ))}
               <li className={`page-item ${paginaActual === totalPaginas ? 'disabled' : ''}`}>
                 <button className="page-link" onClick={() => cambiarPagina(paginaActual + 1)}>
                   Siguiente
@@ -212,8 +214,8 @@ const RecetasGuardadas = () => {
         </div>
       </div>
 
-      {/* El Offcanvas ha sido eliminado */}
-
+      {/* El JSX del Offcanvas ha sido completamente eliminado ya que las referencias y estados asociados también se eliminaron */}
+      </main>
       <Footer />
     </>
   );
