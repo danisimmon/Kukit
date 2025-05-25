@@ -228,6 +228,16 @@ $sql = "CREATE TABLE IF NOT EXISTS favoritos (
 )";
 mysqli_query($conexion, $sql);
 
+// tabla para almacenar las recetas que ha creado el usuario
+$sql = "CREATE TABLE IF NOT EXISTS recetas_creadas (
+    id INT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT(20) UNSIGNED NOT NULL,
+    id_receta VARCHAR(100) NOT NULL,
+    fecha_creacion DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_usuario) REFERENCES usuario(id)
+)";
+mysqli_query($conexion, $sql);
+
 // $sql = "INSERT INTO listacompra_productos (id_lista_compra, id_producto, cantidad, comprado) VALUES
 // (1, 1, 1, false),
 // (1, 2, 2, true),

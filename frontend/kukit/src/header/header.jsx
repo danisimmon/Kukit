@@ -67,7 +67,7 @@ function Header() {
             <li><Link to="/recetas">Recetas</Link></li>
             <li><Link to="/recetas/recetasguardadas">Recetas Guardadas</Link></li>
             <li onClick={() => setListaCompra(true)}>Lista de la Compra</li>
-            <li><a href="/plan-alimentacion">Plan de alimentación</a></li>
+            <li><a href="/planAlimentacion">Plan de alimentación</a></li>
           </ul>
         </nav>
         <div className="contenedor-header">

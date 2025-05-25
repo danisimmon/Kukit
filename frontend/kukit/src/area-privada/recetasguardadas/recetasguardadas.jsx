@@ -5,11 +5,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import CorazonRelleno from '../../img/corazonRelleno.png'
 import CorazonSinRelleno from '../../img/corazonSinRelleno.png'
-import Favoritos from '../../img/bookmark.png'
-import Login from '../../login/login';
-import Registro from '../../login/registro/registro';
+// Importaciones de iconos de favoritos actualizadas para coincidir con el estilo de recetas.jsx
+import NoFavorito from '../../img/bookmark.png'; // Icono para no favorito (era Favoritos)
+import Favorito from '../../img/bookmark-relleno.png'; // Icono para favorito (asegúrate que este archivo exista)
+// import Login from '../../login/login'; // Eliminado si no se usa directamente aquí
+// import Registro from '../../login/registro/registro'; // Eliminado si no se usa directamente aquí
 import Footer from '../../footer/footer';
-import ListaCompra from '../../listaCompra/listaCompra';
+// import ListaCompra from '../../listaCompra/listaCompra'; // Eliminado si no se usa directamente aquí
 import Header from '../../header/header';
 
 const RecetasGuardadas = () => {
@@ -19,9 +21,9 @@ const RecetasGuardadas = () => {
   const [n_recetas, setN_recetas] = useState(0);
   const [recetaSeleccionada, setRecetaSeleccionada] = useState(null);
   const offcanvasRef = useRef(null);
-  const [showListaCompra, setListaCompra] = useState(false);
-  const [showLogin, setShowLogin] = useState(false);
-  const [showRegistro, setShowRegistro] = useState(false);
+  // const [showListaCompra, setListaCompra] = useState(false); // Estado eliminado
+  // const [showLogin, setShowLogin] = useState(false); // Estado eliminado
+  // const [showRegistro, setShowRegistro] = useState(false); // Estado eliminado
   const [likes, setLikes] = useState({});
   const [liked, setLiked] = useState({});
   const [favoritos, setFavoritos] = useState({}); // Estado para almacenar el estado de favorito de cada receta
@@ -32,13 +34,11 @@ const RecetasGuardadas = () => {
   const manejarLike = (idReceta) => {
     const yaLeGusta = liked[idReceta];
 
-    // Alternar el estado del like
     setLiked((prev) => ({
       ...prev,
       [idReceta]: !yaLeGusta,
     }));
 
-    // Sumar o restar 1 al contador de likes
     setLikes((prev) => ({
       ...prev,
       [idReceta]: yaLeGusta
@@ -47,8 +47,6 @@ const RecetasGuardadas = () => {
     }));
   };
 
-
-
   useEffect(() => {
     const obtenerRecetas = async () => {
       try {
@@ -56,19 +54,17 @@ const RecetasGuardadas = () => {
         setN_recetas(respuesta.data.n_recetas);
         setRecetas(respuesta.data.recetas);
         console.log(respuesta);
-        // Inicializa los likes y favoritos
         const likesIniciales = {};
         const favoritosIniciales = {};
         respuesta.data.recetas.forEach(r => {
           likesIniciales[r._id] = r.likes || 0;
-          favoritosIniciales[r._id] = r.favorito || false; // Usa el campo favorito del backend
+          favoritosIniciales[r._id] = r.favorito || false; 
         });
         setLikes(likesIniciales);
         setFavoritos(favoritosIniciales);
         setCargando(false);
       } catch (err) {
-        // setError('Error al cargar las recetas', err);
-        console.error('Error al cargar las recetas:', err); // Log full error for debugging
+        console.error('Error al cargar las recetas:', err);
         setError(`Error al cargar las recetas. ${err.message ? err.message : 'Inténtelo de nuevo más tarde.'}`);
         setCargando(false);
       }
@@ -81,15 +77,14 @@ const RecetasGuardadas = () => {
       const esFavoritoActual = favoritos[idReceta] || false;
       const respuesta = await axios.post('http://localhost/api/area_privada/recetas/favoritas/guardarFavorito.php', {
         id_receta: idReceta,
-        accion: esFavoritoActual ? 'eliminar' : 'guardar' // Enviar la acción al backend
+        accion: esFavoritoActual ? 'eliminar' : 'guardar'
       });
 
       if (respuesta.data.success) {
         alert(esFavoritoActual ? 'Receta eliminada de favoritos' : 'Receta guardada en favoritos');
-        // Actualiza el estado de favoritos
         setFavoritos(prevFavoritos => ({
           ...prevFavoritos,
-          [idReceta]: !esFavoritoActual, // Invierte el estado de favorito
+          [idReceta]: !esFavoritoActual,
         }));
       } else {
         alert(esFavoritoActual? 'Error al eliminar de favoritos' : 'Error al guardar favorito');
@@ -101,12 +96,12 @@ const RecetasGuardadas = () => {
     }
   };
 
-
   const abrirReceta = (receta) => {
     setRecetaSeleccionada(receta);
     const offcanvasElement = offcanvasRef.current;
     if (offcanvasElement) {
-      const bsOffcanvas = new bootstrap.Offcanvas(offcanvasElement);
+      // Asegúrate de que Bootstrap esté disponible globalmente o importa `Offcanvas` directamente
+      const bsOffcanvas = new window.bootstrap.Offcanvas(offcanvasElement);
       bsOffcanvas.show();
     }
   };
@@ -115,7 +110,7 @@ const RecetasGuardadas = () => {
     setRecetaSeleccionada(null);
     const offcanvasElement = offcanvasRef.current;
     if (offcanvasElement) {
-      const bsOffcanvas = bootstrap.Offcanvas.getInstance(offcanvasElement);
+      const bsOffcanvas = window.bootstrap.Offcanvas.getInstance(offcanvasElement);
       if (bsOffcanvas) {
         bsOffcanvas.hide();
       }
@@ -141,9 +136,10 @@ const RecetasGuardadas = () => {
   return (
     <>
       <Header />
-      {showListaCompra && (
+      {/* Renderizado de ListaCompra eliminado para simplificar y alinear con recetas.jsx */}
+      {/* {showListaCompra && (
         <ListaCompra showListaCompra={showListaCompra} setListaCompra={setListaCompra} />
-      )}
+      )} */}
 
       <div className="container">
         <div className="titulo-pagina">
@@ -166,10 +162,10 @@ const RecetasGuardadas = () => {
                 onClick={() => abrirReceta(receta)}
               >
               <img
-                src={receta.imagen || "/img/comida_default.jpg"} // Usa la imagen de la receta o una por defecto
+                src={receta.href || "/img/comida_default.jpg"}
                 className="imagen-receta-tarjeta"
-                alt={receta.nombre || `Receta ${receta._id}`} // Alt text más descriptivo
-                onError={(e) => { e.target.onerror = null; e.target.src = "/img/comida_default.jpg"; }} // Fallback si la imagen no carga
+                alt={`Receta ${receta.nombre}`} // Alt text consistente con recetas.jsx
+                onError={(e) => { e.target.onerror = null; e.target.src = "/img/comida_default.jpg"; }}
                />
               <h3>{receta.nombre}</h3>
               <div className="like-container" onClick={(e) => { e.stopPropagation(); manejarLike(receta._id); }}>
@@ -181,22 +177,24 @@ const RecetasGuardadas = () => {
                 />
                 <p className="likesNumero">{likes[receta._id] || 0}</p>
               </div>
-              <p className="duracion">{receta.duracion || 'N/A'} min</p>
+              {/* Duración eliminada de la tarjeta */}
+              {/* <p className="duracion">{receta.duracion || 'N/A'} min</p> */}
               <img
-                src={Favoritos}
+                src={favoritos[receta._id] ? Favorito : NoFavorito} // Icono dinámico
                 className="icono-bookmark"
-                alt="Guardar"
+                alt={favoritos[receta._id] ? "En favoritos" : "No en favoritos"} // Alt text dinámico
                 onClick={(e) => {
                   e.stopPropagation();
-                  guardarFavorito(receta._id); // Llama a guardarFavorito con el ID
+                  guardarFavorito(receta._id);
                 }}
                 style={{ cursor: 'pointer' }}
               />
-              {favoritos[receta._id] ? (
+              {/* Texto explícito de favorito eliminado */}
+              {/* {favoritos[receta._id] ? (
                 <p>En favoritos</p>
               ) : (
                 <p>No en favoritos</p>
-              )}
+              )} */}
             </div>
           ))}
         </div>
@@ -279,4 +277,3 @@ const RecetasGuardadas = () => {
 };
 
 export default RecetasGuardadas;
-
