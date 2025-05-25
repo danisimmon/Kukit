@@ -14,7 +14,7 @@ import Registro from '../login/registro/registro';
 import Footer from '../footer/footer';
 import ListaCompra from '../listaCompra/listaCompra';
 import Header from '../header/header';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom'; // Importar useNavigate
 // import ImagenReceta from 'http://localhost/api/img/recetas/pasta-al-pesto.jpg';
 
 const VerReceta = () => {
@@ -25,6 +25,7 @@ const VerReceta = () => {
     const PASOS_POR_PAGINA = 1; // Mostrar un paso a la vez
 
     const { recetaId } = useParams(); // Obtener recetaId de los parámetros de la URL
+    const navigate = useNavigate(); // Hook para la navegación
 
     useEffect(() => {
         axios.get('http://localhost/api/area_privada/recetas/getRecetas.php') // Ajusta esta URL a la tuya
@@ -87,16 +88,33 @@ const VerReceta = () => {
         return items;
     };
 
-    console.log(receta);
+    const handleVerComoTexto = () => {
+        if (recetaId) {
+            navigate(`/area-privada/verrecetaportexto/${recetaId}`);
+        }
+    };
 
 
     if (!receta) return <p className="text-center mt-5">Cargando receta...</p>;
+    // Eliminamos el console.log(receta) que estaba aquí para limpiar.
+    // Si necesitas depurar, puedes volver a añadirlo temporalmente.
+    // console.log(receta);
+
+
+
 
     return (
         <>
             <Header />
             <div className="container mt-4">
                 <h4>Recetas Guardadas <span className="text-danger">| {receta.nombre}</span></h4>
+
+                <button
+                    className="btn btn-outline-secondary mt-2 mb-3"
+                    onClick={handleVerComoTexto}
+                >
+                    Ver como Texto
+                </button>
 
                 <div className="d-flex flex-column flex-md-row gap-4 mt-4">
                     <div className="text-center">
