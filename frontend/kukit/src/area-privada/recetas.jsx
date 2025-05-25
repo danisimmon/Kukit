@@ -18,7 +18,7 @@ const Recetas = () => {
   const [recetas, setRecetas] = useState([]);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
-  const [n_recetas, setN_recetas] = useState(0);  
+  const [n_recetas, setN_recetas] = useState(0);
   const [showListaCompra, setListaCompra] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
   const [showRegistro, setShowRegistro] = useState(false);
@@ -26,6 +26,7 @@ const Recetas = () => {
   const [liked, setLiked] = useState({});
   const [favoritos, setFavoritos] = useState({});
   const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = useState('');
   const [paginaActual, setPaginaActual] = useState(1);
   const recetasPorPagina = 8;
 
@@ -59,6 +60,7 @@ const Recetas = () => {
         setLikes(likesIniciales);
         setFavoritos(favoritosIniciales);
         setCargando(false);
+        setPaginaActual(1);
       } catch (err) {
         setError('Error al cargar las recetas', err);
         setCargando(false);
@@ -95,19 +97,35 @@ const Recetas = () => {
     navigate(`/area-privada/verreceta/${receta._id}`);
   };
 
+  // const indexUltima = paginaActual * recetasPorPagina;
+  const recetasFiltradas = recetas.filter(receta =>
+    receta.nombre.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  // Lógica de paginación aplicada a las recetas filtradas
   const indexUltima = paginaActual * recetasPorPagina;
   const indexPrimera = indexUltima - recetasPorPagina;
-  const recetasActuales = recetas.slice(indexPrimera, indexUltima);
-  const totalPaginas = Math.ceil(recetas.length / recetasPorPagina);
+  // const recetasActuales = recetas.slice(indexPrimera, indexUltima);
+  const recetasActuales = recetasFiltradas.slice(indexPrimera, indexUltima); // Obtiene las recetas para la página actual
+
+  // Calcular el total de páginas basado en las recetas filtradas
+  const totalPaginas = Math.ceil(recetasFiltradas.length / recetasPorPagina);
   const cambiarPagina = (numero) => {
     if (numero >= 1 && numero <= totalPaginas) {
       setPaginaActual(numero);
     }
   };
 
-  if (cargando) return <div className="spinner-border text-primary" role="status">
-    <span className="visually-hidden">Loading...</span>
-  </div>;
+  // Manejar cambio en el input de búsqueda
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+    setPaginaActual(1); // Resetear a la primera página al buscar
+  };
+
+  if (cargando) return (
+    <div className="d-flex justify-content-center mt-5">
+      <div className="spinner-border text-primary" role="status" ><span className="visually-hidden">Loading...</span></div>
+    </div>);
   if (error) return <p>{error}</p>;
 
   return (
@@ -122,6 +140,17 @@ const Recetas = () => {
           <h2>Recetas</h2>
           <div className="linea-vertical"></div>
           <h2 className="numero-recetas">{`${n_recetas} recetas`}</h2>
+        </div>
+
+        {/* Barra de búsqueda */}
+        <div className="mb-4">
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Buscar recetas por nombre..."
+            value={searchTerm}
+            onChange={handleSearchChange}
+          />
         </div>
 
         <div className="tarjetas">
@@ -162,7 +191,8 @@ const Recetas = () => {
         </div>
 
         {/* Paginación principal */}
-        <div className="paginacion d-flex justify-content-center mt-4">
+        {/* <div className="paginacion d-flex justify-content-center mt-4"> */}
+        {totalPaginas > 1 && ( // Mostrar paginación solo si hay más de una página
           <nav>
             <ul className="pagination">
               <li className={`page-item ${paginaActual === 1 ? 'disabled' : ''}`}>
@@ -183,9 +213,9 @@ const Recetas = () => {
                 </button>
               </li>
             </ul>
-          </nav>
-        </div>
+          </nav>)}
       </div>
+
 
       <Footer />
     </>
