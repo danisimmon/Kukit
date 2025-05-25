@@ -1553,6 +1553,63 @@ footer.section.bg-footer {
     color: #222;
     font-weight: 600;
 } */
+ /* En tu archivo style.css o un CSS específico para el header */
+
+header nav ul li .nav-link,
+header nav ul li.nav-link-li { /* Aplicamos estilos base también al li de Lista de Compra */
+  position: relative; /* Necesario para el posicionamiento de la línea inferior */
+  text-decoration: none; /* Quitamos el subrayado por defecto */
+  color: var(--text-color); /* Usamos la variable para el color de texto */
+  padding-bottom: 8px; /* Espacio para la línea inferior y para que no esté pegada al texto */
+  transition: color 0.3s ease;
+  cursor: pointer; /* Para el li de Lista de Compra */
+}
+
+/* Línea inferior (inicialmente oculta) */
+header nav ul li .nav-link::after,
+header nav ul li.nav-link-li::after {
+  content: '';
+  position: absolute;
+  bottom: 0; /* Posiciona la línea en la parte inferior */
+  left: 50%; /* Centra la línea para la animación de crecimiento desde el centro */
+  width: 0; /* Ancho inicial 0 para que no se vea */
+  height: 2px; /* Grosor de la línea */
+  background-color: var(--primary-color); /* Usamos la variable para el color de la línea */
+  transition: width 0.3s ease-in-out, left 0.3s ease-in-out; /* Animación suave para ancho y posición */
+}
+
+/* Efecto al pasar el ratón */
+header nav ul li .nav-link:hover,
+header nav ul li.nav-link-li:hover {
+  color: var(--primary-color); /* Cambia el color del texto al color primario al pasar el ratón */
+}
+
+header nav ul li .nav-link:hover::after,
+header nav ul li.nav-link-li:hover::after {
+  width: 100%; /* La línea se expande al 100% del ancho */
+  left: 0; /* La línea se alinea a la izquierda */
+  background-color: var(--primary-color); /* Aseguramos el color primario en hover */
+}
+
+/* Estilo para el NavLink activo */
+header nav ul li .nav-link.active {
+  color: var(--primary-color) !important; /* Texto en color primario para el enlace activo */
+  font-weight: bold; /* Opcional: texto en negrita para el enlace activo */
+}
+
+/* Línea siempre visible para el NavLink activo */
+header nav ul li .nav-link.active::after {
+  width: 100%; /* La línea siempre visible y al 100% */
+  left: 0; /* La línea alineada a la izquierda */
+  background-color: var(--primary-color); /* Aseguramos el color primario */
+}
+
+/* Ajustes para el li que no es NavLink pero queremos que se comporte similar en hover */
+header nav ul li.nav-link-li {
+    display: inline-block; /* Para que el ::after se posicione correctamente */
+}
+
+
 
 @keyframes movimientoFondo {
     0% {
@@ -1619,4 +1676,63 @@ footer.section.bg-footer {
   flex-direction: column;
   flex-grow: 1; /* Crucial para que este contenedor se expanda dentro del <main> global */
   width: 100%; /* Opcional, pero bueno para asegurar que ocupe todo el ancho */
+}
+
+.mensaje-subrayado {
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  position: relative;
+  display: inline-block;
+  margin: 2rem auto;
+  padding-bottom: 0.2rem;
+}
+
+.mensaje-subrayado::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  background-color: var(--primary-color);
+  left: 0;
+  bottom: 0;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.mensaje-subrayado:hover::after {
+  transform: scaleX(1);
+}
+
+.registro-pill {
+  background: linear-gradient(to right,#C33333, #ff5a5a);
+  color: white;
+  padding: 0.4rem 1rem;
+  font-size: 0.9rem;
+  border-radius: 50px;
+  font-weight: 500;
+  display: inline-block;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.registro-pill:hover {
+  transform: scale(1.05);
+}
+
+.registro-animado {
+  background: linear-gradient(270deg, #C33333, #ff6666, #C33333);
+  background-size: 600% 600%;
+  color: white;
+  padding: 1rem 1.5rem;
+  border-radius: 1rem;
+  font-weight: bold;
+  text-align: center;
+  animation: movimientoFondo 5s ease infinite;
+  max-width: 500px;
+  margin: 2rem auto;
+  cursor: pointer;
 }
