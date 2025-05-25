@@ -46,12 +46,22 @@ $dificultad = $input['dificultad'];
 $tiempo = $input['tiempo'];
 $ingredientes = $input['ingredientes']; // Ya es un array desde el frontend
 $pasos = $input['pasos']; // Ya es un array desde el frontend
+$pais = $input['pais'];
+$gluten = $input['gluten'];
+$vegetariana = $input['vegetariana'];
+$lactosa = $input['lactosa'];
+$vegana = $input['vegana'];
 
 // Agregamos a Mongo la receta
 $receta = [
     'nombre' => $nombre,
     'dificultad' => $dificultad,
     'tiempo' => $tiempo,
+    'pais' => $pais,
+    'gluten' => $gluten,
+    'vegetariana' => $vegetariana,
+    'lactosa' => $lactosa,
+    'vegana' => $vegana,
     'ingredientes' => $ingredientes,
     'pasos' => $pasos,
     'id_usuario' => $id_usuario

@@ -18,8 +18,30 @@ const EditarPerfil = () => {
     dificultad: '',
     tiempo: '',
     ingredientes: [],
+    pais: '',
+    gluten: false,
+    vegetariana: false,
+    lactosa: false,
+    vegana: false,
     pasos: []
   });
+
+  const manejarCambioPais = (e) => {
+    setRecetaNueva({
+      ...formRecetaNueva,
+      pais: e.target.value
+    });
+  };
+
+  // Handler genérico para opciones booleanas de la receta (gluten, vegetariana, lactosa, vegana)
+  const manejarCambioOpcionBooleanaReceta = (e) => {
+    const { name, value } = e.target; // name será "gluten", "vegetariana", etc.
+    setRecetaNueva(prevState => ({
+      ...prevState,
+      // Convertir el valor "sí" a true
+      [name]: value === 'sí'
+    }));
+  };
 
   const [ingredientes, setIngredientes] = useState([{ nombre: '', cantidad: '', unidad: '' }]);
   const [pasos, setPasos] = useState(['']);
@@ -129,6 +151,11 @@ const EditarPerfil = () => {
       console.error('Error:', error);
     }
   };
+console.log({
+  ...formRecetaNueva,
+  ingredientes: ingredientes,
+  pasos: pasos,
+});
 
   // Manejar el envio de la receta
     const manejarEnvioReceta = async (e) => {
@@ -138,8 +165,8 @@ const EditarPerfil = () => {
                 'http://localhost/api/area_privada/editar-perfil/crear-receta.php',
                 {
                     ...formRecetaNueva,
-                    ingredientes: ingredientes, // Include ingredientes in the payload
-                    pasos: pasos, // Include pasos in the payload
+                    ingredientes: ingredientes,
+                    pasos: pasos,
                 },
                 {
                     headers: {
@@ -153,8 +180,18 @@ const EditarPerfil = () => {
                 setExito(true);
                 setMensaje(respuesta.data.message);
                 console.log('Receta:', respuesta.data.receta);
-                // Optionally reset the form
-                setRecetaNueva({ nombre: '', dificultad: '', tiempo: '', ingredientes: [], pasos: [] });
+                setRecetaNueva({
+                    nombre: '',
+                    dificultad: '',
+                    tiempo: '',
+                    ingredientes: [],
+                    pais: '',
+                    gluten: false,
+                    vegetariana: false,
+                    lactosa: false,
+                    vegana: false,
+                    pasos: []
+                });
                 setIngredientes([{ nombre: '', cantidad: '', unidad: '' }]);
                 setPasos(['']);
             } else {
@@ -185,11 +222,11 @@ const EditarPerfil = () => {
 
           {/* Apartado Perfil Usuario */}
           {seccionActiva === "perfil" && (
-            <div class="tarjeta-perfil">
+            <div className="tarjeta-perfil">
               <h1 className="titulos-perfil">Mi Perfil</h1>
-              <div class="info-perfil">
-                <div class="contenedores-info-perfil">
-                  <h3 class="titulos-perfil">Usuario</h3>
+              <div className="info-perfil">
+                <div className="contenedores-info-perfil">
+                  <h3 className="titulos-perfil">Usuario</h3>
                   <h3 type="text"
                     id="usuario"
                     name="usuario"
@@ -199,32 +236,32 @@ const EditarPerfil = () => {
                 </div>
               </div>
 
-              <div class="info-perfil">
-                <div class="contenedores-info-perfil">
-                  <h3 class="titulos-perfil">Correo Electrónico</h3>
+              <div className="info-perfil">
+                <div className="contenedores-info-perfil">
+                  <h3 className="titulos-perfil">Correo Electrónico</h3>
                   <h3>{formData.correo}</h3>
                 </div>
               </div>
 
-              <div class="info-perfil">
-                <div class="contenedores-info-perfil">
-                  <h3 class="titulos-perfil">Contraseña</h3>
+              <div className="info-perfil">
+                <div className="contenedores-info-perfil">
+                  <h3 className="titulos-perfil">Contraseña</h3>
                   <h3>******</h3>
                 </div>
               </div>
-              <div class="botones-perfil">
+              <div className="botones-perfil">
                 <button onClick={() => setSeccionActiva("editar-perfil")}>Editar Perfil</button>
-                <button class="botones-inversos">Eliminar Cuenta</button>
+                <button className="botones-inversos">Eliminar Cuenta</button>
               </div>
             </div>
           )}
           {seccionActiva === "editar-perfil" && (
-            <div class="tarjeta-perfil">
-              <h1 class="titulos-perfil">Mi Perfil</h1>
+            <div className="tarjeta-perfil">
+              <h1 className="titulos-perfil">Mi Perfil</h1>
               <form onSubmit={manejarEnvio}>
-                <div class="info-perfil">
-                  <div class="contenedores-info-perfil">
-                    <h3 class="titulos-perfil">Usuario</h3>
+                <div className="info-perfil">
+                  <div className="contenedores-info-perfil">
+                    <h3 className="titulos-perfil">Usuario</h3>
                     <input
                       type="text"
                       id="usuario"
@@ -236,9 +273,9 @@ const EditarPerfil = () => {
                   </div>
                 </div>
 
-                <div class="info-perfil">
-                  <div class="contenedores-info-perfil">
-                    <h3 class="titulos-perfil">Correo Electrónico</h3>
+                <div className="info-perfil">
+                  <div className="contenedores-info-perfil">
+                    <h3 className="titulos-perfil">Correo Electrónico</h3>
                     <input
                       type="email"
                       id="correo"
@@ -250,9 +287,9 @@ const EditarPerfil = () => {
                   </div>
                 </div>
 
-                <div class="info-perfil">
-                  <div class="contenedores-info-perfil">
-                    <h3 class="titulos-perfil">Contraseña</h3>
+                <div className="info-perfil">
+                  <div className="contenedores-info-perfil">
+                    <h3 className="titulos-perfil">Contraseña</h3>
                     <input
                       type="password"
                       id="password"
@@ -262,9 +299,9 @@ const EditarPerfil = () => {
                     />
                   </div>
                 </div>
-                <div class="botones-perfil">
+                <div className="botones-perfil">
                   <button type="submit">Guardar</button>
-                  <button class="botones-inversos">Cancelar</button>
+                  <button className="botones-inversos">Cancelar</button>
                 </div>
               </form>
             </div>
@@ -333,7 +370,7 @@ const EditarPerfil = () => {
                     onChange={manejarCambioReceta}
                     required
                   >
-                    <option value="" disabled selected>
+                    <option value="" disabled>
                       Selecciona una dificultad
                     </option>
                     <option value="facil">Fácil</option>
@@ -353,6 +390,235 @@ const EditarPerfil = () => {
                     required
                   />
                 </div>
+                
+                <div className="apartado-pais">
+                <h5>Selecciona el país</h5>
+    <label>
+    <input
+      type="radio"
+      name="pais"
+      value="Italia"
+      checked={formRecetaNueva.pais === "Italia"}
+      onChange={manejarCambioPais}
+    />
+    Italia
+  </label>
+    <label>
+    <input
+      type="radio"
+      name="pais"
+      value="México"
+      checked={formRecetaNueva.pais === 'México'}
+      onChange={manejarCambioPais}
+    />
+    México
+  </label><br />
+    <label>
+      <input
+        type="radio"
+        name="pais"
+        value="Japón"
+        checked={formRecetaNueva.pais ==='Japón'}
+        onChange={manejarCambioPais}
+      /> Japón
+    </label><br />
+    <label>
+      <input
+        type="radio"
+        name="pais"
+        value="España"
+        checked={formRecetaNueva.pais ==='España'}
+        onChange={manejarCambioPais}
+      /> España
+    </label><br />
+    <label>
+      <input
+        type="radio"
+        name="pais"
+        value="India"
+        checked={formRecetaNueva.pais === 'India'}
+        onChange={manejarCambioPais}
+      /> India
+    </label><br />
+    <label>
+      <input
+        type="radio"
+        name="pais"
+        value="Francia"
+        checked={formRecetaNueva.pais ==='Francia'}
+        onChange={manejarCambioPais}
+      /> Francia
+    </label><br />
+    <label>
+      <input
+        type="radio"
+        name="pais"
+        value="Alemania"
+        checked={formRecetaNueva.pais === 'Alemania'}
+        onChange={manejarCambioPais}
+      /> Alemania
+    </label><br />
+    <label>
+      <input
+        type="radio"
+        name="pais"
+        value="Estados Unidos"
+        checked={formRecetaNueva.pais ==='Estados Unidos'}
+        onChange={manejarCambioPais}
+      /> Estados Unidos
+    </label><br />
+    <label>
+      <input
+        type="radio"
+        name="pais"
+        value="China"
+        checked={formRecetaNueva.pais ==='China'}
+        onChange={manejarCambioPais}
+      /> China
+    </label><br />
+    <label>
+      <input
+        type="radio"
+        name="pais"
+        value="Brasil"
+        checked={formRecetaNueva.pais === 'Brasil'}
+        onChange={manejarCambioPais}
+      /> Brasil
+    </label><br />
+    <label>
+      <input
+        type="radio"
+        name="pais"
+        value="Tailandia"
+        checked={formRecetaNueva.pais ==='Tailandia'}
+        onChange={manejarCambioPais}
+      /> Tailandia
+    </label><br />
+    <label>
+      <input
+        type="radio"
+        name="pais"
+        value="Grecia"
+        checked={formRecetaNueva.pais ==='Grecia'}
+        onChange={manejarCambioPais}
+      /> Grecia
+    </label><br />
+    <label>
+      <input
+        type="radio"
+        name="pais"
+        value="Turquía"
+        checked={formRecetaNueva.pais ==='Turquía'}
+        onChange={manejarCambioPais}
+      /> Turquía
+    </label><br />
+    <label>
+      <input
+        type="radio"
+        name="pais"
+        value="Corea del Sur"
+        checked={formRecetaNueva.pais ==='Corea del Sur'}
+        onChange={manejarCambioPais}
+      /> Corea del Sur
+    </label><br />
+    <label>
+      <input
+        type="radio"
+        name="pais"
+        value="Libano"
+        checked={formRecetaNueva.pais ==='Libano'}
+        onChange={manejarCambioPais}
+      /> Líbano
+    </label><br />
+    <div className="apartado-gluten">
+    <h5>¿Contiene gluten?</h5>
+    <label>
+      <input
+        type="radio"
+        name="gluten"
+        value="sí"
+        //checked={formRecetaNueva.gluten === true}
+        onChange={manejarCambioOpcionBooleanaReceta}
+      /> Sí
+    </label><br />
+    <label>
+      <input
+        type="radio"
+        name="gluten"
+        value="no"
+        //checked={formRecetaNueva.gluten === false}
+        onChange={manejarCambioOpcionBooleanaReceta}
+      /> No
+    </label>
+  </div>
+
+  <div className="apartado-vegetariana">
+    <h5>¿Es vegetariana?</h5>
+    <label>
+      <input
+        type="radio"
+        name="vegetariana"
+        value="sí"
+        //checked={formRecetaNueva.vegetariana === true}
+        onChange={manejarCambioOpcionBooleanaReceta}
+      /> Sí
+    </label><br />
+    <label>
+      <input
+        type="radio"
+        name="vegetariana"
+        value="no"
+        //checked={formRecetaNueva.vegetariana === false}
+        onChange={manejarCambioOpcionBooleanaReceta}
+      /> No
+    </label>
+  </div>
+    <div className="apartado-lactosa">
+      <h5>¿Contiene lactosa?</h5>
+      <label>
+        <input
+          type="radio"
+          name="lactosa"
+          value="sí"
+          //checked={formRecetaNueva.lactosa === true}
+          onChange={manejarCambioOpcionBooleanaReceta}
+        /> Sí
+      </label><br />
+      <label>
+      <input
+        type="radio"
+        name="lactosa"
+        value="no"
+        //checked={formRecetaNueva.lactosa === false}
+        onChange={manejarCambioOpcionBooleanaReceta}
+      /> No
+    </label>
+    </div>
+
+  <div className="vegana">
+    <h5>¿Es vegana?</h5>
+    <label>
+      <input
+        type="radio"
+        name="vegana"
+        value="sí"
+        //checked={formRecetaNueva.vegana === true}
+        onChange={manejarCambioOpcionBooleanaReceta}
+      /> Sí
+    </label><br />
+    <label>
+      <input
+        type="radio"
+        name="vegana"
+        value="no"
+        //checked={formRecetaNueva.vegana === false}
+        onChange={manejarCambioOpcionBooleanaReceta}
+      /> No
+    </label>
+  </div>
+                
+  </div>
+
               </div>
             </div>
 

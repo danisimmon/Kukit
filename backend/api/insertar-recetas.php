@@ -28,7 +28,7 @@ $recetas = [
         "idUsuario" => "usuario456",
         "compartido" => true,
         "alergias" => ["gluten", "lactosa"],
-        "pais" => ["italiana"],
+        "pais" => ["Italia"],
         "otrasCategorias" => ["rápida", "vegetariana"],
         "tiempo_estimado" => "15 min",
         "dificultad" => "fácil",
@@ -66,12 +66,13 @@ $recetas = [
         "idUsuario" => "usuario123",
         "compartido" => true,
         "alergias" => [],
-        "pais" => ["mexicana"],
-        "otrasCategorias" => ["rápida", "sin gluten"],
+        "pais" => ["México"],
+        "otrasCategorias" => ["rápida"],
         "tiempo_estimado" => "20 min",
         "dificultad" => "media",
         "likes" => 10,
-        "informacionNutricional" => ["calorias" => 400, "proteinas" => 25, "carbohidratos" => 35, "grasas" => 15]
+        "informacionNutricional" => ["calorias" => 400, "proteinas" => 25, "carbohidratos" => 35, "grasas" => 15],
+        "href" => "http://localhost/api/img/recetas/tacosPollo.jpg"
     ],
     [
         "nombre" => "Sushi vegetal",
@@ -105,12 +106,13 @@ $recetas = [
         "idUsuario" => "usuario789",
         "compartido" => true,
         "alergias" => [],
-        "pais" => ["japonesa"],
-        "otrasCategorias" => ["vegano", "sin gluten", "light"],
+        "pais" => ["Japón"],
+        "otrasCategorias" => ["vegetariana"],
         "tiempo_estimado" => "30 min",
         "dificultad" => "difícil",
         "likes" => 8,
-        "informacionNutricional" => ["calorias" => 250, "proteinas" => 6, "carbohidratos" => 40, "grasas" => 5]
+        "informacionNutricional" => ["calorias" => 250, "proteinas" => 6, "carbohidratos" => 40, "grasas" => 5],
+        "href" => "http://localhost/api/img/recetas/sushiVegetal.png"
     ],
     [
         "nombre" => "Gazpacho andaluz",
@@ -151,12 +153,13 @@ $recetas = [
         "idUsuario" => "usuario321",
         "compartido" => true,
         "alergias" => [],
-        "pais" => ["española"],
-        "otrasCategorias" => ["vegano", "bajo en grasas", "light"],
+        "pais" => ["España"],
+        "otrasCategorias" => ["vegetariana", "bajo en grasas"],
         "tiempo_estimado" => "10 min",
         "dificultad" => "fácil",
         "likes" => 15,
-        "informacionNutricional" => ["calorias" => 120, "proteinas" => 2, "carbohidratos" => 10, "grasas" => 5]
+        "informacionNutricional" => ["calorias" => 120, "proteinas" => 2, "carbohidratos" => 10, "grasas" => 5],
+        "href" => "http://localhost/api/img/recetas/gazpacho.png"
     ],
     [
         "nombre" => "Curry de garbanzos",
@@ -197,12 +200,13 @@ $recetas = [
         "idUsuario" => "usuario456",
         "compartido" => true,
         "alergias" => [],
-        "pais" => ["indú"],
-        "otrasCategorias" => ["vegano", "proteico", "sin gluten"],
+        "pais" => ["India"],
+        "otrasCategorias" => ["vegetariana", "proteico", "sin gluten"],
         "tiempo_estimado" => "25 min",
         "dificultad" => "media",
         "likes" => 12,
-        "informacionNutricional" => ["calorias" => 420, "proteinas" => 14, "carbohidratos" => 35, "grasas" => 18]
+        "informacionNutricional" => ["calorias" => 420, "proteinas" => 14, "carbohidratos" => 35, "grasas" => 18],
+        "href" => "http://localhost/api/img/recetas/curryGarbanzos.jpg"
     ],
     [
         "nombre" => "Pollo al horno con patatas",
@@ -238,12 +242,13 @@ $recetas = [
         "idUsuario" => "usuario321",
         "compartido" => false,
         "alergias" => [],
-        "pais" => ["alemana"],
+        "pais" => ["Alemania"],
         "otrasCategorias" => ["alta en proteínas", "kid friendly"],
         "tiempo_estimado" => "50 min",
         "dificultad" => "media",
         "likes" => 7,
-        "informacionNutricional" => ["calorias" => 500, "proteinas" => 35, "carbohidratos" => 30, "grasas" => 20]
+        "informacionNutricional" => ["calorias" => 500, "proteinas" => 35, "carbohidratos" => 30, "grasas" => 20],
+        "href" => "http://localhost/api/img/recetas/polloHornoPatatas.jpg"
     ],
     [
         "nombre" => "Arroz frito con verduras",
@@ -286,12 +291,13 @@ $recetas = [
         "idUsuario" => "usuario654",
         "compartido" => true,
         "alergias" => [],
-        "pais" => ["china"],
-        "otrasCategorias" => ["vegano", "rápido", "bajo en grasas"],
+        "pais" => ["China"],
+        "otrasCategorias" => ["vegetariana", "rápido", "bajo en grasas"],
         "tiempo_estimado" => "20 min",
         "dificultad" => "fácil",
         "likes" => 6,
-        "informacionNutricional" => ["calorias" => 300, "proteinas" => 5, "carbohidratos" => 45, "grasas" => 7]
+        "informacionNutricional" => ["calorias" => 300, "proteinas" => 5, "carbohidratos" => 45, "grasas" => 7],
+        "href" => "http://localhost/api/img/recetas/arrozFrito.jpg"
     ],
     [
         "nombre" => "Crepes dulces",
@@ -336,12 +342,13 @@ $recetas = [
         "idUsuario" => "usuario999",
         "compartido" => false,
         "alergias" => ["gluten", "lactosa", "huevo"],
-        "pais" => ["francesa"],
+        "pais" => ["Francia"],
         "otrasCategorias" => ["postre", "kid friendly"],
         "tiempo_estimado" => "15 min",
         "dificultad" => "fácil",
         "likes" => 3,
-        "informacionNutricional" => ["calorias" => 250, "proteinas" => 6, "carbohidratos" => 35, "grasas" => 8]
+        "informacionNutricional" => ["calorias" => 250, "proteinas" => 6, "carbohidratos" => 35, "grasas" => 8],
+        "href" => "http://localhost/api/img/recetas/crepesDulces.jpg"
     ],
     [
         "nombre" => "Salteado de tofu",
@@ -382,12 +389,13 @@ $recetas = [
         "idUsuario" => "usuario852",
         "compartido" => true,
         "alergias" => ["soja"],
-        "pais" => ["china"],
-        "otrasCategorias" => ["vegano", "rico en fibra", "bajo en carbohidratos"],
+        "pais" => ["China"],
+        "otrasCategorias" => ["vegetariana", "rico en fibra", "bajo en carbohidratos"],
         "tiempo_estimado" => "15 min",
         "dificultad" => "fácil",
         "likes" => 9,
-        "informacionNutricional" => ["calorias" => 280, "proteinas" => 15, "carbohidratos" => 10, "grasas" => 14]
+        "informacionNutricional" => ["calorias" => 280, "proteinas" => 15, "carbohidratos" => 10, "grasas" => 14],
+        "href" => "http://localhost/api/img/recetas/salteadoTofu.jpg"
     ],
     [
         "nombre" => "Pizza margarita casera",
@@ -437,12 +445,13 @@ $recetas = [
         "idUsuario" => "usuario999",
         "compartido" => false,
         "alergias" => ["gluten", "lactosa"],
-        "pais" => ["italiana"],
+        "pais" => ["Italia"],
         "otrasCategorias" => ["vegetariana", "kid friendly"],
         "tiempo_estimado" => "25 min",
         "dificultad" => "media",
         "likes" => 11,
-        "informacionNutricional" => ["calorias" => 450, "proteinas" => 20, "carbohidratos" => 40, "grasas" => 18]
+        "informacionNutricional" => ["calorias" => 450, "proteinas" => 20, "carbohidratos" => 40, "grasas" => 18],
+        "href" => "http://localhost/api/img/recetas/pizzaMargarita.jpg"
     ]
 ];
 
