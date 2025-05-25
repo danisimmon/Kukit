@@ -3,6 +3,13 @@ include 'conecta-mongo.php';
 
 $collection = $db->selectCollection('recetas');
 
+// Asegurarse de que la colección esté vacía antes de insertar para evitar duplicados
+// si se ejecuta el script varias veces.
+if ($collection->countDocuments() > 0) {
+    $collection->drop();
+}
+
+
 $recetas = [
     [
         "nombre" => "Pasta al pesto",
@@ -34,7 +41,8 @@ $recetas = [
         "dificultad" => "fácil",
         "likes" => 5,
         "informacionNutricional" => ["calorias" => 350, "proteinas" => 12, "carbohidratos" => 50, "grasas" => 10],
-        "href" => "http://localhost/api/img/recetas/pasta-al-pesto.jpg"
+        "href" => "http://localhost/api/img/recetas/pasta-al-pesto.jpg",
+        "fecha_creacion" => "2023-10-01T10:00:00.000Z"
     ],
     [
         "nombre" => "Tacos de pollo",
@@ -72,7 +80,8 @@ $recetas = [
         "dificultad" => "media",
         "likes" => 10,
         "informacionNutricional" => ["calorias" => 400, "proteinas" => 25, "carbohidratos" => 35, "grasas" => 15],
-        "href" => "http://localhost/api/img/recetas/tacosPollo.jpg"
+        "href" => "http://localhost/api/img/recetas/tacosPollo.jpg",
+        "fecha_creacion" => "2023-10-15T11:30:00.000Z"
     ],
     [
         "nombre" => "Sushi vegetal",
@@ -112,7 +121,8 @@ $recetas = [
         "dificultad" => "difícil",
         "likes" => 8,
         "informacionNutricional" => ["calorias" => 250, "proteinas" => 6, "carbohidratos" => 40, "grasas" => 5],
-        "href" => "http://localhost/api/img/recetas/sushiVegetal.png"
+        "href" => "http://localhost/api/img/recetas/sushiVegetal.png",
+        "fecha_creacion" => "2023-09-20T09:15:00.000Z"
     ],
     [
         "nombre" => "Gazpacho andaluz",
@@ -159,7 +169,8 @@ $recetas = [
         "dificultad" => "fácil",
         "likes" => 15,
         "informacionNutricional" => ["calorias" => 120, "proteinas" => 2, "carbohidratos" => 10, "grasas" => 5],
-        "href" => "http://localhost/api/img/recetas/gazpacho.png"
+        "href" => "http://localhost/api/img/recetas/gazpacho.png",
+        "fecha_creacion" => "2024-01-05T14:00:00.000Z"
     ],
     [
         "nombre" => "Curry de garbanzos",
@@ -206,7 +217,8 @@ $recetas = [
         "dificultad" => "media",
         "likes" => 12,
         "informacionNutricional" => ["calorias" => 420, "proteinas" => 14, "carbohidratos" => 35, "grasas" => 18],
-        "href" => "http://localhost/api/img/recetas/curryGarbanzos.jpg"
+        "href" => "http://localhost/api/img/recetas/curryGarbanzos.jpg",
+        "fecha_creacion" => "2023-11-10T16:45:00.000Z"
     ],
     [
         "nombre" => "Pollo al horno con patatas",
@@ -248,7 +260,8 @@ $recetas = [
         "dificultad" => "media",
         "likes" => 7,
         "informacionNutricional" => ["calorias" => 500, "proteinas" => 35, "carbohidratos" => 30, "grasas" => 20],
-        "href" => "http://localhost/api/img/recetas/polloHornoPatatas.jpg"
+        "href" => "http://localhost/api/img/recetas/polloHornoPatatas.jpg",
+        "fecha_creacion" => "2024-02-20T12:00:00.000Z"
     ],
     [
         "nombre" => "Arroz frito con verduras",
@@ -297,7 +310,8 @@ $recetas = [
         "dificultad" => "fácil",
         "likes" => 6,
         "informacionNutricional" => ["calorias" => 300, "proteinas" => 5, "carbohidratos" => 45, "grasas" => 7],
-        "href" => "http://localhost/api/img/recetas/arrozFrito.jpg"
+        "href" => "http://localhost/api/img/recetas/arrozFrito.jpg",
+        "fecha_creacion" => "2023-12-01T18:20:00.000Z"
     ],
     [
         "nombre" => "Crepes dulces",
@@ -348,7 +362,8 @@ $recetas = [
         "dificultad" => "fácil",
         "likes" => 3,
         "informacionNutricional" => ["calorias" => 250, "proteinas" => 6, "carbohidratos" => 35, "grasas" => 8],
-        "href" => "http://localhost/api/img/recetas/crepesDulces.jpg"
+        "href" => "http://localhost/api/img/recetas/crepesDulces.jpg",
+        "fecha_creacion" => "2024-03-10T08:00:00.000Z"
     ],
     [
         "nombre" => "Salteado de tofu",
@@ -395,7 +410,8 @@ $recetas = [
         "dificultad" => "fácil",
         "likes" => 9,
         "informacionNutricional" => ["calorias" => 280, "proteinas" => 15, "carbohidratos" => 10, "grasas" => 14],
-        "href" => "http://localhost/api/img/recetas/salteadoTofu.jpg"
+        "href" => "http://localhost/api/img/recetas/salteadoTofu.jpg",
+        "fecha_creacion" => "2024-03-25T13:10:00.000Z"
     ],
     [
         "nombre" => "Pizza margarita casera",
@@ -451,13 +467,22 @@ $recetas = [
         "dificultad" => "media",
         "likes" => 11,
         "informacionNutricional" => ["calorias" => 450, "proteinas" => 20, "carbohidratos" => 40, "grasas" => 18],
-        "href" => "http://localhost/api/img/recetas/pizzaMargarita.jpg"
+        "href" => "http://localhost/api/img/recetas/pizzaMargarita.jpg",
+        "fecha_creacion" => "2024-04-01T19:00:00.000Z"
     ]
 ];
 
 try {
-    $collection->insertMany($recetas);
+    if (!empty($recetas)) {
+        $insertManyResult = $collection->insertMany($recetas);
+        // Opcional: puedes añadir un mensaje de éxito si lo deseas para depuración
+        // echo "Se insertaron " . $insertManyResult->getInsertedCount() . " recetas correctamente.";
+    } else {
+        // echo "No hay recetas para insertar.";
+    }
 } catch (Exception $e) {
-    echo "Error al insertar las recetas: " . $e->getMessage();
+    // Considera loggear el error en lugar de solo hacer echo, o manejarlo de forma más robusta.
+    error_log("Error al insertar las recetas: " . $e->getMessage());
+    // echo "Error al insertar las recetas: " . $e->getMessage(); // Puedes mantener el echo si es para desarrollo rápido
     exit;
 }

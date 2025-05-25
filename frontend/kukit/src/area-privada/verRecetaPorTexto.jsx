@@ -155,163 +155,165 @@ const VerRecetaTexto = () => {
     return ( // JSX principal del componente
         <>
             <Header />
-            <div className="container mt-4">
-                {/* Título de la receta */}
-                <div className="mb-2">
-                    <h4>Recetas Guardadas <span className="text-danger">| {receta.nombre}</span></h4>
-                </div>
-                {/* Contenedor de botones alineado a la derecha */}
-                <div className="d-flex justify-content-end mb-3">
-                    <div>
-                        <button
-                            className={`btn ${isSpeaking ? 'btn-danger' : 'btn-primary'} btn-sm me-2`}
-                            onClick={handleToggleSpeak}
-                            disabled={!receta}
-                            aria-label={isSpeaking ? `Detener la lectura de la receta ${receta.nombre}` : `Pasar a texto y leer en voz alta la receta ${receta.nombre}`}
-                        >
-                            {isSpeaking ? 'Detener Lectura' : 'Pasar a Texto y Leer'}
-                        </button>
-                        <button
-                            className={`btn ${showPlainText ? 'btn-info' : 'btn-outline-info'} btn-sm`}
-                            onClick={toggleShowPlainText}
-                            disabled={!receta}
-                            aria-label={showPlainText ? `Ocultar versión en texto de la receta ${receta.nombre}` : `Mostrar versión en texto de la receta ${receta.nombre}`}
-                        >
-                            {showPlainText ? 'Ocultar Texto' : 'Mostrar Texto'}
-                        </button>
+            <main>
+                <div className="container mt-4">
+                    {/* Título de la receta */}
+                    <div className="mb-2">
+                        <h4>Recetas Guardadas <span className="text-danger">| {receta.nombre}</span></h4>
                     </div>
-                </div>
-
-                {showPlainText ? (
-                    <div className="mt-4 p-3 bg-light border rounded">
-                        <h4 className="mb-3">Versión en Texto: {receta.nombre}</h4>
-                        <pre style={{ whiteSpace: 'pre-wrap', wordWrap: 'break-word', fontFamily: 'inherit', fontSize: 'inherit' }}>
-                            {getTextToSpeak()}
-                        </pre>
+                    {/* Contenedor de botones alineado a la derecha */}
+                    <div className="d-flex justify-content-end mb-3">
+                        <div>
+                            <button
+                                className={`btn ${isSpeaking ? 'btn-danger' : 'btn-primary'} btn-sm me-2`}
+                                onClick={handleToggleSpeak}
+                                disabled={!receta}
+                                aria-label={isSpeaking ? `Detener la lectura de la receta ${receta.nombre}` : `Pasar a texto y leer en voz alta la receta ${receta.nombre}`}
+                            >
+                                {isSpeaking ? 'Detener Lectura' : 'Pasar a Texto y Leer'}
+                            </button>
+                            <button
+                                className={`btn ${showPlainText ? 'btn-info' : 'btn-outline-info'} btn-sm`}
+                                onClick={toggleShowPlainText}
+                                disabled={!receta}
+                                aria-label={showPlainText ? `Ocultar versión en texto de la receta ${receta.nombre}` : `Mostrar versión en texto de la receta ${receta.nombre}`}
+                            >
+                                {showPlainText ? 'Ocultar Texto' : 'Mostrar Texto'}
+                            </button>
+                        </div>
                     </div>
-                ) : (
-                    <>
-                        <div className="d-flex flex-column flex-md-row gap-4 mt-4">
-                            <div className="text-center">
-                                {/* Aquí podrías poner la imagen de la receta si la tienes */}
-                                {/* <img src={`http://localhost/api/img/recetas/${receta.imagen}`} alt={receta.nombre} className="img-fluid rounded shadow-sm" style={{ maxWidth: '300px', maxHeight: '300px', objectFit: 'cover' }} /> */}
-                            </div>
 
-                            <div className="flex-fill">
-                                {/* El título ya está arriba, se puede omitir aquí si se prefiere */}
-                                {/* <h3>{receta.nombre}</h3> */}
-                                <div className="d-flex gap-4">
-                                    <div>
-                                        <p className="mb-1 fw-bold">Dificultad</p>
-                                        <div className="d-flex align-items-center">
-                                            <img src={dificultadIcon} alt="Dificultad" style={{ width: '20px', marginRight: '5px' }} />
-                                            <span>{receta.dificultad}</span>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <p className="mb-1 fw-bold">Tiempo Estimado</p>
-                                        <div className="d-flex align-items-center">
-                                            <img src={tiempoIcon} alt="Tiempo" style={{ width: '20px', marginRight: '5px' }} />
-                                            <span>{receta.tiempo_estimado}</span>
-                                        </div>
-                                    </div>
+                    {showPlainText ? (
+                        <div className="mt-4 p-3 bg-light border rounded">
+                            <h4 className="mb-3">Versión en Texto: {receta.nombre}</h4>
+                            <pre style={{ whiteSpace: 'pre-wrap', wordWrap: 'break-word', fontFamily: 'inherit', fontSize: 'inherit' }}>
+                                {getTextToSpeak()}
+                            </pre>
+                        </div>
+                    ) : (
+                        <>
+                            <div className="d-flex flex-column flex-md-row gap-4 mt-4">
+                                <div className="text-center">
+                                    {/* Aquí podrías poner la imagen de la receta si la tienes */}
+                                    {/* <img src={`http://localhost/api/img/recetas/${receta.imagen}`} alt={receta.nombre} className="img-fluid rounded shadow-sm" style={{ maxWidth: '300px', maxHeight: '300px', objectFit: 'cover' }} /> */}
                                 </div>
 
-                                <hr />
-
-                                <h5>INGREDIENTES ({raciones} {raciones === 1 ? 'ración' : 'raciones'})</h5>
-                                <div>
-                                    <button className="btn btn-outline-secondary btn-sm me-2" onClick={() => ajustarRaciones(-1)} disabled={raciones <= 1}>-</button>
-                                    <span>{raciones}</span>
-                                    <button className="btn btn-outline-secondary btn-sm ms-2" onClick={() => ajustarRaciones(1)}>+</button>
-                                </div>
-                                <div className="row g-2 mt-2">
-                                    {receta.ingredientes.map((ing, idx) => {
-                                        const cantidadBase = ing.cantidad || 0;
-                                        const racionesBase = receta.raciones_originales || 1; // Asumir 1 si no está definido
-                                        const cantidadFinal = (cantidadBase * raciones) / racionesBase;
-                                        return (
-                                            <div key={idx} className="col-md-6">
-                                                <div className="bg-white rounded shadow-sm p-2">
-                                                    {ing.nombre}: {cantidadFinal.toFixed(1)} {ing.unidad}
-                                                </div>
+                                <div className="flex-fill">
+                                    {/* El título ya está arriba, se puede omitir aquí si se prefiere */}
+                                    {/* <h3>{receta.nombre}</h3> */}
+                                    <div className="d-flex gap-4">
+                                        <div>
+                                            <p className="mb-1 fw-bold">Dificultad</p>
+                                            <div className="d-flex align-items-center">
+                                                <img src={dificultadIcon} alt="Dificultad" style={{ width: '20px', marginRight: '5px' }} />
+                                                <span>{receta.dificultad}</span>
                                             </div>
-                                        );
-                                    })}
-                                </div>
-
-                                {receta.nutricion && Object.keys(receta.nutricion).length > 0 && (
-                                    <div className="mt-4">
-                                        <h5>INFORMACIÓN NUTRICIONAL POR RACIÓN</h5>
-                                        <div className="row g-2 mt-2">
-                                            {receta.nutricion.calorias && <div className="col-md-6 col-lg-4">
-                                                <div className="bg-white rounded shadow-sm p-2">
-                                                    <strong>Calorías:</strong> {receta.nutricion.calorias} kcal
-                                                </div>
-                                            </div>}
-                                            {receta.nutricion.proteina && <div className="col-md-6 col-lg-4">
-                                                <div className="bg-white rounded shadow-sm p-2">
-                                                    <strong>Proteína:</strong> {receta.nutricion.proteina} g
-                                                </div>
-                                            </div>}
-                                            {receta.nutricion.grasa && <div className="col-md-6 col-lg-4">
-                                                <div className="bg-white rounded shadow-sm p-2">
-                                                    <strong>Grasa:</strong> {receta.nutricion.grasa} g
-                                                </div>
-                                            </div>}
-                                            {receta.nutricion.carbohidratos && <div className="col-md-6 col-lg-4">
-                                                <div className="bg-white rounded shadow-sm p-2">
-                                                    <strong>Carbohidratos:</strong> {receta.nutricion.carbohidratos} g
-                                                </div>
-                                            </div>}
-                                            {receta.nutricion.fibra && <div className="col-md-6 col-lg-4">
-                                                <div className="bg-white rounded shadow-sm p-2">
-                                                    <strong>Fibra:</strong> {receta.nutricion.fibra} g
-                                                </div>
-                                            </div>}
+                                        </div>
+                                        <div>
+                                            <p className="mb-1 fw-bold">Tiempo Estimado</p>
+                                            <div className="d-flex align-items-center">
+                                                <img src={tiempoIcon} alt="Tiempo" style={{ width: '20px', marginRight: '5px' }} />
+                                                <span>{receta.tiempo_estimado}</span>
+                                            </div>
                                         </div>
                                     </div>
-                                )}
 
-                                <div className="mt-4">
-                                    <h5>PASOS</h5>
-                                    {/* Aquí iría la lógica de paginación de pasos si la mantienes */}
-                                    {receta.pasos.slice((paginaPasosActual - 1) * PASOS_POR_PAGINA, paginaPasosActual * PASOS_POR_PAGINA).map((paso, index) => (
-                                        <div key={index} className="bg-white rounded shadow-sm p-3 mb-3">
-                                            <p className="fw-bold">Paso {(paginaPasosActual - 1) * PASOS_POR_PAGINA + index + 1}:</p>
-                                            <p>{paso}</p>
+                                    <hr />
+
+                                    <h5>INGREDIENTES ({raciones} {raciones === 1 ? 'ración' : 'raciones'})</h5>
+                                    <div>
+                                        <button className="btn btn-outline-secondary btn-sm me-2" onClick={() => ajustarRaciones(-1)} disabled={raciones <= 1}>-</button>
+                                        <span>{raciones}</span>
+                                        <button className="btn btn-outline-secondary btn-sm ms-2" onClick={() => ajustarRaciones(1)}>+</button>
+                                    </div>
+                                    <div className="row g-2 mt-2">
+                                        {receta.ingredientes.map((ing, idx) => {
+                                            const cantidadBase = ing.cantidad || 0;
+                                            const racionesBase = receta.raciones_originales || 1; // Asumir 1 si no está definido
+                                            const cantidadFinal = (cantidadBase * raciones) / racionesBase;
+                                            return (
+                                                <div key={idx} className="col-md-6">
+                                                    <div className="bg-white rounded shadow-sm p-2">
+                                                        {ing.nombre}: {cantidadFinal.toFixed(1)} {ing.unidad}
+                                                    </div>
+                                                </div>
+                                            );
+                                        })}
+                                    </div>
+
+                                    {receta.nutricion && Object.keys(receta.nutricion).length > 0 && (
+                                        <div className="mt-4">
+                                            <h5>INFORMACIÓN NUTRICIONAL POR RACIÓN</h5>
+                                            <div className="row g-2 mt-2">
+                                                {receta.nutricion.calorias && <div className="col-md-6 col-lg-4">
+                                                    <div className="bg-white rounded shadow-sm p-2">
+                                                        <strong>Calorías:</strong> {receta.nutricion.calorias} kcal
+                                                    </div>
+                                                </div>}
+                                                {receta.nutricion.proteina && <div className="col-md-6 col-lg-4">
+                                                    <div className="bg-white rounded shadow-sm p-2">
+                                                        <strong>Proteína:</strong> {receta.nutricion.proteina} g
+                                                    </div>
+                                                </div>}
+                                                {receta.nutricion.grasa && <div className="col-md-6 col-lg-4">
+                                                    <div className="bg-white rounded shadow-sm p-2">
+                                                        <strong>Grasa:</strong> {receta.nutricion.grasa} g
+                                                    </div>
+                                                </div>}
+                                                {receta.nutricion.carbohidratos && <div className="col-md-6 col-lg-4">
+                                                    <div className="bg-white rounded shadow-sm p-2">
+                                                        <strong>Carbohidratos:</strong> {receta.nutricion.carbohidratos} g
+                                                    </div>
+                                                </div>}
+                                                {receta.nutricion.fibra && <div className="col-md-6 col-lg-4">
+                                                    <div className="bg-white rounded shadow-sm p-2">
+                                                        <strong>Fibra:</strong> {receta.nutricion.fibra} g
+                                                    </div>
+                                                </div>}
+                                            </div>
                                         </div>
-                                    ))}
-                                    {/* Aquí los botones de paginación de pasos */}
+                                    )}
+
+                                    <div className="mt-4">
+                                        <h5>PASOS</h5>
+                                        {/* Aquí iría la lógica de paginación de pasos si la mantienes */}
+                                        {receta.pasos.slice((paginaPasosActual - 1) * PASOS_POR_PAGINA, paginaPasosActual * PASOS_POR_PAGINA).map((paso, index) => (
+                                            <div key={index} className="bg-white rounded shadow-sm p-3 mb-3">
+                                                <p className="fw-bold">Paso {(paginaPasosActual - 1) * PASOS_POR_PAGINA + index + 1}:</p>
+                                                <p>{paso}</p>
+                                            </div>
+                                        ))}
+                                        {/* Aquí los botones de paginación de pasos */}
+                                    </div>
+                                </div>
+                            </div>
+                        </>
+                    )}
+                </div>
+
+                {/* Modal para error de lectura */}
+                {showSpeechErrorPopup && (
+                    <>
+                        <div className="modal fade show" tabIndex="-1" style={{ display: 'block' }} role="dialog" aria-modal="true" aria-labelledby="speechErrorModalTitle">
+                            <div className="modal-dialog modal-dialog-centered">
+                                <div className="modal-content">
+                                    <div className="modal-header">
+                                        <h5 className="modal-title" id="speechErrorModalTitle">Aviso</h5>
+                                        <button type="button" className="btn-close" onClick={() => setShowSpeechErrorPopup(false)} aria-label="Close"></button>
+                                    </div>
+                                    <div className="modal-body">
+                                        <p>Se ha parado la lectura.</p>
+                                    </div>
+                                    <div className="modal-footer">
+                                        <button type="button" className="btn btn-secondary" onClick={() => setShowSpeechErrorPopup(false)}>Cerrar</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <div className="modal-backdrop fade show"></div> {/* Fondo del modal */}
                     </>
                 )}
-            </div>
-
-            {/* Modal para error de lectura */}
-            {showSpeechErrorPopup && (
-                <>
-                    <div className="modal fade show" tabIndex="-1" style={{ display: 'block' }} role="dialog" aria-modal="true" aria-labelledby="speechErrorModalTitle">
-                        <div className="modal-dialog modal-dialog-centered">
-                            <div className="modal-content">
-                                <div className="modal-header">
-                                    <h5 className="modal-title" id="speechErrorModalTitle">Aviso</h5>
-                                    <button type="button" className="btn-close" onClick={() => setShowSpeechErrorPopup(false)} aria-label="Close"></button>
-                                </div>
-                                <div className="modal-body">
-                                    <p>Se ha parado la lectura.</p>
-                                </div>
-                                <div className="modal-footer">
-                                    <button type="button" className="btn btn-secondary" onClick={() => setShowSpeechErrorPopup(false)}>Cerrar</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="modal-backdrop fade show"></div> {/* Fondo del modal */}
-                </>
-            )}
+            </main>
             <Footer />
         </>
     );
