@@ -1677,3 +1677,62 @@ header nav ul li.nav-link-li {
   flex-grow: 1; /* Crucial para que este contenedor se expanda dentro del <main> global */
   width: 100%; /* Opcional, pero bueno para asegurar que ocupe todo el ancho */
 }
+
+.mensaje-subrayado {
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  position: relative;
+  display: inline-block;
+  margin: 2rem auto;
+  padding-bottom: 0.2rem;
+}
+
+.mensaje-subrayado::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  background-color: var(--primary-color);
+  left: 0;
+  bottom: 0;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.mensaje-subrayado:hover::after {
+  transform: scaleX(1);
+}
+
+.registro-pill {
+  background: linear-gradient(to right,#C33333, #ff5a5a);
+  color: white;
+  padding: 0.4rem 1rem;
+  font-size: 0.9rem;
+  border-radius: 50px;
+  font-weight: 500;
+  display: inline-block;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.registro-pill:hover {
+  transform: scale(1.05);
+}
+
+.registro-animado {
+  background: linear-gradient(270deg, #C33333, #ff6666, #C33333);
+  background-size: 600% 600%;
+  color: white;
+  padding: 1rem 1.5rem;
+  border-radius: 1rem;
+  font-weight: bold;
+  text-align: center;
+  animation: movimientoFondo 5s ease infinite;
+  max-width: 500px;
+  margin: 2rem auto;
+  cursor: pointer;
+}

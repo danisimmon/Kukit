@@ -125,6 +125,9 @@ function Home() {
                   Esto te permitirá ahorrar tiempo en tus compras y asegurarte de tener todo lo necesario para
                   tus platos. ¡Cocinar nunca fue tan fácil!
                 </p>
+                <div class="registro-animado" onClick={() => setShowRegistro(true)}>
+                  🚀 ¡Accede a tu espacio de recetas personalizadas! Regístrate gratis.
+                </div>
               </div>
             </div>
           </div>
@@ -143,6 +146,9 @@ function Home() {
                   necesidades: sin gluten, veganas, bajas en carbohidratos y mucho más. Así ahorras tiempo y
                   disfrutas justo lo que necesitas, sin complicaciones.
                 </p>
+                <span class="registro-pill" onClick={() => setShowRegistro(true)}>
+                  🔐 Solo para usuarios registrados
+                </span>
               </div>
             </div>
           </div>
@@ -156,11 +162,9 @@ function Home() {
               <div className="contenedor-lista-compra-texto">
                 <h3>¿Cómo hacerlo?</h3>
                 <p>
-                  En Kukit te lo ponemos fácil para encontrar la receta perfecta. Explora platos según su país
-                  de origen, filtra por los ingredientes que tienes en casa o elige opciones que se adapten a tus
-                  necesidades: sin gluten, veganas, bajas en carbohidratos y mucho más. Así ahorras tiempo y
-                  disfrutas justo lo que necesitas, sin complicaciones.
+                  Organiza tus comidas con facilidad y encuentra inspiración para cada día. Con nuestro calendario semanal, podrás agregar recetas, adaptar tu menú y gestionar tu alimentación de manera práctica. Convierte la planificación en una experiencia sencilla y deliciosa.
                 </p>
+                <p class="mensaje-subrayado" onClick={() => setShowRegistro(true)}>Crea tu cuenta y descubre todo lo que Kukit tiene preparado para ti.</p>
               </div>
             </div>
           </div>
