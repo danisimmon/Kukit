@@ -18,8 +18,8 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 // import '../node_modules/bootstrap-icons/font/bootstrap-icons.css';
 import '../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js';
 import PlanificacionSemanal from './planAlimentacion/planAlimentacion.jsx';
+import VerRecetaTexto from './area-privada/verRecetaPorTexto.jsx';
 // import './bootstrap/dist/js/bootstrap.bundle.min.js';
-
 
 function App() {
   return (
@@ -36,6 +36,7 @@ function App() {
         <Route path="/listaCompra" element={<ListaCompra />} />
         <Route path="/planAlimentacion" element={<PlanificacionSemanal />} />
         <Route path="/area-privada/verreceta/:recetaId" element={<VerReceta />} />
+        <Route path="/area-privada/verrecetaportexto/:recetaId" element={<VerRecetaTexto />} />
       </Routes>
     </BrowserRouter>
   );
