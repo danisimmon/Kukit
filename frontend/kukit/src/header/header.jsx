@@ -3,7 +3,7 @@ import logo from '../img/logo_kukit.png';
 import Login from '../login/login';
 import Registro from '../login/registro/registro';
 import ListaCompra from '../listaCompra/listaCompra';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom'; // Cambiado Link por NavLink
 import { useNavigate } from 'react-router-dom';
 import Recetas from '../area-privada/recetas';
 import DesplegablePerfil from '../area-privada/desplegable-perfil'
@@ -64,10 +64,23 @@ function Header() {
         </button>
         <nav>
           <ul>
-            <li><Link to="/recetas">Recetas</Link></li>
-            <li><Link to="/recetas/recetasguardadas">Recetas Guardadas</Link></li>
-            <li onClick={() => setListaCompra(true)}>Lista de la Compra</li>
-            <li><a href="/planAlimentacion">Plan de alimentación</a></li>
+            <li>
+              <NavLink to="/recetas" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+                Recetas
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/recetas/recetasguardadas" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+                Recetas Guardadas
+              </NavLink>
+            </li>
+            {/* Para "Lista de la Compra", como no es una ruta, el estilo activo se manejaría diferente si es necesario */}
+            <li onClick={() => setListaCompra(true)} className="nav-link-li">Lista de la Compra</li>
+            <li>
+              <NavLink to="/planAlimentacion" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+                Plan de alimentación
+              </NavLink>
+            </li>
           </ul>
         </nav>
         <div className="contenedor-header">
