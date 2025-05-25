@@ -18,21 +18,21 @@ function Header() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    const fetchRecetas = async () => {
-      try {
-        const response = await fetch('http://localhost/api/area_privada/recetas/getRecetas.php');
-        const data = await response.json();
-        // Ordena las recetas por algún criterio fijo si necesitas que siempre sean las mismas
-        // Ejemplo: por nombre (alfabéticamente), por id, o similar.
-        const recetasOrdenadas = [...data.recetas].sort((a, b) => a.nombre.localeCompare(b.nombre));
-        setRecetas(recetasOrdenadas.slice(0, 4));
-      } catch (error) {
-        console.error('Error cargando recetas:', error);
-      }
-    };
-    fetchRecetas();
-  }, []);
+  // useEffect(() => {
+  //   const fetchRecetas = async () => {
+  //     try {
+  //       const response = await fetch('http://localhost/api/area_privada/recetas/getRecetas.php');
+  //       const data = await response.json();
+  //       // Ordena las recetas por algún criterio fijo si necesitas que siempre sean las mismas
+  //       // Ejemplo: por nombre (alfabéticamente), por id, o similar.
+  //       const recetasOrdenadas = [...data.recetas].sort((a, b) => a.nombre.localeCompare(b.nombre));
+  //       setRecetas(recetasOrdenadas.slice(0, 4));
+  //     } catch (error) {
+  //       console.error('Error cargando recetas:', error);
+  //     }
+  //   };
+  //   fetchRecetas();
+  // }, []);
 
   useEffect(() => {
     fetch("http://localhost/api/login/gestion-autenticacion/gestion-autenticacion.php", {

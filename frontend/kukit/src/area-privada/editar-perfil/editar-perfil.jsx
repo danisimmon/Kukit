@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useLocation } from 'react-router-dom';
 import logo from '../../img/logo_kukit.png';
 import comida from "../../img/comida.jpg";
 import bookmark from "../../img/bookmark.png";
@@ -7,6 +8,8 @@ import Footer from '../../footer/footer';
 import Header from '../../header/header';
 
 const EditarPerfil = () => {
+  const location = useLocation();
+
   const [formData, setFormData] = useState({
     usuario: '',
     correo: '',
@@ -148,6 +151,14 @@ const EditarPerfil = () => {
   // Cargar los datos del usuario al montar el componente
   useEffect(() => {
     obtenerDatosUsuario();
+
+    // Check for navigation state to set active section
+    if (location.state?.seccion) {
+      setSeccionActiva(location.state.seccion);
+    } else {
+      // Default section if no state is passed
+      setSeccionActiva("perfil");
+    }
   }, []);
 
   // Cargar las recetas creadas cuando la sección "recetas" esté activa

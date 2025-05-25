@@ -30,6 +30,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $sql = $conexion->prepare($sql);
         $sql->bind_param("sss", $usuario, $correo, $password);
         if ($sql->execute()) {
+            // Iniciar sesión automáticamente después del registro
+            session_start();
+            $_SESSION['user']['id'] = $conexion->insert_id; // Asignar el ID del nuevo usuario a la sesión
             echo json_encode(["success" => true, "message" => "Registro exitoso"]);
         } else {
             echo json_encode(["success" => false, "message" => "Error al registrar el usuario"]);

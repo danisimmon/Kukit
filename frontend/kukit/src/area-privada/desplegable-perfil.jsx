@@ -7,15 +7,21 @@ const DesplegablePerfil = ({ showDesplegablePerfil, setDesplegablePerfil }) => {
     const offcanvasRef = useRef();
     const bsOffcanvasRef = useRef(null);
     const editarPerfil = () => {
-        navigate("/area-privada/editar-perfil");
+        navigate("/area-privada/editar-perfil", {
+            state: { seccion: "perfil" },
+        });
         setDesplegablePerfil(false);
     };
     const crearReceta = () => {
-        navigate("/recetas");
+        navigate("/area-privada/editar-perfil", {
+            state: { seccion: "crear" },
+        });
         setDesplegablePerfil(false);
     };
     const verRecetas = () => {
-        navigate("/recetas/recetasguardadas");
+        navigate("/area-privada/editar-perfil", {
+            state: { seccion: "recetas" },
+        });
         setDesplegablePerfil(false);
     };
     const cerrarSesion = () => {
@@ -27,7 +33,7 @@ const DesplegablePerfil = ({ showDesplegablePerfil, setDesplegablePerfil }) => {
                 console.log("Respuesta del backend:", response.data);
                 if (response.data.success) {
                     // Redirigir a la página de inicio o a otra página después de cerrar sesión
-                    window.location.href = "/home";
+                    navigate("/home");
                 } else {
                     console.error("Error al cerrar sesión:", response.data.message);
                 }

@@ -22,7 +22,7 @@ const VerReceta = () => {
     const [raciones, setRaciones] = useState(2);
     // Estado para la paginación de los pasos
     const [paginaPasosActual, setPaginaPasosActual] = useState(1);
-    const [mensajeListaCompra, setMensajeListaCompra] = useState('');
+    const [mensajeListaCompra, setMensajeListaCompra] = useState({ text: '', type: '' }); // Para mensajes de éxito/error
     const [mostrarListaCompraLocal, setMostrarListaCompraLocal] = useState(false); // Estado para mostrar ListaCompra desde VerReceta
     const [itemsParaListaLocal, setItemsParaListaLocal] = useState([]); // Estado para los ítems añadidos desde esta vista
     const PASOS_POR_PAGINA = 1; // Mostrar un paso a la vez
@@ -31,10 +31,15 @@ const VerReceta = () => {
     const navigate = useNavigate(); // Hook para la navegación
 
     useEffect(() => {
-        axios.get('http://localhost/api/area_privada/recetas/getRecetas.php') // Ajusta esta URL a la tuya
+        axios.get('http://localhost/api/area_privada/recetas/getRecetasConcreta.php'
+            , {
+                params: { recetaId } // Pasar el ID de la receta como parámetro
+                // withCredentials: true // Descomentar si necesitas enviar cookies con la solicitud
+            }
+        )
             .then(res => {
                 if (res.data.success) {
-                    const recetaSeleccionada = res.data.recetas.find(r => r._id === recetaId);
+                    const recetaSeleccionada = res.data.recetas.find(r => r._id.$oid === recetaId);
                     setReceta(recetaSeleccionada);
                     if (!recetaSeleccionada) {
                         console.warn(`Receta con ID ${recetaId} no encontrada.`);
@@ -100,25 +105,49 @@ const VerReceta = () => {
         }
     };
 
-    const handleAddToShoppingList = (nombreIngrediente, cantidad, unidad) => {
-        const nuevoItem = {
-            id: Date.now(), // ID único simple
+    const handleAddToShoppingList = (nombreIngrediente, cantidadNum, unidad) => {
+        const itemParaBackend = {
             nombre: nombreIngrediente,
-            cantidad: cantidad.toFixed(1), // Aseguramos que la cantidad sea string con 1 decimal
+            cantidad: cantidadNum, // Enviar cantidad numérica al backend
             unidad: unidad,
-            comprado: false // Estado inicial
+            // Considera añadir aquí el ID del usuario si tu backend lo requiere
+            // Ejemplo: userId: obtenerIdUsuarioActual() 
         };
 
-        setItemsParaListaLocal(prevItems => [...prevItems, nuevoItem]);
+        // Ajusta la URL a tu endpoint real del backend
+        axios.post('http://localhost/api/area_privada/listaCompra/insertListaCompra.php', itemParaBackend)
+            .then(response => {
+                console.log('Ingrediente añadido a la lista de compra en el backend:', response.data);
 
-        const mensaje = `${nuevoItem.nombre} (${nuevoItem.cantidad} ${nuevoItem.unidad}) añadido a la lista de la compra.`;
-        console.log(mensaje);
-        setMensajeListaCompra(mensaje);
-        setTimeout(() => {
-            setMensajeListaCompra('');
-        }, 3000);
-        setMostrarListaCompraLocal(true); // Mostrar el componente ListaCompra
+                // Crear el item para el estado local, usando ID del backend si está disponible
+                const nuevoItemLocal = {
+                    id: response.data?.id || Date.now(), // Usar ID del backend o fallback
+                    nombre: nombreIngrediente,
+                    cantidad: cantidadNum.toFixed(1), // Formatear cantidad para la UI local
+                    unidad: unidad,
+                    comprado: false // Estado inicial para la UI local
+                };
+
+                setItemsParaListaLocal(prevItems => [...prevItems, nuevoItemLocal]);
+
+                const mensaje = `${nuevoItemLocal.nombre} (${nuevoItemLocal.cantidad} ${nuevoItemLocal.unidad}) añadido a la lista de la compra.`;
+                setMensajeListaCompra({ text: mensaje, type: 'success' });
+                setTimeout(() => {
+                    setMensajeListaCompra({ text: '', type: '' });
+                }, 3000);
+                setMostrarListaCompraLocal(true); // Mostrar el componente ListaCompra
+            })
+            .catch(error => {
+                console.error('Error al añadir ingrediente a la lista de compra:', error);
+                const errorMensaje = error.response?.data?.message || `Error al añadir ${nombreIngrediente}. Inténtalo de nuevo.`;
+                setMensajeListaCompra({ text: errorMensaje, type: 'danger' });
+                setTimeout(() => {
+                    setMensajeListaCompra({ text: '', type: '' });
+                }, 5000); // Mostrar mensaje de error un poco más
+                // No se actualiza la lista local ni se muestra `ListaCompra` si hay error
+            });
     };
+
 
     if (!receta) return <p className="text-center mt-5">Cargando receta...</p>;
     // Eliminamos el console.log(receta) que estaba aquí para limpiar.
@@ -133,10 +162,10 @@ const VerReceta = () => {
             <Header />
             <div className="container mt-4">
                 <h4>Recetas <span className="text-danger">| {receta.nombre}</span></h4>
-                {mensajeListaCompra && (
-                    <div className="alert alert-success alert-dismissible fade show" role="alert">
-                        {mensajeListaCompra}
-                        <button type="button" className="btn-close" onClick={() => setMensajeListaCompra('')} aria-label="Close"></button>
+                {mensajeListaCompra.text && (
+                    <div className={`alert alert-${mensajeListaCompra.type || 'info'} alert-dismissible fade show`} role="alert">
+                        {mensajeListaCompra.text}
+                        <button type="button" className="btn-close" onClick={() => setMensajeListaCompra({ text: '', type: '' })} aria-label="Close"></button>
                     </div>
                 )}
 

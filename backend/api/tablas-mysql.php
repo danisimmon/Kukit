@@ -212,10 +212,9 @@ mysqli_query($conexion, "INSERT INTO productos (nombre, categoria, unidad) VALUE
 $sql = "CREATE TABLE IF NOT EXISTS listacompra_productos (
     id INT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     id_usuario INT(20) UNSIGNED NOT NULL,
-    id_producto INT(20) UNSIGNED NOT NULL,
-    cantidad DECIMAL(6,2) NOT NULL,
-    FOREIGN KEY (id_usuario) REFERENCES usuario(id),
-    FOREIGN KEY (id_producto) REFERENCES productos(id)
+    productos VARCHAR(100) NOT NULL,
+    cantidad VARCHAR(100) NOT NULL,
+    FOREIGN KEY (id_usuario) REFERENCES usuario(id)
 )";
 mysqli_query($conexion, $sql);
 

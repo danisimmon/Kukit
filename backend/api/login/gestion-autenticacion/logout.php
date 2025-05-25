@@ -1,9 +1,7 @@
 <?php 
-include '../../conecta-mysql.php';
+session_start(); //Recuperamos la sesión iniciada por el usuario
 
-if(isset($_SESSION) && isset($_SESSION['user'])) {
-    session_start(); //Recuperamos la sesión iniciada por el usuario
-    session_unset(); // Destruye todas las variables de sesión
+if(isset($_SESSION) && isset($_SESSION['user']['id'])) {
     session_destroy(); // Destruye la sesión actual
     $data = ["success" => true, "message" => "Sesión cerrada correctamente."];
 } else {

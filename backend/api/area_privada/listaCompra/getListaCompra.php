@@ -22,26 +22,12 @@ if (!$resultado) {
 // Crear un array para almacenar los datos de la lista de la compra
 $listaCompra = [];
 while ($fila = mysqli_fetch_assoc($resultado)) {
-    $id_producto = $fila['id_producto'];
-    $cantidad = $fila['cantidad'];
 
-    // Obtener los detalles del producto
-    $queryProducto = "SELECT * FROM productos WHERE id = ?";
-    $stmtProducto = $conexion->prepare($queryProducto);
-    $stmtProducto->bind_param("i", $id_producto);
-    $stmtProducto->execute();
-    $resultadoProducto = $stmtProducto->get_result();
-    if ($resultadoProducto) {
-        $producto = mysqli_fetch_assoc($resultadoProducto);
-        if ($producto) {
-            // Agregar el producto a la lista de compra
-            $listaCompra[] = [
-                "id_producto" => $id_producto,
-                "nombre" => $producto['nombre'],
-                "cantidad" => $cantidad
-            ];
-        }
-    }
+    // Agregar el producto a la lista de compra
+    $listaCompra[] = [
+        "nombre" => $fila['productos'],
+        "cantidad" => $fila['cantidad']
+    ];
 }
 
 // Devolver una respuesta JSON
@@ -50,4 +36,3 @@ echo json_encode([
     "message" => "Lista de compra recibida correctamente",
     "data" => $listaCompra
 ]);
-?>

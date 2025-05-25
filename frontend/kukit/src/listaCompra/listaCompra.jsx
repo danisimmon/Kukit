@@ -62,11 +62,11 @@ const ListaCompra = ({ showListaCompra, setListaCompra }) => {
   };
 
   // Eliminar un producto de la lista de la compra
-  const deleteListaCompra = async (id_producto, cantidad) => {
+  const deleteListaCompra = async (nombre, cantidad) => {
     try {
       const response = await axios.post(
         "http://localhost/api/area_privada/listaCompra/deleteListaCompra.php",
-        { id_producto, cantidad },
+        { nombre, cantidad },
         {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
@@ -93,7 +93,7 @@ const ListaCompra = ({ showListaCompra, setListaCompra }) => {
   const vaciarListaCompra = async () => {
     try {
       for (const producto of listaCompra) {
-        await deleteListaCompra(producto.id_producto, producto.cantidad);
+        await deleteListaCompra(producto.nombre, producto.cantidad);
       }
       setMensaje("Lista de la compra vaciada correctamente.");
       setExito(true);
@@ -167,7 +167,7 @@ const ListaCompra = ({ showListaCompra, setListaCompra }) => {
                 <li key={producto.id_producto}>
                   {producto.nombre} - Cantidad: {producto.cantidad}
                   <button
-                    onClick={() => deleteListaCompra(producto.id_producto, producto.cantidad)}
+                    onClick={() => deleteListaCompra(producto.nombre, producto.cantidad)}
                     className="btn btn-danger btn-sm mx-2"
                   >
                     Eliminar
