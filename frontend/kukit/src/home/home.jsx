@@ -1,9 +1,9 @@
 // src/pages/Home.jsx
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import logo from '../img/logo_kukit.png';
 import hero from '../img/mesa-de-cocina-con-platos-preparados-e-ingredientes.jpg';
-import Login from '../login/login';
-import Registro from '../login/registro/registro';
+import Login from '../login/login'; // Descomentado
+import Registro from '../login/registro/registro'; // Descomentado
 import Footer from '../footer/footer';
 import ListaCompra from '../listaCompra/listaCompra';
 import { useNavigate } from 'react-router-dom';
@@ -18,9 +18,12 @@ function Home() {
   const [showLogin, setShowLogin] = useState(false);
   const [showRegistro, setShowRegistro] = useState(false);
   const [showListaCompra, setListaCompra] = useState(false);
-  const [recetas, setRecetas] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const intervalRef = useRef(null);
+
+  const [recetasImprescindibles, setRecetasImprescindibles] = useState([]);
+  const [currentIndexImprescindibles, setCurrentIndexImprescindibles] = useState(0);
+  const [recetasNovedades, setRecetasNovedades] = useState([]);
+  const [currentIndexNovedades, setCurrentIndexNovedades] = useState(0);
+
 
   useEffect(() => {
     const container = document.querySelector('.bubbles');
@@ -39,33 +42,75 @@ function Home() {
       try {
         const response = await fetch('http://localhost/api/area_privada/recetas/getRecetas.php');
         const data = await response.json();
-        // Ordena las recetas por algún criterio fijo si necesitas que siempre sean las mismas
-        // Ejemplo: por nombre (alfabéticamente), por id, o similar.
-        const recetasOrdenadas = [...data.recetas].sort((a, b) => a.nombre.localeCompare(b.nombre));
-        setRecetas(recetasOrdenadas.slice(0, 4));
+
+        if (data && Array.isArray(data.recetas)) {
+          const todasLasRecetas = data.recetas;
+
+          // Para Imprescindibles Kukit (ordenadas por nombre, las primeras 4)
+          const imprescindiblesOrdenadas = [...todasLasRecetas].sort((a, b) => a.nombre.localeCompare(b.nombre));
+          setRecetasImprescindibles(imprescindiblesOrdenadas.slice(0, 4));
+
+          // Para Novedades de la semana (ordenadas por fecha, las 4 más recientes)
+          const novedadesOrdenadas = [...todasLasRecetas].sort((a, b) => {
+            const dateA = a.fecha_creacion ? new Date(a.fecha_creacion).getTime() : 0;
+            const dateB = b.fecha_creacion ? new Date(b.fecha_creacion).getTime() : 0;
+            const validTimeA = isNaN(dateA) ? 0 : dateA;
+            const validTimeB = isNaN(dateB) ? 0 : dateB;
+            return validTimeB - validTimeA; // Descendente
+          });
+          setRecetasNovedades(novedadesOrdenadas.slice(0, 4));
+
+        } else {
+          console.error('Error cargando recetas: la estructura de datos no es la esperada o no hay recetas.', data);
+          setRecetasImprescindibles([]);
+          setRecetasNovedades([]);
+        }
       } catch (error) {
         console.error('Error cargando recetas:', error);
+        setRecetasImprescindibles([]);
+        setRecetasNovedades([]);
       }
     };
 
     fetchRecetas();
   }, []);
-  // Navegar a la siguiente receta
-  const handleNext = () => {
-    setCurrentIndex((prev) => (prev + 1) % recetas.length);
-  };
 
-  // Navegar a la receta anterior
-  const handlePrev = () => {
-    setCurrentIndex((prev) => (prev - 1 + recetas.length) % recetas.length);
-  };
+  // Manejadores para el carrusel de Imprescindibles
+  const handleNextImprescindibles = useCallback(() => {
+    const numTotalSlides = recetasImprescindibles.length + 1; // +1 para la tarjeta de login/registro
+    setCurrentIndexImprescindibles((prev) => (prev + 1) % numTotalSlides);
+  }, [recetasImprescindibles.length]);
 
-  // Solo mostrar la receta actual
-  const receta = recetas[currentIndex];
+  const handlePrevImprescindibles = useCallback(() => {
+    const numTotalSlides = recetasImprescindibles.length + 1;
+    setCurrentIndexImprescindibles((prev) => (prev - 1 + numTotalSlides) % numTotalSlides);
+  }, [recetasImprescindibles.length]);
+
+  const recetaImprescindibleActual = recetasImprescindibles[currentIndexImprescindibles];
+
+  // Manejadores para el carrusel de Novedades
+  const handleNextNovedades = useCallback(() => {
+    const numTotalSlides = recetasNovedades.length + 1; // +1 para la tarjeta de login/registro
+    setCurrentIndexNovedades((prev) => (prev + 1) % numTotalSlides);
+  }, [recetasNovedades.length]);
+
+  const handlePrevNovedades = useCallback(() => {
+    const numTotalSlides = recetasNovedades.length + 1;
+    setCurrentIndexNovedades((prev) => (prev - 1 + numTotalSlides) % numTotalSlides);
+  }, [recetasNovedades.length]);
+
+  const recetaNovedadActual = recetasNovedades[currentIndexNovedades];
+
+  // Los useEffect para el carrusel automático han sido eliminados.
+  // La navegación manual seguirá funcionando con los botones.
 
   return (
     <>
       <Header />
+      {/* Renderizado condicional de modales de Login y Registro */}
+      {showLogin && <Login onClose={() => setShowLogin(false)} setShowRegistro={setShowRegistro} setShowLogin={setShowLogin} />}
+      {showRegistro && <Registro onClose={() => setShowRegistro(false)} setShowLogin={setShowLogin} setShowRegistro={setShowRegistro} />}
+
       <main>
         <div className="hero">
           <div className="textos-hero">
@@ -90,24 +135,130 @@ function Home() {
             </div>
           </div>
 
-          <div className="contenedor-home" id="contenedor-imprescindibles-novedades">
-            <div className="contenedor-home" id="contenedor-imprescindibles-novedades">
-              <h2>Imprescindibles Kukit</h2>
-              <div className="imprescindibles-kukit-recetas" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                {receta && (
-                  <div className="tarjeta-receta" key={receta._id || currentIndex}>
-                    <img src={receta.imagen || 'img/comida.jpg'} alt={receta.nombre} />
-                    <h3>{receta.nombre}</h3>
-                    <p>{receta.descripcion}</p>
+          {/* Contenedor para las secciones de Imprescindibles y Novedades */}
+          {/* Usamos container-fluid para ancho completo y my-5 para margen vertical. La clase 'row' de Bootstrap permite que los elementos hijos se coloquen en línea. */}
+          <div className="container-fluid my-5" id="contenedor-imprescindibles-novedades">
+            <div className="row">
+
+              {/* Sección Imprescindibles Kukit - Ocupa la mitad del ancho en pantallas medianas y superiores */}
+              <div className="col-md-6">
+                <div className="seccion-home-recetas text-center mb-4 mb-md-0"> {/* mb-4 para móviles, mb-md-0 para resetear en medianas+ */}
+                  <h2>Imprescindibles Kukit</h2>
+                  <div className="imprescindibles-kukit-recetas" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    {currentIndexImprescindibles < recetasImprescindibles.length && recetaImprescindibleActual ? (
+                      <div
+                        className="tarjeta-receta"
+                        key={recetaImprescindibleActual._id || currentIndexImprescindibles}
+                        style={{
+                          minHeight: '300px', // Altura mínima consistente para la tarjeta
+                          width: '100%',      // Ancho consistente
+                          display: 'flex',
+                          flexDirection: 'column'
+                        }}
+                      >
+                        <img
+                          src={recetaImprescindibleActual.href || '/img/comida_default.jpg'}
+                          alt={recetaImprescindibleActual.nombre}
+                          onError={(e) => { e.target.onerror = null; e.target.src = "/img/comida_default.jpg"; }}
+                          style={{
+                            height: '200px',    // Altura fija para la caja de la imagen
+                            width: '100%',      // La imagen ocupa todo el ancho de la tarjeta
+                            objectFit: 'cover' // La imagen cubre el área, puede recortarse
+                          }}
+                        />
+                        <div style={{ padding: '10px 15px', textAlign: 'center', flexGrow: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                          <h3 style={{ margin: 0, fontSize: '1.1rem' }}>{recetaImprescindibleActual.nombre}</h3>
+                        </div>
+                      </div>
+                    ) : (
+                      // Tarjeta de Login/Registro para Imprescindibles
+                      <div className="tarjeta-receta tarjeta-login-extra" key="login-imprescindibles" style={{ textAlign: 'center', padding: '20px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', minHeight: '300px', width: '100%' }}>
+                        <h4>¡Únete a Kukit!</h4>
+                        <p style={{ fontSize: '0.9rem', margin: '10px 0' }}>Regístrate o inicia sesión para descubrir un mundo de recetas y funcionalidades.</p>
+                        <button
+                          className="btn btn-primary mt-2 w-75"
+                          style={{ backgroundColor: '#C33333', color: '#FFFFFF', borderColor: '#C33333' }}
+                          onClick={() => setShowLogin(true)}
+                        >
+                          Iniciar Sesión
+                        </button>
+                        <button
+                          className="btn btn-outline-primary mt-2 w-75"
+                          style={{ backgroundColor: '#FFFFFF', color: '#C33333', borderColor: '#C33333' }}
+                          onClick={() => setShowRegistro(true)}
+                        >
+                          Registrarse
+                        </button>                      </div>
+                    )}
+                    <div className='contenedor-boton'>
+                      {/* Los botones se deshabilitan si solo hay un slide (la tarjeta de login/registro cuando no hay recetas) */}
+                      <button onClick={handlePrevImprescindibles} disabled={(recetasImprescindibles.length + 1) <= 1}>&lt;</button>
+                      <button onClick={handleNextImprescindibles} disabled={(recetasImprescindibles.length + 1) <= 1}>&gt;</button>
+                    </div>
                   </div>
-                )}
-                <div className='contenedor-boton'>
-                <button onClick={handlePrev} disabled={recetas.length === 0}>&lt;</button>
-                <button onClick={handleNext} disabled={recetas.length === 0}>&gt;</button>
+                </div>
+              </div>
+
+              {/* Sección Novedades de la semana - Ocupa la mitad del ancho en pantallas medianas y superiores */}
+              <div className="col-md-6">
+                <div className="seccion-home-recetas text-center">
+                  <h2>Novedades de la semana</h2>
+                  <div className="imprescindibles-kukit-recetas" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    {currentIndexNovedades < recetasNovedades.length && recetaNovedadActual ? (
+                      <div
+                        className="tarjeta-receta"
+                        key={recetaNovedadActual._id || currentIndexNovedades}
+                        style={{
+                          minHeight: '300px', // Altura mínima consistente para la tarjeta
+                          width: '100%',      // Ancho consistente
+                          display: 'flex',
+                          flexDirection: 'column'
+                        }}
+                      >
+                        <img
+                          src={recetaNovedadActual.href || '/img/comida_default.jpg'}
+                          alt={recetaNovedadActual.nombre}
+                          onError={(e) => { e.target.onerror = null; e.target.src = "/img/comida_default.jpg"; }}
+                          style={{
+                            height: '200px',    // Altura fija para la caja de la imagen
+                            width: '100%',      // La imagen ocupa todo el ancho de la tarjeta
+                            objectFit: 'cover' // La imagen cubre el área, puede recortarse
+                          }}
+                        />
+                        <div style={{ padding: '10px 15px', textAlign: 'center', flexGrow: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                          <h3 style={{ margin: 0, fontSize: '1.1rem' }}>{recetaNovedadActual.nombre}</h3>
+                        </div>
+                      </div>
+                    ) : (
+                      // Tarjeta de Login/Registro para Novedades
+                      <div className="tarjeta-receta tarjeta-login-extra" key="login-novedades" style={{ textAlign: 'center', padding: '20px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', minHeight: '300px', width: '100%' }}>
+                        <h4>¡Explora Más!</h4>
+                        <p style={{ fontSize: '0.9rem', margin: '10px 0' }}>Inicia sesión para acceder a todas las funcionalidades y guardar tus recetas favoritas.</p>
+                        <button
+                          className="btn btn-primary mt-2 w-75"
+                          style={{ backgroundColor: '#C33333', color: '#FFFFFF', borderColor: '#C33333' }}
+                          onClick={() => setShowLogin(true)}
+                        >
+                          Iniciar Sesión
+                        </button>
+                        <button
+                          className="btn btn-outline-primary mt-2 w-75"
+                          style={{ backgroundColor: '#FFFFFF', color: '#C33333', borderColor: '#C33333' }}
+                          onClick={() => setShowRegistro(true)}
+                        >
+                          Registrarse
+                        </button>                        
+                        </div>
+                    )}
+                    <div className='contenedor-boton'>
+                      <button onClick={handlePrevNovedades} disabled={(recetasNovedades.length + 1) <= 1}>&lt;</button>
+                      <button onClick={handleNextNovedades} disabled={(recetasNovedades.length + 1) <= 1}>&gt;</button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-            <h2>Novedades de la semana</h2>
+
           </div>
 
           <div className="contenedor-home" id="contenedor-lista-compra">
@@ -170,74 +321,6 @@ function Home() {
           </div>
         </section>
       </main>
-
-      {/* <footer>
-          <div className="main"></div>
-          <div className="footer">
-            <div className="bubbles"></div>
-            <div className="content">
-              <div>
-                <div>
-                  <b>Eldew</b>
-                  <a href="#">Secuce</a>
-                  <a href="#">Drupand</a>
-                  <a href="#">Oceash</a>
-                  <a href="#">Ugefe</a>
-                  <a href="#">Babed</a>
-                </div>
-                <div>
-                  <b>Spotha</b>
-                  <a href="#">Miskasa</a>
-                  <a href="#">Agithe</a>
-                  <a href="#">Scesha</a>
-                  <a href="#">Lulle</a>
-                </div>
-                <div>
-                  <b>Chashakib</b>
-                  <a href="#">Chogauw</a>
-                  <a href="#">Phachuled</a>
-                  <a href="#">Tiebeft</a>
-                  <a href="#">Ocid</a>
-                  <a href="#">Izom</a>
-                  <a href="#">Ort</a>
-                </div>
-                <div>
-                  <b>Athod</b>
-                  <a href="#">Pamuz</a>
-                  <a href="#">Vapert</a>
-                  <a href="#">Neesk</a>
-                  <a href="#">Omemanen</a>
-                </div>
-              </div>
-              <div>
-                <a
-                  className="image"
-                  href="https://codepen.io/z-"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{
-                    backgroundImage: "url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/199011/happy.svg')"
-                  }}
-                ></a>
-                <p>©2019 Not Really</p>
-              </div>
-            </div>
-          </div>
-
-          <svg style={{ position: 'fixed', top: '100vh' }}>
-            <defs>
-              <filter id="blob">
-                <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
-                <feColorMatrix
-                  in="blur"
-                  mode="matrix"
-                  values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9"
-                  result="blob"
-                />
-              </filter>
-            </defs>
-          </svg>
-        </footer> */}
       <Footer />
     </>
   );

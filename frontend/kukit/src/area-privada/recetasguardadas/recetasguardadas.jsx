@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react'; // useRef eliminado
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; // Importar useNavigate
 import logo from '../../img/logo_kukit.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
@@ -19,9 +20,9 @@ const RecetasGuardadas = () => {
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
   const [n_recetas, setN_recetas] = useState(0);
-  const [recetaSeleccionada, setRecetaSeleccionada] = useState(null);
-  const offcanvasRef = useRef(null);
-  // const [showListaCompra, setListaCompra] = useState(false); // Estado eliminado
+  // const [recetaSeleccionada, setRecetaSeleccionada] = useState(null); // Estado eliminado, no se usa offcanvas
+  // const offcanvasRef = useRef(null); // Ref eliminada, no se usa offcanvas
+
   // const [showLogin, setShowLogin] = useState(false); // Estado eliminado
   // const [showRegistro, setShowRegistro] = useState(false); // Estado eliminado
   const [likes, setLikes] = useState({});
@@ -30,6 +31,8 @@ const RecetasGuardadas = () => {
 
   const [paginaActual, setPaginaActual] = useState(1);
   const recetasPorPagina = 8;
+
+  const navigate = useNavigate(); // Hook para la navegación
 
   const manejarLike = (idReceta) => {
     const yaLeGusta = liked[idReceta];
@@ -96,25 +99,9 @@ const RecetasGuardadas = () => {
     }
   };
 
-  const abrirReceta = (receta) => {
-    setRecetaSeleccionada(receta);
-    const offcanvasElement = offcanvasRef.current;
-    if (offcanvasElement) {
-      // Asegúrate de que Bootstrap esté disponible globalmente o importa `Offcanvas` directamente
-      const bsOffcanvas = new window.bootstrap.Offcanvas(offcanvasElement);
-      bsOffcanvas.show();
-    }
-  };
-
-  const cerrarOffcanvas = () => {
-    setRecetaSeleccionada(null);
-    const offcanvasElement = offcanvasRef.current;
-    if (offcanvasElement) {
-      const bsOffcanvas = window.bootstrap.Offcanvas.getInstance(offcanvasElement);
-      if (bsOffcanvas) {
-        bsOffcanvas.hide();
-      }
-    }
+  // Función para navegar a la vista detallada de la receta
+  const verDetalleReceta = (idReceta) => {
+    navigate(`/area-privada/verreceta/${idReceta}`);
   };
 
   const indexUltima = paginaActual * recetasPorPagina;
@@ -159,7 +146,7 @@ const RecetasGuardadas = () => {
                 key={receta._id}
                 className="tarjeta btn"
                 role="button"
-                onClick={() => abrirReceta(receta)}
+                onClick={() => verDetalleReceta(receta._id)} // Modificado para navegar
               >
               <img
                 src={receta.href || "/img/comida_default.jpg"}
@@ -225,51 +212,7 @@ const RecetasGuardadas = () => {
         </div>
       </div>
 
-      {/* Offcanvas de receta */}
-      <div
-        className="offcanvas offcanvas-end"
-        tabIndex="-1"
-        id="receta-offcanvasExample"
-        aria-labelledby="offcanvasExampleLabel"
-        ref={offcanvasRef}
-      >
-        <div className="offcanvas-header">
-          <h5 className="offcanvas-title" id="offcanvasExampleLabel">
-            {recetaSeleccionada ? recetaSeleccionada.nombre : 'Información de la receta'}
-          </h5>
-          <button
-            type="button"
-            className="btn-close"
-            data-bs-dismiss="offcanvas"
-            aria-label="Close"
-            onClick={cerrarOffcanvas}
-          ></button>
-        </div>
-        <div className="offcanvas-body">
-          {recetaSeleccionada ? (
-            <>
-              <h3>Ingredientes</h3>
-              <ul>
-                {recetaSeleccionada.ingredientes?.map((ing, index) => (
-                  <li key={index}>
-                    {ing.cantidad && `${ing.cantidad} `}
-                    {ing.unidad && `${ing.unidad} `}
-                    {ing.nombre}
-                  </li>
-                ))}
-              </ul>
-              <h3>Instrucciones</h3>
-              <ol>
-                {recetaSeleccionada.pasos?.map((paso, index) => (
-                  <li key={index}>{paso}</li>
-                ))}
-              </ol>
-            </>
-          ) : (
-            <p>Selecciona una receta para ver los detalles.</p>
-          )}
-        </div>
-      </div>
+      {/* El Offcanvas ha sido eliminado */}
 
       <Footer />
     </>
