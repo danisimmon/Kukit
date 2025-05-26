@@ -103,13 +103,13 @@ const Recetas = () => {
       });
 
       if (respuesta.data.success) {
-        alert(esFavoritoActual ? 'Receta eliminada de favoritos' : 'Receta guardada en favoritos');
+        // alert(esFavoritoActual ? 'Receta eliminada de favoritos' : 'Receta guardada en favoritos');
         setFavoritos(prevFavoritos => ({
           ...prevFavoritos,
           [idReceta]: !esFavoritoActual,
         }));
       } else {
-        alert(esFavoritoActual ? 'Error al eliminar de favoritos' : 'Error al guardar favorito');
+        // alert(esFavoritoActual ? 'Error al eliminar de favoritos' : 'Error al guardar favorito');
         console.error('Error al guardar/eliminar favorito:', respuesta.data.message);
       }
     } catch (error) {
