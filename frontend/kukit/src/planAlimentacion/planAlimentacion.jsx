@@ -84,6 +84,57 @@ function PlanificacionSemanal() {
       }
     };
 
+    // const guardarPlanSemanal = async () => {
+    //   try {
+    //     // Ejemplo de datos necesarios
+    //     const idUsuario = "usuario456"; // deberías sacarlo de tu sesión o contexto real
+    //     const fechaInicio = "2025-04-01"; // calcular según semanaActualVisualizada
+    //     const fechaFin = "2025-04-07";    // calcular según semanaActualVisualizada
+
+    //     // Transformar semanaVisible en array de menus
+    //     const menus = [];
+
+    //     semanaVisible.forEach((dia, diaIndex) => {
+    //       TIPOS_COMIDA.forEach(tipo => {
+    //         const comida = dia[tipo.key];
+    //         if (comida) {
+    //           menus.push({
+    //             fecha: calcularFechaPorDiaIndex(fechaInicio, diaIndex), // función que convierte día index a fecha string
+    //             tipoComida: tipo.key,
+    //             receta: comida
+    //           });
+    //         }
+    //       });
+    //     });
+
+    //     const planSemanal = {
+    //       idUsuario,
+    //       fechaInicio,
+    //       fechaFin,
+    //       menus
+    //     };
+
+    //     const response = await axios.post('http://localhost/api/area_privada/plan-semanal/guardarPlanSemanal.php', planSemanal);
+
+    //     if (response.data?.success) {
+    //       alert("Plan semanal guardado correctamente.");
+    //     } else {
+    //       console.warn("Error del servidor:", response.data);
+    //       alert("Ocurrió un error al guardar el plan.");
+    //     }
+    //   } catch (error) {
+    //     console.error("Error al guardar el plan:", error);
+    //     alert("No se pudo conectar con el servidor.");
+    //   }
+    // };
+
+    // // Función ejemplo para calcular la fecha según el día de la semana visible
+    // function calcularFechaPorDiaIndex(fechaInicioStr, diaIndex) {
+    //   const fechaInicio = new Date(fechaInicioStr);
+    //   fechaInicio.setDate(fechaInicio.getDate() + diaIndex);
+    //   return fechaInicio.toISOString().slice(0, 10); // "YYYY-MM-DD"
+    // }
+
     cargarRecetasGuardadas();
     cargarRecetasCreadas();
 
@@ -377,7 +428,10 @@ function PlanificacionSemanal() {
               </div>
             </div>
           </div>
-        </div>
+        </div> 
+        {/* <button className="btn btn-success mt-4" onClick={guardarPlanSemanal}>
+          Guardar Plan Semanal
+        </button> */}
       </main>
       <Footer />
     </>
