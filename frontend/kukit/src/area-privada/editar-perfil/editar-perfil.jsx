@@ -10,6 +10,20 @@ import Header from '../../header/header';
 const EditarPerfil = () => {
   const location = useLocation();
 
+  const [mostrarPopup, setMostrarPopup] = useState(false);
+
+  // Llamar esta función después de crear la receta
+  const mostrarPopupExito = () => {
+    console.log("Mostrando popup");
+    setMostrarPopup(true);
+  };
+
+  // Usar para cerrar y redirigir
+  const handleCerrarPopup = () => {
+    setMostrarPopup(false);
+    //navigate("/ruta-destino"); // o usar window.location.href = "/..."
+  };
+
   const [formData, setFormData] = useState({
     usuario: '',
     correo: '',
@@ -236,6 +250,8 @@ const EditarPerfil = () => {
         });
         setIngredientes([{ nombre: '', cantidad: '', unidad: '' }]);
         setPasos(['']);
+
+        setMostrarPopup(true);
       } else {
         setExito(false);
         setMensaje(respuesta.data.message);
@@ -361,7 +377,7 @@ const EditarPerfil = () => {
               {!loadingRecetas && !errorRecetas && recetasCreadas.map((receta) => (
                 <div className="tarjeta" key={receta._id}>
                   <img
-                    src={receta.imagen || comida} 
+                    src={receta.imagen || comida}
                     className="imagen-receta-tarjeta"
                     alt={receta.nombre}
                   />
@@ -369,7 +385,7 @@ const EditarPerfil = () => {
                   <a
                     className="btn"
                     data-bs-toggle="offcanvas"
-                    href="#offcanvasExample" 
+                    href="#offcanvasExample"
                     role="button"
                     aria-controls="offcanvasExample"
                   >
@@ -691,6 +707,37 @@ const EditarPerfil = () => {
                         </button>
                       </div>
                     ))}
+                    {/* {ingredientes.map((ing, index) => (
+                      <div key={index} className="rellenar-ingrediente">
+                        <label>
+                          Nombre Ingrediente:
+                          <input
+                            type="text"
+                            value={ing.nombre}
+                            onChange={(e) => handleIngredienteChange(index, 'nombre', e.target.value)}
+                          />
+                        </label>
+                        <label>
+                          Cantidad:
+                          <input
+                            type="number"
+                            value={ing.cantidad}
+                            onChange={(e) => handleIngredienteChange(index, 'cantidad', e.target.value)}
+                          />
+                        </label>
+                        <label>
+                          Unidad:
+                          <input
+                            type="text"
+                            value={ing.unidad}
+                            onChange={(e) => handleIngredienteChange(index, 'unidad', e.target.value)}
+                          />
+                        </label>
+                        <button type="button" onClick={() => handleRemoveIngrediente(index)}>
+                          Eliminar
+                        </button>
+                      </div>
+                    ))} */}
                     <div className="anadir-ingrediente" onClick={handleAddIngrediente}>
                       Añadir Ingrediente
                     </div>
@@ -731,38 +778,21 @@ const EditarPerfil = () => {
               </div>
             </div>
           )}
+          {mostrarPopup && (
+            <div className="popup-receta-creada">
+              <div className="popup-contenido-receta-creada">
+                <h2>¡Receta creada con éxito!</h2>
+                <button
+                  className="boton-cerrar-popup-receta-creada"
+                  onClick={handleCerrarPopup}
+                >
+                  Cerrar
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </main>
-
-      {/* Offcanvas para Lista de la compra */}
-      {
-        // <div className="offcanvas offcanvas-end" tabIndex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-        //   <div className="offcanvas-header">
-        //     <h2 className="offcanvas-title" id="offcanvasExampleLabel">Lista de la Compra</h2>
-        //     <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        //   </div>
-        //   <div className="offcanvas-body">
-        //     <div>
-        //       <div>
-        //         <h3>Ingredientes</h3>
-        //         <ul>
-        //           <li>1 kg de carne de res</li>
-        //           <li>2 cebollas</li>
-        //           <li>1 pimiento rojo</li>
-        //           <li>2 dientes de ajo</li>
-        //           <li>1 cucharadita de comino</li>
-        //           <li>Sal y pimienta al gusto</li>
-        //           <li>12 tortillas de maíz</li>
-        //         </ul>
-        //       </div>
-        //     </div>
-        //     <div className="botones-lista-compra">
-        //       <button>Vaciar Lista</button>
-        //       <button className="botones-inversos">Ir a recetas</button>
-        //     </div>
-        //   </div>
-        // </div>
-      }
       <Footer />
     </>
 

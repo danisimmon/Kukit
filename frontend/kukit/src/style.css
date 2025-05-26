@@ -1,8 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Germania+One&display=swap');
 
-html, body, #root { /* Aseguramos que #root también pueda ocupar toda la altura */
-    height: 100%; /* Asegura que html ocupe toda la altura si body usa % */
-    margin: 0; /* Buena práctica para resetear márgenes */
+html,
+body,
+#root {
+    /* Aseguramos que #root también pueda ocupar toda la altura */
+    height: 100%;
+    /* Asegura que html ocupe toda la altura si body usa % */
+    margin: 0;
+    /* Buena práctica para resetear márgenes */
     padding: 0;
 }
 
@@ -19,7 +24,8 @@ body {
 #root {
     display: flex;
     flex-direction: column;
-    min-height: 100%; /* O 100vh si body no tuviera min-height: 100vh */
+    min-height: 100%;
+    /* O 100vh si body no tuviera min-height: 100vh */
 }
 
 :root {
@@ -84,6 +90,31 @@ input:focus {
     /* Un color más oscuro para mejorar la visibilidad */
     font-weight: 500;
     /* Hacerlo un poco más marcado al escribir */
+}
+
+select {
+    width: 95%;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.62);
+    background: #FFF;
+    font-size: 14px;
+    color: #000;
+    font-weight: 400;
+    padding: 10px;
+    appearance: none;
+    /* Elimina el estilo por defecto del navegador */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+}
+
+select:focus {
+    color: #333;
+    font-weight: 500;
+    outline: none;
+    /* Elimina el borde azul por defecto */
+    border-color: #666;
+    /* Opcional: mejora el contraste del borde al hacer focus */
 }
 
 header {
@@ -829,21 +860,48 @@ footer hr {
     box-shadow: 4px 0px 40px 0px rgba(0, 0, 0, 0.25);
 }
 
-/* .info-basica-receta {
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
-}
+
 
 .info-basica-receta h3 {
     margin-bottom: 10px;
-} */
-.info-basica-receta {
+}
+
+*/ .info-basica-receta {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* dos columnas: dificultad y tiempo */
+    grid-template-columns: 1fr 1fr;
+    /* dos columnas: dificultad y tiempo */
     gap: 20px;
-    width: 40vw; /* asegúrate que tenga un ancho fijo, si no puede colapsar */
+    width: 40vw;
+    /* asegúrate que tenga un ancho fijo, si no puede colapsar */
     box-sizing: border-box;
+}
+
+.apartado-dificultad,
+.apartado-tiempo,
+.apartado-pais,
+.apartado-gluten,
+.apartado-vegetariana,
+.apartado-lactosa,
+.vegana {
+    margin-bottom: 1rem;
+}
+
+.vegana {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.apartado-pais label,
+.apartado-gluten label,
+.apartado-vegetariana label,
+.apartado-lactosa label,
+.vegana label {
+    display: block;
+    margin: 0.3rem 0;
 }
 
 /* .apartado-dificultad,
@@ -852,60 +910,61 @@ footer hr {
     max-height: 10vh;
 } */
 
-.info-basica-receta > .apartado-dificultad,
-.info-basica-receta > .apartado-tiempo {
+.info-basica-receta>.apartado-dificultad,
+.info-basica-receta>.apartado-tiempo {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
 }
 
 .apartado-pais {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 10px;
-  width: 100%;
-  box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .apartado-pais h5 {
-  width: 100%;
-  margin-bottom: 10px;
+    width: 100%;
+    margin-bottom: 10px;
 }
 
 .apartado-pais label {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex: 0 0 calc(33.333% - 10px); /* 3 por fila con espacio entre ellos */
-  box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 0 0 calc(33.333% - 10px);
+    /* 3 por fila con espacio entre ellos */
+    box-sizing: border-box;
 }
 
 .apartado-gluten {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 10px;
-  width: 100%;
-  box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .apartado-vegetariana {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 10px;
-  width: 100%;
-  box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .apartado-lactosa {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 10px;
-  width: 100%;
-  box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .apartado-vegana {
@@ -970,7 +1029,7 @@ footer hr {
     box-shadow: 4px 0px 40px 0px rgba(0, 0, 0, 0.25);
 }
 
-.rellenar-ingrediente,
+/* .rellenar-ingrediente,
 .rellenar-pasos {
     display: flex;
     justify-content: center;
@@ -985,6 +1044,78 @@ footer hr {
     box-shadow: 4px 0px 40px 0px rgba(0, 0, 0, 0.25);
     background: #FFF;
     border-radius: 10px;
+} */
+
+.rellenar-ingrediente,
+.rellenar-pasos {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    background-color: #f9f9f9;
+}
+
+.rellenar-ingrediente label,
+.rellenar-pasos label {
+    display: flex;
+    flex-direction: column;
+    font-weight: 500;
+    font-size: 14px;
+    color: #333;
+}
+
+.rellenar-ingrediente input,
+.rellenar-pasos input {
+    width: 95%;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.62);
+    background: #FFF;
+    font-size: 14px;
+    color: #000;
+    font-weight: 400;
+    padding: 10px;
+}
+
+.popup-receta-creada {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+
+.popup-contenido-receta-creada {
+    background: #fff;
+    padding: 30px 40px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+}
+
+.popup-contenido-receta-creada h2 {
+    margin-bottom: 20px;
+    font-size: 20px;
+    color: #2ecc71;
+}
+
+.boton-cerrar-popup-receta-creada {
+    padding: 10px 20px;
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease;
 }
 
 .anadir-ingrediente,
@@ -1567,60 +1698,82 @@ footer.section.bg-footer {
     color: #222;
     font-weight: 600;
 } */
- /* En tu archivo style.css o un CSS específico para el header */
+/* En tu archivo style.css o un CSS específico para el header */
 
 header nav ul li .nav-link,
-header nav ul li.nav-link-li { /* Aplicamos estilos base también al li de Lista de Compra */
-  position: relative; /* Necesario para el posicionamiento de la línea inferior */
-  text-decoration: none; /* Quitamos el subrayado por defecto */
-  color: var(--text-color); /* Usamos la variable para el color de texto */
-  padding-bottom: 8px; /* Espacio para la línea inferior y para que no esté pegada al texto */
-  transition: color 0.3s ease;
-  cursor: pointer; /* Para el li de Lista de Compra */
+header nav ul li.nav-link-li {
+    /* Aplicamos estilos base también al li de Lista de Compra */
+    position: relative;
+    /* Necesario para el posicionamiento de la línea inferior */
+    text-decoration: none;
+    /* Quitamos el subrayado por defecto */
+    color: var(--text-color);
+    /* Usamos la variable para el color de texto */
+    padding-bottom: 8px;
+    /* Espacio para la línea inferior y para que no esté pegada al texto */
+    transition: color 0.3s ease;
+    cursor: pointer;
+    /* Para el li de Lista de Compra */
 }
 
 /* Línea inferior (inicialmente oculta) */
 header nav ul li .nav-link::after,
 header nav ul li.nav-link-li::after {
-  content: '';
-  position: absolute;
-  bottom: 0; /* Posiciona la línea en la parte inferior */
-  left: 50%; /* Centra la línea para la animación de crecimiento desde el centro */
-  width: 0; /* Ancho inicial 0 para que no se vea */
-  height: 2px; /* Grosor de la línea */
-  background-color: var(--primary-color); /* Usamos la variable para el color de la línea */
-  transition: width 0.3s ease-in-out, left 0.3s ease-in-out; /* Animación suave para ancho y posición */
+    content: '';
+    position: absolute;
+    bottom: 0;
+    /* Posiciona la línea en la parte inferior */
+    left: 50%;
+    /* Centra la línea para la animación de crecimiento desde el centro */
+    width: 0;
+    /* Ancho inicial 0 para que no se vea */
+    height: 2px;
+    /* Grosor de la línea */
+    background-color: var(--primary-color);
+    /* Usamos la variable para el color de la línea */
+    transition: width 0.3s ease-in-out, left 0.3s ease-in-out;
+    /* Animación suave para ancho y posición */
 }
 
 /* Efecto al pasar el ratón */
 header nav ul li .nav-link:hover,
 header nav ul li.nav-link-li:hover {
-  color: var(--primary-color); /* Cambia el color del texto al color primario al pasar el ratón */
+    color: var(--primary-color);
+    /* Cambia el color del texto al color primario al pasar el ratón */
 }
 
 header nav ul li .nav-link:hover::after,
 header nav ul li.nav-link-li:hover::after {
-  width: 100%; /* La línea se expande al 100% del ancho */
-  left: 0; /* La línea se alinea a la izquierda */
-  background-color: var(--primary-color); /* Aseguramos el color primario en hover */
+    width: 100%;
+    /* La línea se expande al 100% del ancho */
+    left: 0;
+    /* La línea se alinea a la izquierda */
+    background-color: var(--primary-color);
+    /* Aseguramos el color primario en hover */
 }
 
 /* Estilo para el NavLink activo */
 header nav ul li .nav-link.active {
-  color: var(--primary-color) !important; /* Texto en color primario para el enlace activo */
-  font-weight: bold; /* Opcional: texto en negrita para el enlace activo */
+    color: var(--primary-color) !important;
+    /* Texto en color primario para el enlace activo */
+    font-weight: bold;
+    /* Opcional: texto en negrita para el enlace activo */
 }
 
 /* Línea siempre visible para el NavLink activo */
 header nav ul li .nav-link.active::after {
-  width: 100%; /* La línea siempre visible y al 100% */
-  left: 0; /* La línea alineada a la izquierda */
-  background-color: var(--primary-color); /* Aseguramos el color primario */
+    width: 100%;
+    /* La línea siempre visible y al 100% */
+    left: 0;
+    /* La línea alineada a la izquierda */
+    background-color: var(--primary-color);
+    /* Aseguramos el color primario */
 }
 
 /* Ajustes para el li que no es NavLink pero queremos que se comporte similar en hover */
 header nav ul li.nav-link-li {
-    display: inline-block; /* Para que el ::after se posicione correctamente */
+    display: inline-block;
+    /* Para que el ::after se posicione correctamente */
 }
 
 
@@ -1643,110 +1796,112 @@ header nav ul li.nav-link-li {
 /* Sección Mi perfil */
 
 .perfil-menu {
-  background-color: #fff;
-  border: 1px solid #ddd;
-  padding: 20px;
-  width: 220px;
-  border-radius: 10px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  font-family: Arial, sans-serif;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 20px;
+    width: 220px;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    font-family: Arial, sans-serif;
 }
 
 .perfil-titulo {
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin-bottom: 10px;
-  border-bottom: 1px solid #ddd;
-  padding-bottom: 5px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
 }
 
 .perfil-opciones {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .perfil-opciones li {
-  padding: 10px 12px;
-  background-color: #f7f7f7;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+    padding: 10px 12px;
+    background-color: #f7f7f7;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .perfil-opciones li:hover {
-  background-color: #e0e0e0;
+    background-color: #e0e0e0;
 }
 
 /* PRUEBA FOOTER EDITAR-PERFIL */
 .page-container-editar-perfil {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1; /* Crucial para que este contenedor se expanda dentro del <main> global */
-  width: 100%; /* Opcional, pero bueno para asegurar que ocupe todo el ancho */
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    /* Crucial para que este contenedor se expanda dentro del <main> global */
+    width: 100%;
+    /* Opcional, pero bueno para asegurar que ocupe todo el ancho */
 }
 
 .mensaje-subrayado {
-  text-align: center;
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: var(--primary-color);
-  position: relative;
-  display: inline-block;
-  margin: 2rem auto;
-  padding-bottom: 0.2rem;
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    position: relative;
+    display: inline-block;
+    margin: 2rem auto;
+    padding-bottom: 0.2rem;
 }
 
 .mensaje-subrayado::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 3px;
-  background-color: var(--primary-color);
-  left: 0;
-  bottom: 0;
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.3s ease;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    background-color: var(--primary-color);
+    left: 0;
+    bottom: 0;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
 }
 
 .mensaje-subrayado:hover::after {
-  transform: scaleX(1);
+    transform: scaleX(1);
 }
 
 .registro-pill {
-  background: linear-gradient(to right,#C33333, #ff5a5a);
-  color: white;
-  padding: 0.4rem 1rem;
-  font-size: 0.9rem;
-  border-radius: 50px;
-  font-weight: 500;
-  display: inline-block;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
-  cursor: pointer;
-  transition: transform 0.2s ease;
+    background: linear-gradient(to right, #C33333, #ff5a5a);
+    color: white;
+    padding: 0.4rem 1rem;
+    font-size: 0.9rem;
+    border-radius: 50px;
+    font-weight: 500;
+    display: inline-block;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: transform 0.2s ease;
 }
 
 .registro-pill:hover {
-  transform: scale(1.05);
+    transform: scale(1.05);
 }
 
 .registro-animado {
-  background: linear-gradient(270deg, #C33333, #ff6666, #C33333);
-  background-size: 600% 600%;
-  color: white;
-  padding: 1rem 1.5rem;
-  border-radius: 1rem;
-  font-weight: bold;
-  text-align: center;
-  animation: movimientoFondo 5s ease infinite;
-  max-width: 500px;
-  margin: 2rem auto;
-  cursor: pointer;
+    background: linear-gradient(270deg, #C33333, #ff6666, #C33333);
+    background-size: 600% 600%;
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 1rem;
+    font-weight: bold;
+    text-align: center;
+    animation: movimientoFondo 5s ease infinite;
+    max-width: 500px;
+    margin: 2rem auto;
+    cursor: pointer;
 }
