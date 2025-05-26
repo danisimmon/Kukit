@@ -23,8 +23,8 @@ const VerReceta = () => {
     // Estado para la paginación de los pasos
     const [paginaPasosActual, setPaginaPasosActual] = useState(1);
     const [mensajeListaCompra, setMensajeListaCompra] = useState({ text: '', type: '' }); // Para mensajes de éxito/error
-    const [mostrarListaCompraLocal, setMostrarListaCompraLocal] = useState(false); // Estado para mostrar ListaCompra desde VerReceta
-    const [itemsParaListaLocal, setItemsParaListaLocal] = useState([]); // Estado para los ítems añadidos desde esta vista
+    const [mostrarListaCompraLocal, setMostrarListaCompraLocal] = useState(false); 
+    const [lastItemAddedTimestamp, setLastItemAddedTimestamp] = useState(null); // Para forzar la recarga de ListaCompra
     const PASOS_POR_PAGINA = 1; // Mostrar un paso a la vez
 
     const { recetaId } = useParams(); // Obtener recetaId de los parámetros de la URL
@@ -119,18 +119,10 @@ const VerReceta = () => {
             .then(response => {
                 console.log('Ingrediente añadido a la lista de compra en el backend:', response.data);
 
-                // Crear el item para el estado local, usando ID del backend si está disponible
-                const nuevoItemLocal = {
-                    id: response.data?.id || Date.now(), // Usar ID del backend o fallback
-                    nombre: nombreIngrediente,
-                    cantidad: cantidadNum.toFixed(1), // Formatear cantidad para la UI local
-                    unidad: unidad,
-                    comprado: false // Estado inicial para la UI local
-                };
+                // Actualizar el timestamp para que ListaCompra sepa que debe recargar
+                setLastItemAddedTimestamp(Date.now());
 
-                setItemsParaListaLocal(prevItems => [...prevItems, nuevoItemLocal]);
-
-                const mensaje = `${nuevoItemLocal.nombre} (${nuevoItemLocal.cantidad} ${nuevoItemLocal.unidad}) añadido a la lista de la compra.`;
+                const mensaje = `${nombreIngrediente} (${cantidadNum.toFixed(1)} ${unidad}) añadido a la lista de la compra.`;
                 setMensajeListaCompra({ text: mensaje, type: 'success' });
                 setTimeout(() => {
                     setMensajeListaCompra({ text: '', type: '' });
@@ -307,7 +299,7 @@ const VerReceta = () => {
                 <ListaCompra
                     showListaCompra={mostrarListaCompraLocal}
                     setListaCompra={setMostrarListaCompraLocal}
-                    initialItems={itemsParaListaLocal} // Pasamos los ítems a ListaCompra
+                    refreshTrigger={lastItemAddedTimestamp} // Pasamos el trigger para recargar
                 />
             )}
             </main>

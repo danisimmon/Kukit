@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const ListaCompra = ({ showListaCompra, setListaCompra }) => {
+const ListaCompra = ({ showListaCompra, setListaCompra, refreshTrigger }) => {
   const navigate = useNavigate();
   const offcanvasRef = useRef();
   const bsOffcanvasRef = useRef(null);
@@ -16,7 +16,9 @@ const ListaCompra = ({ showListaCompra, setListaCompra }) => {
 
       // Listener que se dispara cuando se cierra el offcanvas
       offcanvasRef.current.addEventListener("hidden.bs.offcanvas", () => {
-        setListaCompra(false);
+        if (typeof setListaCompra === 'function') {
+          setListaCompra(false);
+        }
       });
     }
 
@@ -25,7 +27,7 @@ const ListaCompra = ({ showListaCompra, setListaCompra }) => {
       bsOffcanvasRef.current.show();
     }
 
-  }, [showListaCompra]);
+  }, [showListaCompra, setListaCompra]);
 
   const [listaCompra, setLista] = useState([]); // Lista de la compra
   const [nuevoProducto, setNuevoProducto] = useState({
@@ -104,10 +106,12 @@ const ListaCompra = ({ showListaCompra, setListaCompra }) => {
     }
   };
 
-  // Llamar a getListaCompra al cargar el componente
+  // Efecto para cargar/recargar la lista de la compra
   useEffect(() => {
-    getListaCompra();
-  }, []);
+    if (showListaCompra) { // Solo cargar si el offcanvas está destinado a estar visible
+      getListaCompra();
+    }
+  }, [showListaCompra, refreshTrigger]); // Recargar si se muestra o si hay un trigger de refresco
 
   const [mostrarConfirmacion, setMostrarConfirmacion] = useState(false);
 
@@ -149,9 +153,9 @@ const ListaCompra = ({ showListaCompra, setListaCompra }) => {
         aria-labelledby="offcanvasExampleLabel"
       >
         <div className="offcanvas-header">
-          <h2 className="offcanvas-title" id="offcanvasExampleLabel">
+          <h4 className="offcanvas-title" id="offcanvasExampleLabel"> {/* Ajustado tamaño para consistencia visual */}
             Lista de la Compra
-          </h2>
+          </h4>
           <button
             type="button"
             className="btn-close"
@@ -159,8 +163,9 @@ const ListaCompra = ({ showListaCompra, setListaCompra }) => {
             aria-label="Close"
           ></button>
         </div>
-        <div className="offcanvas-body">
-          <div>
+        {/* Añadimos position: relative para que el pop-up se posicione correctamente dentro del offcanvas-body */}
+        <div className="offcanvas-body" style={{ position: 'relative' }}>
+          <div className="lista-compra-contenido"> {/* Contenedor para el contenido principal de la lista */}
             <h3>Ingredientes</h3>
             <ul>
               {listaCompra.map((producto) => (
@@ -175,25 +180,44 @@ const ListaCompra = ({ showListaCompra, setListaCompra }) => {
                 </li>
               ))}
             </ul>
-            {mostrarConfirmacion && (
-              <div className="confirmacion-vaciar">
-                <h1>¿Seguro que quieres vaciar tu lista de la compra?</h1>
-                <div className="botones-lista-compra">
-                  <button className="btn btn-danger" onClick={handleConfirmarVaciado}>Vaciar</button>
-                  <button className="btn btn-secondary" onClick={handleCancelarVaciado}>Cancelar</button>
-                </div>
-              </div>
-            )}
           </div>
-          <div className="botones-lista-compra">
+
+          {/* Botones principales del offcanvas, con un poco de separación superior */}
+          <div className="botones-lista-compra pt-3 mt-3 border-top">
             <button className="btn btn-danger" onClick={handleMostrarConfirmacion}>
               Vaciar Lista
             </button>
             <button
               className="btn btn-secondary"
               onClick={() => navigate("/recetas")}
-            >Ir a recetas</button>
+            >
+              Ir a recetas
+            </button>
           </div>
+
+          {/* Panel de Confirmación (debajo de los botones) */}
+          {mostrarConfirmacion && (
+            <div style={{
+              marginTop: '20px', // Espacio superior para separarlo de los botones
+              padding: '20px',
+              border: '1px solid #dee2e6', // Un borde sutil
+              borderRadius: '8px',
+              backgroundColor: '#f8f9fa', // Un fondo ligeramente diferente para distinguirlo
+              textAlign: 'center',
+              // maxWidth: '320px', // Opcional: si quieres limitar su ancho
+              // margin: '0 auto' // Si se usa maxWidth, para centrarlo
+            }}>
+              <h5 style={{ marginBottom: '15px', fontSize: '1.1rem' }}>
+                ¿Seguro que quieres vaciar tu lista de la compra?
+              </h5>
+              <button className="btn btn-danger me-2" onClick={handleConfirmarVaciado}>
+                Sí, Vaciar
+              </button>
+              <button className="btn btn-secondary" onClick={handleCancelarVaciado}>
+                Cancelar
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </>
