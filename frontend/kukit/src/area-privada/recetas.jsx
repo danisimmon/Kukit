@@ -30,6 +30,8 @@ const Recetas = () => {
   const [paginaActual, setPaginaActual] = useState(1);
   const recetasPorPagina = 8;
   // Estados para los nuevos filtros
+  const [mostrarFiltros, setMostrarFiltros] = useState(false);
+
   const [selectedDificultad, setSelectedDificultad] = useState('');
   const [selectedPais, setSelectedPais] = useState('');
   const [filterTiempo, setFilterTiempo] = useState('');
@@ -103,13 +105,13 @@ const Recetas = () => {
       });
 
       if (respuesta.data.success) {
-        alert(esFavoritoActual ? 'Receta eliminada de favoritos' : 'Receta guardada en favoritos');
+        // alert(esFavoritoActual ? 'Receta eliminada de favoritos' : 'Receta guardada en favoritos');
         setFavoritos(prevFavoritos => ({
           ...prevFavoritos,
           [idReceta]: !esFavoritoActual,
         }));
       } else {
-        alert(esFavoritoActual ? 'Error al eliminar de favoritos' : 'Error al guardar favorito');
+        // alert(esFavoritoActual ? 'Error al eliminar de favoritos' : 'Error al guardar favorito');
         console.error('Error al guardar/eliminar favorito:', respuesta.data.message);
       }
     } catch (error) {
@@ -227,8 +229,12 @@ const Recetas = () => {
               onChange={handleSearchChange}
             />
           </div>
+          <button className="btn-mostrar-filtros" onClick={() => setMostrarFiltros(prev => !prev)}>
+            {mostrarFiltros ? "Ocultar Filtros" : "Mostrar Filtros"}
+          </button>
 
           {/* Sección de Filtros Adicionales */}
+          {mostrarFiltros && (
           <div className="filtros-adicionales mb-4 p-3 border rounded">
             <h5 className="mb-3">Filtros Adicionales</h5>
             <div className="row">
@@ -290,6 +296,7 @@ const Recetas = () => {
             </div>
             <button className="btn btn-secondary mt-2" onClick={resetFilters}>Limpiar Filtros</button>
           </div>
+          )}
 
           {/* Mensaje cuando no hay resultados con los filtros aplicados */}
           {recetasFiltradas.length === 0 && !cargando && (

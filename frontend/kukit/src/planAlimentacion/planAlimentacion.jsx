@@ -84,6 +84,57 @@ function PlanificacionSemanal() {
       }
     };
 
+    // const guardarPlanSemanal = async () => {
+    //   try {
+    //     // Ejemplo de datos necesarios
+    //     const idUsuario = "usuario456"; // deberías sacarlo de tu sesión o contexto real
+    //     const fechaInicio = "2025-04-01"; // calcular según semanaActualVisualizada
+    //     const fechaFin = "2025-04-07";    // calcular según semanaActualVisualizada
+
+    //     // Transformar semanaVisible en array de menus
+    //     const menus = [];
+
+    //     semanaVisible.forEach((dia, diaIndex) => {
+    //       TIPOS_COMIDA.forEach(tipo => {
+    //         const comida = dia[tipo.key];
+    //         if (comida) {
+    //           menus.push({
+    //             fecha: calcularFechaPorDiaIndex(fechaInicio, diaIndex), // función que convierte día index a fecha string
+    //             tipoComida: tipo.key,
+    //             receta: comida
+    //           });
+    //         }
+    //       });
+    //     });
+
+    //     const planSemanal = {
+    //       idUsuario,
+    //       fechaInicio,
+    //       fechaFin,
+    //       menus
+    //     };
+
+    //     const response = await axios.post('http://localhost/api/area_privada/plan-semanal/guardarPlanSemanal.php', planSemanal);
+
+    //     if (response.data?.success) {
+    //       alert("Plan semanal guardado correctamente.");
+    //     } else {
+    //       console.warn("Error del servidor:", response.data);
+    //       alert("Ocurrió un error al guardar el plan.");
+    //     }
+    //   } catch (error) {
+    //     console.error("Error al guardar el plan:", error);
+    //     alert("No se pudo conectar con el servidor.");
+    //   }
+    // };
+
+    // // Función ejemplo para calcular la fecha según el día de la semana visible
+    // function calcularFechaPorDiaIndex(fechaInicioStr, diaIndex) {
+    //   const fechaInicio = new Date(fechaInicioStr);
+    //   fechaInicio.setDate(fechaInicio.getDate() + diaIndex);
+    //   return fechaInicio.toISOString().slice(0, 10); // "YYYY-MM-DD"
+    // }
+
     cargarRecetasGuardadas();
     cargarRecetasCreadas();
 
@@ -205,178 +256,183 @@ function PlanificacionSemanal() {
   return (
     <>
       <Header />
-      <div className="container mt-4">
-        <h2 className="mb-4 text-center">Planificación Semanal de Comidas</h2>
+      <main>
+        <div className="container mt-4">
+          <h2 className="mb-4 text-center">Planificación Semanal de Comidas</h2>
 
-        {/* Navegación de Semanas */}
-        <div className="d-flex justify-content-between align-items-center mb-3">
-          <button
-            className="btn btn-outline-primary"
-            onClick={() => cambiarSemana(-1)}
-            disabled={semanaActualVisualizada === 0}
-          >
-            &laquo; Semana Anterior
-          </button>
-          <h4>Semana {semanaActualVisualizada + 1} de {NUMERO_SEMANAS_PLAN}</h4>
-          <button
-            className="btn btn-outline-primary"
-            onClick={() => cambiarSemana(1)}
-            disabled={semanaActualVisualizada === NUMERO_SEMANAS_PLAN - 1}
-          >
-            Semana Siguiente &raquo;
-          </button>
-        </div>
+          {/* Navegación de Semanas */}
+          <div className="d-flex justify-content-between align-items-center mb-3">
+            <button
+              className="btn btn-outline-primary"
+              onClick={() => cambiarSemana(-1)}
+              disabled={semanaActualVisualizada === 0}
+            >
+              &laquo; Semana Anterior
+            </button>
+            <h4>Semana {semanaActualVisualizada + 1} de {NUMERO_SEMANAS_PLAN}</h4>
+            <button
+              className="btn btn-outline-primary"
+              onClick={() => cambiarSemana(1)}
+              disabled={semanaActualVisualizada === NUMERO_SEMANAS_PLAN - 1}
+            >
+              Semana Siguiente &raquo;
+            </button>
+          </div>
 
-        {/* Tabla de Planificación Semanal */}
-        <div className="table-responsive">
-          <table className="table table-bordered text-center">
-            <thead>
-              <tr>
-                <th>Comida</th>
-                {DIAS_SEMANA.map(dia => <th key={dia}>{dia}</th>)}
-              </tr>
-            </thead>
-            <tbody>
-              {TIPOS_COMIDA.map(tipoComida => (
-                <tr key={tipoComida.key}>
-                  <td><strong>{tipoComida.nombre}</strong></td>
-                  {DIAS_SEMANA.map((diaNombre, diaIndex) => {
-                    const comidaPlanificada =
-                      semanaVisible && semanaVisible[diaIndex]
-                        ? semanaVisible[diaIndex][tipoComida.key]
-                        : null;
-                    return (
-                      <td key={`${diaNombre}-${tipoComida.key}`} style={{ verticalAlign: 'middle' }}>
-                        {comidaPlanificada ? (
-                          <div>
-                            <span>{comidaPlanificada.nombre}</span>
-                            <div className="mt-1">
-                              <button
-                                className="btn btn-sm btn-outline-secondary me-1"
-                                onClick={() =>abrirSelectorRecetas(semanaActualVisualizada,diaIndex,tipoComida.key)}
-                                title="Cambiar receta"
-                              >
-                                ✏️
-                              </button>
-                              <button
-                                className="btn btn-sm btn-outline-danger"
-                                onClick={() => iniciarEliminacionComida(semanaActualVisualizada, diaIndex, tipoComida.key)}
-                                title="Eliminar receta"
-                              >
-                                🗑️
-                              </button>
-                            </div>
-                          </div>
-                        ) : (
-                          <button
-                            className="btn btn-light btn-sm"
-                            onClick={() => abrirSelectorRecetas(semanaActualVisualizada, diaIndex, tipoComida.key)}
-                          >
-                            + Añadir
-                          </button>
-                        )}
-                      </td>
-                    );
-                  })}
+          {/* Tabla de Planificación Semanal */}
+          <div className="table-responsive">
+            <table className="table table-bordered text-center">
+              <thead>
+                <tr>
+                  <th>Comida</th>
+                  {DIAS_SEMANA.map(dia => <th key={dia}>{dia}</th>)}
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      {/* Offcanvas para Selector de Recetas */}
-      <div
-        className="offcanvas offcanvas-end"
-        tabIndex="-1"
-        id="recipeSelectorOffcanvas"
-        aria-labelledby="recipeSelectorOffcanvasLabel"
-        ref={recipeSelectorOffcanvasRef}
-      >
-        <div className="offcanvas-header">
-          <h5 className="offcanvas-title" id="recipeSelectorOffcanvasLabel">Seleccionar Receta</h5>
-          <button
-            type="button"
-            className="btn-close"
-            onClick={() => recipeSelectorOffcanvasInstance.current && recipeSelectorOffcanvasInstance.current.hide()}
-            aria-label="Close"
-          ></button>
-        </div>
-        <div className="offcanvas-body">
-          {slotSeleccionado && (
-            <p>
-              Añadiendo/Editando para: Semana {slotSeleccionado.semanaIndex + 1}, {DIAS_SEMANA[slotSeleccionado.diaIndex]}, {TIPOS_COMIDA.find(tc => tc.key === slotSeleccionado.tipoComidaKey)?.nombre}
-            </p>
-          )}
-          <hr />
-          <h6>Recetas Guardadas</h6>
-          <ul className="list-group mb-3">
-            {recetasGuardadas.length > 0 ? (
-              recetasGuardadas.map(receta => (
-                <li
-                  key={receta.id_receta || receta.id}
-                  className="list-group-item list-group-item-action"
-                  style={{ cursor: 'pointer' }}
-                  onClick={() => seleccionarRecetaParaSlot(receta)}
-                >
-                  {receta.nombre}
-                </li>
-              ))
-            ) : (
-              <li className="list-group-item">No tienes recetas guardadas.</li>
-            )}
-          </ul>
-
-          <h6>Mis Recetas Creadas</h6>
-          <ul className="list-group">
-            {recetasCreadas.length > 0 ? (
-              recetasCreadas.map(receta => (
-                <li
-                  key={receta.id}
-                  className="list-group-item list-group-item-action"
-                  style={{ cursor: 'pointer' }}
-                  onClick={() => seleccionarRecetaParaSlot(receta)}
-                >
-                  {receta.nombre}
-                </li>
-              ))
-            ) : (
-              <li className="list-group-item">No has creado recetas.</li>
-            )}
-          </ul>
-        </div>
-      </div>
-
-      {/* Modal de Confirmación de Eliminación */}
-      <div
-        className="modal fade"
-        id="confirmDeleteModal"
-        tabIndex="-1"
-        aria-labelledby="confirmDeleteModalLabel"
-        aria-hidden="true"
-        ref={confirmDeleteModalRef}
-      >
-        <div className="modal-dialog">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="confirmDeleteModalLabel">Confirmar Eliminación</h5>
-              <button
-                type="button"
-                className="btn-close"
-                onClick={cancelarEliminacion}
-                aria-label="Close"
-              ></button>
-            </div>
-            <div className="modal-body">
-              ¿Estás seguro de que quieres eliminar esta comida de tu planificación?
-            </div>
-            <div className="modal-footer">
-              <button type="button" className="btn btn-secondary" onClick={cancelarEliminacion}>Cancelar</button>
-              <button type="button" className="btn btn-danger" onClick={confirmarEliminacionComida}>Eliminar</button>
-            </div>
+              </thead>
+              <tbody>
+                {TIPOS_COMIDA.map(tipoComida => (
+                  <tr key={tipoComida.key}>
+                    <td><strong>{tipoComida.nombre}</strong></td>
+                    {DIAS_SEMANA.map((diaNombre, diaIndex) => {
+                      const comidaPlanificada =
+                        semanaVisible && semanaVisible[diaIndex]
+                          ? semanaVisible[diaIndex][tipoComida.key]
+                          : null;
+                      return (
+                        <td key={`${diaNombre}-${tipoComida.key}`} style={{ verticalAlign: 'middle' }}>
+                          {comidaPlanificada ? (
+                            <div>
+                              <span>{comidaPlanificada.nombre}</span>
+                              <div className="mt-1">
+                                <button
+                                  className="btn btn-sm btn-outline-secondary me-1"
+                                  onClick={() => abrirSelectorRecetas(semanaActualVisualizada, diaIndex, tipoComida.key)}
+                                  title="Cambiar receta"
+                                >
+                                  ✏️
+                                </button>
+                                <button
+                                  className="btn btn-sm btn-outline-danger"
+                                  onClick={() => iniciarEliminacionComida(semanaActualVisualizada, diaIndex, tipoComida.key)}
+                                  title="Eliminar receta"
+                                >
+                                  🗑️
+                                </button>
+                              </div>
+                            </div>
+                          ) : (
+                            <button
+                              className="btn btn-light btn-sm"
+                              onClick={() => abrirSelectorRecetas(semanaActualVisualizada, diaIndex, tipoComida.key)}
+                            >
+                              + Añadir
+                            </button>
+                          )}
+                        </td>
+                      );
+                    })}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
-      </div>
+
+        {/* Offcanvas para Selector de Recetas */}
+        <div
+          className="offcanvas offcanvas-end"
+          tabIndex="-1"
+          id="recipeSelectorOffcanvas"
+          aria-labelledby="recipeSelectorOffcanvasLabel"
+          ref={recipeSelectorOffcanvasRef}
+        >
+          <div className="offcanvas-header">
+            <h5 className="offcanvas-title" id="recipeSelectorOffcanvasLabel">Seleccionar Receta</h5>
+            <button
+              type="button"
+              className="btn-close"
+              onClick={() => recipeSelectorOffcanvasInstance.current && recipeSelectorOffcanvasInstance.current.hide()}
+              aria-label="Close"
+            ></button>
+          </div>
+          <div className="offcanvas-body">
+            {slotSeleccionado && (
+              <p>
+                Añadiendo/Editando para: Semana {slotSeleccionado.semanaIndex + 1}, {DIAS_SEMANA[slotSeleccionado.diaIndex]}, {TIPOS_COMIDA.find(tc => tc.key === slotSeleccionado.tipoComidaKey)?.nombre}
+              </p>
+            )}
+            <hr />
+            <h6>Recetas Guardadas</h6>
+            <ul className="list-group mb-3">
+              {recetasGuardadas.length > 0 ? (
+                recetasGuardadas.map(receta => (
+                  <li
+                    key={receta.id_receta || receta.id}
+                    className="list-group-item list-group-item-action"
+                    style={{ cursor: 'pointer' }}
+                    onClick={() => seleccionarRecetaParaSlot(receta)}
+                  >
+                    {receta.nombre}
+                  </li>
+                ))
+              ) : (
+                <li className="list-group-item">No tienes recetas guardadas.</li>
+              )}
+            </ul>
+
+            <h6>Mis Recetas Creadas</h6>
+            <ul className="list-group">
+              {recetasCreadas.length > 0 ? (
+                recetasCreadas.map(receta => (
+                  <li
+                    key={receta.id}
+                    className="list-group-item list-group-item-action"
+                    style={{ cursor: 'pointer' }}
+                    onClick={() => seleccionarRecetaParaSlot(receta)}
+                  >
+                    {receta.nombre}
+                  </li>
+                ))
+              ) : (
+                <li className="list-group-item">No has creado recetas.</li>
+              )}
+            </ul>
+          </div>
+        </div>
+
+        {/* Modal de Confirmación de Eliminación */}
+        <div
+          className="modal fade"
+          id="confirmDeleteModal"
+          tabIndex="-1"
+          aria-labelledby="confirmDeleteModalLabel"
+          aria-hidden="true"
+          ref={confirmDeleteModalRef}
+        >
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title" id="confirmDeleteModalLabel">Confirmar Eliminación</h5>
+                <button
+                  type="button"
+                  className="btn-close"
+                  onClick={cancelarEliminacion}
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div className="modal-body">
+                ¿Estás seguro de que quieres eliminar esta comida de tu planificación?
+              </div>
+              <div className="modal-footer">
+                <button type="button" className="btn btn-secondary" onClick={cancelarEliminacion}>Cancelar</button>
+                <button type="button" className="btn btn-danger" onClick={confirmarEliminacionComida}>Eliminar</button>
+              </div>
+            </div>
+          </div>
+        </div> 
+        {/* <button className="btn btn-success mt-4" onClick={guardarPlanSemanal}>
+          Guardar Plan Semanal
+        </button> */}
+      </main>
       <Footer />
     </>
   );
