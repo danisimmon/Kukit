@@ -6,11 +6,19 @@ import comida from "../../img/comida.jpg";
 import bookmark from "../../img/bookmark.png";
 import Footer from '../../footer/footer';
 import Header from '../../header/header';
+import { useNavigate } from 'react-router-dom';
+
 
 const EditarPerfil = () => {
   const location = useLocation();
-
+  const navigate = useNavigate();
   const [mostrarPopup, setMostrarPopup] = useState(false);
+
+  const direccionRecetasCreadas = () => {
+    navigate("/area-privada/editar-perfil", {
+      state: { seccion: "recetas" },
+    });
+  };
 
   // Llamar esta función después de crear la receta
   const mostrarPopupExito = () => {
@@ -213,9 +221,10 @@ const EditarPerfil = () => {
     pasos: pasos,
   });
 
+
   // Manejar el envio de la receta
   const manejarEnvioReceta = async (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     try {
       const respuesta = await axios.post(
         'http://localhost/api/area_privada/editar-perfil/crear-receta.php',
@@ -251,7 +260,7 @@ const EditarPerfil = () => {
         setIngredientes([{ nombre: '', cantidad: '', unidad: '' }]);
         setPasos(['']);
 
-        setMostrarPopup(true);
+        // setMostrarPopup(true);
       } else {
         setExito(false);
         setMensaje(respuesta.data.message);
@@ -768,7 +777,10 @@ const EditarPerfil = () => {
                 <button
                   className="boton-crear-receta"
                   id="terminar-receta"
-                  onClick={manejarEnvioReceta}
+                  onClick={async () => {
+                    await manejarEnvioReceta();
+                    direccionRecetasCreadas();
+                  }}
                 >
                   Terminar
                 </button>
@@ -778,7 +790,7 @@ const EditarPerfil = () => {
               </div>
             </div>
           )}
-          {mostrarPopup && (
+          {/* {mostrarPopup && (
             <div className="popup-receta-creada">
               <div className="popup-contenido-receta-creada">
                 <h2>¡Receta creada con éxito!</h2>
@@ -790,7 +802,7 @@ const EditarPerfil = () => {
                 </button>
               </div>
             </div>
-          )}
+          )} */}
         </div>
       </main>
       <Footer />
