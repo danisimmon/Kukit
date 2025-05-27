@@ -40,7 +40,7 @@ const Recetas = () => {
   const [filterLactosa, setFilterLactosa] = useState('');
   const [filterVegana, setFilterVegana] = useState('');
 
-  const PAISES_FILTRO = [ // Renombrado para evitar confusión si tienes otra constante PAISES
+  const PAISES_FILTRO = [ 
     "Italia", "México", "Japón", "España", "India", "Francia", "Alemania",
     "Estados Unidos", "China", "Brasil", "Tailandia", "Grecia", "Turquía",
     "Corea del Sur", "Libano" // Ajustado para coincidir con el value de editar-perfil.jsx
@@ -71,30 +71,70 @@ const Recetas = () => {
     }));
   };
 
+  // useEffect(() => {
+  //   const obtenerRecetas = async () => {
+  //     try {
+  //       const respuesta = await axios.get('http://localhost/api/area_privada/recetas/getRecetas.php');
+  //       setN_recetas(respuesta.data.n_recetas);
+  //       setRecetas(respuesta.data.recetas);
+  //       // Inicializa los likes y favoritos
+  //       const likesIniciales = {};
+  //       const favoritosIniciales = {};
+  //       respuesta.data.recetas.forEach(r => {
+  //         likesIniciales[r._id] = r.likes || 0;
+  //         favoritosIniciales[r._id] = r.favorito || false;
+  //       });
+  //       setLikes(likesIniciales);
+  //       setFavoritos(favoritosIniciales);
+  //       setCargando(false);
+  //       setPaginaActual(1);
+  //     } catch (err) {
+  //       setError('Error al cargar las recetas', err);
+  //       setCargando(false);
+  //     }
+  //   };
+  //   obtenerRecetas();
+  // }, []);
+
   useEffect(() => {
-    const obtenerRecetas = async () => {
-      try {
-        const respuesta = await axios.get('http://localhost/api/area_privada/recetas/getRecetas.php');
-        setN_recetas(respuesta.data.n_recetas);
-        setRecetas(respuesta.data.recetas);
-        // Inicializa los likes y favoritos
-        const likesIniciales = {};
-        const favoritosIniciales = {};
-        respuesta.data.recetas.forEach(r => {
-          likesIniciales[r._id] = r.likes || 0;
-          favoritosIniciales[r._id] = r.favorito || false;
-        });
-        setLikes(likesIniciales);
-        setFavoritos(favoritosIniciales);
-        setCargando(false);
-        setPaginaActual(1);
-      } catch (err) {
-        setError('Error al cargar las recetas', err);
-        setCargando(false);
-      }
-    };
-    obtenerRecetas();
-  }, []);
+  const obtenerRecetas = async () => {
+    try {
+      const respuesta = await axios.get('http://localhost/api/area_privada/recetas/getRecetas.php');
+      const recetasRaw = respuesta.data.recetas;
+
+      const recetasNormalizadas = recetasRaw.map(r => ({
+        ...r,
+        gluten: r.gluten === true || r.gluten === "true",
+        vegetariana: r.vegetariana === true || r.vegetariana === "true",
+        lactosa: r.lactosa === true || r.lactosa === "true",
+        vegana: r.vegana === true || r.vegana === "true",
+        dificultad: (r.dificultad || '').toLowerCase().trim(),
+        pais: r.pais || '',
+        tiempo: r.tiempo || '',
+      }));
+
+      setRecetas(recetasNormalizadas);
+
+      // Likes y favoritos
+      const likesIniciales = {};
+      const favoritosIniciales = {};
+      recetasNormalizadas.forEach(r => {
+        likesIniciales[r._id] = r.likes || 0;
+        favoritosIniciales[r._id] = r.favorito || false;
+      });
+      setLikes(likesIniciales);
+      setFavoritos(favoritosIniciales);
+      setN_recetas(respuesta.data.n_recetas);
+      setCargando(false);
+      setPaginaActual(1);
+    } catch (err) {
+      setError('Error al cargar las recetas');
+      setCargando(false);
+    }
+  };
+  obtenerRecetas();
+}, []);
+
 
   const guardarFavorito = async (idReceta) => {
     try {

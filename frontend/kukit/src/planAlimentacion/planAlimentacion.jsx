@@ -4,7 +4,7 @@ import axios from 'axios';
 import Footer from '../footer/footer';
 import Header from '../header/header';
 
-
+// Arrays con los dias de la semana y tipos de comida
 const DIAS_SEMANA = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
 const TIPOS_COMIDA = [
   { key: 'desayuno', nombre: 'Desayuno' },
@@ -15,6 +15,7 @@ const TIPOS_COMIDA = [
 ];
 const NUMERO_SEMANAS_PLAN = 4; // El usuario puede planificar para 4 semanas
 
+// Componente principal de la planificación semanal
 function PlanificacionSemanal() {
   const [plan, setPlan] = useState([]);
   const [semanaActualVisualizada, setSemanaActualVisualizada] = useState(0); // Índice de la semana

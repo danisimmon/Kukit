@@ -51,7 +51,6 @@ const VerReceta = () => {
             });
         setPaginaPasosActual(1); // Resetear la paginación de pasos si cambia la receta
     }, [recetaId]);
-
     const ajustarRaciones = (cambio) => {
         setRaciones(prev => Math.max(1, prev + cambio));
     };
@@ -110,8 +109,11 @@ const VerReceta = () => {
             nombre: nombreIngrediente,
             cantidad: cantidadNum, // Enviar cantidad numérica al backend
             unidad: unidad,
-            // Considera añadir aquí el ID del usuario si tu backend lo requiere
-            // Ejemplo: userId: obtenerIdUsuarioActual() 
+            calorias: informacionNutricional.calorias,
+            proteinas: informacionNutricional.proteinas,
+            carbohidratos: informacionNutricional.carbohidratos,
+            grasas: informacionNutricional.grasas,
+            fibra: informacionNutricional.fibra,
         };
 
         // Ajusta la URL a tu endpoint real del backend
@@ -172,7 +174,7 @@ const VerReceta = () => {
                 <div className="d-flex flex-column flex-md-row gap-4 mt-4">
                     <div className="text-center">
                         {receta.href && (
-                           <img src={receta.href} alt={receta.nombre} className="img-fluid rounded shadow mb-3" style={{ maxWidth: '300px', maxHeight: '300px', objectFit: 'cover' }} />
+                            <img src={receta.href} alt={receta.nombre} className="img-fluid rounded shadow mb-3" style={{ maxWidth: '300px', maxHeight: '300px', objectFit: 'cover' }} />
                         )}
                         <div className="d-flex justify-content-center align-items-center gap-3 mt-3">
                             <button className="btn btn-danger" onClick={() => ajustarRaciones(-1)}>-</button>
@@ -237,27 +239,27 @@ const VerReceta = () => {
                                     <div className="row g-3 mt-2">
                                         <div className="col-12"> {/* Usar col-12 para que apilen bien en esta columna */}
                                             <div className="bg-white rounded shadow-sm p-3">
-                                                <strong>Calorías:</strong> {receta.nutricion?.calorias}
+                                                <strong>Calorías:</strong> {receta.informacionNutricional?.calorias}
                                             </div>
                                         </div>
                                         <div className="col-12">
                                             <div className="bg-white rounded shadow-sm p-3">
-                                                <strong>Proteína:</strong> {receta.nutricion?.proteina}
+                                                <strong>Proteína:</strong> {receta.informacionNutricional?.proteina}
                                             </div>
                                         </div>
                                         <div className="col-12">
                                             <div className="bg-white rounded shadow-sm p-3">
-                                                <strong>Grasa:</strong> {receta.nutricion?.grasa}
+                                                <strong>Grasas:</strong> {receta.informacionNutricional?.grasas}
                                             </div>
                                         </div>
                                         <div className="col-12">
                                             <div className="bg-white rounded shadow-sm p-3">
-                                                <strong>Carbohidratos:</strong> {receta.nutricion?.carbohidratos}
+                                                <strong>Carbohidratos:</strong> {receta.informacionNutricional?.carbohidratos}
                                             </div>
                                         </div>
                                         <div className="col-12">
                                             <div className="bg-white rounded shadow-sm p-3">
-                                                <strong>Fibra:</strong> {receta.nutricion?.fibra}
+                                                <strong>Fibra:</strong> {receta.informacionNutricional?.fibra ?? 'N/A'}
                                             </div>
                                         </div>
                                     </div>
