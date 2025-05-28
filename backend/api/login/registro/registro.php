@@ -33,6 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Iniciar sesión automáticamente después del registro
             session_start();
             $_SESSION['user']['id'] = $conexion->insert_id; // Asignar el ID del nuevo usuario a la sesión
+            $_SESSION['user']['email'] = $correo;
             echo json_encode(["success" => true, "message" => "Registro exitoso"]);
         } else {
             echo json_encode(["success" => false, "message" => "Error al registrar el usuario"]);

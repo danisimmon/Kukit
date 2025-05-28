@@ -30,33 +30,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $sql->bind_param("sssss", $correo, $token, $codigo_verificacion, $fecha_actual, $token);
         $sql->execute();
 
-        // require_once '../../email-config.php'; // importa la función crearMailer
+        require_once '../../../email-config.php'; // importa la función crearMailer
 
-        $reset_link = "localhost/restablecer.php?token=$token"; // crea enlace
+        $reset_link = "localhost/login/restablecer-password/nueva-password?token=$token"; // crea enlace
 
-    //     try {
-    //         $mail = crearMailer();
-    //         $mail->addAddress($correo);
-    //         $mail->Subject = "Recupera tu contraseña";
-    //         $mail->Body = "
-    //     <h3>Solicitud de recuperación</h3>
-    //     <p>Tu código de verificación es: <strong>$codigo_verificacion</strong></p>
-    //     <p>Haz clic en el siguiente enlace para restablecer tu contraseña:</p>
-    //     <a href='$reset_link'>Restablece tu contraseña</a>
-    // ";
-    //         $mail->AltBody = "Código: $codigo_verificacion. Enlace: $reset_link";
-    //         $mail->send();
+        try {
+            $mail = crearMailer();
+            $mail->addAddress($correo);
+            $mail->Subject = "Recupera tu contraseña";
+            $mail->Body = "
+        <h3>Solicitud de recuperación</h3>
+        <p>Tu código de verificación es: <strong>$codigo_verificacion</strong></p>
+        <p>Haz clic en el siguiente enlace para restablecer tu contraseña:</p>
+        <a href='$reset_link'>Restablece tu contraseña</a>
+    ";
+            $mail->AltBody = "Código: $codigo_verificacion. Enlace: $reset_link";
+            $mail->send();
 
-    //         echo json_encode([
-    //             "success" => true,
-    //             "message" => "Se ha enviado un correo con las instrucciones para recuperar tu contraseña"
-    //         ]);
-    //     } catch (Exception $e) {
-    //         echo json_encode([
-    //             "success" => false,
-    //             "message" => "No se pudo enviar el correo. Error: " . $mail->ErrorInfo
-    //         ]);
-    //     }
+            echo json_encode([
+                "success" => true,
+                "message" => "Se ha enviado un correo con las instrucciones para recuperar tu contraseña"
+            ]);
+        } catch (Exception $e) {
+            echo json_encode([
+                "success" => false,
+                "message" => "No se pudo enviar el correo. Error: " . $mail->ErrorInfo
+            ]);
+        }
 
         $reset_link = $token;
 

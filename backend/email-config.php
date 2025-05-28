@@ -10,12 +10,12 @@ function crearMailer(): PHPMailer {
     $mail->isSMTP();
     $mail->Host       = 'smtp.gmail.com';
     $mail->SMTPAuth   = true;
-    $mail->Username   = 'tuemail@gmail.com';
-    $mail->Password   = 'tu_contraseña_app';
+    $mail->Username   = 'kukit.contacto@gmail.com';
+    $mail->Password   = 'udks jver geqi vhsi';
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
     $mail->Port       = 465;
 
-    $mail->setFrom('kukit_app@gmail.com', 'Kukit App');
+    $mail->setFrom('kukit.contacto@gmail.com', 'Kukit App');
     $mail->isHTML(true);
 
     return $mail;
