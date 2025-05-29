@@ -4,10 +4,7 @@ import axios from 'axios';
 import Footer from '../footer/footer';
 import Header from '../header/header';
 
-<<<<<<< HEAD
-=======
 // Arrays con los dias de la semana y tipos de comida
->>>>>>> 2a4ec0e31523ee0c9d095c402b162bbc23f09017
 const DIAS_SEMANA = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
 const TIPOS_COMIDA = [
   { key: 'desayuno', nombre: 'Desayuno' },

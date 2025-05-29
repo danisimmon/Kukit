@@ -1,17 +1,13 @@
-import React, { useState, useEffect } from 'react'; // useRef eliminado
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom'; // Importar useNavigate
+import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-import CorazonRelleno from '../../img/corazonRelleno.png'
-import CorazonSinRelleno from '../../img/corazonSinRelleno.png'
-// Importaciones de iconos de favoritos actualizadas para coincidir con el estilo de recetas.jsx
-import NoFavorito from '../../img/bookmark.png'; // Icono para no favorito (era Favoritos)
-import Favorito from '../../img/bookmark-relleno.png'; // Icono para favorito (asegúrate que este archivo exista)
-// import Login from '../../login/login'; // Eliminado si no se usa directamente aquí
-// import Registro from '../../login/registro/registro'; // Eliminado si no se usa directamente aquí
+import CorazonRelleno from '../../img/corazonRelleno.png';
+import CorazonSinRelleno from '../../img/corazonSinRelleno.png';
+import NoFavorito from '../../img/bookmark.png';
+import Favorito from '../../img/bookmark-relleno.png';
 import Footer from '../../footer/footer';
-// import ListaCompra from '../../listaCompra/listaCompra'; // Eliminado si no se usa directamente aquí
 import Header from '../../header/header';
 
 const RecetasGuardadas = () => {
@@ -19,19 +15,12 @@ const RecetasGuardadas = () => {
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
   const [n_recetas, setN_recetas] = useState(0);
-  // const [recetaSeleccionada, setRecetaSeleccionada] = useState(null); // Estado eliminado, no se usa offcanvas
-  // const offcanvasRef = useRef(null); // Ref eliminada, no se usa offcanvas
-
-  // const [showLogin, setShowLogin] = useState(false); // Estado eliminado
-  // const [showRegistro, setShowRegistro] = useState(false); // Estado eliminado
   const [likes, setLikes] = useState({});
   const [liked, setLiked] = useState({});
-  const [favoritos, setFavoritos] = useState({}); // Estado para almacenar el estado de favorito de cada receta
-
+  const [favoritos, setFavoritos] = useState({});
   const [paginaActual, setPaginaActual] = useState(1);
   const recetasPorPagina = 8;
-
-  const navigate = useNavigate(); // Hook para la navegación
+  const navigate = useNavigate();
 
   const manejarLike = (idReceta) => {
     const yaLeGusta = liked[idReceta];
@@ -49,29 +38,29 @@ const RecetasGuardadas = () => {
     }));
   };
 
+  const obtenerRecetasGuardadas = async () => {
+    try {
+      const respuesta = await axios.get('http://localhost/api/area_privada/recetas/getRecetasGuardadas.php');
+      setN_recetas(respuesta.data.n_recetas);
+      setRecetas(respuesta.data.recetas);
+      const likesIniciales = {};
+      const favoritosIniciales = {};
+      respuesta.data.recetas.forEach(r => {
+        likesIniciales[r._id] = r.likes || 0;
+        favoritosIniciales[r._id] = r.favorito || false;
+      });
+      setLikes(likesIniciales);
+      setFavoritos(favoritosIniciales);
+      setCargando(false);
+    } catch (err) {
+      console.error('Error al cargar las recetas:', err);
+      setError(`Error al cargar las recetas. ${err.message ? err.message : 'Inténtelo de nuevo más tarde.'}`);
+      setCargando(false);
+    }
+  };
+
   useEffect(() => {
-    const obtenerRecetas = async () => {
-      try {
-        const respuesta = await axios.get('http://localhost/api/area_privada/recetas/getRecetasGuardadas.php');
-        setN_recetas(respuesta.data.n_recetas);
-        setRecetas(respuesta.data.recetas);
-        console.log(respuesta);
-        const likesIniciales = {};
-        const favoritosIniciales = {};
-        respuesta.data.recetas.forEach(r => {
-          likesIniciales[r._id] = r.likes || 0;
-          favoritosIniciales[r._id] = r.favorito || false;
-        });
-        setLikes(likesIniciales);
-        setFavoritos(favoritosIniciales);
-        setCargando(false);
-      } catch (err) {
-        console.error('Error al cargar las recetas:', err);
-        setError(`Error al cargar las recetas. ${err.message ? err.message : 'Inténtelo de nuevo más tarde.'}`);
-        setCargando(false);
-      }
-    };
-    obtenerRecetas();
+    obtenerRecetasGuardadas();
   }, []);
 
   const guardarFavorito = async (idReceta) => {
@@ -83,14 +72,15 @@ const RecetasGuardadas = () => {
       });
 
       if (respuesta.data.success) {
-        // alert(esFavoritoActual ? 'Receta eliminada de favoritos' : 'Receta guardada en favoritos');
         setFavoritos(prevFavoritos => ({
           ...prevFavoritos,
           [idReceta]: !esFavoritoActual,
         }));
+        // Vuelve a cargar las recetas guardadas para actualizar la lista
+        obtenerRecetasGuardadas();
       } else {
-        // alert(esFavoritoActual ? 'Error al eliminar de favoritos' : 'Error al guardar favorito');
         console.error('Error al guardar/eliminar favorito:', respuesta.data.message);
+        alert(esFavoritoActual ? 'Error al eliminar de favoritos' : 'Error al guardar favorito');
       }
     } catch (error) {
       console.error('Error al guardar/eliminar favorito:', error);
@@ -98,7 +88,6 @@ const RecetasGuardadas = () => {
     }
   };
 
-  // Función para navegar a la vista detallada de la receta
   const verDetalleReceta = (idReceta) => {
     navigate(`/area-privada/verreceta/${idReceta}`);
   };
@@ -122,69 +111,54 @@ const RecetasGuardadas = () => {
   return (
     <>
       <Header />
-      {/* Renderizado de ListaCompra eliminado para simplificar y alinear con recetas.jsx */}
-      {/* {showListaCompra && (
-        <ListaCompra showListaCompra={showListaCompra} setListaCompra={setListaCompra} />
-      )} */}
       <main>
-
-
         <div className="container">
           <div className="titulo-pagina">
             <h2>Recetas Guardadas</h2>
             <div className="linea-vertical"></div>
             <h2 className="numero-recetas">{`${n_recetas} recetas`}</h2>
-          </div> {/* Cierre correcto del div titulo-pagina */}
+          </div>
           {recetasActuales.length > 0 ? (
-          <div className="tarjetas">
-            {recetasActuales.map((receta) => (
-              <div
-                key={receta._id}
-                className="tarjeta btn"
-                role="button"
-                onClick={() => verDetalleReceta(receta._id)} // Modificado para navegar
-              >
-              <img
-                src={receta.href || "/img/comida_default.jpg"}
-                className="imagen-receta-tarjeta"
-                alt={`Receta ${receta.nombre}`} // Alt text consistente con recetas.jsx
-                onError={(e) => { e.target.onerror = null; e.target.src = "/img/comida_default.jpg"; }}
-               />
-              <h3>{receta.nombre}</h3>
-              <div className="like-container" onClick={(e) => { e.stopPropagation(); manejarLike(receta._id); }}>
-                <img
-                  src={liked[receta._id] ? CorazonRelleno : CorazonSinRelleno}
-                  alt="like"
-                  className="like"
-                  style={{ cursor: 'pointer' }}
-                />
-                <p className="likesNumero">{likes[receta._id] || 0}</p>
-              </div>
-              {/* Duración eliminada de la tarjeta */}
-              {/* <p className="duracion">{receta.duracion || 'N/A'} min</p> */}
-              <img
-                src={favoritos[receta._id] ? Favorito : NoFavorito} // Icono dinámico
-                className="icono-bookmark"
-                alt={favoritos[receta._id] ? "En favoritos" : "No en favoritos"} // Alt text dinámico
-                onClick={(e) => {
-                  e.stopPropagation();
-                  guardarFavorito(receta._id);
-                }}
-                style={{ cursor: 'pointer' }}
-              />
-              {/* Texto explícito de favorito eliminado */}
-              {/* {favoritos[receta._id] ? (
-                <p>En favoritos</p>
-              ) : (
-                <p>No en favoritos</p>
-              )} */}
+            <div className="tarjetas">
+              {recetasActuales.map((receta) => (
+                <div
+                  key={receta._id}
+                  className="tarjeta btn"
+                  role="button"
+                  onClick={() => verDetalleReceta(receta._id)}
+                >
+                  <img
+                    src={receta.href || "/img/comida_default.jpg"}
+                    className="imagen-receta-tarjeta"
+                    alt={`Receta ${receta.nombre}`}
+                    onError={(e) => { e.target.onerror = null; e.target.src = "/img/comida_default.jpg"; }}
+                  />
+                  <h3>{receta.nombre}</h3>
+                  <div className="like-container" onClick={(e) => { e.stopPropagation(); manejarLike(receta._id); }}>
+                    <img
+                      src={liked[receta._id] ? CorazonRelleno : CorazonSinRelleno}
+                      alt="like"
+                      className="like"
+                      style={{ cursor: 'pointer' }}
+                    />
+                    <p className="likesNumero">{likes[receta._id] || 0}</p>
+                  </div>
+                  <img
+                    src={favoritos[receta._id] ? Favorito : NoFavorito}
+                    className="icono-bookmark"
+                    alt={favoritos[receta._id] ? "En favoritos" : "No en favoritos"}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      guardarFavorito(receta._id);
+                    }}
+                    style={{ cursor: 'pointer' }}
+                  />
                 </div>
               ))}
             </div>
           ) : (
             <p className="text-center mt-4">No tienes recetas guardadas todavía.</p>
           )}
-          {/* Paginación */}
           <div className="paginacion d-flex justify-content-center mt-4">
             <nav>
               <ul className="pagination">
@@ -193,7 +167,6 @@ const RecetasGuardadas = () => {
                     Anterior
                   </button>
                 </li>
-                {/* Generar los números de página */}
                 {Array.from({ length: totalPaginas }, (_, i) => i + 1).map(numero => (
                   <li
                     key={numero}
@@ -204,17 +177,15 @@ const RecetasGuardadas = () => {
                     </button>
                   </li>
                 ))}
-              <li className={`page-item ${paginaActual === totalPaginas ? 'disabled' : ''}`}>
-                <button className="page-link" onClick={() => cambiarPagina(paginaActual + 1)}>
-                  Siguiente
-                </button>
-              </li>
-            </ul>
-          </nav>
+                <li className={`page-item ${paginaActual === totalPaginas ? 'disabled' : ''}`}>
+                  <button className="page-link" onClick={() => cambiarPagina(paginaActual + 1)}>
+                    Siguiente
+                  </button>
+                </li>
+              </ul>
+            </nav>
+          </div>
         </div>
-      </div>
-
-      {/* El JSX del Offcanvas ha sido completamente eliminado ya que las referencias y estados asociados también se eliminaron */}
       </main>
       <Footer />
     </>
