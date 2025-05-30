@@ -1,29 +1,51 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import 'bootstrap/dist/js/bootstrap.bundle.min'; // Asegúrate de importar Bootstrap JS
 
 const DesplegablePerfil = ({ showDesplegablePerfil, setDesplegablePerfil }) => {
     const navigate = useNavigate();
     const offcanvasRef = useRef();
     const bsOffcanvasRef = useRef(null);
+
+    useEffect(() => {
+        if (!offcanvasRef.current || !window.bootstrap?.Offcanvas) return;
+
+        if (!bsOffcanvasRef.current) {
+            bsOffcanvasRef.current = new window.bootstrap.Offcanvas(offcanvasRef.current);
+
+            offcanvasRef.current.addEventListener("hidden.bs.offcanvas", () => {
+                setDesplegablePerfil(false);
+            });
+        }
+
+        if (showDesplegablePerfil) {
+            bsOffcanvasRef.current.show();
+        } else {
+            bsOffcanvasRef.current?.hide(); // Ocultar cuando showDesplegablePerfil es false
+        }
+
+    }, [showDesplegablePerfil]);
+
+    const navegarYCerrar = (path, state) => {
+        bsOffcanvasRef.current?.hide();
+        // Esperar un breve momento para que la animación de cierre termine (opcional)
+        setTimeout(() => {
+            navigate(path, { state });
+        }, 150); // Ajusta el tiempo según la duración de la animación del offcanvas
+        setDesplegablePerfil(false); // Asegúrate de que el estado también se actualice
+    };
+
     const editarPerfil = () => {
-        navigate("/area-privada/editar-perfil", {
-            state: { seccion: "perfil" },
-        });
-        setDesplegablePerfil(false);
+        navegarYCerrar("/area-privada/editar-perfil", { seccion: "perfil" });
     };
     const crearReceta = () => {
-        navigate("/area-privada/editar-perfil", {
-            state: { seccion: "crear" },
-        });
-        setDesplegablePerfil(false);
+        navegarYCerrar("/area-privada/editar-perfil", { seccion: "crear" });
     };
     const verRecetas = () => {
-        navigate("/area-privada/editar-perfil", {
-            state: { seccion: "recetas" },
-        });
-        setDesplegablePerfil(false);
+        navegarYCerrar("/area-privada/editar-perfil", { seccion: "recetas" });
     };
+
     const cerrarSesion = () => {
         axios
             .get("http://localhost/api/login/gestion-autenticacion/logout.php", {
@@ -32,51 +54,28 @@ const DesplegablePerfil = ({ showDesplegablePerfil, setDesplegablePerfil }) => {
             .then((response) => {
                 console.log("Respuesta del backend:", response.data);
                 if (response.data.success) {
-                    // Redirigir a la página de inicio o a otra página después de cerrar sesión
-                    navigate("/home");
+                    // Navegar después de cerrar el offcanvas
+                    bsOffcanvasRef.current?.hide();
+                    setTimeout(() => {
+                        navigate("/home");
+                    }, 150); // Ajusta el tiempo si es necesario
+                    setDesplegablePerfil(false);
                 } else {
                     console.error("Error al cerrar sesión:", response.data.message);
+                    setDesplegablePerfil(false); // Asegúrate de actualizar el estado en caso de error también
                 }
             })
             .catch((error) => {
                 console.error("Error en la solicitud:", error);
+                setDesplegablePerfil(false); // Asegúrate de actualizar el estado en caso de error también
+            })
+            .finally(() => {
+                // No es necesario llamar a setDesplegablePerfil aquí, ya se hace en then/catch
             });
-        setDesplegablePerfil(false);
     };
 
-    useEffect(() => {
-        if (!offcanvasRef.current || !window.bootstrap?.Offcanvas) return;
-
-        // Solo inicializamos una vez
-        if (!bsOffcanvasRef.current) {
-            bsOffcanvasRef.current = new window.bootstrap.Offcanvas(offcanvasRef.current);
-
-            // Listener que se dispara cuando se cierra el offcanvas
-            offcanvasRef.current.addEventListener("hidden.bs.offcanvas", () => {
-                setDesplegablePerfil(false);
-            });
-        }
-
-        // Mostrar el offcanvas solo cuando cambia a true
-        if (showDesplegablePerfil) {
-            bsOffcanvasRef.current.show();
-        }
-
-    }, [showDesplegablePerfil]);
     return (
         <>
-            <link
-                href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"
-                integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7"
-                rel="stylesheet"
-            ></link>
-            <script
-                src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
-                integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
-                crossOrigin="anonymous"
-                defer
-            ></script>
-
             <div
                 ref={offcanvasRef}
                 className="offcanvas offcanvas-end"
@@ -93,6 +92,7 @@ const DesplegablePerfil = ({ showDesplegablePerfil, setDesplegablePerfil }) => {
                         className="btn-close"
                         data-bs-dismiss="offcanvas"
                         aria-label="Close"
+                        onClick={() => setDesplegablePerfil(false)} // Asegúrate de que el estado se actualice al cerrar con el botón
                     ></button>
                 </div>
                 <div className="offcanvas-body">

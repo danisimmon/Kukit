@@ -23,7 +23,7 @@ const VerReceta = () => {
     // Estado para la paginación de los pasos
     const [paginaPasosActual, setPaginaPasosActual] = useState(1);
     const [mensajeListaCompra, setMensajeListaCompra] = useState({ text: '', type: '' }); // Para mensajes de éxito/error
-    const [mostrarListaCompraLocal, setMostrarListaCompraLocal] = useState(false); 
+    const [mostrarListaCompraLocal, setMostrarListaCompraLocal] = useState(false);
     const [lastItemAddedTimestamp, setLastItemAddedTimestamp] = useState(null); // Para forzar la recarga de ListaCompra
     const PASOS_POR_PAGINA = 1; // Mostrar un paso a la vez
 
@@ -51,6 +51,7 @@ const VerReceta = () => {
             });
         setPaginaPasosActual(1); // Resetear la paginación de pasos si cambia la receta
     }, [recetaId]);
+
     const ajustarRaciones = (cambio) => {
         setRaciones(prev => Math.max(1, prev + cambio));
     };
@@ -105,15 +106,24 @@ const VerReceta = () => {
     };
 
     const handleAddToShoppingList = (nombreIngrediente, cantidadNum, unidad) => {
+        if (!receta?.informacionNutricional) {
+            console.error('Información nutricional no disponible para esta receta.');
+            setMensajeListaCompra({ text: 'Información nutricional no disponible.', type: 'danger' });
+            setTimeout(() => {
+                setMensajeListaCompra({ text: '', type: '' });
+            }, 3000);
+            return;
+        }
+
         const itemParaBackend = {
             nombre: nombreIngrediente,
             cantidad: cantidadNum, // Enviar cantidad numérica al backend
             unidad: unidad,
-            calorias: informacionNutricional.calorias,
-            proteinas: informacionNutricional.proteinas,
-            carbohidratos: informacionNutricional.carbohidratos,
-            grasas: informacionNutricional.grasas,
-            fibra: informacionNutricional.fibra,
+            calorias: receta.informacionNutricional.calorias,
+            proteinas: receta.informacionNutricional.proteina,
+            carbohidratos: receta.informacionNutricional.carbohidratos,
+            grasas: receta.informacionNutricional.grasas,
+            fibra: receta.informacionNutricional.fibra,
         };
 
         // Ajusta la URL a tu endpoint real del backend
@@ -292,7 +302,6 @@ const VerReceta = () => {
                                 )}
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
