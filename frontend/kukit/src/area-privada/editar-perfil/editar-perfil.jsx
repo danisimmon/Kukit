@@ -455,8 +455,7 @@ const EditarPerfil = () => {
                 />
                 <div className="info-basica-receta">
                   <div className="apartado-dificultad">
-                    <h5>Dificultad</h5>
-                    <h5>Selecciona la dificultad</h5>
+                    <h5>Introduce la dificultad</h5>
                     <select
                       name="dificultad"
                       id="nivel-dificultad"
@@ -473,8 +472,7 @@ const EditarPerfil = () => {
                     </select>
                   </div>
                   <div className="apartado-tiempo">
-                    <h5>Tiempo</h5>
-                    <h5>Selecciona el tiempo</h5>
+                    <h5>Introduce el tiempo (minutos)</h5>
                     <input
                       type="text"
                       name="tiempo"
@@ -645,28 +643,6 @@ const EditarPerfil = () => {
                         /> No
                       </label>
                     </div>
-
-                    <div className="apartado-vegetariana">
-                      <h5>¿Es vegetariana?</h5>
-                      <label>
-                        <input
-                          type="radio"
-                          name="vegetariana"
-                          value="sí"
-                          checked={formRecetaNueva.vegetariana === true}
-                          onChange={manejarCambioOpcionBooleanaReceta}
-                        /> Sí
-                      </label><br />
-                      <label>
-                        <input
-                          type="radio"
-                          name="vegetariana"
-                          value="no"
-                          checked={formRecetaNueva.vegetariana === false}
-                          onChange={manejarCambioOpcionBooleanaReceta}
-                        /> No
-                      </label>
-                    </div>
                     <div className="apartado-lactosa">
                       <h5>¿Contiene lactosa?</h5>
                       <label>
@@ -688,7 +664,27 @@ const EditarPerfil = () => {
                         /> No
                       </label>
                     </div>
-
+                    <div className="apartado-vegetariana">
+                      <h5>¿Es vegetariana?</h5>
+                      <label>
+                        <input
+                          type="radio"
+                          name="vegetariana"
+                          value="sí"
+                          checked={formRecetaNueva.vegetariana === true}
+                          onChange={manejarCambioOpcionBooleanaReceta}
+                        /> Sí
+                      </label><br />
+                      <label>
+                        <input
+                          type="radio"
+                          name="vegetariana"
+                          value="no"
+                          checked={formRecetaNueva.vegetariana === false}
+                          onChange={manejarCambioOpcionBooleanaReceta}
+                        /> No
+                      </label>
+                    </div>
                     <div className="vegana">
                       <h5>¿Es vegana?</h5>
                       <label>
