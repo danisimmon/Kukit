@@ -14,39 +14,60 @@ const TIPOS_COMIDA = [
   { key: 'cena', nombre: 'Cena' },
 ];
 const NUMERO_SEMANAS_PLAN = 4; // El usuario puede planificar para 4 semanas
+const API_BASE_URL = 'http://localhost/api/area_privada';
+const API_URL_PLAN = `${API_BASE_URL}/planAlimentacion/api-plan-semanal.php`;
+const API_URL_RECETAS_GUARDADAS = `${API_BASE_URL}/recetas/getRecetasGuardadas.php`;
+const API_URL_RECETAS_CREADAS = `${API_BASE_URL}/recetas/getRecetasCreadas.php`;
+
+const getDefaultPlan = () => Array(NUMERO_SEMANAS_PLAN).fill(null).map(() =>
+  Array(DIAS_SEMANA.length).fill(null).map(() => TIPOS_COMIDA.reduce((acc, tipo) => {
+    acc[tipo.key] = null;
+    return acc;
+  }, {}))
+);
 
 // Componente principal de la planificación semanal
 function PlanificacionSemanal() {
   const [plan, setPlan] = useState([]);
-  const [semanaActualVisualizada, setSemanaActualVisualizada] = useState(0); // Índice de la semana
-  const [slotSeleccionado, setSlotSeleccionado] = useState(null); // { semanaIndex, diaIndex, tipoComidaKey }
-  const [recetasGuardadas, setRecetasGuardadas] = useState([]); // Estado para las recetas guardadas
-  const [recetasCreadas, setRecetasCreadas] = useState([]); // Nuevo estado para las recetas creadas
+  const [cargandoPlanInicial, setCargandoPlanInicial] = useState(true);
+  const [semanaActualVisualizada, setSemanaActualVisualizada] = useState(0);
+  const [slotSeleccionado, setSlotSeleccionado] = useState(null);
+  const [recetasGuardadas, setRecetasGuardadas] = useState([]);
+  const [recetasCreadas, setRecetasCreadas] = useState([]);
   const [slotParaEliminar, setSlotParaEliminar] = useState(null);
 
-  // Refs para Offcanvas y Modal de Bootstrap
   const recipeSelectorOffcanvasRef = useRef(null);
   const recipeSelectorOffcanvasInstance = useRef(null);
   const confirmDeleteModalRef = useRef(null);
   const confirmDeleteModalInstance = useRef(null);
 
-  // Inicializar el plan y cargar recetas guardadas y creadas por separado
   useEffect(() => {
-    const planInicial = Array(NUMERO_SEMANAS_PLAN).fill(null).map(() =>
-      Array(DIAS_SEMANA.length).fill(null).map(() => ({
-        desayuno: null,
-        almuerzo: null,
-        comida: null,
-        merienda: null,
-        cena: null,
-      }))
-    );
-    setPlan(planInicial);
+    const cargarPlan = async () => {
+      setCargandoPlanInicial(true);
+      try {
+        const response = await axios.get(API_URL_PLAN, { withCredentials: true });
+        if (response.data && response.data.status === 'success' && response.data.data && Array.isArray(response.data.data.plan) && response.data.data.plan.length === NUMERO_SEMANAS_PLAN) {
+          setPlan(response.data.data.plan);
+        } else {
+          console.warn("Plan no encontrado o formato incorrecto desde API, inicializando uno nuevo.", response.data);
+          setPlan(getDefaultPlan());
+        }
+      } catch (error) {
+        console.error("Error cargando el plan semanal:", error);
+        setPlan(getDefaultPlan());
+      } finally {
+        setCargandoPlanInicial(false);
+      }
+    };
 
+    cargarPlan();
+
+    // Cargar recetas guardadas
     const cargarRecetasGuardadas = async () => {
       try {
-        const response = await axios.get('http://localhost/api/area_privada/recetas/getRecetasGuardadas.php');
-        console.log("Respuesta de recetas guardadas:", response);
+        const response = await axios.get(API_URL_RECETAS_GUARDADAS, {
+          withCredentials: true,
+        });
         const data = response.data;
         if (Array.isArray(data)) {
           setRecetasGuardadas(data);
@@ -55,19 +76,21 @@ function PlanificacionSemanal() {
         } else if (data && data.n_recetas && Array.isArray(data.n_recetas)) {
           setRecetasGuardadas(data.n_recetas);
         } else {
-          console.error("Error al cargar recetas guardadas: la respuesta no tiene la estructura esperada.", data);
           setRecetasGuardadas([]);
+          console.error("Respuesta inesperada recetas guardadas:", data);
         }
       } catch (error) {
-        console.error("Error al cargar recetas guardadas:", error);
         setRecetasGuardadas([]);
+        console.error("Error cargando recetas guardadas:", error);
       }
     };
 
+    // Cargar recetas creadas
     const cargarRecetasCreadas = async () => {
       try {
-        const response = await axios.get('http://localhost/api/area_privada/recetas/getRecetasCreadas.php'); // Reemplaza con la URL correcta
-        console.log("Respuesta de recetas creadas:", response);
+        const response = await axios.get(API_URL_RECETAS_CREADAS, {
+          withCredentials: true,
+        });
         const data = response.data;
         if (Array.isArray(data)) {
           setRecetasCreadas(data);
@@ -76,70 +99,19 @@ function PlanificacionSemanal() {
         } else if (data && data.n_recetas && Array.isArray(data.n_recetas)) {
           setRecetasCreadas(data.n_recetas);
         } else {
-          console.error("Error al cargar recetas creadas: la respuesta no tiene la estructura esperada.", data);
           setRecetasCreadas([]);
+          console.error("Respuesta inesperada recetas creadas:", data);
         }
       } catch (error) {
-        console.error("Error al cargar recetas creadas:", error);
         setRecetasCreadas([]);
+        console.error("Error cargando recetas creadas:", error);
       }
     };
-
-    // const guardarPlanSemanal = async () => {
-    //   try {
-    //     // Ejemplo de datos necesarios
-    //     const idUsuario = "usuario456"; // deberías sacarlo de tu sesión o contexto real
-    //     const fechaInicio = "2025-04-01"; // calcular según semanaActualVisualizada
-    //     const fechaFin = "2025-04-07";    // calcular según semanaActualVisualizada
-
-    //     // Transformar semanaVisible en array de menus
-    //     const menus = [];
-
-    //     semanaVisible.forEach((dia, diaIndex) => {
-    //       TIPOS_COMIDA.forEach(tipo => {
-    //         const comida = dia[tipo.key];
-    //         if (comida) {
-    //           menus.push({
-    //             fecha: calcularFechaPorDiaIndex(fechaInicio, diaIndex), // función que convierte día index a fecha string
-    //             tipoComida: tipo.key,
-    //             receta: comida
-    //           });
-    //         }
-    //       });
-    //     });
-
-    //     const planSemanal = {
-    //       idUsuario,
-    //       fechaInicio,
-    //       fechaFin,
-    //       menus
-    //     };
-
-    //     const response = await axios.post('http://localhost/api/area_privada/plan-semanal/guardarPlanSemanal.php', planSemanal);
-
-    //     if (response.data?.success) {
-    //       alert("Plan semanal guardado correctamente.");
-    //     } else {
-    //       console.warn("Error del servidor:", response.data);
-    //       alert("Ocurrió un error al guardar el plan.");
-    //     }
-    //   } catch (error) {
-    //     console.error("Error al guardar el plan:", error);
-    //     alert("No se pudo conectar con el servidor.");
-    //   }
-    // };
-
-    // // Función ejemplo para calcular la fecha según el día de la semana visible
-    // function calcularFechaPorDiaIndex(fechaInicioStr, diaIndex) {
-    //   const fechaInicio = new Date(fechaInicioStr);
-    //   fechaInicio.setDate(fechaInicio.getDate() + diaIndex);
-    //   return fechaInicio.toISOString().slice(0, 10); // "YYYY-MM-DD"
-    // }
 
     cargarRecetasGuardadas();
     cargarRecetasCreadas();
 
-    // Inicializar instancias de Bootstrap Offcanvas y Modal
+    // Inicializar Bootstrap Offcanvas y Modal
     import('bootstrap/dist/js/bootstrap.bundle.min.js').then(bootstrap => {
       if (recipeSelectorOffcanvasRef.current && !recipeSelectorOffcanvasInstance.current) {
         recipeSelectorOffcanvasInstance.current = new bootstrap.Offcanvas(recipeSelectorOffcanvasRef.current);
@@ -147,9 +119,8 @@ function PlanificacionSemanal() {
       if (confirmDeleteModalRef.current && !confirmDeleteModalInstance.current) {
         confirmDeleteModalInstance.current = new bootstrap.Modal(confirmDeleteModalRef.current);
       }
-    }).catch(err => console.error("Failed to load Bootstrap JS", err));
+    }).catch(err => console.error("No se pudo cargar Bootstrap JS", err));
 
-    // Cleanup function for Bootstrap instances when component unmounts
     return () => {
       if (recipeSelectorOffcanvasInstance.current) {
         recipeSelectorOffcanvasInstance.current.dispose();
@@ -160,7 +131,25 @@ function PlanificacionSemanal() {
         confirmDeleteModalInstance.current = null;
       }
     };
-  }, []); // El array vacío asegura que useEffect se ejecute solo al montar y desmontar
+  }, []);
+
+  const guardarPlan = async (planAGuardar) => {
+    try {
+      const response = await axios.post(API_URL_PLAN, { plan: planAGuardar }, {
+        headers: { 'Content-Type': 'application/json' },
+        withCredentials: true,
+      });
+      if (response.data && response.data.status === 'success') {
+        console.log("Plan guardado exitosamente.");
+      } else {
+        console.error("Error al guardar el plan:", response.data.message || "Respuesta desconocida del servidor.");
+        // Aquí podrías implementar un reintento o una notificación al usuario más robusta
+      }
+    } catch (error) {
+      console.error("Error de red o servidor al guardar el plan:", error);
+      // Aquí podrías implementar un reintento o una notificación al usuario más robusta
+    }
+  };
 
   const cambiarSemana = (direccion) => {
     setSemanaActualVisualizada(prev => {
@@ -168,7 +157,7 @@ function PlanificacionSemanal() {
       if (nuevaSemana >= 0 && nuevaSemana < NUMERO_SEMANAS_PLAN) {
         return nuevaSemana;
       }
-      return prev; // Mantener la semana actual si está fuera de los límites
+      return prev;
     });
   };
 
@@ -179,12 +168,11 @@ function PlanificacionSemanal() {
     }
   };
 
-  const seleccionarRecetaParaSlot = (receta) => {
+  const seleccionarRecetaParaSlot = async (receta) => {
     if (!slotSeleccionado) return;
 
     const { semanaIndex, diaIndex, tipoComidaKey } = slotSeleccionado;
 
-    // Crear una copia profunda del plan para asegurar la inmutabilidad
     const nuevoPlan = plan.map((semana, sIndex) => {
       if (sIndex === semanaIndex) {
         return semana.map((dia, dIndex) => {
@@ -201,6 +189,7 @@ function PlanificacionSemanal() {
     });
 
     setPlan(nuevoPlan);
+    await guardarPlan(nuevoPlan);
     if (recipeSelectorOffcanvasInstance.current) {
       recipeSelectorOffcanvasInstance.current.hide();
     }
@@ -214,7 +203,7 @@ function PlanificacionSemanal() {
     }
   };
 
-  const confirmarEliminacionComida = () => {
+  const confirmarEliminacionComida = async () => {
     if (!slotParaEliminar) return;
 
     const { semanaIndex, diaIndex, tipoComidaKey } = slotParaEliminar;
@@ -225,7 +214,7 @@ function PlanificacionSemanal() {
           if (dIndex === diaIndex) {
             return {
               ...dia,
-              [tipoComidaKey]: null, // Eliminar la receta
+              [tipoComidaKey]: null,
             };
           }
           return dia;
@@ -235,6 +224,7 @@ function PlanificacionSemanal() {
     });
 
     setPlan(nuevoPlan);
+    await guardarPlan(nuevoPlan);
     if (confirmDeleteModalInstance.current) {
       confirmDeleteModalInstance.current.hide();
     }
@@ -248,8 +238,19 @@ function PlanificacionSemanal() {
     setSlotParaEliminar(null);
   };
 
-  if (plan.length === 0) {
-    return <div className="container mt-5 text-center"><div className="spinner-border text-primary" role="status"><span className="visually-hidden">Cargando planificación...</span></div></div>;
+  if (cargandoPlanInicial) {
+    return (
+      <div className="container mt-5 text-center">
+        <div className="spinner-border text-primary" role="status">
+          <span className="visually-hidden">Cargando planificación...</span>
+        </div>
+      </div>
+    );
+  }
+
+  // Fallback por si algo muy extraño ocurre y el plan no se carga ni se inicializa
+  if (!plan || plan.length !== NUMERO_SEMANAS_PLAN) {
+    return <div className="container mt-5 text-center alert alert-danger">Error: No se pudo cargar la estructura del plan. Intente recargar la página.</div>;
   }
 
   const semanaVisible = plan[semanaActualVisualizada];
@@ -261,7 +262,6 @@ function PlanificacionSemanal() {
         <div className="container mt-4">
           <h2 className="mb-4 text-center">Planificación Semanal de Comidas</h2>
 
-          {/* Navegación de Semanas */}
           <div className="d-flex justify-content-between align-items-center mb-3">
             <button
               className="btn btn-outline-primary"
@@ -280,7 +280,6 @@ function PlanificacionSemanal() {
             </button>
           </div>
 
-          {/* Tabla de Planificación Semanal */}
           <div className="table-responsive">
             <table className="table table-bordered text-center">
               <thead>
@@ -429,10 +428,7 @@ function PlanificacionSemanal() {
               </div>
             </div>
           </div>
-        </div> 
-        {/* <button className="btn btn-success mt-4" onClick={guardarPlanSemanal}>
-          Guardar Plan Semanal
-        </button> */}
+        </div>
       </main>
       <Footer />
     </>

@@ -14,6 +14,12 @@ const EditarPerfil = () => {
   const navigate = useNavigate();
   const [mostrarPopup, setMostrarPopup] = useState(false);
 
+  // Estados para los nuevos inputs de ingredientes y pasos
+  const [newIngredienteNombre, setNewIngredienteNombre] = useState('');
+  const [newIngredienteCantidad, setNewIngredienteCantidad] = useState('');
+  const [newIngredienteUnidad, setNewIngredienteUnidad] = useState('');
+  const [newPaso, setNewPaso] = useState('');
+
   const direccionRecetasCreadas = () => {
     navigate("/area-privada/editar-perfil", {
       state: { seccion: "recetas" },
@@ -42,13 +48,12 @@ const EditarPerfil = () => {
     nombre: '',
     dificultad: '',
     tiempo: '',
-    ingredientes: [],
+    // Se eliminan ingredientes y pasos de aquí porque ahora se gestionan con sus propios estados
     pais: '',
     gluten: false,
     vegetariana: false,
     lactosa: false,
     vegana: false,
-    pasos: []
   });
 
   const manejarCambioPais = (e) => {
@@ -68,8 +73,9 @@ const EditarPerfil = () => {
     }));
   };
 
-  const [ingredientes, setIngredientes] = useState([{ nombre: '', cantidad: '', unidad: '' }]);
-  const [pasos, setPasos] = useState(['']);
+  // Se modifican los estados iniciales para ingredientes y pasos a arrays vacíos
+  const [ingredientes, setIngredientes] = useState([]);
+  const [pasos, setPasos] = useState([]);
   const [mensaje, setMensaje] = useState('');
   const [exito, setExito] = useState(false);
   const [seccionActiva, setSeccionActiva] = useState("perfil");
@@ -77,18 +83,26 @@ const EditarPerfil = () => {
   const [loadingRecetas, setLoadingRecetas] = useState(false);
   const [errorRecetas, setErrorRecetas] = useState('');
 
-  // Manejadores para Ingredientes
-  const handleIngredienteChange = (index, field, value) => {
-    const newIngredientes = [...ingredientes];
-    newIngredientes[index] = {
-      ...newIngredientes[index],
-      [field]: value,
-    };
-    setIngredientes(newIngredientes);
-  };
-
+  // Manejadores para Ingredientes (añadido para la nueva funcionalidad)
   const handleAddIngrediente = () => {
-    setIngredientes([...ingredientes, { nombre: '', cantidad: '', unidad: '' }]);
+    if (newIngredienteNombre && newIngredienteCantidad && newIngredienteUnidad) {
+      setIngredientes([
+        ...ingredientes,
+        {
+          nombre: newIngredienteNombre,
+          cantidad: newIngredienteCantidad,
+          unidad: newIngredienteUnidad,
+        },
+      ]);
+      // Limpiar los campos de entrada después de añadir
+      setNewIngredienteNombre('');
+      setNewIngredienteCantidad('');
+      setNewIngredienteUnidad('');
+      setMensaje(''); // Limpiar mensaje de error si lo hubiera
+    } else {
+      setMensaje('Por favor, rellena todos los campos del ingrediente para añadirlo.');
+      setExito(false);
+    }
   };
 
   const handleRemoveIngrediente = (index) => {
@@ -96,21 +110,42 @@ const EditarPerfil = () => {
     setIngredientes(newIngredientes);
   };
 
-  // Manejadores para Pasos
-  const handlePasoChange = (index, value) => {
-    const newPasos = [...pasos];
-    newPasos[index] = value;
-    setPasos(newPasos);
-  };
-
+  // Manejadores para Pasos (añadido para la nueva funcionalidad)
   const handleAddPaso = () => {
-    setPasos([...pasos, '']);
+    if (newPaso) {
+      setPasos([...pasos, newPaso]);
+      setNewPaso('');
+      setMensaje(''); // Limpiar mensaje de error si lo hubiera
+    } else {
+      setMensaje('Por favor, escribe el paso para añadirlo.');
+      setExito(false);
+    }
   };
 
   const handleRemovePaso = (index) => {
     const newPasos = pasos.filter((_, i) => i !== index);
     setPasos(newPasos);
   };
+
+  // Los manejadores originales handleIngredienteChange y handlePasoChange ya no son necesarios
+  // para la entrada de nuevos elementos, ya que usamos los estados newIngrediente... y newPaso.
+  // Si se usaban para editar elementos existentes en una tabla, se deberían mantener y adaptar.
+  // Como la petición es solo añadir y borrar, y no modificar elementos en la tabla, los omitimos.
+  // const handleIngredienteChange = (index, field, value) => {
+  //   const newIngredientes = [...ingredientes];
+  //   newIngredientes[index] = {
+  //     ...newIngredientes[index],
+  //     [field]: value,
+  //   };
+  //   setIngredientes(newIngredientes);
+  // };
+
+  // const handlePasoChange = (index, value) => {
+  //   const newPasos = [...pasos];
+  //   newPasos[index] = value;
+  //   setPasos(newPasos);
+  // };
+
 
   const manejarCambioReceta = (e) => {
     const { name, value } = e.target;
@@ -224,14 +259,14 @@ const EditarPerfil = () => {
 
   // Manejar el envio de la receta
   const manejarEnvioReceta = async (e) => {
-    // e.preventDefault();
+    e.preventDefault(); // Asegúrate de prevenir el comportamiento por defecto del formulario
     try {
       const respuesta = await axios.post(
         'http://localhost/api/area_privada/editar-perfil/crear-receta.php',
         {
           ...formRecetaNueva,
-          ingredientes: ingredientes,
-          pasos: pasos,
+          ingredientes: ingredientes, // Se envían los ingredientes de la tabla
+          pasos: pasos, // Se envían los pasos de la tabla
         },
         {
           headers: {
@@ -245,22 +280,25 @@ const EditarPerfil = () => {
         setExito(true);
         setMensaje(respuesta.data.message);
         console.log('Receta:', respuesta.data.receta);
+        // Limpiar los formularios después de un envío exitoso
         setRecetaNueva({
           nombre: '',
           dificultad: '',
           tiempo: '',
-          ingredientes: [],
           pais: '',
           gluten: false,
           vegetariana: false,
           lactosa: false,
           vegana: false,
-          pasos: []
         });
-        setIngredientes([{ nombre: '', cantidad: '', unidad: '' }]);
-        setPasos(['']);
-
-        // setMostrarPopup(true);
+        setIngredientes([]); // Limpiar la tabla de ingredientes
+        setPasos([]); // Limpiar la tabla de pasos
+        setNewIngredienteNombre('');
+        setNewIngredienteCantidad('');
+        setNewIngredienteUnidad('');
+        setNewPaso('');
+        setMostrarPopup(true);
+        direccionRecetasCreadas(); // Redirigir después de un envío exitoso
       } else {
         setExito(false);
         setMensaje(respuesta.data.message);
@@ -294,12 +332,8 @@ const EditarPerfil = () => {
               <div className="info-perfil">
                 <div className="contenedores-info-perfil">
                   <h3 className="titulos-perfil">Usuario</h3>
-                  <h3 type="text"
-                    id="usuario"
-                    name="usuario"
-                    value={formData.usuario}
-                    onChange={manejarCambio}
-                    required>{formData.usuario}</h3>
+                  {/* Se cambia <h3> por <p> ya que no es un input editable en esta vista */}
+                  <p id="usuario" name="usuario">{formData.usuario}</p>
                 </div>
               </div>
 
@@ -368,7 +402,7 @@ const EditarPerfil = () => {
                 </div>
                 <div className="botones-perfil">
                   <button type="submit">Guardar</button>
-                  <button className="botones-inversos">Cancelar</button>
+                  <button className="botones-inversos" type='button' onClick={() => setSeccionActiva("perfil")}>Cancelar</button>
                 </div>
               </form>
             </div>
@@ -597,7 +631,7 @@ const EditarPerfil = () => {
                           type="radio"
                           name="gluten"
                           value="sí"
-                          //checked={formRecetaNueva.gluten === true}
+                          checked={formRecetaNueva.gluten === true}
                           onChange={manejarCambioOpcionBooleanaReceta}
                         /> Sí
                       </label><br />
@@ -606,7 +640,7 @@ const EditarPerfil = () => {
                           type="radio"
                           name="gluten"
                           value="no"
-                          //checked={formRecetaNueva.gluten === false}
+                          checked={formRecetaNueva.gluten === false}
                           onChange={manejarCambioOpcionBooleanaReceta}
                         /> No
                       </label>
@@ -619,7 +653,7 @@ const EditarPerfil = () => {
                           type="radio"
                           name="vegetariana"
                           value="sí"
-                          //checked={formRecetaNueva.vegetariana === true}
+                          checked={formRecetaNueva.vegetariana === true}
                           onChange={manejarCambioOpcionBooleanaReceta}
                         /> Sí
                       </label><br />
@@ -628,7 +662,7 @@ const EditarPerfil = () => {
                           type="radio"
                           name="vegetariana"
                           value="no"
-                          //checked={formRecetaNueva.vegetariana === false}
+                          checked={formRecetaNueva.vegetariana === false}
                           onChange={manejarCambioOpcionBooleanaReceta}
                         /> No
                       </label>
@@ -640,7 +674,7 @@ const EditarPerfil = () => {
                           type="radio"
                           name="lactosa"
                           value="sí"
-                          //checked={formRecetaNueva.lactosa === true}
+                          checked={formRecetaNueva.lactosa === true}
                           onChange={manejarCambioOpcionBooleanaReceta}
                         /> Sí
                       </label><br />
@@ -649,7 +683,7 @@ const EditarPerfil = () => {
                           type="radio"
                           name="lactosa"
                           value="no"
-                          //checked={formRecetaNueva.lactosa === false}
+                          checked={formRecetaNueva.lactosa === false}
                           onChange={manejarCambioOpcionBooleanaReceta}
                         /> No
                       </label>
@@ -662,7 +696,7 @@ const EditarPerfil = () => {
                           type="radio"
                           name="vegana"
                           value="sí"
-                          //checked={formRecetaNueva.vegana === true}
+                          checked={formRecetaNueva.vegana === true}
                           onChange={manejarCambioOpcionBooleanaReceta}
                         /> Sí
                       </label><br />
@@ -671,7 +705,7 @@ const EditarPerfil = () => {
                           type="radio"
                           name="vegana"
                           value="no"
-                          //checked={formRecetaNueva.vegana === false}
+                          checked={formRecetaNueva.vegana === false}
                           onChange={manejarCambioOpcionBooleanaReceta}
                         /> No
                       </label>
@@ -691,84 +725,101 @@ const EditarPerfil = () => {
                 <div className="ingredientes-crear-receta">
                   <div className="contenedor-ingredientes">
                     <h5>INGREDIENTES</h5>
-                    {ingredientes.map((ing, index) => (
-                      <div key={index} className="rellenar-ingrediente">
-                        Nombre Ingrediente:
-                        <input
-                          type="text"
-                          value={ing.nombre}
-                          onChange={(e) => handleIngredienteChange(index, 'nombre', e.target.value)}
-                        />
-                        <span>Cantidad</span>
-                        <input
-                          type="number"
-                          value={ing.cantidad}
-                          onChange={(e) => handleIngredienteChange(index, 'cantidad', e.target.value)}
-                        />
-                        <span>Unidad</span>
-                        <input
-                          type="text"
-                          value={ing.unidad}
-                          onChange={(e) => handleIngredienteChange(index, 'unidad', e.target.value)}
-                        />
-                        <button type="button" onClick={() => handleRemoveIngrediente(index)}>
-                          Eliminar
-                        </button>
-                      </div>
-                    ))}
-                    {/* {ingredientes.map((ing, index) => (
-                      <div key={index} className="rellenar-ingrediente">
-                        <label>
-                          Nombre Ingrediente:
-                          <input
-                            type="text"
-                            value={ing.nombre}
-                            onChange={(e) => handleIngredienteChange(index, 'nombre', e.target.value)}
-                          />
-                        </label>
-                        <label>
-                          Cantidad:
-                          <input
-                            type="number"
-                            value={ing.cantidad}
-                            onChange={(e) => handleIngredienteChange(index, 'cantidad', e.target.value)}
-                          />
-                        </label>
-                        <label>
-                          Unidad:
-                          <input
-                            type="text"
-                            value={ing.unidad}
-                            onChange={(e) => handleIngredienteChange(index, 'unidad', e.target.value)}
-                          />
-                        </label>
-                        <button type="button" onClick={() => handleRemoveIngrediente(index)}>
-                          Eliminar
-                        </button>
-                      </div>
-                    ))} */}
-                    <div className="anadir-ingrediente" onClick={handleAddIngrediente}>
-                      Añadir Ingrediente
+                    {/* Tabla para mostrar los ingredientes añadidos */}
+                    {ingredientes.length > 0 && (
+                      <table className="tabla-ingredientes">
+                        <thead>
+                          <tr>
+                            <th>Nombre</th>
+                            <th>Cantidad</th>
+                            <th>Unidad</th>
+                            <th>Acciones</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {ingredientes.map((ing, index) => (
+                            <tr key={index}>
+                              <td>{ing.nombre}</td>
+                              <td>{ing.cantidad}</td>
+                              <td>{ing.unidad}</td>
+                              <td>
+                                <button type="button" onClick={() => handleRemoveIngrediente(index)}>
+                                  Eliminar
+                                </button>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    )}
+                    {/* Campos de entrada para añadir un nuevo ingrediente */}
+                    <div className="rellenar-ingrediente">
+                      Nombre Ingrediente:
+                      <input
+                        type="text"
+                        placeholder="Ej: Harina"
+                        value={newIngredienteNombre}
+                        onChange={(e) => setNewIngredienteNombre(e.target.value)}
+                      />
+                      <span>Cantidad</span>
+                      <input
+                        type="number"
+                        placeholder="Ej: 200"
+                        value={newIngredienteCantidad}
+                        onChange={(e) => setNewIngredienteCantidad(e.target.value)}
+                      />
+                      <span>Unidad</span>
+                      <input
+                        type="text"
+                        placeholder="Ej: gramos"
+                        value={newIngredienteUnidad}
+                        onChange={(e) => setNewIngredienteUnidad(e.target.value)}
+                      />
+                      <button type="button" onClick={handleAddIngrediente} className="anadir-ingrediente-btn">
+                        Añadir Ingrediente
+                      </button>
                     </div>
                   </div>
                 </div>
                 <div className="pasos-crear-receta">
                   <h5>PASOS</h5>
-                  {pasos.map((paso, index) => (
-                    <div key={index} className="rellenar-pasos">
-                      Paso {index + 1}
-                      <input
-                        type="text"
-                        value={paso}
-                        onChange={(e) => handlePasoChange(index, e.target.value)}
-                      />
-                      <button type="button" onClick={() => handleRemovePaso(index)}>
-                        Eliminar
-                      </button>
-                    </div>
-                  ))}
-                  <div className="anadir-pasos" onClick={handleAddPaso}>
-                    Añadir Paso
+                  {/* Tabla para mostrar los pasos añadidos */}
+                  {pasos.length > 0 && (
+                    <table className="tabla-pasos">
+                      <thead>
+                        <tr>
+                          <th>Paso #</th>
+                          <th>Descripción</th>
+                          <th>Acciones</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {pasos.map((paso, index) => (
+                          <tr key={index}>
+                            <td>{index + 1}</td>
+                            <td>{paso}</td>
+                            <td>
+                              <button type="button" onClick={() => handleRemovePaso(index)}>
+                                Eliminar
+                              </button>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  )}
+                  {/* Campo de entrada para añadir un nuevo paso */}
+                  <div className="rellenar-pasos">
+                    Paso:
+                    <input
+                      type="text"
+                      placeholder="Describe el paso"
+                      value={newPaso}
+                      onChange={(e) => setNewPaso(e.target.value)}
+                    />
+                    <button type="button" onClick={handleAddPaso} className="anadir-pasos-btn">
+                      Añadir Paso
+                    </button>
                   </div>
                 </div>
               </div>
@@ -777,20 +828,43 @@ const EditarPerfil = () => {
                 <button
                   className="boton-crear-receta"
                   id="terminar-receta"
-                  onClick={async () => {
-                    await manejarEnvioReceta();
-                    direccionRecetasCreadas();
-                  }}
+                  type="submit" // Cambiado a type="submit" para que el formulario se envíe
+                  onClick={manejarEnvioReceta} // Se llama a manejarEnvioReceta directamente aquí
                 >
                   Terminar
                 </button>
-                <button className="botones-inversos" id="cancelar-receta">
+                <button className="botones-inversos" id="cancelar-receta" type='button'
+                  onClick={() => {
+                    setSeccionActiva("perfil"); // Vuelve a la sección de perfil
+                    setRecetaNueva({ // Limpia el formulario de receta
+                        nombre: '',
+                        dificultad: '',
+                        tiempo: '',
+                        pais: '',
+                        gluten: false,
+                        vegetariana: false,
+                        lactosa: false,
+                        vegana: false,
+                    });
+                    setIngredientes([]); // Limpia la tabla de ingredientes
+                    setPasos([]); // Limpia la tabla de pasos
+                    setNewIngredienteNombre('');
+                    setNewIngredienteCantidad('');
+                    setNewIngredienteUnidad('');
+                    setNewPaso('');
+                  }}
+                >
                   Cancelar
                 </button>
               </div>
+              {mensaje && (
+                <div style={{ color: exito ? 'green' : 'red' }}>
+                  {mensaje}
+                </div>
+              )}
             </div>
           )}
-          {/* {mostrarPopup && (
+          {mostrarPopup && (
             <div className="popup-receta-creada">
               <div className="popup-contenido-receta-creada">
                 <h2>¡Receta creada con éxito!</h2>
@@ -802,56 +876,11 @@ const EditarPerfil = () => {
                 </button>
               </div>
             </div>
-          )} */}
+          )}
         </div>
       </main>
       <Footer />
     </>
-
-    // <div>
-    //   <h2>Editar Perfil</h2>
-    //   <form onSubmit={manejarEnvio}>
-    //     <div>
-    //       <label htmlFor="usuario">Usuario:</label>
-    //       <input
-    //         type="text"
-    //         id="usuario"
-    //         name="usuario"
-    //         value={formData.usuario}
-    //         onChange={manejarCambio}
-    //         required
-    //       />
-    //     </div>
-    //     <div>
-    //       <label htmlFor="correo">Correo:</label>
-    //       <input
-    //         type="email"
-    //         id="correo"
-    //         name="correo"
-    //         value={formData.correo}
-    //         onChange={manejarCambio}
-    //         required
-    //       />
-    //     </div>
-    //     <div>
-    //       <label htmlFor="password">Contraseña:</label>
-    //       <input
-    //         type="password"
-    //         id="password"
-    //         name="password"
-    //         value={formData.password}
-    //         onChange={manejarCambio}
-    //         required
-    //       />
-    //     </div>
-    //     <button type="submit">Actualizar perfil</button>
-    //   </form>
-    //   {mensaje && (
-    //     <div style={{ color: exito ? 'green' : 'red' }}>
-    //       {mensaje}
-    //     </div>
-    //   )}
-    // </div>
   );
 };
 
