@@ -10,7 +10,7 @@ import tiempoIcon from '../img/tiempo.png';
 import Footer from '../footer/footer';
 // import ListaCompra from '../listaCompra/listaCompra'; // No usado
 import Header from '../header/header';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 // import ImagenReceta from 'http://localhost/api/img/recetas/pasta-al-pesto.jpg';
 
 const VerRecetaTexto = () => {
@@ -24,6 +24,8 @@ const VerRecetaTexto = () => {
     const [showSpeechErrorPopup, setShowSpeechErrorPopup] = useState(false); // Estado para el pop-up de error de lectura
     const [showPlainText, setShowPlainText] = useState(false); // Estado para mostrar/ocultar texto plano
     const { recetaId } = useParams(); // Obtener recetaId de los parámetros de la URL
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         // Detener cualquier locución activa si cambia el ID de la receta o al cargar inicialmente.
@@ -65,6 +67,12 @@ const VerRecetaTexto = () => {
             }
         };
     }, [recetaId]);
+
+    const handleVerReceta = () => {
+        if (recetaId) {
+            navigate(`/area-privada/verreceta/${recetaId}`);
+        }
+    };
 
     const ajustarRaciones = (cambio) => {
         setRaciones(prev => Math.max(1, prev + cambio));
@@ -182,7 +190,12 @@ const VerRecetaTexto = () => {
                             </button>
                         </div>
                     </div>
-
+                    <button
+                        className="btn btn-outline-secondary mt-2 mb-3"
+                        onClick={handleVerReceta}
+                    >
+                        Volver
+                    </button>
                     {showPlainText ? (
                         <div className="mt-4 p-3 bg-light border rounded">
                             <h4 className="mb-3">Versión en Texto: {receta.nombre}</h4>

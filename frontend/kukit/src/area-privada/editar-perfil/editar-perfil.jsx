@@ -351,8 +351,9 @@ const EditarPerfil = () => {
                 </div>
               </div>
               <div className="botones-perfil">
-                <button onClick={() => setSeccionActiva("editar-perfil")}>Editar Perfil</button>
                 <button className="botones-inversos">Eliminar Cuenta</button>
+                <button onClick={() => setSeccionActiva("editar-perfil")}>Editar Perfil</button>
+
               </div>
             </div>
           )}
@@ -401,8 +402,8 @@ const EditarPerfil = () => {
                   </div>
                 </div>
                 <div className="botones-perfil">
-                  <button type="submit">Guardar</button>
                   <button className="botones-inversos" type='button' onClick={() => setSeccionActiva("perfil")}>Cancelar</button>
+                  <button type="submit">Guardar</button>
                 </div>
               </form>
             </div>
@@ -643,6 +644,7 @@ const EditarPerfil = () => {
                         /> No
                       </label>
                     </div>
+                    
                     <div className="apartado-lactosa">
                       <h5>¿Contiene lactosa?</h5>
                       <label>
@@ -664,8 +666,8 @@ const EditarPerfil = () => {
                         /> No
                       </label>
                     </div>
-                    <div className="apartado-vegetariana">
-                      <h5>¿Es vegetariana?</h5>
+                    <div className="apartado-lactosa">
+                      <h5>¿Contiene lactosa?</h5>
                       <label>
                         <input
                           type="radio"
@@ -821,26 +823,19 @@ const EditarPerfil = () => {
               </div>
 
               <div className="botones-crear-receta">
-                <button
-                  className="boton-crear-receta"
-                  id="terminar-receta"
-                  type="submit" // Cambiado a type="submit" para que el formulario se envíe
-                  onClick={manejarEnvioReceta} // Se llama a manejarEnvioReceta directamente aquí
-                >
-                  Terminar
-                </button>
+
                 <button className="botones-inversos" id="cancelar-receta" type='button'
                   onClick={() => {
                     setSeccionActiva("perfil"); // Vuelve a la sección de perfil
                     setRecetaNueva({ // Limpia el formulario de receta
-                        nombre: '',
-                        dificultad: '',
-                        tiempo: '',
-                        pais: '',
-                        gluten: false,
-                        vegetariana: false,
-                        lactosa: false,
-                        vegana: false,
+                      nombre: '',
+                      dificultad: '',
+                      tiempo: '',
+                      pais: '',
+                      gluten: false,
+                      vegetariana: false,
+                      lactosa: false,
+                      vegana: false,
                     });
                     setIngredientes([]); // Limpia la tabla de ingredientes
                     setPasos([]); // Limpia la tabla de pasos
@@ -851,6 +846,14 @@ const EditarPerfil = () => {
                   }}
                 >
                   Cancelar
+                </button>
+                <button
+                  className="boton-crear-receta"
+                  id="terminar-receta"
+                  type="submit" // Cambiado a type="submit" para que el formulario se envíe
+                  onClick={manejarEnvioReceta} // Se llama a manejarEnvioReceta directamente aquí
+                >
+                  Terminar
                 </button>
               </div>
               {mensaje && (
