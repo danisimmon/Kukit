@@ -877,6 +877,19 @@ footer hr {
 }
 
 /* Apartado Perfil */
+
+.perfil-opciones li {
+    border: 1px solid var(--primary-color) !important;
+    color: var(--primary-color) !important;
+    cursor: pointer;
+}
+
+.perfil-opciones li:hover {
+    background-color: var(--primary-color) !important;
+    color: var(--background-color) !important;
+    cursor: pointer;
+}
+
 .titulo-pagina ul {
     list-style: none;
     padding: 0;
@@ -1131,29 +1144,33 @@ footer hr {
     background: #FFF;
     box-shadow: 4px 0px 40px 0px rgba(0, 0, 0, 0.25);
 }
+
 .row {
-  flex-wrap: nowrap !important;
+    flex-wrap: nowrap !important;
 }
+
 .textos-hero {
-  text-align: center;
-  padding: 20px;
+    text-align: center;
+    padding: 20px;
 }
 
 .subtitulo-hero {
-   color: var(--background-color);
-  font-size: 1.3rem;
-  font-weight: 300;
-  margin-top: 20px;
-  line-height: 1.5;
-  max-width: 650px;
-  margin-left: auto;
-  margin-right: auto;
-  background-color: var(--primary-color);
+    color: var(--background-color);
+    font-size: 1.3rem;
+    font-weight: 300;
+    margin-top: 20px;
+    line-height: 1.5;
+    max-width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: var(--primary-color);
     padding: 5px;
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4); /* Sombra de texto más sutil */
-  opacity: 0.9;}
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+    /* Sombra de texto más sutil */
+    opacity: 0.9;
+}
 
 /* .rellenar-ingrediente,
 .rellenar-pasos {
@@ -1901,56 +1918,86 @@ header nav ul li.nav-link-li {
     display: inline-block;
     /* Para que el ::after se posicione correctamente */
 }
+
 @media print {
-  body * {
-    visibility: hidden; /* Por defecto, oculta todo en el body */
-  }
+    body * {
+        visibility: hidden;
+        /* Por defecto, oculta todo en el body */
+    }
 
-  /* Hace visible solo el contenido que queremos imprimir y sus hijos */
-  #printable-text-content, #printable-text-content * {
-    visibility: visible;
-  }
+    /* Hace visible solo el contenido que queremos imprimir y sus hijos */
+    #printable-text-content,
+    #printable-text-content * {
+        visibility: visible;
+    }
 
-  /* Posiciona el contenido imprimible para que ocupe toda la página de impresión */
-  #printable-text-content {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    margin: 0;
-    padding: 20px; /* Ajusta el padding para la impresión */
-    font-size: 12pt; /* Un tamaño de fuente legible para imprimir */
-    line-height: 1.4;
-    background-color: white !important; /* Fondo blanco para impresión */
-    color: black !important; /* Texto negro para impresión */
-    border: none !important; /* Sin bordes en la impresión */
-    box-shadow: none !important; /* Sin sombras en la impresión */
-  }
+    /* Posiciona el contenido imprimible para que ocupe toda la página de impresión */
+    #printable-text-content {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        margin: 0;
+        padding: 20px;
+        /* Ajusta el padding para la impresión */
+        font-size: 12pt;
+        /* Un tamaño de fuente legible para imprimir */
+        line-height: 1.4;
+        background-color: white !important;
+        /* Fondo blanco para impresión */
+        color: black !important;
+        /* Texto negro para impresión */
+        border: none !important;
+        /* Sin bordes en la impresión */
+        box-shadow: none !important;
+        /* Sin sombras en la impresión */
+    }
 
-  /* Oculta explícitamente elementos comunes de la interfaz que no queremos en la impresión */
-  header, footer, nav, aside, .btn, button, .modal, .modal-backdrop, .pagination,
-  .d-flex.justify-content-end.mb-3, /* Contenedor de botones de acción */
-  .btn-outline-secondary.mt-2.mb-3, /* Botón "Volver" */
-  .alert /* Oculta alertas si las hubiera */ {
-    display: none !important;
-  }
+    /* Oculta explícitamente elementos comunes de la interfaz que no queremos en la impresión */
+    header,
+    footer,
+    nav,
+    aside,
+    .btn,
+    button,
+    .modal,
+    .modal-backdrop,
+    .pagination,
+    .d-flex.justify-content-end.mb-3,
+    /* Contenedor de botones de acción */
+    .btn-outline-secondary.mt-2.mb-3,
+    /* Botón "Volver" */
+    .alert
 
-  /* Evita que los enlaces muestren su URL después del texto en la impresión (comportamiento de algunos navegadores) */
-  a[href]:after {
-    content: none !important;
-  }
+    /* Oculta alertas si las hubiera */
+        {
+        display: none !important;
+    }
 
-  /* Asegúrate de que el <pre> dentro del contenido imprimible se comporte bien */
-  #printable-text-content pre {
-    white-space: pre-wrap !important; /* Mantiene los saltos de línea y espacios */
-    word-wrap: break-word !important; /* Permite que las palabras largas se rompan */
-    font-family: inherit !important; /* Hereda la fuente definida para #printable-text-content */
-    font-size: inherit !important; /* Hereda el tamaño de fuente */
-    background-color: transparent !important; /* Sin fondo para el pre */
-    border: none !important; /* Sin borde para el pre */
-    padding: 0 !important; /* Sin padding para el pre */
-    margin: 0 !important; /* Sin margen para el pre */
-  }
+    /* Evita que los enlaces muestren su URL después del texto en la impresión (comportamiento de algunos navegadores) */
+    a[href]:after {
+        content: none !important;
+    }
+
+    /* Asegúrate de que el <pre> dentro del contenido imprimible se comporte bien */
+    #printable-text-content pre {
+        white-space: pre-wrap !important;
+        /* Mantiene los saltos de línea y espacios */
+        word-wrap: break-word !important;
+        /* Permite que las palabras largas se rompan */
+        font-family: inherit !important;
+        /* Hereda la fuente definida para #printable-text-content */
+        font-size: inherit !important;
+        /* Hereda el tamaño de fuente */
+        background-color: transparent !important;
+        /* Sin fondo para el pre */
+        border: none !important;
+        /* Sin borde para el pre */
+        padding: 0 !important;
+        /* Sin padding para el pre */
+        margin: 0 !important;
+        /* Sin margen para el pre */
+    }
 }
 
 
@@ -2088,6 +2135,48 @@ header nav ul li.nav-link-li {
     display: flex;
     justify-content: space-evenly;
 }
+
+
+.semana-navegacion h4 {
+    margin: 0;
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+.semana-navegacion .btn {
+    /* min-width: 150px;
+    font-weight: 500; */
+    margin: 10px;
+    background-color: var(--background-color);
+    color: var(--primary-color);
+    border: var(--primary-color) 1px solid;
+}
+
+.semana-navegacion .btn:hover {
+    /* min-width: 150px;
+    font-weight: 500; */
+    margin: 10px;
+    background-color: var(--primary-color);
+    color: var(--background-color);
+    border: none;
+}
+
+.semana-navegacion .btn:disabled {
+  background-color: var(--primary-color);
+    color: var(--background-color);              
+  cursor: not-allowed;   
+  border: none;        
+  opacity: 0.5;                
+}
+
+.semana-navegacion .btn:active {
+  margin: 10px;
+    background-color: var(--primary-color);
+    color: var(--background-color);
+    border: none;                 
+}
+
+
 
 #guardarPlanButton {
     width: 14vw;

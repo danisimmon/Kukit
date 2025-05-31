@@ -262,7 +262,7 @@ function PlanificacionSemanal() {
         <div className="container mt-4">
           <h2 className="mb-4 text-center">Planificación Semanal de Comidas</h2>
 
-          <div className="d-flex justify-content-between align-items-center mb-3">
+          <div className="d-flex justify-content-between align-items-center mb-3 semana-navegacion">
             <button
               className="btn btn-outline-primary"
               onClick={() => cambiarSemana(-1)}
