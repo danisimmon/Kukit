@@ -51,6 +51,23 @@ function Header() {
       .catch(err => console.error(err));
   }, []);
 
+  const getInitial = () => {
+    if (user) {
+      if (user.nombre) {
+        return user.nombre.charAt(0).toUpperCase();
+      } else if (user.email) {
+        return user.email.charAt(0).toUpperCase();
+      } else if (typeof user === 'string') { // Si user es directamente el email
+        return user.charAt(0).toUpperCase();
+      }
+    }
+    return 'Perfil'; // Fallback si no hay nombre ni email
+  };
+
+  const initialDisplay = getInitial();
+  // Determinar si estamos usando el texto de fallback "Perfil" para ajustar estilos
+  const isFallbackText = initialDisplay === 'Perfil';
+
   return (
     <>
       <header>
@@ -91,7 +108,28 @@ function Header() {
             </>
           )}
           {loggedIn && (
-            <button className="mi-perfil" onClick={() => setDesplegablePerfil(true)}>Perfil</button>
+            <div
+              onClick={() => setDesplegablePerfil(!showDesplegablePerfil)} // Toggle para mejor UX
+              style={{
+                width: '40px',
+                height: '40px',
+                borderRadius: '50%',
+                backgroundColor: '#C33333', // Color corporativo
+                color: 'white',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer',
+                fontSize: isFallbackText ? '0.7em' : '1.2em', // Tamaño de fuente más pequeño para "Perfil"
+                fontWeight: 'bold',
+                marginLeft: '10px', // Espacio respecto a otros elementos si los hubiera
+                padding: isFallbackText ? '2px' : '0', // Añadir un poco de padding si es texto largo
+                textAlign: 'center' // Asegurar que el texto esté centrado
+              }}
+              title={user?.nombre || user?.email || 'Perfil'} // Tooltip con nombre/email o "Perfil"
+            >
+              {initialDisplay}
+            </div>
           )}
         </div>
       </header>

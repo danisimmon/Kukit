@@ -1046,6 +1046,10 @@ footer hr {
     background: #FFF;
     box-shadow: 4px 0px 40px 0px rgba(0, 0, 0, 0.25);
 }
+.row {
+  flex-wrap: nowrap !important;
+}
+
 
 /* .rellenar-ingrediente,
 .rellenar-pasos {

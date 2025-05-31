@@ -1,12 +1,10 @@
 // src/pages/Home.jsx
-import React, { useEffect, useRef, useState, useCallback } from 'react';
-import logo from '../img/logo_kukit.png';
+import React, { useEffect, useState, useCallback } from 'react';
 import hero from '../img/mesa-de-cocina-con-platos-preparados-e-ingredientes.jpg';
 import Login from '../login/login'; // Descomentado
 import Registro from '../login/registro/registro'; // Descomentado
 import Footer from '../footer/footer';
 import ListaCompra from '../listaCompra/listaCompra';
-import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import imgHome1 from '../img/imgHome1.png';
 import imgHome2 from '../img/imgHome2.jpg';
@@ -17,7 +15,6 @@ import Header from '../header/header';
 function Home() {
   const [showLogin, setShowLogin] = useState(false);
   const [showRegistro, setShowRegistro] = useState(false);
-  const [showListaCompra, setListaCompra] = useState(false);
 
   const [recetasImprescindibles, setRecetasImprescindibles] = useState([]);
   const [currentIndexImprescindibles, setCurrentIndexImprescindibles] = useState(0);
@@ -198,6 +195,17 @@ function Home() {
                   </div>
                 </div>
               </div>
+              <div
+                style={{
+                  width: '0.5px',
+                  height: '100%',
+                  backgroundColor: '#ccc',
+                  margin: '0 1rem'
+                }}
+              ></div>
+
+
+
 
               {/* Sección Novedades de la semana - Ocupa la mitad del ancho en pantallas medianas y superiores */}
               <div className="col-md-6">
@@ -247,8 +255,8 @@ function Home() {
                           onClick={() => setShowRegistro(true)}
                         >
                           Registrarse
-                        </button>                        
-                        </div>
+                        </button>
+                      </div>
                     )}
                     <div className='contenedor-boton'>
                       <button onClick={handlePrevNovedades} disabled={(recetasNovedades.length + 1) <= 1}>&lt;</button>
