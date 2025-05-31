@@ -260,7 +260,7 @@ const Recetas = () => {
           </div>
 
           {/* Barra de búsqueda */}
-          <div className="mb-4">
+          <div className="search-container mb-4">
             <input
               type="text"
               className="form-control"
@@ -268,7 +268,9 @@ const Recetas = () => {
               value={searchTerm}
               onChange={handleSearchChange}
             />
+            <span className="search-icon">🔍</span>
           </div>
+          
           <button className="btn-mostrar-filtros" onClick={() => setMostrarFiltros(prev => !prev)}>
             {mostrarFiltros ? "Ocultar Filtros" : "Mostrar Filtros"}
           </button>

@@ -61,6 +61,85 @@ button {
     transition: box-shadow 0.3s ease-in-out;
 }
 
+/* Paginación */
+
+.pagination {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 20px;
+}
+
+.page-item {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: all 0.2s ease-in-out;
+}
+
+.page-item.disabled .page-link {
+    color: var(--primary-color);
+    pointer-events: none;
+    opacity: 0.5;
+    cursor: default;
+}
+
+.page-item.active .page-link {
+    background-color: #C33333;
+    /* Usa aquí el color que quieras */
+    color: white;
+    border-color: #C33333;
+}
+
+.page-link {
+    display: block;
+    padding: 8px 14px;
+    color: var(--primary-color);
+    background-color: #fff;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    border-radius: 4px;
+}
+
+.page-item:not(.active) .page-link {
+    color: var(--primary-color);
+}
+
+.page-link:hover {
+    background-color: #f0f0f0;
+}
+
+/* Barra de búsqueda */
+.search-container {
+    position: relative;
+    max-width: 500px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px 40px 10px 15px;
+    /* Espacio para el icono a la derecha */
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+}
+
+.search-icon {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: #888;
+    pointer-events: none;
+}
+
 
 /* hover de .btn-reservation */
 button:hover {
@@ -379,7 +458,11 @@ header .contenedor-header .sign-up:hover {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
-.btn-mostrar-filtros{
+.filtros-adicionales {
+    width: 80vw;
+}
+
+.btn-mostrar-filtros {
     display: flex;
     padding: 8px 10px;
     justify-content: center;
@@ -635,6 +718,8 @@ footer hr {
     flex-wrap: wrap;
     gap: 20px;
     justify-content: center;
+    margin: 20px;
+
 }
 
 .likesNumero {
