@@ -63,6 +63,21 @@ const EditarPerfil = () => {
     });
   };
 
+  const [imagen, setImagen] = useState(null);
+  const [imagenPreview, setImagenPreview] = useState(null);
+
+  // Handler para la subida de la imagen
+  const manejarCambioImagen = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setImagen(file);
+      setImagenPreview(URL.createObjectURL(file));
+    } else {
+      setImagen(null);
+      setImagenPreview(null);
+    }
+  };
+
   // Handler genérico para opciones booleanas de la receta (gluten, vegetariana, lactosa, vegana)
   const manejarCambioOpcionBooleanaReceta = (e) => {
     const { name, value } = e.target; // name será "gluten", "vegetariana", etc.
@@ -260,18 +275,34 @@ const EditarPerfil = () => {
   // Manejar el envio de la receta
   const manejarEnvioReceta = async (e) => {
     e.preventDefault(); // Asegúrate de prevenir el comportamiento por defecto del formulario
+
+    // Crear un objeto FormData para enviar datos mixtos (texto y archivo)
+    const formDataToSend = new FormData();
+
+    // Añadir los campos de texto de formRecetaNueva
+    for (const key in formRecetaNueva) {
+      // Asegúrate de que los valores booleanos se envíen como 'true' o 'false' strings
+      if (typeof formRecetaNueva[key] === 'boolean') {
+        formDataToSend.append(key, formRecetaNueva[key] ? 'true' : 'false');
+      } else {
+        formDataToSend.append(key, formRecetaNueva[key]);
+      }
+    }
+
+    // Añadir la imagen si existe
+    if (imagen) {
+      formDataToSend.append('imagen', imagen); // 'imagen' es el nombre del campo que tu backend esperará para el archivo
+    }
+
+    // Añadir los ingredientes y pasos, convirtiéndolos a string JSON
+    formDataToSend.append('ingredientes', JSON.stringify(ingredientes));
+    formDataToSend.append('pasos', JSON.stringify(pasos));
+
     try {
       const respuesta = await axios.post(
         'http://localhost/api/area_privada/editar-perfil/crear-receta.php',
+        formDataToSend, // Se envía el objeto FormData
         {
-          ...formRecetaNueva,
-          ingredientes: ingredientes, // Se envían los ingredientes de la tabla
-          pasos: pasos, // Se envían los pasos de la tabla
-        },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
           withCredentials: true,
         }
       );
@@ -297,8 +328,12 @@ const EditarPerfil = () => {
         setNewIngredienteCantidad('');
         setNewIngredienteUnidad('');
         setNewPaso('');
+        setImagen(null); // Limpiar la imagen seleccionada
+        setImagenPreview(null); // Limpiar la vista previa de la imagen
+        // Redirigir inmediatamente after successful creation
+        navigate("/area-privada/editar-perfil", { state: { seccion: "recetas" } });
+        // Optionally show the popup after navigation
         setMostrarPopup(true);
-        direccionRecetasCreadas(); // Redirigir después de un envío exitoso
       } else {
         setExito(false);
         setMensaje(respuesta.data.message);
@@ -309,7 +344,6 @@ const EditarPerfil = () => {
       console.error('Error:', error);
     }
   };
-
   return (
     <>
       <Header />
@@ -421,7 +455,7 @@ const EditarPerfil = () => {
               {!loadingRecetas && !errorRecetas && recetasCreadas.map((receta) => (
                 <div className="tarjeta" key={receta._id}>
                   <img
-                    src={receta.imagen || comida}
+                    src={receta.href || comida}
                     className="imagen-receta-tarjeta"
                     alt={receta.nombre}
                   />
@@ -454,6 +488,22 @@ const EditarPerfil = () => {
                   onChange={manejarCambioReceta}
                   required
                 />
+                {/* Sección para subir la imagen */}
+                <div className="subir-imagen-receta">
+                  <h3>Imagen de la Receta</h3>
+                  <input
+                    type="file"
+                    id="imagen-receta-nueva"
+                    name="imagen"
+                    accept="image/*"
+                    onChange={manejarCambioImagen}
+                  />
+                  {imagenPreview && (
+                    <div className="vista-previa-imagen">
+                      <img src={imagenPreview} alt="Vista previa" style={{ maxWidth: '100px', maxHeight: '100px' }} />
+                    </div>
+                  )}
+                </div>
                 <div className="info-basica-receta">
                   <div className="apartado-dificultad">
                     <h5>Introduce la dificultad</h5>
@@ -486,143 +536,32 @@ const EditarPerfil = () => {
 
                   <div className="apartado-pais">
                     <h5>Selecciona el país</h5>
-                    <label>
-                      <input
-                        type="radio"
-                        name="pais"
-                        value="Italia"
-                        checked={formRecetaNueva.pais === "Italia"}
-                        onChange={manejarCambioPais}
-                      />
-                      Italia
-                    </label>
-                    <label>
-                      <input
-                        type="radio"
-                        name="pais"
-                        value="México"
-                        checked={formRecetaNueva.pais === 'México'}
-                        onChange={manejarCambioPais}
-                      />
-                      México
-                    </label><br />
-                    <label>
-                      <input
-                        type="radio"
-                        name="pais"
-                        value="Japón"
-                        checked={formRecetaNueva.pais === 'Japón'}
-                        onChange={manejarCambioPais}
-                      /> Japón
-                    </label><br />
-                    <label>
-                      <input
-                        type="radio"
-                        name="pais"
-                        value="España"
-                        checked={formRecetaNueva.pais === 'España'}
-                        onChange={manejarCambioPais}
-                      /> España
-                    </label><br />
-                    <label>
-                      <input
-                        type="radio"
-                        name="pais"
-                        value="India"
-                        checked={formRecetaNueva.pais === 'India'}
-                        onChange={manejarCambioPais}
-                      /> India
-                    </label><br />
-                    <label>
-                      <input
-                        type="radio"
-                        name="pais"
-                        value="Francia"
-                        checked={formRecetaNueva.pais === 'Francia'}
-                        onChange={manejarCambioPais}
-                      /> Francia
-                    </label><br />
-                    <label>
-                      <input
-                        type="radio"
-                        name="pais"
-                        value="Alemania"
-                        checked={formRecetaNueva.pais === 'Alemania'}
-                        onChange={manejarCambioPais}
-                      /> Alemania
-                    </label><br />
-                    <label>
-                      <input
-                        type="radio"
-                        name="pais"
-                        value="Estados Unidos"
-                        checked={formRecetaNueva.pais === 'Estados Unidos'}
-                        onChange={manejarCambioPais}
-                      /> Estados Unidos
-                    </label><br />
-                    <label>
-                      <input
-                        type="radio"
-                        name="pais"
-                        value="China"
-                        checked={formRecetaNueva.pais === 'China'}
-                        onChange={manejarCambioPais}
-                      /> China
-                    </label><br />
-                    <label>
-                      <input
-                        type="radio"
-                        name="pais"
-                        value="Brasil"
-                        checked={formRecetaNueva.pais === 'Brasil'}
-                        onChange={manejarCambioPais}
-                      /> Brasil
-                    </label><br />
-                    <label>
-                      <input
-                        type="radio"
-                        name="pais"
-                        value="Tailandia"
-                        checked={formRecetaNueva.pais === 'Tailandia'}
-                        onChange={manejarCambioPais}
-                      /> Tailandia
-                    </label><br />
-                    <label>
-                      <input
-                        type="radio"
-                        name="pais"
-                        value="Grecia"
-                        checked={formRecetaNueva.pais === 'Grecia'}
-                        onChange={manejarCambioPais}
-                      /> Grecia
-                    </label><br />
-                    <label>
-                      <input
-                        type="radio"
-                        name="pais"
-                        value="Turquía"
-                        checked={formRecetaNueva.pais === 'Turquía'}
-                        onChange={manejarCambioPais}
-                      /> Turquía
-                    </label><br />
-                    <label>
-                      <input
-                        type="radio"
-                        name="pais"
-                        value="Corea del Sur"
-                        checked={formRecetaNueva.pais === 'Corea del Sur'}
-                        onChange={manejarCambioPais}
-                      /> Corea del Sur
-                    </label><br />
-                    <label>
-                      <input
-                        type="radio"
-                        name="pais"
-                        value="Libano"
-                        checked={formRecetaNueva.pais === 'Libano'}
-                        onChange={manejarCambioPais}
-                      /> Líbano
-                    </label><br />
+                    <select
+                      className="form-select"
+                      name="pais"
+                      value={formRecetaNueva.pais}
+                      onChange={manejarCambioPais}
+                      aria-label="Selecciona el país"
+                    >
+                      <option value="" disabled>
+                        Selecciona un país
+                      </option>
+                      <option value="Italia">Italia</option>
+                      <option value="México">México</option>
+                      <option value="Japón">Japón</option>
+                      <option value="España">España</option>
+                      <option value="India">India</option>
+                      <option value="Francia">Francia</option>
+                      <option value="Alemania">Alemania</option>
+                      <option value="Estados Unidos">Estados Unidos</option>
+                      <option value="China">China</option>
+                      <option value="Brasil">Brasil</option>
+                      <option value="Tailandia">Tailandia</option>
+                      <option value="Grecia">Grecia</option>
+                      <option value="Turquía">Turquía</option>
+                      <option value="Corea del Sur">Corea del Sur</option>
+                      <option value="Libano">Líbano</option>
+                    </select><br />
                     <div className="apartado-gluten">
                       <h5>¿Contiene gluten?</h5>
                       <label>
@@ -644,7 +583,7 @@ const EditarPerfil = () => {
                         /> No
                       </label>
                     </div>
-                    
+
                     <div className="apartado-lactosa">
                       <h5>¿Contiene lactosa?</h5>
                       <label>
@@ -877,7 +816,7 @@ const EditarPerfil = () => {
             </div>
           )}
         </div>
-      </main>
+      </main >
       <Footer />
     </>
   );
