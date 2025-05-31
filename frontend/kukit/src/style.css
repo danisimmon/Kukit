@@ -1927,3 +1927,36 @@ header nav ul li.nav-link-li {
     margin: 2rem auto;
     cursor: pointer;
 }
+
+.boton-plan-semanal {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#guardarPlanButton {
+    width: 14vw;
+    height: 6vh;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    border-radius: 50px;
+    background: #C33333;
+    font-size: 2.5vh;
+    color: white;
+}
+
+#vaciarPlanButton {
+    width: 14vw;
+    height: 6vh;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    border-radius: 50px;
+    border: 1px solid #C33333;
+    background: #FFF;
+    font-size: 2.5vh;
+}

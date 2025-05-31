@@ -337,6 +337,24 @@ function PlanificacionSemanal() {
           </div>
         </div>
 
+        {/*Botón guardar cambios*/}
+        <div className="boton-plan-semanal">
+          <button id="vaciarPlanButton"
+            className="btn vaciar-plan"
+            onClick={() => {
+              if (window.confirm("¿Estás seguro de que quieres vaciar todo el plan? Esta acción no se puede deshacer.")) {
+                setPlan(getDefaultPlan());
+                guardarPlan(getDefaultPlan());
+              }
+            }}
+            >Vaciar Plan</button>
+          <button id="guardarPlanButton"
+            className="btn guardar-plan"
+            onClick={() => guardarPlan(plan)}
+            >Guardar Cambios</button>
+            
+        </div>
+
         {/* Offcanvas para Selector de Recetas */}
         <div
           className="offcanvas offcanvas-end"
