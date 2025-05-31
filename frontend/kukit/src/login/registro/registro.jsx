@@ -7,24 +7,54 @@ const Registro = ({ setShowRegistro }) => {
   const [formData, setFormData] = useState({
     usuario: '',
     correo: '',
-    password: ''
+    password: '',
+    recordarme: false // Asegúrate de que este campo esté en el estado si lo usas
   });
 
   const [mensaje, setMensaje] = useState('');
   const [exito, setExito] = useState(false);
+  const [errorUsuario, setErrorUsuario] = useState('');
+  const [errorCorreo, setErrorCorreo] = useState('');
+  const [errorPassword, setErrorPassword] = useState('');
 
   const navigate = useNavigate();
 
   const manejarCambio = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value
-    });
+    const { name, value, type, checked } = e.target;
+    setFormData(prevFormData => ({ // Usar el callback para asegurar el estado previo correcto
+      ...prevFormData,
+      [name]: type === 'checkbox' ? checked : value
+    }));
   };
 
   const manejarEnvio = async (e) => {
     e.preventDefault();
+    // Resetear errores
+    setErrorUsuario('');
+    setErrorCorreo('');
+    setErrorPassword('');
+    setMensaje(''); // También reseteamos el mensaje general
+
+    let esValido = true;
+    if (!formData.usuario.trim()) { // Añadido .trim() para evitar espacios en blanco
+      setErrorUsuario('El nombre de usuario es obligatorio');
+      esValido = false;
+    }
+    if (!formData.correo.trim()) {
+      setErrorCorreo('El correo electrónico es obligatorio');
+      esValido = false;
+    } else if (!/\S+@\S+\.\S+/.test(formData.correo)) { // Validación básica de formato de email
+        setErrorCorreo('El formato del correo electrónico no es válido');
+        esValido = false;
+    }
+    if (!formData.password) { // Para contraseñas, no se suele usar .trim()
+      setErrorPassword('La contraseña es obligatoria');
+      esValido = false;
+    }
+    // Aquí podrías añadir más validaciones, como longitud mínima de contraseña, etc.
+
+    if (!esValido) return;
+
     try {
       const respuesta = await axios.post('http://localhost/api/login/registro/registro.php', formData, {
         headers: {
@@ -41,11 +71,11 @@ const Registro = ({ setShowRegistro }) => {
         navigate('/recetas');
       } else {
         setExito(false);
-        setMensaje(respuesta.data.message);
+        setMensaje(respuesta.data.message || 'Error desconocido al registrar.');
       }
     } catch (error) {
       setExito(false);
-      setMensaje('Hubo un error al procesar la solicitud.');
+      setMensaje(error.response?.data?.message || 'Hubo un error al procesar la solicitud.');
       console.error('Error:', error);
     }
   };
@@ -64,6 +94,18 @@ const Registro = ({ setShowRegistro }) => {
 
         <form onSubmit={manejarEnvio}>
           <div>
+            <label htmlFor="usuario">Nombre de usuario:</label>
+            <input
+              type="text"
+              name="usuario"
+              id="usuario"
+              value={formData.usuario}
+              onChange={manejarCambio}
+            />
+            <span className="error" style={{ color: 'red', display: 'block', marginBottom: '10px', minHeight: '1em' }}>{errorUsuario}</span>
+          </div>
+
+          <div>
             <label htmlFor="correo">Correo electrónico:</label>
             <input
               type="email"
@@ -71,8 +113,8 @@ const Registro = ({ setShowRegistro }) => {
               id="correo"
               value={formData.correo}
               onChange={manejarCambio}
-              required
             />
+            <span className="error" style={{ color: 'red', display: 'block', marginBottom: '10px', minHeight: '1em' }}>{errorCorreo}</span>
           </div>
 
           <div>
@@ -83,8 +125,8 @@ const Registro = ({ setShowRegistro }) => {
               id="password"
               value={formData.password}
               onChange={manejarCambio}
-              required
             />
+            <span className="error" style={{ color: 'red', display: 'block', marginBottom: '10px', minHeight: '1em' }}>{errorPassword}</span>
           </div>
 
           <label className="checkbox-label">
@@ -106,13 +148,14 @@ const Registro = ({ setShowRegistro }) => {
         </form>
 
         {mensaje && (
-          <p style={{ color: exito ? 'green' : 'red' }}>{mensaje}</p>
+          <p style={{ color: exito ? 'green' : 'red', marginTop: '1rem' }}>{mensaje}</p>
         )}
 
         <p>¿Ya tienes cuenta?</p>
-        <button className="botones-inicio-sesion" id="inicio-google">Iniciar sesión</button>
+        {/* Este botón debería probablemente abrir el pop-up de Login en lugar de ser un submit */}
+        <button type="button" className="botones-inicio-sesion" id="inicio-google" onClick={() => { /* Lógica para mostrar Login */ }}>Iniciar sesión</button>
         <hr />
-        <button onClick={() => setShowRegistro(false)}>Cerrar</button>
+        <button type="button" onClick={() => setShowRegistro(false)}>Cerrar</button>
       </section>
     </div>
   );

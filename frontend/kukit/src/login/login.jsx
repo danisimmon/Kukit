@@ -22,21 +22,44 @@ const Login = ({ setShowLogin }) => {
       ...prev,
       [name]: value
     }));
+
+    // Limpiar errores específicos del campo al escribir
+    if (name === 'correo') {
+      setErrorEmail('');
+    }
+    if (name === 'password') {
+      setErrorPassword('');
+    }
+  };
+
+  const handleBlur = (e) => {
+    const { name, value } = e.target;
+    if (name === 'correo' && !value.trim()) {
+      setErrorEmail('El correo no puede estar vacío');
+    }
+    if (name === 'password' && !value) { // Para password no se suele usar trim
+      setErrorPassword('La contraseña no puede estar vacía');
+    }
   };
 
   const manejarEnvio = async (e) => {
     e.preventDefault();
-    setErrorEmail('');
-    setErrorPassword('');
+    let formIsValid = true;
 
-    if (!formData.correo) {
+    // Validar campos vacíos al enviar, por si el usuario no interactuó (onBlur)
+    if (!formData.correo.trim()) {
       setErrorEmail('El correo es obligatorio');
+      formIsValid = false;
     }
     if (!formData.password) {
       setErrorPassword('La contraseña es obligatoria');
+      formIsValid = false;
     }
 
-    if (!formData.correo || !formData.password) return;
+    if (!formIsValid) {
+      return;
+    }
+    // Si llegamos aquí, los campos obligatorios tienen algún valor (la validación de formato/existencia se hace en el backend)
 
     try {
       const respuesta = await axios.post('http://localhost/api/login/login.php', formData, {
@@ -48,14 +71,15 @@ const Login = ({ setShowLogin }) => {
         setExito(true);
         setMensaje(respuesta.data.message);
         console.log('Usuario:', respuesta.data.user);
-        navigate('/recetas');
+        // Aquí podrías guardar el usuario en el contexto o estado global si es necesario
+        navigate('/recetas'); // Redirige a la página de recetas
       } else {
         setExito(false);
-        setMensaje(respuesta.data.message);
+        setMensaje(respuesta.data.message || 'Correo o contraseña incorrectos.');
       }
     } catch (error) {
       setExito(false);
-      setMensaje('Hubo un error al procesar la solicitud.');
+      setMensaje(error.response?.data?.message || 'Hubo un error al procesar la solicitud.');
       console.error('Error:', error);
     }
   };
@@ -82,9 +106,10 @@ const Login = ({ setShowLogin }) => {
               id="correo"
               value={formData.correo}
               onChange={manejarCambio}
+              onBlur={handleBlur} // Añadido onBlur
             />
-            <span className="error">{errorEmail}</span>
-          </div>
+      <span className="error" style={{ color: 'red', display: 'block', minHeight: '1em'  }}>{errorEmail}</span>
+      </div>
 
           <div className="contenedor-email-password">
             <label htmlFor="password" className="password-sign-in">Contraseña:</label>
@@ -94,8 +119,9 @@ const Login = ({ setShowLogin }) => {
               id="password"
               value={formData.password}
               onChange={manejarCambio}
+              onBlur={handleBlur} // Añadido onBlur
             />
-            <span className="error">{errorPassword}</span>
+            <span className="error" style={{ color: 'red', display: 'block', minHeight: '1em' }}>{errorPassword}</span>
           </div>
 
           <button type="submit" className="botones-inicio-sesion">
@@ -103,14 +129,14 @@ const Login = ({ setShowLogin }) => {
           </button>
         </form>
 
-        <button className="botones-inicio-sesion" id="inicio-google">
+        <button type="button" className="botones-inicio-sesion" id="inicio-google">
           Iniciar sesión con Google
         </button>
 
         {mensaje && (
           <p style={{ color: exito ? 'green' : 'red', marginTop: '1rem' }}>{mensaje}</p>
         )}
-        <button onClick={() => setShowLogin(false)}>Cerrar</button>
+        <button type="button" onClick={() => setShowLogin(false)}>Cerrar</button>
       </section>
     </div>
   );
