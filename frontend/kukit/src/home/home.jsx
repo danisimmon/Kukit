@@ -112,7 +112,7 @@ function Home() {
         <div className="hero">
           <div className="textos-hero">
             <h1 className='rojopasion'>ORGANIZA LO QUE COMES SIN COMERTE LA CABEZA</h1>
-            <button className="btn-reservation">DESCUBRE UN NUEVO MUNDO CULINARIO</button>
+            <p className="subtitulo-hero">Descubre un nuevo mundo culinario y simplifica tu cocina.</p>
           </div>
           <div className="fondo">
             <figure>
@@ -135,10 +135,10 @@ function Home() {
           {/* Contenedor para las secciones de Imprescindibles y Novedades */}
           {/* Usamos container-fluid para ancho completo y my-5 para margen vertical. La clase 'row' de Bootstrap permite que los elementos hijos se coloquen en línea. */}
           <div className="container-fluid my-5" id="contenedor-imprescindibles-novedades">
-            <div className="row">
+            <div className="row gap-3">
 
               {/* Sección Imprescindibles Kukit - Ocupa la mitad del ancho en pantallas medianas y superiores */}
-              <div className="col-md-6">
+              <div className="col-md-6 bg-light ms-auto">
                 <div className="seccion-home-recetas text-center mb-4 mb-md-0"> {/* mb-4 para móviles, mb-md-0 para resetear en medianas+ */}
                   <h2>Imprescindibles Kukit</h2>
                   <div className="imprescindibles-kukit-recetas" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -195,20 +195,11 @@ function Home() {
                   </div>
                 </div>
               </div>
-              <div
-                style={{
-                  width: '0.5px',
-                  height: '100%',
-                  backgroundColor: '#ccc',
-                  margin: '0 1rem'
-                }}
-              ></div>
-
-
-
-
+              <div className="col-auto d-flex align-items-center">
+                 <div class="vr"></div>
+              </div>
               {/* Sección Novedades de la semana - Ocupa la mitad del ancho en pantallas medianas y superiores */}
-              <div className="col-md-6">
+              <div className="col-md-6 bg-light">
                 <div className="seccion-home-recetas text-center">
                   <h2>Novedades de la semana</h2>
                   <div className="imprescindibles-kukit-recetas" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
