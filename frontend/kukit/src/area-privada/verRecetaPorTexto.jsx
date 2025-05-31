@@ -20,7 +20,7 @@ const VerRecetaTexto = () => {
     const utteranceRef = useRef(null);
     // Estado para la paginación de los pasos
     const [paginaPasosActual, setPaginaPasosActual] = useState(1);
-    const PASOS_POR_PAGINA = 1; // Mostrar un paso a la vez
+    const PASOS_POR_PAGINA = 1; // Mostrar un paso a la vez, puedes cambiarlo si quieres mostrar más
     const [showSpeechErrorPopup, setShowSpeechErrorPopup] = useState(false); // Estado para el pop-up de error de lectura
     const [showPlainText, setShowPlainText] = useState(false); // Estado para mostrar/ocultar texto plano
     const { recetaId } = useParams(); // Obtener recetaId de los parámetros de la URL
@@ -77,6 +77,48 @@ const VerRecetaTexto = () => {
     const ajustarRaciones = (cambio) => {
         setRaciones(prev => Math.max(1, prev + cambio));
     };
+
+    // Lógica de paginación de pasos
+    const totalPaginasPasos = receta ? Math.ceil(receta.pasos.length / PASOS_POR_PAGINA) : 0;
+    const indexUltimoPaso = paginaPasosActual * PASOS_POR_PAGINA;
+    const indexPrimerPaso = indexUltimoPaso - PASOS_POR_PAGINA;
+    const pasosEnPaginaActual = receta ? receta.pasos.slice(indexPrimerPaso, indexUltimoPaso) : [];
+
+    const cambiarPaginaPasos = (numero) => {
+        if (numero >= 1 && numero <= totalPaginasPasos) {
+            setPaginaPasosActual(numero);
+        }
+    };
+
+    // Función para renderizar los números de página de los pasos con elipsis (similar a VerReceta.jsx)
+    const renderNumerosPaginaPasos = () => {
+        const items = [];
+        const maxPaginasVisibles = 3; 
+        let inicio = Math.max(1, paginaPasosActual - Math.floor(maxPaginasVisibles / 2));
+        let fin = Math.min(totalPaginasPasos, inicio + maxPaginasVisibles - 1);
+
+        if (fin - inicio + 1 < maxPaginasVisibles && inicio > 1) {
+            inicio = Math.max(1, fin - maxPaginasVisibles + 1);
+        }
+
+        if (inicio > 1) {
+            items.push(<li key="start-ellipsis" className="page-item disabled"><span className="page-link">...</span></li>);
+        }
+
+        for (let i = inicio; i <= fin; i++) {
+            items.push(
+                <li key={i} className={`page-item ${paginaPasosActual === i ? 'active' : ''}`}>
+                    <button className="page-link" onClick={() => cambiarPaginaPasos(i)}>{i}</button>
+                </li>
+            );
+        }
+
+        if (fin < totalPaginasPasos) {
+            items.push(<li key="end-ellipsis" className="page-item disabled"><span className="page-link">...</span></li>);
+        }
+        return items;
+    };
+
     const getTextToSpeak = () => {
         if (!receta) return "";
 
@@ -149,6 +191,9 @@ const VerRecetaTexto = () => {
     const toggleShowPlainText = () => {
         setShowPlainText(!showPlainText);
     };
+    const handlePrint = () => {
+        window.print();
+    };
 
     if (!receta) { // Estado de carga
         return (
@@ -188,6 +233,15 @@ const VerRecetaTexto = () => {
                             >
                                 {showPlainText ? 'Ocultar Texto' : 'Mostrar Texto'}
                             </button>
+                            {showPlainText && (
+                                <button
+                                    className="btn btn-success btn-sm ms-2"
+                                    onClick={handlePrint}
+                                    aria-label={`Imprimir versión en texto de la receta ${receta.nombre}`}
+                                >
+                                    Imprimir Texto
+                                </button>
+                            )}
                         </div>
                     </div>
                     <button
@@ -198,10 +252,12 @@ const VerRecetaTexto = () => {
                     </button>
                     {showPlainText ? (
                         <div className="mt-4 p-3 bg-light border rounded">
+                            <div id="printable-text-content" className="mt-4 p-3 bg-light border rounded">
                             <h4 className="mb-3">Versión en Texto: {receta.nombre}</h4>
                             <pre style={{ whiteSpace: 'pre-wrap', wordWrap: 'break-word', fontFamily: 'inherit', fontSize: 'inherit' }}>
                                 {getTextToSpeak()}
                             </pre>
+                        </div>
                         </div>
                     ) : (
                         <>
@@ -289,14 +345,25 @@ const VerRecetaTexto = () => {
 
                                     <div className="mt-4">
                                         <h5>PASOS</h5>
-                                        {/* Aquí iría la lógica de paginación de pasos si la mantienes */}
-                                        {receta.pasos.slice((paginaPasosActual - 1) * PASOS_POR_PAGINA, paginaPasosActual * PASOS_POR_PAGINA).map((paso, index) => (
-                                            <div key={index} className="bg-white rounded shadow-sm p-3 mb-3">
-                                                <p className="fw-bold">Paso {(paginaPasosActual - 1) * PASOS_POR_PAGINA + index + 1}:</p>
+                                        {pasosEnPaginaActual.map((paso, idx) => (
+                                            <div key={indexPrimerPaso + idx} className="bg-white rounded shadow-sm p-3 mb-3">
+                                                <p className="fw-bold">Paso {indexPrimerPaso + idx + 1}:</p>
                                                 <p>{paso}</p>
                                             </div>
                                         ))}
-                                        {/* Aquí los botones de paginación de pasos */}
+                                        {totalPaginasPasos > 1 && (
+                                            <nav>
+                                                <ul className="pagination justify-content-center">
+                                                    <li className={`page-item ${paginaPasosActual === 1 ? 'disabled' : ''}`}>
+                                                        <button className="page-link" onClick={() => cambiarPaginaPasos(paginaPasosActual - 1)}>&lt;</button>
+                                                    </li>
+                                                    {renderNumerosPaginaPasos()}
+                                                    <li className={`page-item ${paginaPasosActual === totalPaginasPasos ? 'disabled' : ''}`}>
+                                                        <button className="page-link" onClick={() => cambiarPaginaPasos(paginaPasosActual + 1)}>&gt;</button>
+                                                    </li>
+                                                </ul>
+                                            </nav>
+                                        )}
                                     </div>
                                 </div>
                             </div>

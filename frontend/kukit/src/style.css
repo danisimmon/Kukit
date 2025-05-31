@@ -1901,6 +1901,58 @@ header nav ul li.nav-link-li {
     display: inline-block;
     /* Para que el ::after se posicione correctamente */
 }
+@media print {
+  body * {
+    visibility: hidden; /* Por defecto, oculta todo en el body */
+  }
+
+  /* Hace visible solo el contenido que queremos imprimir y sus hijos */
+  #printable-text-content, #printable-text-content * {
+    visibility: visible;
+  }
+
+  /* Posiciona el contenido imprimible para que ocupe toda la página de impresión */
+  #printable-text-content {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    margin: 0;
+    padding: 20px; /* Ajusta el padding para la impresión */
+    font-size: 12pt; /* Un tamaño de fuente legible para imprimir */
+    line-height: 1.4;
+    background-color: white !important; /* Fondo blanco para impresión */
+    color: black !important; /* Texto negro para impresión */
+    border: none !important; /* Sin bordes en la impresión */
+    box-shadow: none !important; /* Sin sombras en la impresión */
+  }
+
+  /* Oculta explícitamente elementos comunes de la interfaz que no queremos en la impresión */
+  header, footer, nav, aside, .btn, button, .modal, .modal-backdrop, .pagination,
+  .d-flex.justify-content-end.mb-3, /* Contenedor de botones de acción */
+  .btn-outline-secondary.mt-2.mb-3, /* Botón "Volver" */
+  .alert /* Oculta alertas si las hubiera */ {
+    display: none !important;
+  }
+
+  /* Evita que los enlaces muestren su URL después del texto en la impresión (comportamiento de algunos navegadores) */
+  a[href]:after {
+    content: none !important;
+  }
+
+  /* Asegúrate de que el <pre> dentro del contenido imprimible se comporte bien */
+  #printable-text-content pre {
+    white-space: pre-wrap !important; /* Mantiene los saltos de línea y espacios */
+    word-wrap: break-word !important; /* Permite que las palabras largas se rompan */
+    font-family: inherit !important; /* Hereda la fuente definida para #printable-text-content */
+    font-size: inherit !important; /* Hereda el tamaño de fuente */
+    background-color: transparent !important; /* Sin fondo para el pre */
+    border: none !important; /* Sin borde para el pre */
+    padding: 0 !important; /* Sin padding para el pre */
+    margin: 0 !important; /* Sin margen para el pre */
+  }
+}
+
 
 
 
