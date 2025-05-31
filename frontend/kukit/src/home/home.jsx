@@ -37,7 +37,7 @@ function Home() {
   useEffect(() => {
     const fetchRecetas = async () => {
       try {
-        const response = await fetch('http://localhost/api/area_privada/recetas/getRecetas.php');
+        const response = await fetch('http://localhost/api/area_privada/recetas/getRecetasHome.php');
         const data = await response.json();
 
         if (data && Array.isArray(data.recetas)) {
