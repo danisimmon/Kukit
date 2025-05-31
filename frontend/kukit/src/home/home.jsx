@@ -1,12 +1,10 @@
 // src/pages/Home.jsx
-import React, { useEffect, useRef, useState, useCallback } from 'react';
-import logo from '../img/logo_kukit.png';
+import React, { useEffect, useState, useCallback } from 'react';
 import hero from '../img/mesa-de-cocina-con-platos-preparados-e-ingredientes.jpg';
 import Login from '../login/login'; // Descomentado
 import Registro from '../login/registro/registro'; // Descomentado
 import Footer from '../footer/footer';
 import ListaCompra from '../listaCompra/listaCompra';
-import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import imgHome1 from '../img/imgHome1.png';
 import imgHome2 from '../img/imgHome2.jpg';
@@ -17,7 +15,6 @@ import Header from '../header/header';
 function Home() {
   const [showLogin, setShowLogin] = useState(false);
   const [showRegistro, setShowRegistro] = useState(false);
-  const [showListaCompra, setListaCompra] = useState(false);
 
   const [recetasImprescindibles, setRecetasImprescindibles] = useState([]);
   const [currentIndexImprescindibles, setCurrentIndexImprescindibles] = useState(0);
@@ -115,7 +112,7 @@ function Home() {
         <div className="hero">
           <div className="textos-hero">
             <h1 className='rojopasion'>ORGANIZA LO QUE COMES SIN COMERTE LA CABEZA</h1>
-            <button className="btn-reservation">DESCUBRE UN NUEVO MUNDO CULINARIO</button>
+            <p className="subtitulo-hero">Descubre un nuevo mundo culinario y simplifica tu cocina.</p>
           </div>
           <div className="fondo">
             <figure>
@@ -138,10 +135,10 @@ function Home() {
           {/* Contenedor para las secciones de Imprescindibles y Novedades */}
           {/* Usamos container-fluid para ancho completo y my-5 para margen vertical. La clase 'row' de Bootstrap permite que los elementos hijos se coloquen en línea. */}
           <div className="container-fluid my-5" id="contenedor-imprescindibles-novedades">
-            <div className="row">
+            <div className="row gap-3">
 
               {/* Sección Imprescindibles Kukit - Ocupa la mitad del ancho en pantallas medianas y superiores */}
-              <div className="col-md-6">
+              <div className="col-md-6 bg-light ms-auto">
                 <div className="seccion-home-recetas text-center mb-4 mb-md-0"> {/* mb-4 para móviles, mb-md-0 para resetear en medianas+ */}
                   <h2>Imprescindibles Kukit</h2>
                   <div className="imprescindibles-kukit-recetas" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -198,9 +195,11 @@ function Home() {
                   </div>
                 </div>
               </div>
-
+              <div className="col-auto d-flex align-items-center">
+                 <div class="vr"></div>
+              </div>
               {/* Sección Novedades de la semana - Ocupa la mitad del ancho en pantallas medianas y superiores */}
-              <div className="col-md-6">
+              <div className="col-md-6 bg-light">
                 <div className="seccion-home-recetas text-center">
                   <h2>Novedades de la semana</h2>
                   <div className="imprescindibles-kukit-recetas" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -247,8 +246,8 @@ function Home() {
                           onClick={() => setShowRegistro(true)}
                         >
                           Registrarse
-                        </button>                        
-                        </div>
+                        </button>
+                      </div>
                     )}
                     <div className='contenedor-boton'>
                       <button onClick={handlePrevNovedades} disabled={(recetasNovedades.length + 1) <= 1}>&lt;</button>

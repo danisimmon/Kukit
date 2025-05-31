@@ -1131,6 +1131,29 @@ footer hr {
     background: #FFF;
     box-shadow: 4px 0px 40px 0px rgba(0, 0, 0, 0.25);
 }
+.row {
+  flex-wrap: nowrap !important;
+}
+.textos-hero {
+  text-align: center;
+  padding: 20px;
+}
+
+.subtitulo-hero {
+   color: var(--background-color);
+  font-size: 1.3rem;
+  font-weight: 300;
+  margin-top: 20px;
+  line-height: 1.5;
+  max-width: 650px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: var(--primary-color);
+    padding: 5px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4); /* Sombra de texto más sutil */
+  opacity: 0.9;}
 
 /* .rellenar-ingrediente,
 .rellenar-pasos {
