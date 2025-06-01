@@ -2205,3 +2205,9 @@ header nav ul li.nav-link-li {
     background: #FFF;
     font-size: 2.5vh;
 }
+
+.enlace-footer  {
+    text-decoration: none !important; 
+    color: var(--background-color)  !important;
+    cursor: pointer;
+}

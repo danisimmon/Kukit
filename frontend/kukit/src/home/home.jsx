@@ -3,7 +3,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import hero from '../img/mesa-de-cocina-con-platos-preparados-e-ingredientes.jpg';
 import Login from '../login/login'; // Descomentado
 import Registro from '../login/registro/registro'; // Descomentado
-import Footer from '../footer/footer';
+// import Footer from '../footer/footer';
 import ListaCompra from '../listaCompra/listaCompra';
 import { Link } from 'react-router-dom';
 import imgHome1 from '../img/imgHome1.png';
@@ -320,7 +320,7 @@ function Home() {
           </div>
         </section>
       </main>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }
