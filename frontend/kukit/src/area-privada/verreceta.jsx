@@ -314,7 +314,7 @@ const VerReceta = () => {
                 />
             )}
             </main>
-            <Footer />
+            {/* <Footer /> */}
         </>
     );
 };

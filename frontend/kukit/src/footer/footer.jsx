@@ -1,4 +1,8 @@
 import React, { useState } from "react";
+import facebookLogo from '../img/Facebook.png';
+import instagramLogo from '../img/Instagram.png';
+import xLogo from '../img/x.png';
+import tiktokLogo from '../img/tikTok.png';
 
 function Footer({ setShowListaCompra }) {
     const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
@@ -26,10 +30,9 @@ function Footer({ setShowListaCompra }) {
                             <div>
                                 <h6 className="footer-heading text-uppercase text-white">Información Corporativa</h6>
                                 <ul className="list-unstyled footer-link mt-4">
-                                    <li><a href="#" className="enlace-footer">Sobre Kukit</a></li>
-                                    <li><a href="#" className="enlace-footer">Partners o Colaboradores</a></li>
-                                    <li><a href="#" className="enlace-footer">Términos y condiciones</a></li>
-                                    <li><a href="#" className="enlace-footer">Aviso legal</a></li>
+                                    <li><a href="/sobrekukit" className="enlace-footer">Sobre Kukit</a></li>
+                                    <li><a href="/partners" className="enlace-footer">Partners o Colaboradores</a></li>
+                                    <li><a href="/terminosycondiciones" className="enlace-footer">Términos y condiciones</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -39,10 +42,9 @@ function Footer({ setShowListaCompra }) {
                             <div>
                                 <h6 className="footer-heading text-uppercase text-white">Empieza con Kukit</h6>
                                 <ul className="list-unstyled footer-link mt-4">
-                                    <li><a href="#" className="enlace-footer">Iniciar Sesión</a></li>
-                                    <li><a href="#" className="enlace-footer">Crear Cuenta</a></li>
-                                    <li><a href="#" className="enlace-footer">¿Olvidaste tu contraseña?</a></li>
-                                    <li><a href="#" className="enlace-footer">Ver mi perfil</a></li>
+                                    <li><a href="/login" className="enlace-footer">Iniciar Sesión</a></li>
+                                    <li><a href="/Registro" className="enlace-footer">Crear Cuenta</a></li>
+                                    <li><a href="/login/restablecer-password" className="enlace-footer">¿Olvidaste tu contraseña?</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -52,20 +54,24 @@ function Footer({ setShowListaCompra }) {
                             <div>
                                 <h6 className="footer-heading text-uppercase text-white">Contáctanos</h6>
                                 <p className="contact-info mt-4">Contacta con nosotros si necesitas ayuda</p>
-                                <p className="contact-info">kukit@kukit.com</p>
+                                <p className="contact-info">kukit.contacto@gmail.com</p>
                                 <div className="mt-5">
                                     <ul className="list-inline">
                                         <li className="list-inline-item">
-                                            <a href="#"><i className="fab facebook footer-social-icon fa-facebook-f"></i></a>
+                                            <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
+                                            <img src={instagramLogo} alt="Instagram Logo" className="footer-icon-img" /></a>
                                         </li>
                                         <li className="list-inline-item">
-                                            <a href="#"><i className="fab twitter footer-social-icon fa-twitter"></i></a>
+                                            <a href="https://x.com/home" target="_blank" rel="noopener noreferrer">
+                                            <img src={xLogo} alt="X Logo" className="footer-icon-img" /></a>
                                         </li>
                                         <li className="list-inline-item">
-                                            <a href="#"><i className="fab google footer-social-icon fa-google"></i></a>
+                                            <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
+                                            <img src={facebookLogo} alt="Facebook Logo" className="footer-icon-img"/></a>
                                         </li>
                                         <li className="list-inline-item">
-                                            <a href="#"><i className="fab apple footer-social-icon fa-apple"></i></a>
+                                            <a href="https://www.tiktok.com" target="_blank" rel="noopener noreferrer">
+                                            <img src={tiktokLogo} alt="TikTok Logo" className="footer-icon-img" /></a>
                                         </li>
                                     </ul>
                                 </div>

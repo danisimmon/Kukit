@@ -448,7 +448,6 @@ function PlanificacionSemanal() {
           </div>
         </div>
       </main>
-      <Footer />
     </>
   );
 }

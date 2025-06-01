@@ -196,7 +196,7 @@ function Home() {
                 </div>
               </div>
               <div className="col-auto d-flex align-items-center">
-                 <div class="vr"></div>
+                  <div class="vr"></div>
               </div>
               {/* Sección Novedades de la semana - Ocupa la mitad del ancho en pantallas medianas y superiores */}
               <div className="col-md-6 bg-light">

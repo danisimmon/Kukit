@@ -1,0 +1,66 @@
+import React from "react";
+import glovologo from "../img/glovo.png";
+import bimbologo from "../img/bimbo.png";
+import asturianalogo from "../img/asturiana.png";
+import nesquiklogo from "../img/nesquicklogo.png";
+import Header from "../header/header.jsx";
+
+function Partners() {
+    return (
+        <>
+            <Header />
+        
+        <div className="container py-5">
+            <h1 className="mb-4 text-center">Partners y Colaboradores</h1>
+            <p className="text-center mb-5">
+                En Kukit creemos en la colaboración con marcas que comparten nuestra visión:
+                facilitar una alimentación equilibrada, accesible y divertida para todos.
+                Gracias a nuestros colaboradores podemos llegar más lejos y ofrecer un mejor servicio.
+            </p>
+
+            <div className="row text-center">
+                {/* GLOVO */}
+                <div className="col-md-3 mb-4">
+                    <img src={glovologo} alt="Glovo" className="img-fluid partner-logo" />
+                    <h5 className="mt-3">Glovo</h5>
+                    <p className="small">
+                        En Kukit, creemos que una buena alimentación también debe ser cómoda y accesible. Por eso, contamos con Glovo como uno de nuestros principales partners logísticos.
+                        Esta colaboración permite a nuestros usuarios recibir en la puerta de su casa los productos que necesitan para preparar sus recetas favoritas, sin perder tiempo en desplazamientos. Además, trabajamos junto a Glovo para garantizar entregas sostenibles, rápidas y con todas las garantías de calidad.
+
+                        Con Glovo, la experiencia Kukit va más allá del menú: la cocina saludable comienza desde la comodidad de tu hogar.
+                    </p>
+                </div>
+
+                {/* BIMBO */}
+                <div className="col-md-3 mb-4">
+                    <img src={bimbologo} alt="Bimbo" className="img-fluid partner-logo" />
+                    <h5 className="mt-3">Bimbo</h5>
+                    <p className="small">
+                        En Kukit, confiamos en marcas que comparten nuestra pasión por la alimentación saludable y accesible. Bimbo nos acompaña como uno de nuestros colaboradores clave, aportando su amplia gama de panes integrales y productos horneados que forman parte de muchos de nuestros planes de alimentación. Gracias a Bimbo, nuestras recetas ganan en sabor, textura y equilibrio nutricional.
+                    </p>
+                </div>
+
+                {/* LECHE ASTURIANA */}
+                <div className="col-md-3 mb-4">
+                    <img src={asturianalogo} alt="Leche Asturiana" className="img-fluid partner-logo" />
+                    <h5 className="mt-3">Leche Asturiana</h5>
+                    <p className="small">
+                        La calidad y el compromiso con la sostenibilidad de Leche Asturiana nos convierten en aliados naturales. Esta emblemática marca española aporta valor a nuestras propuestas gracias a sus productos lácteos de origen 100% natural, ideales para desayunos, meriendas o recetas saludables. Su compromiso con el entorno rural conecta con los valores de Kukit: cercanía, salud y autenticidad.
+                    </p>
+                </div>
+
+                {/* NESQUIK */}
+                <div className="col-md-3 mb-4">
+                    <img src={nesquiklogo} alt="Nesquik" className="img-fluid partner-logo" />
+                    <h5 className="mt-3">Nesquik</h5>
+                    <p className="small">
+                        Nesquik es sinónimo de sabor, energía y alegría para los más pequeños. Como parte de nuestra colaboración, algunos de nuestros desayunos para niños incluyen esta marca tan reconocida, siempre dentro de un contexto equilibrado y guiado por profesionales de la nutrición. Porque creemos que una alimentación saludable también puede ser divertida y deliciosa.
+                    </p>
+                </div>
+            </div>
+        </div>
+        </>
+    );
+}
+
+export default Partners;

@@ -410,8 +410,6 @@ const Recetas = () => {
             </nav>)}
         </div>
       </main>
-
-      <Footer />
     </>
   );
 };

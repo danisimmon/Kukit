@@ -21,6 +21,9 @@ import PlanificacionSemanal from './planAlimentacion/planAlimentacion.jsx';
 import VerRecetaTexto from './area-privada/verRecetaPorTexto.jsx';
 import Footer from './footer/footer.jsx';
 import { useState } from 'react';
+import Partners from './footer/partners.jsx';
+import SobreKukit from './footer/sobrekukit.jsx';
+import TerminosCondiciones from './footer/terminosycondiciones.jsx';
 // import './bootstrap/dist/js/bootstrap.bundle.min.js';
 
 function App() {
@@ -39,6 +42,9 @@ function App() {
         <Route path="/planAlimentacion" element={<PlanificacionSemanal />} />
         <Route path="/area-privada/verreceta/:recetaId" element={<VerReceta />} />
         <Route path="/area-privada/verrecetaportexto/:recetaId" element={<VerRecetaTexto />} />
+        <Route path="/partners" element={<Partners />} />
+        <Route path="/sobrekukit" element={<SobreKukit />} />
+        <Route path="/terminosycondiciones" element={<TerminosCondiciones />} />
       </Routes>
 
       {/* <Footer /> */}

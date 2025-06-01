@@ -1370,6 +1370,35 @@ footer hr {
     display: inline-block;
 }
 
+.footer-link a {
+  position: relative;
+  color: #acacac;
+  line-height: 40px;
+  font-size: 14px;
+  transition: color 0.3s;
+  text-decoration: none;
+}
+
+.footer-link a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0%;
+  height: 2px;
+  background-color: #1bbc9b;
+  transition: width 0.3s ease;
+}
+
+.footer-link a:hover {
+  color: #1bbc9b;
+}
+
+.footer-link a:hover::after {
+  width: 100%;
+}
+
+
 .facebook {
     background-color: #4e71a8;
     color: #ffffff;
@@ -2210,4 +2239,16 @@ header nav ul li.nav-link-li {
     text-decoration: none !important; 
     color: var(--background-color)  !important;
     cursor: pointer;
+}
+
+.partner-logo {
+    max-height: 80px;
+    object-fit: contain;
+    margin: 0 auto;
+}
+
+.footer-icon-img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
 }
