@@ -31,6 +31,9 @@ RUN COMPOSER_MEMORY_LIMIT=-1 composer install --no-interaction --prefer-dist --n
     composer init --name="kukit/app" --require="phpmailer/phpmailer:^6.8" --require="google/apiclient:^2.18" --no-interaction && \
     COMPOSER_MEMORY_LIMIT=-1 composer install --no-interaction --prefer-dist --no-dev --optimize-autoloader
 
+# Optimizar el autoloader
+RUN composer dump-autoload -o
+
 # Exponer puerto por si usas este contenedor directamente
 EXPOSE 9000
 
