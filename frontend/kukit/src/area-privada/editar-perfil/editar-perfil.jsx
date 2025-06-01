@@ -605,8 +605,8 @@ const EditarPerfil = () => {
                         /> No
                       </label>
                     </div>
-                    <div className="apartado-lactosa">
-                      <h5>¿Contiene lactosa?</h5>
+                    <div className="apartado-vegetariana">
+                      <h5>¿Es vegetariana?</h5>
                       <label>
                         <input
                           type="radio"
