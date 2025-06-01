@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import logo from '../img/logo_kukit.png';
@@ -13,42 +13,99 @@ const Login = ({ setShowLogin }) => {
   const [errorPassword, setErrorPassword] = useState('');
   const [mensaje, setMensaje] = useState('');
   const [exito, setExito] = useState(false);
+  const [scriptLoaded, setScriptLoaded] = useState(false);
 
-  const navigate = useNavigate(); // Hook para redirección
+  const navigate = useNavigate();
+
+  // Cargar script de Google Identity Services dinámicamente
+  useEffect(() => {
+    if (document.getElementById('google-client-script')) {
+      setScriptLoaded(true);
+      return;
+    }
+
+    const script = document.createElement('script');
+    script.src = 'https://accounts.google.com/gsi/client';
+    script.async = true;
+    script.defer = true;
+    script.id = 'google-client-script';
+
+    script.onload = () => setScriptLoaded(true);
+
+    document.body.appendChild(script);
+
+    return () => {
+      if (document.getElementById('google-client-script')) {
+        document.body.removeChild(script);
+      }
+    };
+  }, []);
+
+  // Inicializar botón Google cuando el script está listo
+  useEffect(() => {
+    if (scriptLoaded && window.google) {
+      window.google.accounts.id.initialize({
+        client_id: '457729135946-4i3fug0fv5h3p1h8kfmmkhra1dfuvn81.apps.googleusercontent.com',
+        callback: handleGoogleResponse,
+      });
+
+      window.google.accounts.id.renderButton(
+        document.getElementById('googleSignInButton'),
+        { theme: 'outline', size: 'large', width: 300 }
+      );
+
+      // Opcional: mostrar el prompt de login Google
+      // window.google.accounts.id.prompt();
+    }
+  }, [scriptLoaded]);
+
+  const handleGoogleResponse = async (response) => {
+    console.log('Google ID Token:', response.credential);
+
+    try {
+      // Enviar token al backend para validación y login/registro
+      const res = await axios.post(
+        'http://localhost/api/login/google/login-google.php',
+        { id_token: response.credential },
+        { headers: { 'Content-Type': 'application/json' }, withCredentials: true }
+      );
+
+      if (res.data.success) {
+        setExito(true);
+        setMensaje('Login con Google exitoso');
+        navigate('/recetas');
+      } else {
+        setExito(false);
+        setMensaje(res.data.message || 'Error en login con Google');
+      }
+    } catch (error) {
+      setExito(false);
+      setMensaje('Error en comunicación con el servidor');
+      console.error(error);
+    }
+  };
 
   const manejarCambio = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
 
-    // Limpiar errores específicos del campo al escribir
-    if (name === 'correo') {
-      setErrorEmail('');
-    }
-    if (name === 'password') {
-      setErrorPassword('');
-    }
+    if (name === 'correo') setErrorEmail('');
+    if (name === 'password') setErrorPassword('');
   };
 
   const handleBlur = (e) => {
     const { name, value } = e.target;
-    if (name === 'correo' && !value.trim()) {
-      if (!value.trim()) {
-        setErrorEmail('El correo no puede estar vacío');
-      } else if (!/\S+@\S+\.\S+/.test(value)) {
-        setErrorEmail('El formato del correo no es válido');
-      } else {
-        setErrorEmail(''); // Limpiar error si es válido
-      }
+    if (name === 'correo') {
+      if (!value.trim()) setErrorEmail('El correo no puede estar vacío');
+      else if (!/\S+@\S+\.\S+/.test(value)) setErrorEmail('El formato del correo no es válido');
+      else setErrorEmail('');
     }
     if (name === 'password') {
-      if (!value) { // Para password no se suele usar trim
-        setErrorPassword('La contraseña no puede estar vacía');
-      } else {
-        setErrorPassword(''); // Limpiar error si no está vacío
-      }
+      if (!value) setErrorPassword('La contraseña no puede estar vacía');
+      else setErrorPassword('');
     }
   };
 
@@ -58,7 +115,6 @@ const Login = ({ setShowLogin }) => {
     e.preventDefault();
     let formIsValid = true;
 
-    // Validar campos vacíos al enviar, por si el usuario no interactuó (onBlur)
     if (!formData.correo.trim()) {
       setErrorEmail('El correo es obligatorio.');
       formIsValid = false;
@@ -72,23 +128,22 @@ const Login = ({ setShowLogin }) => {
       formIsValid = false;
     }
 
-    if (!formIsValid) {
-      return;
-    }
-    // Si llegamos aquí, los campos obligatorios tienen algún valor (la validación de formato/existencia se hace en el backend)
+    if (!formIsValid) return;
 
     try {
-      const respuesta = await axios.post('http://localhost/api/login/login.php', formData, {
-        headers: { 'Content-Type': 'application/json' },
-        withCredentials: true
-      });
+      const respuesta = await axios.post(
+        'http://localhost/api/login/login.php',
+        formData,
+        {
+          headers: { 'Content-Type': 'application/json' },
+          withCredentials: true,
+        }
+      );
 
       if (respuesta.data.success) {
         setExito(true);
         setMensaje(respuesta.data.message);
-        console.log('Usuario:', respuesta.data.user);
-        // Aquí podrías guardar el usuario en el contexto o estado global si es necesario
-        navigate('/recetas'); // Redirige a la página de recetas
+        navigate('/recetas');
       } else {
         setExito(false);
         setMensaje(respuesta.data.message || 'Correo o contraseña incorrectos.');
@@ -122,10 +177,14 @@ const Login = ({ setShowLogin }) => {
               id="correo"
               value={formData.correo}
               onChange={manejarCambio}
-              onBlur={handleBlur} // Añadido onBlur
+              onBlur={handleBlur}
             />
-      {errorEmail && <span className="error" style={{ color: 'red', display: 'block', minHeight: '1em'  }}>{errorEmail}</span>}
-      </div>
+            {errorEmail && (
+              <span className="error" style={{ color: 'red', display: 'block', minHeight: '1em' }}>
+                {errorEmail}
+              </span>
+            )}
+          </div>
 
           <div className="contenedor-email-password">
             <label htmlFor="password" className="password-sign-in">Contraseña:</label>
@@ -135,9 +194,13 @@ const Login = ({ setShowLogin }) => {
               id="password"
               value={formData.password}
               onChange={manejarCambio}
-              onBlur={handleBlur} // Añadido onBlur
+              onBlur={handleBlur}
             />
-            {errorPassword && <span className="error" style={{ color: 'red', display: 'block', minHeight: '1em' }}>{errorPassword}</span>}
+            {errorPassword && (
+              <span className="error" style={{ color: 'red', display: 'block', minHeight: '1em' }}>
+                {errorPassword}
+              </span>
+            )}
           </div>
 
           <button type="submit" className="botones-inicio-sesion">
@@ -145,14 +208,17 @@ const Login = ({ setShowLogin }) => {
           </button>
         </form>
 
-        <button type="button" className="botones-inicio-sesion" id="inicio-google">
-          Iniciar sesión con Google
-        </button>
+        <hr style={{ margin: '1rem 0' }} />
+
+        <div id="googleSignInButton"></div>
 
         {mensaje && (
           <p style={{ color: exito ? 'green' : 'red', marginTop: '1rem' }}>{mensaje}</p>
         )}
-        <button type="button" onClick={() => setShowLogin(false)}>Cerrar</button>
+
+        <button type="button" onClick={() => setShowLogin(false)}>
+          Cerrar
+        </button>
       </section>
     </div>
   );

@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 import logo from '../../img/logo_kukit.png';
@@ -45,6 +47,25 @@ const EditarPerfil = () => {
   const mostrarPopupExito = () => {
     console.log("Mostrando popup");
     setMostrarPopup(true);
+  };
+
+  const [mostrarModalEliminar, setMostrarModalEliminar] = useState(false);
+
+  const handleEliminarCuenta = async () => {
+    try {
+      const respuesta = await axios.post('http://localhost/api/login/borrar-cuenta.php', {}, {
+        withCredentials: true
+      });
+      if (respuesta.data.success) {
+        // Redirige al login o página principal tras eliminar
+        navigate("/home");
+      } else {
+        alert(respuesta.data.message || "No se pudo eliminar la cuenta.");
+      }
+    } catch (error) {
+      alert("Error al eliminar la cuenta.");
+    }
+    setMostrarModalEliminar(false);
   };
 
   // Usar para cerrar y redirigir
@@ -238,7 +259,7 @@ const EditarPerfil = () => {
   const handleProfileBlur = (e) => {
     const { name, value } = e.target;
     if (name === 'usuario' && !value.trim()) {
-        setErrorUsuario('El nombre de usuario es obligatorio.');
+      setErrorUsuario('El nombre de usuario es obligatorio.');
     }
     // if (name === 'correo') { // Ya no se necesita si el correo no es editable
     //     if (!value.trim()) {
@@ -247,7 +268,7 @@ const EditarPerfil = () => {
     //         setErrorCorreo('El formato del correo electrónico no es válido.');
     //     }
     // }
-};
+  };
 
   const handleRecipeFieldBlur = (e) => {
     const { name, value } = e.target;
@@ -569,15 +590,40 @@ const EditarPerfil = () => {
               </div>
 
               <div className="info-perfil">
-                <p class="mensaje-subrayado" >Reestablecer contraseña</p>
+                <p class="mensaje-subrayado" ><a href="/login/restablecer-password">Reestablecer contraseña</a></p>
               </div>
               <div className="botones-perfil">
-                <button className="botones-inversos">Eliminar Cuenta</button>
+                <button className="botones-inversos" type="button" onClick={() => setMostrarModalEliminar(true)}>
+                  Eliminar Cuenta
+                </button>
                 <button onClick={() => setSeccionActiva("editar-perfil")}>Editar Perfil</button>
 
               </div>
             </div>
-          )}
+          )} {/* Modal Bootstrap */}
+          <div className={`modal fade ${mostrarModalEliminar ? "show d-block" : ""}`} tabIndex="-1" style={{ background: mostrarModalEliminar ? "rgba(0,0,0,0.5)" : "none" }}>
+            <div className="modal-dialog">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h5 className="modal-title">¿Estás seguro?</h5>
+                  <button type="button" className="btn-close" onClick={() => setMostrarModalEliminar(false)}></button>
+                </div>
+                <div className="modal-body">
+                  <p>¿Estás seguro de que quieres eliminar tu cuenta? Esta acción no se puede deshacer.
+                    <br />Tus recetas se guadaran pero los datos asociados a tu cuenta serán eliminados.
+                  </p>
+                </div>
+                <div className="modal-footer">
+                  <button type="button" className="btn btn-secondary" onClick={() => setMostrarModalEliminar(false)}>
+                    Cancelar
+                  </button>
+                  <button type="button" className="btn btn-danger" onClick={handleEliminarCuenta}>
+                    Sí, eliminar
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
           {seccionActiva === "editar-perfil" && (
             <div className="tarjeta-perfil">
               <h1 className="titulos-perfil">Mi Perfil</h1>
