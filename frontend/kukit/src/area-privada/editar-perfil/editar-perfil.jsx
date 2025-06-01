@@ -569,10 +569,7 @@ const EditarPerfil = () => {
               </div>
 
               <div className="info-perfil">
-                <div className="contenedores-info-perfil">
-                  <h3 className="titulos-perfil">Contraseña</h3>
-                  <h3>******</h3>
-                </div>
+                <p class="mensaje-subrayado" >Reestablecer contraseña</p>
               </div>
               <div className="botones-perfil">
                 <button className="botones-inversos">Eliminar Cuenta</button>
@@ -609,18 +606,6 @@ const EditarPerfil = () => {
                   </div>
                 </div>
 
-                <div className="info-perfil">
-                  <div className="contenedores-info-perfil">
-                    <h3 className="titulos-perfil">Contraseña</h3>
-                    <input
-                      type="password"
-                      id="password"
-                      name="password"
-                      value={formData.password}
-                      onChange={manejarCambio}
-                    />
-                  </div>
-                </div>
                 <div className="botones-perfil">
                   <button className="botones-inversos" type='button' onClick={() => setSeccionActiva("perfil")}>Cancelar</button>
                   <button type="submit">Guardar</button>
@@ -1024,7 +1009,6 @@ const EditarPerfil = () => {
           )}
         </div>
       </main >
-      <Footer />
     </>
   );
 };

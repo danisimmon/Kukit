@@ -458,6 +458,62 @@ header .contenedor-header .sign-up:hover {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
+.btn.ver-texto {
+    margin: 10px;
+    background-color: var(--background-color);
+    color: var(--primary-color);
+    border: var(--primary-color) 1px solid;
+}
+
+.btn.ver-texto:hover {
+    margin: 10px;
+    background-color: var(--primary-color);
+    color: var(--background-color);
+    border: none;
+}
+
+.btn.volver-receta {
+    margin: 10px;
+    background-color: var(--background-color);
+    color: var(--primary-color);
+    border: var(--primary-color) 1px solid;
+}
+
+.btn.volver-receta:hover {
+    margin: 10px;
+    background-color: var(--primary-color);
+    color: var(--background-color);
+    border: none;
+}
+
+button.btn.btn-lectura {
+    margin: 10px;
+    background-color: var(--primary-color) !important;
+    color: var(--background-color) !important;
+    border: none !important;
+}
+
+button.btn.btn-lectura:hover {
+    background-color: var(--primary-color) !important;
+    color: var(--background-color) !important;
+    border: none !important;
+}
+
+button.btn.btn-texto-toggle {
+    margin: 10px;
+    margin: 10px;
+    background-color: var(--background-color) !important;
+    color: var(--primary-color) !important;
+    border: var(--primary-color) 1px solid !important;
+}
+
+button.btn.btn-texto-toggle:hover {
+    background-color: var(--background-color) !important;
+    color: var(--primary-color) !important;
+    border: 1px solid var(--primary-color) !important;
+}
+
+
 .filtros-adicionales {
     width: 80vw;
 }
@@ -905,7 +961,8 @@ footer hr {
     align-items: center;
     gap: 20px;
     width: 40vw;
-    height: 70vh;
+    height: auto;
+    padding: 20px;
     flex-shrink: 0;
     border-radius: 20px;
     background: #FFF;
@@ -923,6 +980,7 @@ footer hr {
     align-items: center;
     width: 30vw;
     gap: 10px;
+    margin: 20px;
     padding: 10px;
     background-color: var(--background-color);
     border: var(--primary-color) solid 1px;
@@ -1337,6 +1395,7 @@ footer hr {
 
 .bg-footer {
     background-color: #33383c;
+    margin-top: 30px;
     padding: 50px 0 30px;
 }
 
@@ -1371,31 +1430,31 @@ footer hr {
 }
 
 .footer-link a {
-  position: relative;
-  color: #acacac;
-  line-height: 40px;
-  font-size: 14px;
-  transition: color 0.3s;
-  text-decoration: none;
+    position: relative;
+    color: #acacac;
+    line-height: 40px;
+    font-size: 14px;
+    transition: color 0.3s;
+    text-decoration: none;
 }
 
 .footer-link a::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 0%;
-  height: 2px;
-  background-color: #1bbc9b;
-  transition: width 0.3s ease;
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0%;
+    height: 2px;
+    background-color: #1bbc9b;
+    transition: width 0.3s ease;
 }
 
 .footer-link a:hover {
-  color: #1bbc9b;
+    color: #1bbc9b;
 }
 
 .footer-link a:hover::after {
-  width: 100%;
+    width: 100%;
 }
 
 
@@ -1809,6 +1868,21 @@ footer.section.bg-footer {
     margin-top: 0.7rem;
 }
 
+.contenedor-info-nutricional {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 1rem;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
 /* Botones pequeños y redondeados */
 .contenedor-boton button {
     font-size: 1rem;
@@ -1947,13 +2021,17 @@ header nav ul li.nav-link-li {
     display: inline-block;
     /* Para que el ::after se posicione correctamente */
 }
+
 /* En tu archivo CSS principal (ej: src/index.css o src/App.css) */
 .btn-danger.no-hover:hover,
 .btn-danger.no-hover:focus,
 .btn-danger.no-hover:active {
-  border-color: #dc3545;    /* Color de borde base de .btn-danger */
-  color: #fff;              /* Color de texto base */
-  box-shadow: none;          /* Elimina la sombra en focus/active si la hay */
+    border-color: #dc3545;
+    /* Color de borde base de .btn-danger */
+    color: #fff;
+    /* Color de texto base */
+    box-shadow: none;
+    /* Elimina la sombra en focus/active si la hay */
 }
 
 
@@ -2200,18 +2278,18 @@ header nav ul li.nav-link-li {
 }
 
 .semana-navegacion .btn:disabled {
-  background-color: var(--primary-color);
-    color: var(--background-color);              
-  cursor: not-allowed;   
-  border: none;        
-  opacity: 0.5;                
+    background-color: var(--primary-color);
+    color: var(--background-color);
+    cursor: not-allowed;
+    border: none;
+    opacity: 0.5;
 }
 
 .semana-navegacion .btn:active {
-  margin: 10px;
+    margin: 10px;
     background-color: var(--primary-color);
     color: var(--background-color);
-    border: none;                 
+    border: none;
 }
 
 
@@ -2244,9 +2322,9 @@ header nav ul li.nav-link-li {
     font-size: 2.5vh;
 }
 
-.enlace-footer  {
-    text-decoration: none !important; 
-    color: var(--background-color)  !important;
+.enlace-footer {
+    text-decoration: none !important;
+    color: var(--background-color) !important;
     cursor: pointer;
 }
 

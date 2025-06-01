@@ -165,154 +165,159 @@ const VerReceta = () => {
         <>
             <Header />
             <main>
-            <div className="container mt-4">
-                <h4>Recetas <span className="text-danger">| {receta.nombre}</span></h4>
-                {mensajeListaCompra.text && (
-                    <div className={`alert alert-${mensajeListaCompra.type || 'info'} alert-dismissible fade show`} role="alert">
-                        {mensajeListaCompra.text}
-                        <button type="button" className="btn-close" onClick={() => setMensajeListaCompra({ text: '', type: '' })} aria-label="Close"></button>
-                    </div>
-                )}
-
-                <button
-                    className="btn btn-outline-secondary mt-2 mb-3"
-                    onClick={handleVerComoTexto}
-                >
-                    Ver como Texto
-                </button>
-
-                <div className="d-flex flex-column flex-md-row gap-4 mt-4">
-                    <div className="text-center">
-                        {receta.href && (
-                            <img src={receta.href} alt={receta.nombre} className="img-fluid rounded shadow mb-3" style={{ maxWidth: '300px', maxHeight: '300px', objectFit: 'cover' }} />
-                        )}
-                        <div className="d-flex justify-content-center align-items-center gap-3 mt-3">
-                            <button className="btn btn-danger" onClick={() => ajustarRaciones(-1)}>-</button>
-                            <span className="fs-4">{raciones}</span>
-                            <button className="btn btn-danger" onClick={() => ajustarRaciones(1)}>+</button>
+                <div className="container mt-4">
+                    <h4>Recetas <span className="text-danger">| {receta.nombre}</span></h4>
+                    {mensajeListaCompra.text && (
+                        <div className={`alert alert-${mensajeListaCompra.type || 'info'} alert-dismissible fade show`} role="alert">
+                            {mensajeListaCompra.text}
+                            <button type="button" className="btn-close" onClick={() => setMensajeListaCompra({ text: '', type: '' })} aria-label="Close"></button>
                         </div>
-                        <p className="mt-2">Raciones</p>
-                    </div>
+                    )}
 
-                    <div className="flex-fill">
-                        {/* El título ya está arriba, se puede omitir aquí si se prefiere */}
-                        {/* <h3>{receta.nombre}</h3> */}
-                        <div className="d-flex gap-4">
-                            <div>
-                                <p className="mb-1 fw-bold">Dificultad</p>
-                                <div className="d-flex align-items-center">
-                                    <img src={dificultadIcon} alt="Icono de dificultad" style={{ width: '20px', marginRight: '5px' }} />
-                                    <span>{receta.dificultad}</span>
-                                </div>
+                    <button
+                        className="btn btn-outline-secondary mt-2 mb-3 ver-texto"
+                        onClick={handleVerComoTexto}
+                    >
+                        Ver como Texto
+                    </button>
+
+                    <div className="d-flex flex-column flex-md-row gap-4 mt-4">
+                        <div className="text-center">
+                            {receta.href && (
+                                <img src={receta.href} alt={receta.nombre} className="img-fluid rounded shadow mb-3" style={{ maxWidth: '300px', maxHeight: '300px', objectFit: 'cover' }} />
+                            )}
+                            <div className="d-flex justify-content-center align-items-center gap-3 mt-3">
+                                <button className="btn btn-danger" onClick={() => ajustarRaciones(-1)}>-</button>
+                                <span className="fs-4">{raciones}</span>
+                                <button className="btn btn-danger" onClick={() => ajustarRaciones(1)}>+</button>
                             </div>
-                            <div>
-                                <p className="mb-1 fw-bold">Tiempo</p>
-                                <div className="d-flex align-items-center">
-                                    <img src={tiempoIcon} alt="Icono de tiempo" style={{ width: '20px', marginRight: '5px' }} />
-                                    <span>{receta.tiempo_estimado}</span>
-                                </div>
-                            </div>
+                            <p className="mt-2">Raciones</p>
                         </div>
 
-                        <div className="row mt-4">
-                            {/* Columna Izquierda: Ingredientes e Información Nutricional */}
-                            <div className="col-md-5">
-                                <div className="mb-4">
-                                    <h5>INGREDIENTES</h5>
-                                    <div className="d-flex flex-column gap-3">
-                                        {receta.ingredientes.map((ing, idx) => {
-                                            const cantidadBase = ing.cantidad || 0;
-                                            const racionesBase = receta.raciones_originales || 1;
-                                            const cantidadFinal = (cantidadBase * raciones) / racionesBase;
+                        <div className="flex-fill">
+                            {/* El título ya está arriba, se puede omitir aquí si se prefiere */}
+                            {/* <h3>{receta.nombre}</h3> */}
+                            <div className="d-flex gap-4">
+                                <div>
+                                    <p className="mb-1 fw-bold">Dificultad</p>
+                                    <div className="d-flex align-items-center">
+                                        <img src={dificultadIcon} alt="Icono de dificultad" style={{ width: '20px', marginRight: '5px' }} />
+                                        <span>{receta.dificultad}</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p className="mb-1 fw-bold">Tiempo</p>
+                                    <div className="d-flex align-items-center">
+                                        <img src={tiempoIcon} alt="Icono de tiempo" style={{ width: '20px', marginRight: '5px' }} />
+                                        <span>{receta.tiempo}</span>
+                                    </div>
+                                </div>
+                            </div>
 
-                                            return ( // Contenedor para el ingrediente y el botón
-                                                <div key={idx} className="d-flex justify-content-between align-items-center bg-white rounded shadow-sm p-3">
-                                                    <span>
-                                                        {ing.nombre}: {cantidadFinal.toFixed(1)} {ing.unidad}
-                                                    </span>
-                                                    <button
-                                                        className="btn btn-outline-success btn-sm py-0 px-1"
-                                                        onClick={() => handleAddToShoppingList(ing.nombre, cantidadFinal, ing.unidad)}
-                                                        title={`Añadir ${ing.nombre} a la lista`}
-                                                        style={{ lineHeight: '1', fontSize: '0.9rem', padding: '0.2rem 0.4rem' }}
-                                                    >
-                                                        +
-                                                    </button>
+                            <div className="receta-header">
+                                <h1>{receta.nombre}</h1>
+                                <p><strong>Creado por:</strong> {receta.idUsuario}</p>
+                            </div>
+
+                            <div className="row mt-4">
+                                {/* Columna Izquierda: Ingredientes e Información Nutricional */}
+                                <div className="col-md-5">
+                                    <div className="mb-4">
+                                        <h5>INGREDIENTES</h5>
+                                        <div className="d-flex flex-column gap-3">
+                                            {receta.ingredientes.map((ing, idx) => {
+                                                const cantidadBase = ing.cantidad || 0;
+                                                const racionesBase = receta.raciones_originales || 1;
+                                                const cantidadFinal = (cantidadBase * raciones) / racionesBase;
+
+                                                return ( // Contenedor para el ingrediente y el botón
+                                                    <div key={idx} className="d-flex justify-content-between align-items-center bg-white rounded shadow-sm p-3">
+                                                        <span>
+                                                            {ing.nombre}: {cantidadFinal.toFixed(1)} {ing.unidad}
+                                                        </span>
+                                                        <button
+                                                            className="btn btn-outline-success btn-sm py-0 px-1"
+                                                            onClick={() => handleAddToShoppingList(ing.nombre, cantidadFinal, ing.unidad)}
+                                                            title={`Añadir ${ing.nombre} a la lista`}
+                                                            style={{ lineHeight: '1', fontSize: '0.9rem', padding: '0.2rem 0.4rem' }}
+                                                        >
+                                                            +
+                                                        </button>
+                                                    </div>
+                                                );
+                                            })}
+                                        </div>
+                                    </div>
+
+                                    <div className="mt-4">
+                                        <h5>INFORMACIÓN NUTRICIONAL POR RACIÓN</h5>
+                                        <div className="row g-3 mt-2 contenedor-info-nutricional">
+                                            <div className="col-12"> {/* Usar col-12 para que apilen bien en esta columna */}
+                                                <div className="bg-white rounded shadow-sm p-3">
+                                                    <strong>Calorías:</strong> {receta.informacionNutricional?.calorias}
                                                 </div>
-                                            );
-                                        })}
-                                    </div>
-                                </div>
-
-                                <div className="mt-4">
-                                    <h5>INFORMACIÓN NUTRICIONAL POR RACIÓN</h5>
-                                    <div className="row g-3 mt-2">
-                                        <div className="col-12"> {/* Usar col-12 para que apilen bien en esta columna */}
-                                            <div className="bg-white rounded shadow-sm p-3">
-                                                <strong>Calorías:</strong> {receta.informacionNutricional?.calorias}
                                             </div>
-                                        </div>
-                                        <div className="col-12">
-                                            <div className="bg-white rounded shadow-sm p-3">
-                                                <strong>Proteína:</strong> {receta.informacionNutricional?.proteina}
+                                            <div className="col-12">
+                                                <div className="bg-white rounded shadow-sm p-3">
+                                                    <strong>Proteína:</strong> {receta.informacionNutricional?.proteina}
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div className="col-12">
-                                            <div className="bg-white rounded shadow-sm p-3">
-                                                <strong>Grasas:</strong> {receta.informacionNutricional?.grasas}
+                                            <div className="col-12">
+                                                <div className="bg-white rounded shadow-sm p-3">
+                                                    <strong>Grasas:</strong> {receta.informacionNutricional?.grasas}
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div className="col-12">
-                                            <div className="bg-white rounded shadow-sm p-3">
-                                                <strong>Carbohidratos:</strong> {receta.informacionNutricional?.carbohidratos}
+                                            <div className="col-12">
+                                                <div className="bg-white rounded shadow-sm p-3">
+                                                    <strong>Carbohidratos:</strong> {receta.informacionNutricional?.carbohidratos}
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div className="col-12">
-                                            <div className="bg-white rounded shadow-sm p-3">
-                                                <strong>Fibra:</strong> {receta.informacionNutricional?.fibra ?? 'N/A'}
+                                            <div className="col-12">
+                                                <div className="bg-white rounded shadow-sm p-3">
+                                                    <strong>Fibra:</strong> {receta.informacionNutricional?.fibra ?? 'N/A'}
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            {/* Columna Derecha: Pasos y Paginación */}
-                            <div className="col-md-7">
-                                <h5>PASOS</h5>
-                                <div className="d-flex flex-column gap-3 mb-3">
-                                    {pasosEnPaginaActual.map((paso, idx) => (
-                                        <div key={indexPrimerPaso + idx} className="d-flex align-items-start bg-white rounded shadow-sm p-3">
-                                            <span className="badge bg-dark me-3 fs-6" style={{ minWidth: "30px", height: "30px", lineHeight: "20px" }}>{indexPrimerPaso + idx + 1}</span>
-                                            <span>{paso}</span>
-                                        </div>
-                                    ))}
+                                {/* Columna Derecha: Pasos y Paginación */}
+                                <div className="col-md-7">
+                                    <h5>PASOS</h5>
+                                    <div className="d-flex flex-column gap-3 mb-3">
+                                        {pasosEnPaginaActual.map((paso, idx) => (
+                                            <div key={indexPrimerPaso + idx} className="d-flex align-items-start bg-white rounded shadow-sm p-3">
+                                                <span className="badge bg-dark me-3 fs-6" style={{ minWidth: "30px", height: "30px", lineHeight: "20px" }}>{indexPrimerPaso + idx + 1}</span>
+                                                <span>{paso}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                    {totalPaginasPasos > 1 && (
+                                        <nav>
+                                            <ul className="pagination justify-content-center">
+                                                <li className={`page-item ${paginaPasosActual === 1 ? 'disabled' : ''}`}>
+                                                    <button className="page-link" onClick={() => cambiarPaginaPasos(paginaPasosActual - 1)}>&lt;</button>
+                                                </li>
+                                                {renderNumerosPaginaPasos()}
+                                                <li className={`page-item ${paginaPasosActual === totalPaginasPasos ? 'disabled' : ''}`}>
+                                                    <button className="page-link" onClick={() => cambiarPaginaPasos(paginaPasosActual + 1)}>&gt;</button>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    )}
                                 </div>
-                                {totalPaginasPasos > 1 && (
-                                    <nav>
-                                        <ul className="pagination justify-content-center">
-                                            <li className={`page-item ${paginaPasosActual === 1 ? 'disabled' : ''}`}>
-                                                <button className="page-link" onClick={() => cambiarPaginaPasos(paginaPasosActual - 1)}>&lt;</button>
-                                            </li>
-                                            {renderNumerosPaginaPasos()}
-                                            <li className={`page-item ${paginaPasosActual === totalPaginasPasos ? 'disabled' : ''}`}>
-                                                <button className="page-link" onClick={() => cambiarPaginaPasos(paginaPasosActual + 1)}>&gt;</button>
-                                            </li>
-                                        </ul>
-                                    </nav>
-                                )}
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            {/* Renderizar ListaCompra cuando mostrarListaCompraLocal sea true */}
-            {mostrarListaCompraLocal && (
-                <ListaCompra
-                    showListaCompra={mostrarListaCompraLocal}
-                    setListaCompra={setMostrarListaCompraLocal}
-                    refreshTrigger={lastItemAddedTimestamp} // Pasamos el trigger para recargar
-                />
-            )}
+                {/* Renderizar ListaCompra cuando mostrarListaCompraLocal sea true */}
+                {mostrarListaCompraLocal && (
+                    <ListaCompra
+                        showListaCompra={mostrarListaCompraLocal}
+                        setListaCompra={setMostrarListaCompraLocal}
+                        refreshTrigger={lastItemAddedTimestamp} // Pasamos el trigger para recargar
+                    />
+                )}
             </main>
             {/* <Footer /> */}
         </>

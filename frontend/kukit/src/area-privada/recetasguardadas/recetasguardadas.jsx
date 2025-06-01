@@ -362,7 +362,6 @@ const RecetasGuardadas = () => {
           </div>
         </div>
       </main>
-      <Footer />
     </>
   );
 };

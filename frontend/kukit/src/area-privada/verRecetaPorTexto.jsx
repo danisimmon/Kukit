@@ -93,7 +93,7 @@ const VerRecetaTexto = () => {
     // Función para renderizar los números de página de los pasos con elipsis (similar a VerReceta.jsx)
     const renderNumerosPaginaPasos = () => {
         const items = [];
-        const maxPaginasVisibles = 3; 
+        const maxPaginasVisibles = 3;
         let inicio = Math.max(1, paginaPasosActual - Math.floor(maxPaginasVisibles / 2));
         let fin = Math.min(totalPaginasPasos, inicio + maxPaginasVisibles - 1);
 
@@ -218,7 +218,7 @@ const VerRecetaTexto = () => {
                     <div className="d-flex justify-content-end mb-3">
                         <div>
                             <button
-                                className={`btn ${isSpeaking ? 'btn-danger' : 'btn-primary'} btn-sm me-2`}
+                                className={`btn ${isSpeaking ? 'btn-danger' : 'btn-primary'} btn-sm me-2 btn-lectura`}
                                 onClick={handleToggleSpeak}
                                 disabled={!receta}
                                 aria-label={isSpeaking ? `Detener la lectura de la receta ${receta.nombre}` : `Pasar a texto y leer en voz alta la receta ${receta.nombre}`}
@@ -226,7 +226,7 @@ const VerRecetaTexto = () => {
                                 {isSpeaking ? 'Detener Lectura' : 'Pasar a Texto y Leer'}
                             </button>
                             <button
-                                className={`btn ${showPlainText ? 'btn-info' : 'btn-outline-info'} btn-sm`}
+                                className={`btn btn-sm btn-texto-toggle ${showPlainText ? 'btn-activo' : ''}`}
                                 onClick={toggleShowPlainText}
                                 disabled={!receta}
                                 aria-label={showPlainText ? `Ocultar versión en texto de la receta ${receta.nombre}` : `Mostrar versión en texto de la receta ${receta.nombre}`}
@@ -245,7 +245,7 @@ const VerRecetaTexto = () => {
                         </div>
                     </div>
                     <button
-                        className="btn btn-outline-secondary mt-2 mb-3"
+                        className="btn btn-outline-secondary mt-2 mb-3 volver-receta"
                         onClick={handleVerReceta}
                     >
                         Volver
@@ -253,11 +253,11 @@ const VerRecetaTexto = () => {
                     {showPlainText ? (
                         <div className="mt-4 p-3 bg-light border rounded">
                             <div id="printable-text-content" className="mt-4 p-3 bg-light border rounded">
-                            <h4 className="mb-3">Versión en Texto: {receta.nombre}</h4>
-                            <pre style={{ whiteSpace: 'pre-wrap', wordWrap: 'break-word', fontFamily: 'inherit', fontSize: 'inherit' }}>
-                                {getTextToSpeak()}
-                            </pre>
-                        </div>
+                                <h4 className="mb-3">Versión en Texto: {receta.nombre}</h4>
+                                <pre style={{ whiteSpace: 'pre-wrap', wordWrap: 'break-word', fontFamily: 'inherit', fontSize: 'inherit' }}>
+                                    {getTextToSpeak()}
+                                </pre>
+                            </div>
                         </div>
                     ) : (
                         <>
@@ -282,9 +282,13 @@ const VerRecetaTexto = () => {
                                             <p className="mb-1 fw-bold">Tiempo Estimado</p>
                                             <div className="d-flex align-items-center">
                                                 <img src={tiempoIcon} alt="Tiempo" style={{ width: '20px', marginRight: '5px' }} />
-                                                <span>{receta.tiempo_estimado}</span>
+                                                <span>{receta.tiempo}</span>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div className="receta-header">
+                                        <h1>{receta.nombre}</h1>
+                                        <p><strong>Creado por:</strong> {receta.idUsuario}</p>
                                     </div>
 
                                     <hr />
@@ -394,7 +398,6 @@ const VerRecetaTexto = () => {
                     </>
                 )}
             </main>
-            <Footer />
         </>
     );
 };
