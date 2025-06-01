@@ -516,6 +516,25 @@ button.btn.btn-texto-toggle:hover {
 
 .filtros-adicionales {
     width: 80vw;
+    display: flex;
+    flex-direction: column;
+}
+
+.limpiar-filtros {
+    margin: 10px;
+    background-color: var(--primary-color) !important;
+    color: var(--background-color) !important;
+    border: none !important;
+    width: 10%;
+    align-self: center;
+}
+
+.limpiar-filtros:hover {
+    background-color: var(--primary-color) !important;
+    color: var(--background-color) !important;
+    border: none !important;
+    width: 10%;
+    align-self: center;
 }
 
 .btn-mostrar-filtros {
@@ -1213,21 +1232,11 @@ footer hr {
 }
 
 .subtitulo-hero {
-    color: var(--background-color);
-    font-size: 1.3rem;
+     color: #fff;
+    font-size: 1.2rem;
     font-weight: 300;
-    margin-top: 20px;
-    line-height: 1.5;
-    max-width: 650px;
-    margin-left: auto;
-    margin-right: auto;
-    background-color: var(--primary-color);
-    padding: 5px;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
-    /* Sombra de texto más sutil */
-    opacity: 0.9;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
+    margin-top: 1rem;
 }
 
 /* .rellenar-ingrediente,

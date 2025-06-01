@@ -9,7 +9,6 @@ import { Link } from 'react-router-dom';
 import imgHome1 from '../img/imgHome1.png';
 import imgHome2 from '../img/imgHome2.jpg';
 import imgHome3 from '../img/imgHome3.jpg';
-import Organiza from '../img/ChatGPT Image 15 may 2025, 18_09_34.png'
 import Header from '../header/header';
 
 function Home() {
@@ -122,15 +121,7 @@ function Home() {
         </div>
 
         <section>
-          <div className="contenendor-home" id="contenedor-recetas">
-            <div className="recetas">
-              <h2>Recetas</h2>
-              <div className="tarjetas-recetas" id="tarjetas-recetas">
-                {/* Aquí se generarán las tarjetas de recetas */}
-              </div>
-              <button className="recetas">+ Recetas</button>
-            </div>
-          </div>
+          
 
           {/* Contenedor para las secciones de Imprescindibles y Novedades */}
           {/* Usamos container-fluid para ancho completo y my-5 para margen vertical. La clase 'row' de Bootstrap permite que los elementos hijos se coloquen en línea. */}
