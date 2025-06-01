@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function Footer() {
+function Footer({ setShowListaCompra }) {
     const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
 
     return (
@@ -14,9 +14,9 @@ function Footer() {
                             <div>
                                 <h6 className="footer-heading text-uppercase text-white">Visita nuestras secciones</h6>
                                 <ul className="list-unstyled footer-link mt-4">
-                                    <li><a href="#" className="enlace-footer">Recetas</a></li>
-                                    <li><a href="#" className="enlace-footer">Lista de la compra</a></li>
-                                    <li><a href="#" className="enlace-footer">Plan de alimentación</a></li>
+                                    <li><a href="/recetas" className="enlace-footer">Recetas</a></li>
+                                    <li> <a className="enlace-footer" onClick={() => setShowListaCompra(true)}>Lista de la compra</a></li>
+                                    <li><a href="/planAlimentacion" className="enlace-footer">Plan de alimentación</a></li>
                                 </ul>
                             </div>
                         </div>
