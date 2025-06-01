@@ -18,7 +18,22 @@ const EditarPerfil = () => {
   const [newIngredienteNombre, setNewIngredienteNombre] = useState('');
   const [newIngredienteCantidad, setNewIngredienteCantidad] = useState('');
   const [newIngredienteUnidad, setNewIngredienteUnidad] = useState('');
+  const [errorNuevoIngrediente, setErrorNuevoIngrediente] = useState('');
+
   const [newPaso, setNewPaso] = useState('');
+  const [errorNuevoPaso, setErrorNuevoPaso] = useState('');
+
+  // Estados para errores de validación del perfil
+  const [errorUsuario, setErrorUsuario] = useState('');
+  const [errorCorreo, setErrorCorreo] = useState('');
+
+  // Estados para errores de validación de la receta
+  const [errorNombreReceta, setErrorNombreReceta] = useState('');
+  const [errorDificultad, setErrorDificultad] = useState('');
+  const [errorTiempo, setErrorTiempo] = useState('');
+  const [errorPais, setErrorPais] = useState('');
+  const [errorIngredientesLista, setErrorIngredientesLista] = useState('');
+  const [errorPasosLista, setErrorPasosLista] = useState('');
 
   const direccionRecetasCreadas = () => {
     navigate("/area-privada/editar-perfil", {
@@ -61,6 +76,7 @@ const EditarPerfil = () => {
       ...formRecetaNueva,
       pais: e.target.value
     });
+    setErrorPais(''); // Limpiar error al cambiar
   };
 
   const [imagen, setImagen] = useState(null);
@@ -99,24 +115,53 @@ const EditarPerfil = () => {
   const [errorRecetas, setErrorRecetas] = useState('');
 
   // Manejadores para Ingredientes (añadido para la nueva funcionalidad)
+  const validateNewIngredientFields = () => {
+    if (!newIngredienteNombre.trim()) {
+      setErrorNuevoIngrediente('El nombre del ingrediente es obligatorio.');
+      return false;
+    }
+    if (!isNaN(parseFloat(newIngredienteNombre)) && isFinite(newIngredienteNombre)) {
+      setErrorNuevoIngrediente('El nombre del ingrediente no puede ser un número.');
+      return false;
+    }
+    if (!newIngredienteCantidad.trim()) {
+      setErrorNuevoIngrediente('La cantidad del ingrediente es obligatoria.');
+      return false;
+    }
+    if (isNaN(parseFloat(newIngredienteCantidad)) || !isFinite(newIngredienteCantidad)) {
+      setErrorNuevoIngrediente('La cantidad debe ser un número.');
+      return false;
+    }
+    if (Number(newIngredienteCantidad) <= 0) {
+      setErrorNuevoIngrediente('La cantidad debe ser un número positivo.');
+      return false;
+    }
+    if (!newIngredienteUnidad.trim()) {
+      setErrorNuevoIngrediente('La unidad del ingrediente es obligatoria.');
+      return false;
+    }
+    if (!isNaN(parseFloat(newIngredienteUnidad)) && isFinite(newIngredienteUnidad)) {
+      setErrorNuevoIngrediente('La unidad del ingrediente no puede ser un número.');
+      return false;
+    }
+    setErrorNuevoIngrediente('');
+    return true;
+  };
+
   const handleAddIngrediente = () => {
-    if (newIngredienteNombre && newIngredienteCantidad && newIngredienteUnidad) {
+    if (validateNewIngredientFields()) {
       setIngredientes([
         ...ingredientes,
         {
           nombre: newIngredienteNombre,
-          cantidad: newIngredienteCantidad,
+          cantidad: parseFloat(newIngredienteCantidad), // Guardar como número
           unidad: newIngredienteUnidad,
         },
       ]);
-      // Limpiar los campos de entrada después de añadir
       setNewIngredienteNombre('');
       setNewIngredienteCantidad('');
       setNewIngredienteUnidad('');
-      setMensaje(''); // Limpiar mensaje de error si lo hubiera
-    } else {
-      setMensaje('Por favor, rellena todos los campos del ingrediente para añadirlo.');
-      setExito(false);
+      setErrorIngredientesLista(''); // Limpiar error de la lista general
     }
   };
 
@@ -130,10 +175,10 @@ const EditarPerfil = () => {
     if (newPaso) {
       setPasos([...pasos, newPaso]);
       setNewPaso('');
-      setMensaje(''); // Limpiar mensaje de error si lo hubiera
+      setErrorNuevoPaso(''); // Limpiar mensaje de error específico
+      setErrorPasosLista(''); // Limpiar error de la lista general
     } else {
-      setMensaje('Por favor, escribe el paso para añadirlo.');
-      setExito(false);
+      setErrorNuevoPaso('Por favor, escribe el paso para añadirlo.');
     }
   };
 
@@ -168,6 +213,11 @@ const EditarPerfil = () => {
       ...formRecetaNueva,
       [name]: value
     });
+    // Limpiar errores específicos al escribir
+    if (name === 'nombre') setErrorNombreReceta('');
+    if (name === 'dificultad') setErrorDificultad('');
+    if (name === 'tiempo') setErrorTiempo('');
+    // Pais se maneja en manejarCambioPais
   };
 
   const manejarCambio = (e) => {
@@ -176,6 +226,83 @@ const EditarPerfil = () => {
       ...formData,
       [name]: value
     });
+    // Limpiar errores específicos del campo al escribir
+    if (name === 'usuario') {
+      setErrorUsuario('');
+    }
+    if (name === 'correo') {
+      setErrorCorreo('');
+    }
+  };
+
+  const handleProfileBlur = (e) => {
+    const { name, value } = e.target;
+    if (name === 'usuario' && !value.trim()) {
+        setErrorUsuario('El nombre de usuario es obligatorio.');
+    }
+    if (name === 'correo') {
+        if (!value.trim()) {
+            setErrorCorreo('El correo electrónico es obligatorio.');
+        } else if (!/\S+@\S+\.\S+/.test(value)) {
+            setErrorCorreo('El formato del correo electrónico no es válido.');
+        }
+    }
+};
+
+  const handleRecipeFieldBlur = (e) => {
+    const { name, value } = e.target;
+    switch (name) {
+      case 'nombre':
+        if (!value.trim()) setErrorNombreReceta('El nombre de la receta es obligatorio.');
+        break;
+      case 'dificultad':
+        if (!value) setErrorDificultad('La dificultad es obligatoria.');
+        break;
+      case 'tiempo':
+        if (!value.trim()) {
+          setErrorTiempo('El tiempo de preparación es obligatorio.');
+        } else if (isNaN(value) || Number(value) <= 0) {
+          setErrorTiempo('El tiempo debe ser un número positivo en minutos.');
+        }
+        break;
+      case 'pais': // El select de país se valida por su valor, no por trim()
+        if (!value) setErrorPais('El país es obligatorio.');
+        break;
+      default:
+        break;
+    }
+  };
+
+  const handleNewIngredientFieldBlur = (fieldName) => {
+    let error = '';
+    switch (fieldName) {
+      case 'nombre':
+        if (!newIngredienteNombre.trim()) error = 'El nombre del ingrediente es obligatorio.';
+        else if (!isNaN(parseFloat(newIngredienteNombre)) && isFinite(newIngredienteNombre)) error = 'El nombre no puede ser un número.';
+        break;
+      case 'cantidad':
+        if (!newIngredienteCantidad.trim()) error = 'La cantidad del ingrediente es obligatoria.';
+        else if (isNaN(parseFloat(newIngredienteCantidad)) || !isFinite(newIngredienteCantidad)) error = 'La cantidad debe ser un número.';
+        else if (Number(newIngredienteCantidad) <= 0) error = 'La cantidad debe ser un número positivo.';
+        break;
+      case 'unidad':
+        if (!newIngredienteUnidad.trim()) error = 'La unidad del ingrediente es obligatoria.';
+        else if (!isNaN(parseFloat(newIngredienteUnidad)) && isFinite(newIngredienteUnidad)) error = 'La unidad no puede ser un número.';
+        break;
+      default:
+        break;
+    }
+    if (error) {
+      setErrorNuevoIngrediente(error);
+    } else {
+      // Si el campo actual es válido, pero otros podrían tener error al intentar añadir, no limpiar globalmente aquí.
+      // Se podría limpiar solo si el error actual es específicamente sobre este campo.
+      // Por simplicidad, el error general se limpia al escribir o al añadir con éxito.
+    }
+  };
+
+  const handleNewStepFieldBlur = () => {
+    if (!newPaso.trim()) setErrorNuevoPaso('Por favor, escribe el paso para añadirlo.');
   };
 
   // Recibir datos del usuario
@@ -242,7 +369,31 @@ const EditarPerfil = () => {
 
   // Manejar el envío del formulario de perfil
   const manejarEnvio = async (e) => {
-    e.preventDefault(); // Prevent the default form submission
+    e.preventDefault();
+    let formIsValid = true;
+    // Limpiar errores previos
+    setErrorUsuario('');
+    setErrorCorreo('');
+    setMensaje('');
+    setExito(false);
+
+    // Validar usuario
+    if (!formData.usuario.trim()) {
+      setErrorUsuario('El nombre de usuario es obligatorio.');
+      formIsValid = false;
+    }
+
+    // Validar correo
+    if (!formData.correo.trim()) {
+      setErrorCorreo('El correo electrónico es obligatorio.');
+      formIsValid = false;
+    } else if (!/\S+@\S+\.\S+/.test(formData.correo)) {
+      setErrorCorreo('El formato del correo electrónico no es válido.');
+      formIsValid = false;
+    }
+
+    if (!formIsValid) return;
+
     try {
       const respuesta = await axios.post('http://localhost/api/area_privada/editar-perfil/editar-perfil.php', formData, {
         headers: {
@@ -274,8 +425,47 @@ const EditarPerfil = () => {
 
   // Manejar el envio de la receta
   const manejarEnvioReceta = async (e) => {
-    e.preventDefault(); // Asegúrate de prevenir el comportamiento por defecto del formulario
+    e.preventDefault();
+    let formIsValid = true;
+    // Limpiar errores previos
+    setErrorNombreReceta('');
+    setErrorDificultad('');
+    setErrorTiempo('');
+    setErrorPais('');
+    setErrorIngredientesLista('');
+    setErrorPasosLista('');
+    setMensaje('');
+    setExito(false);
 
+    if (!formRecetaNueva.nombre.trim()) {
+      setErrorNombreReceta('El nombre de la receta es obligatorio.');
+      formIsValid = false;
+    }
+    if (!formRecetaNueva.dificultad) {
+      setErrorDificultad('La dificultad es obligatoria.');
+      formIsValid = false;
+    }
+    if (!formRecetaNueva.tiempo.trim()) {
+      setErrorTiempo('El tiempo de preparación es obligatorio.');
+      formIsValid = false;
+    } else if (isNaN(formRecetaNueva.tiempo) || Number(formRecetaNueva.tiempo) <= 0) {
+      setErrorTiempo('El tiempo debe ser un número positivo en minutos.');
+      formIsValid = false;
+    }
+    if (!formRecetaNueva.pais) {
+      setErrorPais('El país es obligatorio.');
+      formIsValid = false;
+    }
+    if (ingredientes.length === 0) {
+      setErrorIngredientesLista('Debes añadir al menos un ingrediente.');
+      formIsValid = false;
+    }
+    if (pasos.length === 0) {
+      setErrorPasosLista('Debes añadir al menos un paso.');
+      formIsValid = false;
+    }
+
+    if (!formIsValid) return;
     // Crear un objeto FormData para enviar datos mixtos (texto y archivo)
     const formDataToSend = new FormData();
 
@@ -404,8 +594,10 @@ const EditarPerfil = () => {
                       name="usuario"
                       value={formData.usuario}
                       onChange={manejarCambio}
+                      onBlur={handleProfileBlur}
                       required
                     />
+                    {errorUsuario && <span className="error-mensaje" style={{ color: 'red', display: 'block', minHeight: '1em' }}>{errorUsuario}</span>}
                   </div>
                 </div>
 
@@ -418,8 +610,10 @@ const EditarPerfil = () => {
                       name="correo"
                       value={formData.correo}
                       onChange={manejarCambio}
+                      onBlur={handleProfileBlur}
                       required
                     />
+                    {errorCorreo && <span className="error-mensaje" style={{ color: 'red', display: 'block', minHeight: '1em' }}>{errorCorreo}</span>}
                   </div>
                 </div>
 
@@ -486,8 +680,10 @@ const EditarPerfil = () => {
                   name="nombre"
                   value={formRecetaNueva.nombre}
                   onChange={manejarCambioReceta}
+                  onBlur={handleRecipeFieldBlur}
                   required
                 />
+                {errorNombreReceta && <span className="error-mensaje" style={{ color: 'red', display: 'block', minHeight: '1em' }}>{errorNombreReceta}</span>}
                 {/* Sección para subir la imagen */}
                 <div className="subir-imagen-receta">
                   <h3>Imagen de la Receta</h3>
@@ -512,6 +708,7 @@ const EditarPerfil = () => {
                       id="nivel-dificultad"
                       value={formRecetaNueva.dificultad}
                       onChange={manejarCambioReceta}
+                      onBlur={handleRecipeFieldBlur}
                       required
                     >
                       <option value="" disabled>
@@ -521,6 +718,7 @@ const EditarPerfil = () => {
                       <option value="intermedio">Intermedio</option>
                       <option value="dificil">Difícil</option>
                     </select>
+                    {errorDificultad && <span className="error-mensaje" style={{ color: 'red', display: 'block', minHeight: '1em' }}>{errorDificultad}</span>}
                   </div>
                   <div className="apartado-tiempo">
                     <h5>Introduce el tiempo (minutos)</h5>
@@ -530,8 +728,10 @@ const EditarPerfil = () => {
                       id="tiempo"
                       value={formRecetaNueva.tiempo}
                       onChange={manejarCambioReceta}
+                      onBlur={handleRecipeFieldBlur}
                       required
                     />
+                    {errorTiempo && <span className="error-mensaje" style={{ color: 'red', display: 'block', minHeight: '1em' }}>{errorTiempo}</span>}
                   </div>
 
                   <div className="apartado-pais">
@@ -541,6 +741,7 @@ const EditarPerfil = () => {
                       name="pais"
                       value={formRecetaNueva.pais}
                       onChange={manejarCambioPais}
+                      onBlur={handleRecipeFieldBlur}
                       aria-label="Selecciona el país"
                     >
                       <option value="" disabled>
@@ -561,7 +762,9 @@ const EditarPerfil = () => {
                       <option value="Turquía">Turquía</option>
                       <option value="Corea del Sur">Corea del Sur</option>
                       <option value="Libano">Líbano</option>
-                    </select><br />
+                    </select>
+                    {errorPais && <span className="error-mensaje" style={{ color: 'red', display: 'block', minHeight: '1em' }}>{errorPais}</span>}
+                    <br />
                     <div className="apartado-gluten">
                       <h5>¿Contiene gluten?</h5>
                       <label>
@@ -689,6 +892,7 @@ const EditarPerfil = () => {
                         </tbody>
                       </table>
                     )}
+                    {errorIngredientesLista && <p style={{ color: 'red', minHeight: '1em' }}>{errorIngredientesLista}</p>}
                     {/* Campos de entrada para añadir un nuevo ingrediente */}
                     <div className="rellenar-ingrediente">
                       Nombre Ingrediente:
@@ -696,25 +900,29 @@ const EditarPerfil = () => {
                         type="text"
                         placeholder="Ej: Harina"
                         value={newIngredienteNombre}
-                        onChange={(e) => setNewIngredienteNombre(e.target.value)}
+                        onChange={(e) => { setNewIngredienteNombre(e.target.value); setErrorNuevoIngrediente(''); }}
+                        onBlur={() => handleNewIngredientFieldBlur('nombre')}
                       />
                       <span>Cantidad</span>
                       <input
-                        type="number"
+                        type="text" // Cambiado a text para permitir validación más flexible antes de convertir a número
                         placeholder="Ej: 200"
                         value={newIngredienteCantidad}
-                        onChange={(e) => setNewIngredienteCantidad(e.target.value)}
+                        onChange={(e) => { setNewIngredienteCantidad(e.target.value); setErrorNuevoIngrediente(''); }}
+                        onBlur={() => handleNewIngredientFieldBlur('cantidad')}
                       />
                       <span>Unidad</span>
                       <input
                         type="text"
                         placeholder="Ej: gramos"
                         value={newIngredienteUnidad}
-                        onChange={(e) => setNewIngredienteUnidad(e.target.value)}
+                        onChange={(e) => { setNewIngredienteUnidad(e.target.value); setErrorNuevoIngrediente(''); }}
+                        onBlur={() => handleNewIngredientFieldBlur('unidad')}
                       />
                       <button type="button" onClick={handleAddIngrediente} className="anadir-ingrediente-btn">
                         Añadir Ingrediente
                       </button>
+                      {errorNuevoIngrediente && <span style={{ color: 'red', display: 'block', minHeight: '1em', marginTop: '5px' }}>{errorNuevoIngrediente}</span>}
                     </div>
                   </div>
                 </div>
@@ -745,6 +953,7 @@ const EditarPerfil = () => {
                       </tbody>
                     </table>
                   )}
+                  {errorPasosLista && <p style={{ color: 'red', minHeight: '1em' }}>{errorPasosLista}</p>}
                   {/* Campo de entrada para añadir un nuevo paso */}
                   <div className="rellenar-pasos">
                     Paso:
@@ -752,11 +961,13 @@ const EditarPerfil = () => {
                       type="text"
                       placeholder="Describe el paso"
                       value={newPaso}
-                      onChange={(e) => setNewPaso(e.target.value)}
+                      onChange={(e) => { setNewPaso(e.target.value); setErrorNuevoPaso(''); }}
+                      onBlur={handleNewStepFieldBlur}
                     />
                     <button type="button" onClick={handleAddPaso} className="anadir-pasos-btn">
                       Añadir Paso
                     </button>
+                    {errorNuevoPaso && <span style={{ color: 'red', display: 'block', minHeight: '1em', marginTop: '5px' }}>{errorNuevoPaso}</span>}
                   </div>
                 </div>
               </div>
@@ -781,7 +992,11 @@ const EditarPerfil = () => {
                     setNewIngredienteNombre('');
                     setNewIngredienteCantidad('');
                     setNewIngredienteUnidad('');
+                    setErrorNuevoIngrediente('');
                     setNewPaso('');
+                    setErrorNuevoPaso('');
+                    // Limpiar también los errores de validación del formulario de receta
+                    setErrorNombreReceta(''); setErrorDificultad(''); setErrorTiempo(''); setErrorPais(''); setErrorIngredientesLista(''); setErrorPasosLista(''); setMensaje('');
                   }}
                 >
                   Cancelar
@@ -789,14 +1004,14 @@ const EditarPerfil = () => {
                 <button
                   className="boton-crear-receta"
                   id="terminar-receta"
-                  type="submit" // Cambiado a type="submit" para que el formulario se envíe
-                  onClick={manejarEnvioReceta} // Se llama a manejarEnvioReceta directamente aquí
+                  type="button" // Dejar como button si el form tiene su propio onSubmit, o submit si este es el que gatilla el form.
+                  onClick={manejarEnvioReceta} // Este botón ahora llama a la función que valida y envía
                 >
                   Terminar
                 </button>
               </div>
               {mensaje && (
-                <div style={{ color: exito ? 'green' : 'red' }}>
+                <div style={{ color: exito ? 'green' : 'red', marginTop: '1rem' }}>
                   {mensaje}
                 </div>
               )}
