@@ -26,7 +26,7 @@ $id_producto = $input['id_producto'];
 $cantidad = $input['cantidad'];
 
 // Verificar si el producto ya está en la lista de compra
-$sql = "SELECT * FROM listacompra_productos WHERE id_producto = ? AND id_usuario = ?";
+$sql = "SELECT * FROM listacompra_productos WHERE id = ? AND id_usuario = ?";
 $stmt = $conexion->prepare($sql);
 $stmt->bind_param("ii", $id_producto, $id_usuario);
 $stmt->execute();
@@ -38,9 +38,9 @@ if ($queryProducto->num_rows == 0) {
 }
 
 // Actualizar la cantidad del producto en la lista de compra
-$sql = "UPDATE listacompra_productos SET cantidad = ? WHERE id_producto = ? AND id_usuario = ?";
+$sql = "UPDATE listacompra_productos SET cantidad = ? WHERE id = ? AND id_usuario = ?";
 $stmt = $conexion->prepare($sql);
-$stmt->bind_param("iii", $cantidad, $id_producto, $id_usuario);
+$stmt->bind_param("sii", $cantidad, $id_producto, $id_usuario);
 if ($stmt->execute()) {
     echo json_encode(array("success" => "true", "message" => "Cantidad actualizada correctamente"));
 } else {
