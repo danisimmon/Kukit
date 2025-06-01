@@ -35,12 +35,24 @@ const Login = ({ setShowLogin }) => {
   const handleBlur = (e) => {
     const { name, value } = e.target;
     if (name === 'correo' && !value.trim()) {
-      setErrorEmail('El correo no puede estar vacío');
+      if (!value.trim()) {
+        setErrorEmail('El correo no puede estar vacío');
+      } else if (!/\S+@\S+\.\S+/.test(value)) {
+        setErrorEmail('El formato del correo no es válido');
+      } else {
+        setErrorEmail(''); // Limpiar error si es válido
+      }
     }
-    if (name === 'password' && !value) { // Para password no se suele usar trim
-      setErrorPassword('La contraseña no puede estar vacía');
+    if (name === 'password') {
+      if (!value) { // Para password no se suele usar trim
+        setErrorPassword('La contraseña no puede estar vacía');
+      } else {
+        setErrorPassword(''); // Limpiar error si no está vacío
+      }
     }
   };
+
+  const emailRegex = /^\S+@\S+\.\S+$/;
 
   const manejarEnvio = async (e) => {
     e.preventDefault();
@@ -48,11 +60,15 @@ const Login = ({ setShowLogin }) => {
 
     // Validar campos vacíos al enviar, por si el usuario no interactuó (onBlur)
     if (!formData.correo.trim()) {
-      setErrorEmail('El correo es obligatorio');
+      setErrorEmail('El correo es obligatorio.');
+      formIsValid = false;
+    } else if (!emailRegex.test(formData.correo)) {
+      setErrorEmail('El formato del correo no es válido.');
       formIsValid = false;
     }
+
     if (!formData.password) {
-      setErrorPassword('La contraseña es obligatoria');
+      setErrorPassword('La contraseña es obligatoria.');
       formIsValid = false;
     }
 
@@ -108,7 +124,7 @@ const Login = ({ setShowLogin }) => {
               onChange={manejarCambio}
               onBlur={handleBlur} // Añadido onBlur
             />
-      <span className="error" style={{ color: 'red', display: 'block', minHeight: '1em'  }}>{errorEmail}</span>
+      {errorEmail && <span className="error" style={{ color: 'red', display: 'block', minHeight: '1em'  }}>{errorEmail}</span>}
       </div>
 
           <div className="contenedor-email-password">
@@ -121,7 +137,7 @@ const Login = ({ setShowLogin }) => {
               onChange={manejarCambio}
               onBlur={handleBlur} // Añadido onBlur
             />
-            <span className="error" style={{ color: 'red', display: 'block', minHeight: '1em' }}>{errorPassword}</span>
+            {errorPassword && <span className="error" style={{ color: 'red', display: 'block', minHeight: '1em' }}>{errorPassword}</span>}
           </div>
 
           <button type="submit" className="botones-inicio-sesion">

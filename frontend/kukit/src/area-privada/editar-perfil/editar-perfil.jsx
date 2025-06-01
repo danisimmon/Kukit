@@ -25,7 +25,7 @@ const EditarPerfil = () => {
 
   // Estados para errores de validación del perfil
   const [errorUsuario, setErrorUsuario] = useState('');
-  const [errorCorreo, setErrorCorreo] = useState('');
+  // const [errorCorreo, setErrorCorreo] = useState(''); // Ya no se necesita si el correo no es editable
 
   // Estados para errores de validación de la receta
   const [errorNombreReceta, setErrorNombreReceta] = useState('');
@@ -230,9 +230,9 @@ const EditarPerfil = () => {
     if (name === 'usuario') {
       setErrorUsuario('');
     }
-    if (name === 'correo') {
-      setErrorCorreo('');
-    }
+    // if (name === 'correo') { // Ya no se necesita si el correo no es editable
+    //   setErrorCorreo('');
+    // }
   };
 
   const handleProfileBlur = (e) => {
@@ -240,13 +240,13 @@ const EditarPerfil = () => {
     if (name === 'usuario' && !value.trim()) {
         setErrorUsuario('El nombre de usuario es obligatorio.');
     }
-    if (name === 'correo') {
-        if (!value.trim()) {
-            setErrorCorreo('El correo electrónico es obligatorio.');
-        } else if (!/\S+@\S+\.\S+/.test(value)) {
-            setErrorCorreo('El formato del correo electrónico no es válido.');
-        }
-    }
+    // if (name === 'correo') { // Ya no se necesita si el correo no es editable
+    //     if (!value.trim()) {
+    //         setErrorCorreo('El correo electrónico es obligatorio.');
+    //     } else if (!/\S+@\S+\.\S+/.test(value)) {
+    //         setErrorCorreo('El formato del correo electrónico no es válido.');
+    //     }
+    // }
 };
 
   const handleRecipeFieldBlur = (e) => {
@@ -373,7 +373,7 @@ const EditarPerfil = () => {
     let formIsValid = true;
     // Limpiar errores previos
     setErrorUsuario('');
-    setErrorCorreo('');
+    // setErrorCorreo(''); // Ya no se necesita
     setMensaje('');
     setExito(false);
 
@@ -384,13 +384,13 @@ const EditarPerfil = () => {
     }
 
     // Validar correo
-    if (!formData.correo.trim()) {
-      setErrorCorreo('El correo electrónico es obligatorio.');
-      formIsValid = false;
-    } else if (!/\S+@\S+\.\S+/.test(formData.correo)) {
-      setErrorCorreo('El formato del correo electrónico no es válido.');
-      formIsValid = false;
-    }
+    // if (!formData.correo.trim()) { // Ya no se valida el correo si no es editable
+    //   setErrorCorreo('El correo electrónico es obligatorio.');
+    //   formIsValid = false;
+    // } else if (!/\S+@\S+\.\S+/.test(formData.correo)) {
+    //   setErrorCorreo('El formato del correo electrónico no es válido.');
+    //   formIsValid = false;
+    // }
 
     if (!formIsValid) return;
 
@@ -604,16 +604,8 @@ const EditarPerfil = () => {
                 <div className="info-perfil">
                   <div className="contenedores-info-perfil">
                     <h3 className="titulos-perfil">Correo Electrónico</h3>
-                    <input
-                      type="email"
-                      id="correo"
-                      name="correo"
-                      value={formData.correo}
-                      onChange={manejarCambio}
-                      onBlur={handleProfileBlur}
-                      required
-                    />
-                    {errorCorreo && <span className="error-mensaje" style={{ color: 'red', display: 'block', minHeight: '1em' }}>{errorCorreo}</span>}
+                    {/* Campo de correo no editable */}
+                    <p id="correo" name="correo" style={{ padding: '10px', border: '1px solid #ccc', borderRadius: '4px', backgroundColor: '#f0f0f0' }}>{formData.correo}</p>
                   </div>
                 </div>
 

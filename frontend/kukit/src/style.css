@@ -1918,6 +1918,15 @@ header nav ul li.nav-link-li {
     display: inline-block;
     /* Para que el ::after se posicione correctamente */
 }
+/* En tu archivo CSS principal (ej: src/index.css o src/App.css) */
+.btn-danger.no-hover:hover,
+.btn-danger.no-hover:focus,
+.btn-danger.no-hover:active {
+  border-color: #dc3545;    /* Color de borde base de .btn-danger */
+  color: #fff;              /* Color de texto base */
+  box-shadow: none;          /* Elimina la sombra en focus/active si la hay */
+}
+
 
 @media print {
     body * {

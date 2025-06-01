@@ -153,9 +153,9 @@ const ListaCompra = ({ showListaCompra, setListaCompra, refreshTrigger }) => {
         aria-labelledby="offcanvasExampleLabel"
       >
         <div className="offcanvas-header">
-          <h4 className="offcanvas-title" id="offcanvasExampleLabel"> {/* Ajustado tamaño para consistencia visual */}
+          <h5 className="offcanvas-title" id="offcanvasExampleLabel" style={{ fontSize: '1.25rem', fontWeight: '500' }}>
             Lista de la Compra
-          </h4>
+          </h5>
           <button
             type="button"
             className="btn-close"
@@ -163,32 +163,63 @@ const ListaCompra = ({ showListaCompra, setListaCompra, refreshTrigger }) => {
             aria-label="Close"
           ></button>
         </div>
-        {/* Añadimos position: relative para que el pop-up se posicione correctamente dentro del offcanvas-body */}
-        <div className="offcanvas-body" style={{ position: 'relative' }}>
-          <div className="lista-compra-contenido"> {/* Contenedor para el contenido principal de la lista */}
-            <h3>Ingredientes</h3>
-            <ul>
+        <div className="offcanvas-body" style={{ position: 'relative', display: 'flex', flexDirection: 'column' }}>
+          <div className="lista-compra-contenido" style={{ flexGrow: 1, overflowY: 'auto', paddingRight: '10px' /* Para que la barra de scroll no tape contenido */ }}>
+            <h6 style={{ marginTop: '0', marginBottom: '15px', fontSize: '1rem', fontWeight: 'bold', color: '#495057' }}>
+              TUS INGREDIENTES
+            </h6>
+            {listaCompra.length === 0 && (
+              <p style={{ textAlign: 'center', color: '#6c757d', marginTop: '20px' }}>
+                Tu lista de la compra está vacía.
+              </p>
+            )}
+            <ul style={{ listStyleType: 'none', paddingLeft: '0', margin: '0' }}>
               {listaCompra.map((producto) => (
-                <li key={producto.id_producto}>
-                  {producto.nombre} - Cantidad: {producto.cantidad}
+                <li 
+                  key={producto.id_producto} 
+                  style={{ 
+                    display: 'flex', // Mantenemos flex para alinear la cruz y el texto
+                    alignItems: 'flex-start', // Alineamos al inicio para que la cruz quede arriba si el texto es largo
+                    padding: '12px 8px', /* Más padding para cada item */
+                    borderBottom: '1px solid #e9ecef', /* Separador sutil entre items */
+                    marginBottom: '0', /* Quitamos el margen inferior ya que usamos border-bottom */
+                  }}
+                >
                   <button
                     onClick={() => deleteListaCompra(producto.nombre, producto.cantidad)}
-                    className="btn btn-danger btn-sm mx-2"
+                    className="btn btn-danger btn-sm no-hover" // Añadida la clase no-hover
+                    style={{ 
+                      marginRight: '10px', /* Espacio entre la cruz y el texto */
+                      padding: '2px 6px', /* Ajustar padding para que la cruz se vea bien */
+                      lineHeight: '1.2', /* Para que la cruz esté bien centrada en el botón */
+                      borderRadius: '50%', /* Para hacer el botón de la cruz redondo */
+                    }}
                   >
-                    Eliminar
+                    &times; {/* Esto crea una 'X' (cruz) */}
                   </button>
+                  <span 
+                    style={{ 
+                      flexGrow: 1, /* Permite que el span ocupe el espacio restante */
+                      fontSize: '0.9rem',
+                      color: '#212529'
+                    }}
+                  >
+                    <strong style={{ fontWeight: '500' }}>{producto.nombre}</strong>
+                    {producto.cantidad && <span style={{ color: '#6c757d', marginLeft: '5px' }}>- Cantidad: {producto.cantidad}</span>}
+                  </span>
                 </li>
               ))}
             </ul>
           </div>
 
           {/* Botones principales del offcanvas, con un poco de separación superior */}
-          <div className="botones-lista-compra pt-3 mt-3 border-top">
-            <button className="btn btn-danger" onClick={handleMostrarConfirmacion}>
+          <div className="botones-lista-compra pt-3 mt-auto border-top" style={{ display: 'flex', justifyContent: 'space-between', gap: '10px', paddingBottom: '10px' }}>
+            <button className="btn btn-danger no-hover" style={{ flexGrow: 1 }} onClick={handleMostrarConfirmacion}>
               Vaciar Lista
             </button>
             <button
               className="btn btn-secondary"
+              style={{ flexGrow: 1 }}
               onClick={() => navigate("/recetas")}
             >
               Ir a recetas
@@ -199,23 +230,24 @@ const ListaCompra = ({ showListaCompra, setListaCompra, refreshTrigger }) => {
           {mostrarConfirmacion && (
             <div style={{
               marginTop: '20px', // Espacio superior para separarlo de los botones
-              padding: '20px',
+              padding: '15px',
               border: '1px solid #dee2e6', // Un borde sutil
               borderRadius: '8px',
               backgroundColor: '#f8f9fa', // Un fondo ligeramente diferente para distinguirlo
               textAlign: 'center',
-              // maxWidth: '320px', // Opcional: si quieres limitar su ancho
-              // margin: '0 auto' // Si se usa maxWidth, para centrarlo
+              boxShadow: '0 2px 5px rgba(0,0,0,0.1)' // Sombra sutil
             }}>
-              <h5 style={{ marginBottom: '15px', fontSize: '1.1rem' }}>
+              <p style={{ marginBottom: '15px', fontSize: '0.95rem', color: '#343a40' }}>
                 ¿Seguro que quieres vaciar tu lista de la compra?
-              </h5>
-              <button className="btn btn-danger me-2" onClick={handleConfirmarVaciado}>
+              </p>
+              <div style={{ display: 'flex', justifyContent: 'center', gap: '10px' }}>
+              <button className="btn btn-danger no-hover btn-sm" onClick={handleConfirmarVaciado}>
                 Sí, Vaciar
               </button>
-              <button className="btn btn-secondary" onClick={handleCancelarVaciado}>
+              <button className="btn btn-secondary btn-sm" onClick={handleCancelarVaciado}>
                 Cancelar
               </button>
+              </div>
             </div>
           )}
         </div>
