@@ -1,5 +1,5 @@
 import React from "react";
-import glovologo from "../img/glovo.png";
+import danonelogo from "../img/Danone.png";
 import bimbologo from "../img/bimbo.png";
 import asturianalogo from "../img/asturiana.png";
 import nesquiklogo from "../img/nesquicklogo.png";
@@ -19,15 +19,12 @@ function Partners() {
             </p>
 
             <div className="row text-center">
-                {/* GLOVO */}
+                {/* DANONE */}
                 <div className="col-md-3 mb-4">
-                    <img src={glovologo} alt="Glovo" className="img-fluid partner-logo" />
-                    <h5 className="mt-3">Glovo</h5>
+                    <img src={danonelogo} alt="Danone" className="img-fluid partner-logo" />
+                    <h5 className="mt-3">Danone</h5>
                     <p className="small">
-                        En Kukit, creemos que una buena alimentación también debe ser cómoda y accesible. Por eso, contamos con Glovo como uno de nuestros principales partners logísticos.
-                        Esta colaboración permite a nuestros usuarios recibir en la puerta de su casa los productos que necesitan para preparar sus recetas favoritas, sin perder tiempo en desplazamientos. Además, trabajamos junto a Glovo para garantizar entregas sostenibles, rápidas y con todas las garantías de calidad.
-
-                        Con Glovo, la experiencia Kukit va más allá del menú: la cocina saludable comienza desde la comodidad de tu hogar.
+                        Kukit colabora con Danone porque compartimos una visión común: promover una alimentación equilibrada, saludable y accesible para todas las familias. Danone, con su compromiso por la salud a través de la alimentación y su apuesta por la sostenibilidad, encaja perfectamente con los valores de Kukit. Juntos, trabajamos para inspirar hábitos saludables desde casa.
                     </p>
                 </div>
 
