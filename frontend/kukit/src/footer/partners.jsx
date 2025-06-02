@@ -56,8 +56,9 @@ function Partners() {
                 </div>
             </div>
         </div>
-        </>
-    );
+      
+    </>
+  );
 }
 
 export default Partners;

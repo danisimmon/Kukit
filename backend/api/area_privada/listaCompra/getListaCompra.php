@@ -26,6 +26,7 @@ while ($fila = mysqli_fetch_assoc($resultado)) {
     // Agregar el producto a la lista de compra
     $listaCompra[] = [
         "nombre" => $fila['productos'],
+        "id_producto" => $fila['id'],
         "cantidad" => $fila['cantidad']
     ];
 }

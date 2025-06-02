@@ -336,7 +336,7 @@ const Recetas = () => {
                 </select>
               </div>
             </div>
-            <button className="btn btn-secondary mt-2" onClick={resetFilters}>Limpiar Filtros</button>
+            <button className="btn btn-secondary mt-2 limpiar-filtros" onClick={resetFilters}>Limpiar Filtros</button>
           </div>
           )}
 
