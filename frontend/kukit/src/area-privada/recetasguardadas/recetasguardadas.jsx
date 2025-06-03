@@ -310,24 +310,28 @@ const RecetasGuardadas = () => {
                   />
                   <h3>{receta.nombre}</h3>
                   <div className="like-container" onClick={(e) => { e.stopPropagation(); manejarLike(receta._id); }}>
-                    <img
-                      src={liked[receta._id] ? CorazonRelleno : CorazonSinRelleno}
-                      alt="like"
-                      className="like"
-                      style={{ cursor: 'pointer' }}
-                    />
-                    <p className="likesNumero">{likes[receta._id] || 0}</p>
+                    <div className="like-inner">
+                      <div className="like-info">
+                        <img
+                          src={liked[receta._id] ? CorazonRelleno : CorazonSinRelleno}
+                          alt="like"
+                          className="like"
+                          style={{ cursor: 'pointer' }}
+                        />
+                        <p className="likesNumero">{likes[receta._id] || 0}</p>
+                      </div>
+                      <img
+                        src={favoritos[receta._id] ? Favorito : NoFavorito}
+                        className="icono-bookmark"
+                        alt={favoritos[receta._id] ? "En favoritos" : "No en favoritos"}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          guardarFavorito(receta._id);
+                        }}
+                        style={{ cursor: 'pointer' }}
+                      />
+                    </div>
                   </div>
-                  <img
-                    src={favoritos[receta._id] ? Favorito : NoFavorito}
-                    className="icono-bookmark"
-                    alt={favoritos[receta._id] ? "En favoritos" : "No en favoritos"}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      guardarFavorito(receta._id);
-                    }}
-                    style={{ cursor: 'pointer' }}
-                  />
                 </div>
               ))}
             </div>

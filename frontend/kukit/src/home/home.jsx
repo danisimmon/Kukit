@@ -6,6 +6,7 @@ import Registro from '../login/registro/registro'; // Descomentado
 // import Footer from '../footer/footer';
 import ListaCompra from '../listaCompra/listaCompra';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import imgHome1 from '../img/imgHome1.png';
 import imgHome2 from '../img/imgHome2.jpg';
 import imgHome3 from '../img/imgHome3.jpg';
@@ -19,6 +20,8 @@ function Home() {
   const [currentIndexImprescindibles, setCurrentIndexImprescindibles] = useState(0);
   const [recetasNovedades, setRecetasNovedades] = useState([]);
   const [currentIndexNovedades, setCurrentIndexNovedades] = useState(0);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const navigate = useNavigate();
 
 
   useEffect(() => {
@@ -100,6 +103,25 @@ function Home() {
   // Los useEffect para el carrusel automático han sido eliminados.
   // La navegación manual seguirá funcionando con los botones.
 
+  // Comprobación de si se ha iniciado sesión
+
+  useEffect(() => {
+    fetch("http://localhost/api/login/gestion-autenticacion/gestion-autenticacion.php", {
+      credentials: "include"
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log("Respuesta del backend:", data);
+        setLoggedIn(data.loggedIn);
+        if (data.loggedIn) {
+          setUser(data.user); // opcional, si quieres guardar el correo del usuario
+        } else {
+          setUser(null);
+        }
+      })
+      .catch(err => console.error(err));
+  }, []);
+
   return (
     <>
       <Header />
@@ -121,7 +143,7 @@ function Home() {
         </div>
 
         <section>
-          
+
 
           {/* Contenedor para las secciones de Imprescindibles y Novedades */}
           {/* Usamos container-fluid para ancho completo y my-5 para margen vertical. La clase 'row' de Bootstrap permite que los elementos hijos se coloquen en línea. */}
@@ -187,7 +209,7 @@ function Home() {
                 </div>
               </div>
               <div className="col-auto d-flex align-items-center">
-                  <div class="vr"></div>
+                <div class="vr"></div>
               </div>
               {/* Sección Novedades de la semana - Ocupa la mitad del ancho en pantallas medianas y superiores */}
               <div className="col-md-6 bg-light">
@@ -266,7 +288,13 @@ function Home() {
                   Esto te permitirá ahorrar tiempo en tus compras y asegurarte de tener todo lo necesario para
                   tus platos. ¡Cocinar nunca fue tan fácil!
                 </p>
-                <div class="registro-animado" onClick={() => setShowRegistro(true)}>
+                <div class="registro-animado" onClick={() => {
+                  if (loggedIn) {
+                    navigate('/recetas');
+                  } else {
+                    setShowRegistro(true);
+                  }
+                }}>
                   🚀 ¡Accede a tu espacio de recetas personalizadas! Regístrate gratis.
                 </div>
               </div>
@@ -287,7 +315,13 @@ function Home() {
                   necesidades: sin gluten, veganas, bajas en carbohidratos y mucho más. Así ahorras tiempo y
                   disfrutas justo lo que necesitas, sin complicaciones.
                 </p>
-                <span class="registro-pill" onClick={() => setShowRegistro(true)}>
+                <span class="registro-pill" onClick={() => {
+                  if (loggedIn) {
+                    navigate('/recetas');
+                  } else {
+                    setShowRegistro(true);
+                  }
+                }}>
                   🔐 Solo para usuarios registrados
                 </span>
               </div>
@@ -305,7 +339,13 @@ function Home() {
                 <p>
                   Organiza tus comidas con facilidad y encuentra inspiración para cada día. Con nuestro calendario semanal, podrás agregar recetas, adaptar tu menú y gestionar tu alimentación de manera práctica. Convierte la planificación en una experiencia sencilla y deliciosa.
                 </p>
-                <p class="mensaje-subrayado" onClick={() => setShowRegistro(true)}>Crea tu cuenta y descubre todo lo que Kukit tiene preparado para ti.</p>
+                <p class="mensaje-subrayado" onClick={() => {
+                  if (loggedIn) {
+                    navigate('/planAlimentacion');
+                  } else {
+                    setShowRegistro(true);
+                  }
+                }}>Crea tu cuenta y descubre todo lo que Kukit tiene preparado para ti.</p>
               </div>
             </div>
           </div>
