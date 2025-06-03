@@ -17,41 +17,35 @@ $password = password_hash('TrenZapato@81', PASSWORD_DEFAULT);
 $sql = "INSERT INTO usuario (nombre, email, password) VALUES ('Pepe Viyuela', 'pepeviyuela@gmail.com', '$password')";
 mysqli_query($conexion, $sql);
 
-$password = password_hash('FuegoTijera@37', PASSWORD_DEFAULT);
-$sql = "INSERT INTO usuario (nombre, email, password) VALUES ('Penélope Cruz', 'penelopecruz@hotmail.es', '$password')";
-mysqli_query($conexion, $sql);
-
-$password = password_hash('MonoTrampa#48', PASSWORD_DEFAULT);
-$sql = "INSERT INTO usuario (nombre, email, password) VALUES ('Koi Sevilla', 'koisevilla@gmail.com', '$password')";
-mysqli_query($conexion, $sql);
-
-$password = password_hash('GuitarraRosa+77', PASSWORD_DEFAULT);
-$sql = "INSERT INTO usuario (nombre, email, password) VALUES ('Farrukito', 'farrukito@outlook.com', '$password')";
-mysqli_query($conexion, $sql);
-
-$password = password_hash('PezCereza#66', PASSWORD_DEFAULT);
-$sql = "INSERT INTO usuario (nombre, email, password) VALUES ('El Xokas', 'elxokas@yahoo.es', '$password')";
-mysqli_query($conexion, $sql);
-
-$password = password_hash('SillaCometa@19', PASSWORD_DEFAULT);
-$sql = "INSERT INTO usuario (nombre, email, password) VALUES ('Ja Morant', 'jamorant@hotmail.com', '$password')";
-mysqli_query($conexion, $sql);
-
-$password = password_hash('ToroMochila#08', PASSWORD_DEFAULT);
-$sql = "INSERT INTO usuario (nombre, email, password) VALUES ('Andy y Lucas', 'andylucas@hotmail.com', '$password')";
-mysqli_query($conexion, $sql);
-
 $password = password_hash('RanaVelcro@33', PASSWORD_DEFAULT);
 $sql = "INSERT INTO usuario (nombre, email, password) VALUES ('Operación Camarón', 'operacioncamaron@gmail.es', '$password')";
 mysqli_query($conexion, $sql);
 
-$password = password_hash('CieloGalleta_96', PASSWORD_DEFAULT);
-$sql = "INSERT INTO usuario (nombre, email, password) VALUES ('Bad Bunny', 'badbunny@yahoo.com', '$password')";
+$password = password_hash('Sara.Villanueva', PASSWORD_DEFAULT);
+$sql = "INSERT INTO usuario (nombre, email, password) VALUES ('Sara Villanueva', 'SARA.VILLANUEVA@universidadeuropea.es', '$password')";
 mysqli_query($conexion, $sql);
 
-$password = password_hash('TrucoSombra$74', PASSWORD_DEFAULT);
-$sql = "INSERT INTO usuario (nombre, email, password) VALUES ('Fernando Alonso', 'fernandoalonso@hotmail.es', '$password')";
+$password = password_hash('Irene.Delrincon', PASSWORD_DEFAULT);
+$sql = "INSERT INTO usuario (nombre, email, password) VALUES ('Irene Del Rincón', 'irene.delrincon@universidadeuropea.es', '$password')";
 mysqli_query($conexion, $sql);
+
+$password = password_hash('Duneplay@123', PASSWORD_DEFAULT);
+$sql = "INSERT INTO usuario (nombre, email, password) VALUES ('Daniel Simón', '22348403@live.uem.es', '$password')";
+mysqli_query($conexion, $sql);
+
+$password = password_hash('Ruben@123', PASSWORD_DEFAULT);
+$sql = "INSERT INTO usuario (nombre, email, password) VALUES ('Rubén Peña', '22337489@live.uem.es', '$password')";
+mysqli_query($conexion, $sql);
+
+$password = password_hash('Ainhoa@123', PASSWORD_DEFAULT);
+$sql = "INSERT INTO usuario (nombre, email, password) VALUES ('Ainhoa Blanca', '22360520@live.uem.es', '$password')";
+mysqli_query($conexion, $sql);
+
+$password = password_hash('Manu@123', PASSWORD_DEFAULT);
+$sql = "INSERT INTO usuario (nombre, email, password) VALUES ('Manuel Gómez', '22301982@live.uem.es', '$password')";
+mysqli_query($conexion, $sql);
+
+
 
 
 //Tabla password reset
@@ -238,33 +232,22 @@ $sql = "CREATE TABLE IF NOT EXISTS recetas_creadas (
 )";
 mysqli_query($conexion, $sql);
 
-// $sql = "INSERT INTO listacompra_productos (id_lista_compra, id_producto, cantidad, comprado) VALUES
-// (1, 1, 1, false),
-// (1, 2, 2, true),
-// (1, 3, 1, false),
-// (1, 4, 1, false),
-// (1, 5, 6, true),
-// (1, 6, 1, false),
-// (2, 26, 1, false),
-// (2, 16, 2, true),
-// (2, 18, 1, true),
-// (2, 14, 1, true),
-// (2, 27, 1, false),
-// (2, 35, 1, true),
-// (2, 10, 0.5, false),
-// (3, 8, 2, true),
-// (3, 42, 2, false),
-// (3, 38, 1, true),
-// (3, 15, 1, false),
-// (3, 3, 2, true),
-// (3, 9, 1, false),
-// (4, 43, 2, true),
-// (4, 38, 2, true),
-// (4, 51, 1, false),
-// (4, 48, 2, true),
-// (4, 12, 2, true),
-// (4, 33, 1, false),
-// (4, 52, 2, true),
-// (4, 50, 1, false)";
+$sql = "CREATE TABLE IF NOT EXISTS plan_alimentacion (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  id_usuario INT UNSIGNED NOT NULL,
+  fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  FOREIGN KEY (id_usuario) REFERENCES usuario(id) ON DELETE CASCADE,
+  UNIQUE KEY idx_usuario_plan_unico (id_usuario)
+)";
+mysqli_query($conexion, $sql);
 
-// mysqli_query($conexion, $sql);
+$sql = "CREATE TABLE IF NOT EXISTS plan_alimentacion_semanas (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  id_plan_alimentacion INT UNSIGNED NOT NULL,
+  numero_semana TINYINT NOT NULL,
+  datos_semana JSON,
+  FOREIGN KEY (id_plan_alimentacion) REFERENCES plan_alimentacion(id) ON DELETE CASCADE,
+  UNIQUE KEY idx_plan_semana_unica (id_plan_alimentacion, numero_semana)
+)";
+mysqli_query($conexion, $sql);

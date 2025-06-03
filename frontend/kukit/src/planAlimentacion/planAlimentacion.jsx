@@ -15,7 +15,8 @@ const TIPOS_COMIDA = [
 ];
 const NUMERO_SEMANAS_PLAN = 4; // El usuario puede planificar para 4 semanas
 const API_BASE_URL = 'http://localhost/api/area_privada';
-const API_URL_PLAN = `${API_BASE_URL}/planAlimentacion/api-plan-semanal.php`;
+// URL para obtener (GET) y guardar (POST) el plan, apuntando a insertplanSemanal.php
+const API_URL_SAVE_PLAN = 'http://localhost/api/plan-semanal/insertplanSemanal.php';
 const API_URL_RECETAS_GUARDADAS = `${API_BASE_URL}/recetas/getRecetasGuardadas.php`;
 const API_URL_RECETAS_CREADAS = `${API_BASE_URL}/recetas/getRecetasCreadas.php`;
 
@@ -45,7 +46,8 @@ function PlanificacionSemanal() {
     const cargarPlan = async () => {
       setCargandoPlanInicial(true);
       try {
-        const response = await axios.get(API_URL_PLAN, { withCredentials: true });
+        // Usar la misma URL base para GET y POST, el método HTTP los diferencia
+        const response = await axios.get(API_URL_SAVE_PLAN, { withCredentials: true });
         if (response.data && response.data.status === 'success' && response.data.data && Array.isArray(response.data.data.plan) && response.data.data.plan.length === NUMERO_SEMANAS_PLAN) {
           setPlan(response.data.data.plan);
         } else {
@@ -135,7 +137,7 @@ function PlanificacionSemanal() {
 
   const guardarPlan = async (planAGuardar) => {
     try {
-      const response = await axios.post(API_URL_PLAN, { plan: planAGuardar }, {
+      const response = await axios.post(API_URL_SAVE_PLAN, { plan: planAGuardar }, {
         headers: { 'Content-Type': 'application/json' },
         withCredentials: true,
       });
@@ -160,13 +162,26 @@ function PlanificacionSemanal() {
       return prev;
     });
   };
+ 
+ const abrirSelectorRecetas = (semanaIndex, diaIndex, tipoComidaKey) => {
+   setSlotSeleccionado({ semanaIndex, diaIndex, tipoComidaKey });
+   // Asegurarse de que el elemento del offcanvas exista en el DOM y la instancia esté creada
+   if (recipeSelectorOffcanvasRef.current && recipeSelectorOffcanvasInstance.current) {
+     recipeSelectorOffcanvasInstance.current.show();
+   } else if (recipeSelectorOffcanvasRef.current) {
+     // Si el elemento existe pero la instancia no, intenta crearla (esto es una salvaguarda)
+     console.warn("Instancia de Offcanvas no encontrada, intentando reinicializar.");
+     // @ts-ignore
+     import('bootstrap/dist/js/bootstrap.bundle.min.js').then(bootstrap => {
+       recipeSelectorOffcanvasInstance.current = new bootstrap.Offcanvas(recipeSelectorOffcanvasRef.current);
+       recipeSelectorOffcanvasInstance.current.show();
+     }).catch(err => console.error("No se pudo cargar Bootstrap JS para abrir Offcanvas", err));
+   } else {
+     console.error("Referencia al DOM del Offcanvas no encontrada. No se puede abrir.");
+   }
+ };
+ 
 
-  const abrirSelectorRecetas = (semanaIndex, diaIndex, tipoComidaKey) => {
-    setSlotSeleccionado({ semanaIndex, diaIndex, tipoComidaKey });
-    if (recipeSelectorOffcanvasInstance.current) {
-      recipeSelectorOffcanvasInstance.current.show();
-    }
-  };
 
   const seleccionarRecetaParaSlot = async (receta) => {
     if (!slotSeleccionado) return;

@@ -1,6 +1,6 @@
 <?php
 header('Content-Type: application/json');
-include 'conecta-mongo.php';
+include '../conecta-mongo.php';
 
 // Funciones auxiliares (utils)
 function calcularRangoSemana($fecha) {
