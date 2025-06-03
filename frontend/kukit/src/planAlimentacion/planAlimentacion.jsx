@@ -162,25 +162,25 @@ function PlanificacionSemanal() {
       return prev;
     });
   };
- 
- const abrirSelectorRecetas = (semanaIndex, diaIndex, tipoComidaKey) => {
-   setSlotSeleccionado({ semanaIndex, diaIndex, tipoComidaKey });
-   // Asegurarse de que el elemento del offcanvas exista en el DOM y la instancia esté creada
-   if (recipeSelectorOffcanvasRef.current && recipeSelectorOffcanvasInstance.current) {
-     recipeSelectorOffcanvasInstance.current.show();
-   } else if (recipeSelectorOffcanvasRef.current) {
-     // Si el elemento existe pero la instancia no, intenta crearla (esto es una salvaguarda)
-     console.warn("Instancia de Offcanvas no encontrada, intentando reinicializar.");
-     // @ts-ignore
-     import('bootstrap/dist/js/bootstrap.bundle.min.js').then(bootstrap => {
-       recipeSelectorOffcanvasInstance.current = new bootstrap.Offcanvas(recipeSelectorOffcanvasRef.current);
-       recipeSelectorOffcanvasInstance.current.show();
-     }).catch(err => console.error("No se pudo cargar Bootstrap JS para abrir Offcanvas", err));
-   } else {
-     console.error("Referencia al DOM del Offcanvas no encontrada. No se puede abrir.");
-   }
- };
- 
+
+  const abrirSelectorRecetas = (semanaIndex, diaIndex, tipoComidaKey) => {
+    setSlotSeleccionado({ semanaIndex, diaIndex, tipoComidaKey });
+    // Asegurarse de que el elemento del offcanvas exista en el DOM y la instancia esté creada
+    if (recipeSelectorOffcanvasRef.current && recipeSelectorOffcanvasInstance.current) {
+      recipeSelectorOffcanvasInstance.current.show();
+    } else if (recipeSelectorOffcanvasRef.current) {
+      // Si el elemento existe pero la instancia no, intenta crearla (esto es una salvaguarda)
+      console.warn("Instancia de Offcanvas no encontrada, intentando reinicializar.");
+      // @ts-ignore
+      import('bootstrap/dist/js/bootstrap.bundle.min.js').then(bootstrap => {
+        recipeSelectorOffcanvasInstance.current = new bootstrap.Offcanvas(recipeSelectorOffcanvasRef.current);
+        recipeSelectorOffcanvasInstance.current.show();
+      }).catch(err => console.error("No se pudo cargar Bootstrap JS para abrir Offcanvas", err));
+    } else {
+      console.error("Referencia al DOM del Offcanvas no encontrada. No se puede abrir.");
+    }
+  };
+
 
 
   const seleccionarRecetaParaSlot = async (receta) => {
@@ -213,8 +213,17 @@ function PlanificacionSemanal() {
 
   const iniciarEliminacionComida = (semanaIndex, diaIndex, tipoComidaKey) => {
     setSlotParaEliminar({ semanaIndex, diaIndex, tipoComidaKey });
+
     if (confirmDeleteModalInstance.current) {
       confirmDeleteModalInstance.current.show();
+    } else if (confirmDeleteModalRef.current) {
+      // Intentar crear la instancia en caliente
+      import('bootstrap/dist/js/bootstrap.bundle.min.js').then(bootstrap => {
+        confirmDeleteModalInstance.current = new bootstrap.Modal(confirmDeleteModalRef.current);
+        confirmDeleteModalInstance.current.show();
+      }).catch(err => console.error("Error al crear modal dinámicamente:", err));
+    } else {
+      console.error("Referencia al DOM del modal no encontrada.");
     }
   };
 
@@ -362,12 +371,12 @@ function PlanificacionSemanal() {
                 guardarPlan(getDefaultPlan());
               }
             }}
-            >Vaciar Plan</button>
+          >Vaciar Plan</button>
           <button id="guardarPlanButton"
             className="btn guardar-plan"
             onClick={() => guardarPlan(plan)}
-            >Guardar Cambios</button>
-            
+          >Guardar Cambios</button>
+
         </div>
 
         {/* Offcanvas para Selector de Recetas */}
