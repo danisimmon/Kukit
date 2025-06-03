@@ -479,6 +479,7 @@ const ListaCompra = ({ showListaCompra, setListaCompra, refreshTrigger }) => {
                 <input
                   type="text"
                   className="form-control"
+                  placeholder="Ej: Leche, Pan, etc."
                   id="nombreProducto"
                   name="nombre"
                   value={nuevoProducto.nombre}
@@ -489,6 +490,7 @@ const ListaCompra = ({ showListaCompra, setListaCompra, refreshTrigger }) => {
                 <label htmlFor="cantidadProducto" className="form-label">Cantidad</label>
                 <input
                   type="number"
+                  placeholder="Ej: 1, 2, 20, etc."
                   className="form-control"
                   id="cantidadProducto"
                   name="cantidad"
