@@ -2317,17 +2317,25 @@ header nav ul li.nav-link-li {
 }
 
 #vaciarPlanButton {
-    width: 14vw;
-    height: 6vh;
-    padding: 10px;
+    display: flex;
     justify-content: center;
-    align-items: center;
-    gap: 10px;
-    flex-shrink: 0;
-    border-radius: 50px;
-    border: 1px solid #C33333;
-    background: #FFF;
-    font-size: 2.5vh;
+    width: 10%;
+    padding: 10px 0;
+    box-sizing: border-box;
+    align-self: center;
+
+    border: 2px solid #C33333;
+    border-radius: 8px;
+    background-color: white;
+    color: #C33333;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#vaciarPlanButton:hover {
+    background-color: #C33333;
+    color: white;
 }
 
 .enlace-footer {
@@ -2346,4 +2354,75 @@ header nav ul li.nav-link-li {
     width: 24px;
     height: 24px;
     object-fit: contain;
+}
+
+.modal-confirmacion {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-contenido {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.btn.btn-si {
+    padding: 12px 24px;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    background-color: #28a745;
+    border-color: #218838;
+    color: #fff;
+}
+
+.btn.btn-si:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+    transform: scale(1.05);
+}
+
+.btn.btn-no {
+    padding: 12px 24px;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    background-color: #dc3545;
+    border-color: #c82333;
+    color: #fff;
+}
+
+.btn.btn-no:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+    transform: scale(1.05);
+}
+
+
+.btn-no:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+    transform: scale(1.05);
+}
+.boton-plan-semanal {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    gap: 10px; /* Opcional, espacio entre botones */
 }

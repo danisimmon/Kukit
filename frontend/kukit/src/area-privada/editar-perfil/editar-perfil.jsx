@@ -701,6 +701,7 @@ const EditarPerfil = () => {
                   type="text"
                   id="nombre-receta-nueva"
                   name="nombre"
+                  placeholder='Introduce el nombre de la receta'
                   value={formRecetaNueva.nombre}
                   onChange={manejarCambioReceta}
                   onBlur={handleRecipeFieldBlur}
@@ -744,11 +745,12 @@ const EditarPerfil = () => {
                     {errorDificultad && <span className="error-mensaje" style={{ color: 'red', display: 'block', minHeight: '1em' }}>{errorDificultad}</span>}
                   </div>
                   <div className="apartado-tiempo">
-                    <h5>Introduce el tiempo (minutos)</h5>
+                    <h5>Introduce el tiempo</h5>
                     <input
                       type="text"
                       name="tiempo"
                       id="tiempo"
+                      placeholder='Tiempo en minutos'
                       value={formRecetaNueva.tiempo}
                       onChange={manejarCambioReceta}
                       onBlur={handleRecipeFieldBlur}

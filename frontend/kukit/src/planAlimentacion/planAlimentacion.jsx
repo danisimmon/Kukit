@@ -4,6 +4,8 @@ import axios from 'axios';
 import Footer from '../footer/footer';
 import Header from '../header/header';
 
+
+
 // Arrays con los dias de la semana y tipos de comida
 const DIAS_SEMANA = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
 const TIPOS_COMIDA = [
@@ -36,6 +38,7 @@ function PlanificacionSemanal() {
   const [recetasGuardadas, setRecetasGuardadas] = useState([]);
   const [recetasCreadas, setRecetasCreadas] = useState([]);
   const [slotParaEliminar, setSlotParaEliminar] = useState(null);
+  const [mostrarConfirmacion, setMostrarConfirmacion] = React.useState(false);
 
   const recipeSelectorOffcanvasRef = useRef(null);
   const recipeSelectorOffcanvasInstance = useRef(null);
@@ -278,7 +281,6 @@ function PlanificacionSemanal() {
   }
 
   const semanaVisible = plan[semanaActualVisualizada];
-
   return (
     <>
       <Header />
@@ -362,23 +364,35 @@ function PlanificacionSemanal() {
         </div>
 
         {/*Botón guardar cambios*/}
-        <div className="boton-plan-semanal">
-          <button id="vaciarPlanButton"
-            className="btn vaciar-plan"
-            onClick={() => {
-              if (window.confirm("¿Estás seguro de que quieres vaciar todo el plan? Esta acción no se puede deshacer.")) {
-                setPlan(getDefaultPlan());
-                guardarPlan(getDefaultPlan());
-              }
-            }}
-          >Vaciar Plan</button>
-          <button id="guardarPlanButton"
-            className="btn guardar-plan"
-            onClick={() => guardarPlan(plan)}
-          >Guardar Cambios</button>
-
-        </div>
-
+        <button id="vaciarPlanButton"
+          className="btn vaciar-plan"
+          onClick={() => setMostrarConfirmacion(true)}
+        >
+          Vaciar Plan
+        </button>
+          {mostrarConfirmacion && (
+            <div className="modal-confirmacion">
+              <div className="modal-contenido">
+                <p>¿Estás seguro de que quieres vaciar todo el plan? Esta acción no se puede deshacer.</p>
+                <button
+                  className="btn btn-si"
+                  onClick={() => {
+                    setPlan(getDefaultPlan());
+                    guardarPlan(getDefaultPlan());
+                    setMostrarConfirmacion(false);
+                  }}
+                >
+                  Sí
+                </button>
+                <button
+                  className="btn btn-no"
+                  onClick={() => setMostrarConfirmacion(false)}
+                >
+                  No
+                </button>
+              </div>
+            </div>
+          )}
         {/* Offcanvas para Selector de Recetas */}
         <div
           className="offcanvas offcanvas-end"
