@@ -40,7 +40,7 @@ const Recetas = () => {
   const [filterLactosa, setFilterLactosa] = useState('');
   const [filterVegana, setFilterVegana] = useState('');
 
-  const PAISES_FILTRO = [ 
+  const PAISES_FILTRO = [
     "Italia", "México", "Japón", "España", "India", "Francia", "Alemania",
     "Estados Unidos", "China", "Brasil", "Tailandia", "Grecia", "Turquía",
     "Corea del Sur", "Libano" // Ajustado para coincidir con el value de editar-perfil.jsx
@@ -97,43 +97,43 @@ const Recetas = () => {
   // }, []);
 
   useEffect(() => {
-  const obtenerRecetas = async () => {
-    try {
-      const respuesta = await axios.get('http://localhost/api/area_privada/recetas/getRecetas.php');
-      const recetasRaw = respuesta.data.recetas;
+    const obtenerRecetas = async () => {
+      try {
+        const respuesta = await axios.get('http://localhost/api/area_privada/recetas/getRecetas.php');
+        const recetasRaw = respuesta.data.recetas;
 
-      const recetasNormalizadas = recetasRaw.map(r => ({
-        ...r,
-        gluten: r.gluten === true || r.gluten === "true",
-        vegetariana: r.vegetariana === true || r.vegetariana === "true",
-        lactosa: r.lactosa === true || r.lactosa === "true",
-        vegana: r.vegana === true || r.vegana === "true",
-        dificultad: (r.dificultad || '').toLowerCase().trim(),
-        pais: r.pais || '',
-        tiempo: r.tiempo || '',
-      }));
+        const recetasNormalizadas = recetasRaw.map(r => ({
+          ...r,
+          gluten: r.gluten === true || r.gluten === "true",
+          vegetariana: r.vegetariana === true || r.vegetariana === "true",
+          lactosa: r.lactosa === true || r.lactosa === "true",
+          vegana: r.vegana === true || r.vegana === "true",
+          dificultad: (r.dificultad || '').toLowerCase().trim(),
+          pais: r.pais || '',
+          tiempo: r.tiempo || '',
+        }));
 
-      setRecetas(recetasNormalizadas);
+        setRecetas(recetasNormalizadas);
 
-      // Likes y favoritos
-      const likesIniciales = {};
-      const favoritosIniciales = {};
-      recetasNormalizadas.forEach(r => {
-        likesIniciales[r._id] = r.likes || 0;
-        favoritosIniciales[r._id] = r.favorito || false;
-      });
-      setLikes(likesIniciales);
-      setFavoritos(favoritosIniciales);
-      setN_recetas(respuesta.data.n_recetas);
-      setCargando(false);
-      setPaginaActual(1);
-    } catch (err) {
-      setError('Error al cargar las recetas');
-      setCargando(false);
-    }
-  };
-  obtenerRecetas();
-}, []);
+        // Likes y favoritos
+        const likesIniciales = {};
+        const favoritosIniciales = {};
+        recetasNormalizadas.forEach(r => {
+          likesIniciales[r._id] = r.likes || 0;
+          favoritosIniciales[r._id] = r.favorito || false;
+        });
+        setLikes(likesIniciales);
+        setFavoritos(favoritosIniciales);
+        setN_recetas(respuesta.data.n_recetas);
+        setCargando(false);
+        setPaginaActual(1);
+      } catch (err) {
+        setError('Error al cargar las recetas');
+        setCargando(false);
+      }
+    };
+    obtenerRecetas();
+  }, []);
 
 
   const guardarFavorito = async (idReceta) => {
@@ -270,74 +270,74 @@ const Recetas = () => {
             />
             <span className="search-icon">🔍</span>
           </div>
-          
+
           <button className="btn-mostrar-filtros" onClick={() => setMostrarFiltros(prev => !prev)}>
             {mostrarFiltros ? "Ocultar Filtros" : "Mostrar Filtros"}
           </button>
 
           {/* Sección de Filtros Adicionales */}
           {mostrarFiltros && (
-          <div className="filtros-adicionales mb-4 p-3 border rounded">
-            <h5 className="mb-3">Filtros Adicionales</h5>
-            <div className="row">
-              <div className="col-md-3 mb-3">
-                <label htmlFor="filtroDificultad" className="form-label">Dificultad</label>
-                <select id="filtroDificultad" className="form-select" value={selectedDificultad} onChange={handleFilterChange(setSelectedDificultad)}>
-                  <option value="">Cualquiera</option>
-                  {DIFICULTADES.map(d => <option key={d.value} value={d.value}>{d.label}</option>)}
-                </select>
+            <div className="filtros-adicionales mb-4 p-3 border rounded">
+              <h5 className="mb-3">Filtros Adicionales</h5>
+              <div className="row">
+                <div className="col-md-3 mb-3">
+                  <label htmlFor="filtroDificultad" className="form-label">Dificultad</label>
+                  <select id="filtroDificultad" className="form-select" value={selectedDificultad} onChange={handleFilterChange(setSelectedDificultad)}>
+                    <option value="">Cualquiera</option>
+                    {DIFICULTADES.map(d => <option key={d.value} value={d.value}>{d.label}</option>)}
+                  </select>
+                </div>
+                <div className="col-md-3 mb-3">
+                  <label htmlFor="filtroPais" className="form-label">País</label>
+                  <select id="filtroPais" className="form-select" value={selectedPais} onChange={handleFilterChange(setSelectedPais)}>
+                    <option value="">Cualquiera</option>
+                    {PAISES_FILTRO.map(p => <option key={p} value={p}>{p}</option>)}
+                  </select>
+                </div>
+                <div className="col-md-3 mb-3">
+                  <label htmlFor="filtroTiempo" className="form-label">Tiempo (ej: "30 min")</label>
+                  <input
+                    type="text"
+                    id="filtroTiempo"
+                    className="form-control"
+                    value={filterTiempo}
+                    onChange={handleFilterChange(setFilterTiempo)}
+                    placeholder="Ej: 30 min"
+                  />
+                </div>
               </div>
-              <div className="col-md-3 mb-3">
-                <label htmlFor="filtroPais" className="form-label">País</label>
-                <select id="filtroPais" className="form-select" value={selectedPais} onChange={handleFilterChange(setSelectedPais)}>
-                  <option value="">Cualquiera</option>
-                  {PAISES_FILTRO.map(p => <option key={p} value={p}>{p}</option>)}
-                </select>
+              <div className="row">
+                <div className="col-md-3 mb-3">
+                  <label htmlFor="filtroGluten" className="form-label">Sin Gluten</label>
+                  <select id="filtroGluten" className="form-select" value={filterGluten} onChange={handleFilterChange(setFilterGluten)}>
+                    <option value="">Cualquiera</option>
+                    {OPCIONES_BOOLEANAS.map(op => <option key={`gluten-${op.value}`} value={op.value}>{op.label}</option>)}
+                  </select>
+                </div>
+                <div className="col-md-3 mb-3">
+                  <label htmlFor="filtroLactosa" className="form-label">Sin Lactosa</label>
+                  <select id="filtroLactosa" className="form-select" value={filterLactosa} onChange={handleFilterChange(setFilterLactosa)}>
+                    <option value="">Cualquiera</option>
+                    {OPCIONES_BOOLEANAS.map(op => <option key={`lactosa-${op.value}`} value={op.value}>{op.label}</option>)}
+                  </select>
+                </div>
+                <div className="col-md-3 mb-3">
+                  <label htmlFor="filtroVegetariana" className="form-label">Vegetariana</label>
+                  <select id="filtroVegetariana" className="form-select" value={filterVegetariana} onChange={handleFilterChange(setFilterVegetariana)}>
+                    <option value="">Cualquiera</option>
+                    {OPCIONES_BOOLEANAS.map(op => <option key={`vegetariana-${op.value}`} value={op.value}>{op.label}</option>)}
+                  </select>
+                </div>
+                <div className="col-md-3 mb-3">
+                  <label htmlFor="filtroVegana" className="form-label">Vegana</label>
+                  <select id="filtroVegana" className="form-select" value={filterVegana} onChange={handleFilterChange(setFilterVegana)}>
+                    <option value="">Cualquiera</option>
+                    {OPCIONES_BOOLEANAS.map(op => <option key={`vegana-${op.value}`} value={op.value}>{op.label}</option>)}
+                  </select>
+                </div>
               </div>
-              <div className="col-md-3 mb-3">
-                <label htmlFor="filtroTiempo" className="form-label">Tiempo (ej: "30 min")</label>
-                <input
-                  type="text"
-                  id="filtroTiempo"
-                  className="form-control"
-                  value={filterTiempo}
-                  onChange={handleFilterChange(setFilterTiempo)}
-                  placeholder="Ej: 30 min"
-                />
-              </div>
+              <button className="btn btn-secondary mt-2 limpiar-filtros" onClick={resetFilters}>Limpiar Filtros</button>
             </div>
-            <div className="row">
-              <div className="col-md-3 mb-3">
-                <label htmlFor="filtroGluten" className="form-label">Sin Gluten</label>
-                <select id="filtroGluten" className="form-select" value={filterGluten} onChange={handleFilterChange(setFilterGluten)}>
-                  <option value="">Cualquiera</option>
-                  {OPCIONES_BOOLEANAS.map(op => <option key={`gluten-${op.value}`} value={op.value}>{op.label}</option>)}
-                </select>
-              </div>
-              <div className="col-md-3 mb-3">
-                <label htmlFor="filtroLactosa" className="form-label">Sin Lactosa</label>
-                <select id="filtroLactosa" className="form-select" value={filterLactosa} onChange={handleFilterChange(setFilterLactosa)}>
-                  <option value="">Cualquiera</option>
-                  {OPCIONES_BOOLEANAS.map(op => <option key={`lactosa-${op.value}`} value={op.value}>{op.label}</option>)}
-                </select>
-              </div>
-              <div className="col-md-3 mb-3">
-                <label htmlFor="filtroVegetariana" className="form-label">Vegetariana</label>
-                <select id="filtroVegetariana" className="form-select" value={filterVegetariana} onChange={handleFilterChange(setFilterVegetariana)}>
-                  <option value="">Cualquiera</option>
-                  {OPCIONES_BOOLEANAS.map(op => <option key={`vegetariana-${op.value}`} value={op.value}>{op.label}</option>)}
-                </select>
-              </div>
-              <div className="col-md-3 mb-3">
-                <label htmlFor="filtroVegana" className="form-label">Vegana</label>
-                <select id="filtroVegana" className="form-select" value={filterVegana} onChange={handleFilterChange(setFilterVegana)}>
-                  <option value="">Cualquiera</option>
-                  {OPCIONES_BOOLEANAS.map(op => <option key={`vegana-${op.value}`} value={op.value}>{op.label}</option>)}
-                </select>
-              </div>
-            </div>
-            <button className="btn btn-secondary mt-2 limpiar-filtros" onClick={resetFilters}>Limpiar Filtros</button>
-          </div>
           )}
 
           {/* Mensaje cuando no hay resultados con los filtros aplicados */}
@@ -362,24 +362,28 @@ const Recetas = () => {
                 />
                 <h3>{receta.nombre}</h3>
                 <div className="like-container" onClick={(e) => { e.stopPropagation(); manejarLike(receta._id); }}>
-                  <img
-                    src={liked[receta._id] ? CorazonRelleno : CorazonSinRelleno}
-                    alt="like"
-                    className="like"
-                    style={{ cursor: 'pointer' }}
-                  />
-                  <p className="likesNumero">{likes[receta._id] || 0}</p>
+                  <div className="like-inner">
+                    <div className='like-info'>
+                      <img
+                        src={liked[receta._id] ? CorazonRelleno : CorazonSinRelleno}
+                        alt="like"
+                        className="like"
+                        style={{ cursor: 'pointer' }}
+                      />
+                      <p className="likesNumero">{likes[receta._id] || 0}</p>
+                    </div>
+                    <img
+                      src={favoritos[receta._id] ? Favorito : NoFavorito}
+                      alt={favoritos[receta._id] ? "En favoritos" : "No en favoritos"}
+                      className="icono-bookmark"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        guardarFavorito(receta._id);
+                      }}
+                      style={{ cursor: 'pointer' }}
+                    />
+                  </div>
                 </div>
-                <img
-                  src={favoritos[receta._id] ? Favorito : NoFavorito}
-                  alt={favoritos[receta._id] ? "En favoritos" : "No en favoritos"}
-                  className="icono-bookmark"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    guardarFavorito(receta._id);
-                  }}
-                  style={{ cursor: 'pointer' }}
-                />
               </div>
             ))}
           </div>
