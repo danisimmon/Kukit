@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import Header from '../../header/header';
 
 const NuevaPassword = () => {
     const [formData, setFormData] = useState({
@@ -63,54 +64,59 @@ const NuevaPassword = () => {
     };
 
     return (
-        <div>
-            <form onSubmit={manejarEnvio}>
-                <div>
-                    <label htmlFor="token">Token:</label>
-                    <input
-                        type="text"
-                        id="token"
-                        name="token"
-                        value={formData.token}
-                        onChange={manejarCambio}
-                        required
-                        disabled
-                    />
+        <>
+            <Header />
+            <main>
+                <div className="form-container">
+                    <form onSubmit={manejarEnvio} className="form-box">
+                        <div className="form-group">
+                            <label htmlFor="token">Token:</label>
+                            <input
+                                type="text"
+                                id="token"
+                                name="token"
+                                value={formData.token}
+                                onChange={manejarCambio}
+                                required
+                                disabled
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="codigo_verificacion">Código de verificación:</label>
+                            <input
+                                type="number"
+                                id="codigo_verificacion"
+                                name="codigo_verificacion"
+                                value={formData.codigo_verificacion}
+                                onChange={manejarCambio}
+                                min="100000"
+                                max="999999"
+                                required
+                                placeholder="Código de verificación"
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="password">Nueva contraseña:</label>
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                value={formData.password}
+                                onChange={manejarCambio}
+                                required
+                                placeholder="Nueva contraseña"
+                            />
+                        </div>
+                        <button type="submit" className="submit-button">Restablecer contraseña</button>
+                    </form>
+                    {mensaje && (
+                        <div className={`mensaje ${exito ? 'mensaje-exito' : 'mensaje-error'}`}>
+                            {mensaje}
+                        </div>
+                    )}
                 </div>
-                <div>
-                    <label htmlFor="codigo_verificacion">Código de verificación:</label>
-                    <input
-                        type="number"
-                        id="codigo_verificacion"
-                        name="codigo_verificacion"
-                        value={formData.codigo_verificacion}
-                        onChange={manejarCambio}
-                        min = "100000"
-                        max = "999999"
-                        required
-                        placeholder="Código de verificación"
-                    />
-                </div>
-                <div>
-                    <label htmlFor="password">Nueva contraseña:</label>
-                    <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        value={formData.password}
-                        onChange={manejarCambio}
-                        required
-                        placeholder="Nueva contraseña"
-                    />
-                </div>
-                <button type="submit">Restablecer contraseña</button>
-            </form>
-            {mensaje && (
-                <div style={{ color: exito ? 'green' : 'red' }}>
-                    {mensaje}
-                </div>
-            )}
-        </div>
+            </main>
+        </>
     );
 };
 

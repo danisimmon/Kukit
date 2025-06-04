@@ -2383,7 +2383,7 @@ header nav ul li.nav-link-li {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -2404,7 +2404,7 @@ header nav ul li.nav-link-li {
     font-size: 16px;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     background-color: #28a745;
     border-color: #218838;
     color: #fff;
@@ -2424,7 +2424,7 @@ header nav ul li.nav-link-li {
     font-size: 16px;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     background-color: #dc3545;
     border-color: #c82333;
     color: #fff;
@@ -2442,8 +2442,74 @@ header nav ul li.nav-link-li {
     border-color: #bd2130;
     transform: scale(1.05);
 }
+
 .boton-plan-semanal {
     display: flex;
-    justify-content: center; /* Centra horizontalmente */
-    gap: 10px; /* Opcional, espacio entre botones */
+    justify-content: center;
+    /* Centra horizontalmente */
+    gap: 10px;
+    /* Opcional, espacio entre botones */
+}
+
+/* Reestablecer contraseña */
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.form-box {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    min-width: 300px;
+    max-width: 400px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 0.5rem;
+}
+
+.form-group input {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border-radius: 5px;
+}
+
+.submit-button {
+    padding: 0.75rem;
+    font-size: 1rem;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.submit-button:hover {
+    background-color: var(--primary-color);
+}
+
+.mensaje {
+    margin-top: 0.5rem;
+    font-weight: bold;
+}
+
+.mensaje-exito {
+    color: green;
+}
+
+.mensaje-error {
+    color: red;
 }

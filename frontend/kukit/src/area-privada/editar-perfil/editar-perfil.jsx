@@ -9,7 +9,10 @@ import bookmark from "../../img/bookmark.png";
 import Footer from '../../footer/footer';
 import Header from '../../header/header';
 import { useNavigate } from 'react-router-dom';
-
+import CorazonRelleno from '../../img/corazonRelleno.png'
+import CorazonSinRelleno from '../../img/corazonSinRelleno.png'
+import NoFavorito from '../../img/bookmark.png'
+import Favorito from '../../img/bookmark-relleno.png'
 
 const EditarPerfil = () => {
   const location = useLocation();
@@ -21,9 +24,15 @@ const EditarPerfil = () => {
   const [newIngredienteCantidad, setNewIngredienteCantidad] = useState('');
   const [newIngredienteUnidad, setNewIngredienteUnidad] = useState('');
   const [errorNuevoIngrediente, setErrorNuevoIngrediente] = useState('');
-
+  const [likes, setLikes] = useState({});
+  const [liked, setLiked] = useState({});
+  const [favoritos, setFavoritos] = useState({});
+  const [n_recetas, setN_recetas] = useState(0);
+  const [cargando, setCargando] = useState(true);
+  const [error, setError] = useState(null);
   const [newPaso, setNewPaso] = useState('');
   const [errorNuevoPaso, setErrorNuevoPaso] = useState('');
+  const [paginaActual, setPaginaActual] = useState(1);
 
   // Estados para errores de validación del perfil
   const [errorUsuario, setErrorUsuario] = useState('');
@@ -91,6 +100,20 @@ const EditarPerfil = () => {
     lactosa: false,
     vegana: false,
   });
+
+  const manejarLike = (idReceta) => {
+    const yaLeGusta = liked[idReceta];
+    setLiked((prev) => ({
+      ...prev,
+      [idReceta]: !yaLeGusta,
+    }));
+    setLikes((prev) => ({
+      ...prev,
+      [idReceta]: yaLeGusta
+        ? Math.max((prev[idReceta] || 0) - 1, 0)
+        : (prev[idReceta] || 0) + 1,
+    }));
+  };
 
   const manejarCambioPais = (e) => {
     setRecetaNueva({
@@ -201,6 +224,10 @@ const EditarPerfil = () => {
     } else {
       setErrorNuevoPaso('Por favor, escribe el paso para añadirlo.');
     }
+  };
+
+  const abrirReceta = (receta) => {
+    navigate(`/area-privada/verreceta/${receta._id}`);
   };
 
   const handleRemovePaso = (index) => {
@@ -357,6 +384,18 @@ const EditarPerfil = () => {
       });
       if (respuesta.data.success) {
         setRecetasCreadas(respuesta.data.recetas);
+        // Likes y favoritos
+        const likesIniciales = {};
+        const favoritosIniciales = {};
+        respuesta.data.recetas.forEach(r => {
+          likesIniciales[r._id] = r.likes || 0;
+          favoritosIniciales[r._id] = r.favorito || false;
+        });
+        setLikes(likesIniciales);
+        setFavoritos(favoritosIniciales);
+        setN_recetas(respuesta.data.n_recetas);
+        setCargando(false);
+        setPaginaActual(1);
       } else {
         setErrorRecetas(respuesta.data.message || 'Error al cargar las recetas creadas.');
       }
@@ -670,26 +709,46 @@ const EditarPerfil = () => {
                 <p>Aún no has creado ninguna receta. ¡Anímate a crear la primera!</p>
               )}
               {!loadingRecetas && !errorRecetas && recetasCreadas.map((receta) => (
-                <div className="tarjeta" key={receta._id}>
+                <div
+                  key={receta._id}
+                  className="tarjeta btn"
+                  role="button"
+                  onClick={() => abrirReceta(receta)}
+                >
                   <img
-                    src={receta.href || comida}
+                    src={receta.href}
                     className="imagen-receta-tarjeta"
-                    alt={receta.nombre}
+                    alt={`Receta ${receta.nombre}`}
                   />
                   <h3>{receta.nombre}</h3>
-                  <a
-                    className="btn"
-                    data-bs-toggle="offcanvas"
-                    href="#offcanvasExample"
-                    role="button"
-                    aria-controls="offcanvasExample"
-                  >
-                    Ver receta
-                  </a>
-                  <img src={bookmark} className="icono-bookmark" alt="Guardar" />
+                  <div className="like-container" onClick={(e) => { e.stopPropagation(); manejarLike(receta._id); }}>
+                    <div className="like-inner">
+                      <div className='like-info'>
+                        <img
+                          src={liked[receta._id] ? CorazonRelleno : CorazonSinRelleno}
+                          alt="like"
+                          className="like"
+                          style={{ cursor: 'pointer' }}
+                        />
+                        <p className="likesNumero">{likes[receta._id] || 0}</p>
+                      </div>
+                      {/* <img
+                        src={favoritos[receta._id] ? Favorito : NoFavorito}
+                        alt={favoritos[receta._id] ? "En favoritos" : "No en favoritos"}
+                        className="icono-bookmark"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          guardarFavorito(receta._id);
+                        }}
+                        style={{ cursor: 'pointer' }}
+                      /> */}
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
+
+
           )}
 
 

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import Header from '../../header/header';
 
 const PasswordReset = () => {
   const [formData, setFormData] = useState({
@@ -44,27 +45,36 @@ const PasswordReset = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={manejarEnvio}>
-        <div>
-          <label htmlFor="correo">Correo:</label>
-          <input
-            type="email"
-            id="correo"
-            name="correo"
-            value={formData.correo}
-            onChange={manejarCambio}
-            required
-          />
+    <>
+      <Header />
+      <main>
+        <div className="form-container">
+          <form onSubmit={manejarEnvio} className="form-box">
+            <div className="form-group">
+              <label htmlFor="correo">Correo:</label>
+              <input
+                type="email"
+                id="correo"
+                name="correo"
+                value={formData.correo}
+                onChange={manejarCambio}
+                required
+              />
+            </div>
+            <button type="submit" className="submit-button">
+              Restablecer contraseña
+            </button>
+            {mensaje && (
+              <div className={`mensaje ${exito ? 'mensaje-exito' : 'mensaje-error'}`}>
+                {mensaje}
+              </div>
+            )}
+          </form>
         </div>
-        <button type="submit">Restablecer contraseña</button>
-      </form>
-      {mensaje && (
-        <div style={{ color: exito ? 'green' : 'red' }}>
-          {mensaje}
-        </div>
-      )}
-    </div>
+
+      </main>
+    </>
+
   );
 };
 
