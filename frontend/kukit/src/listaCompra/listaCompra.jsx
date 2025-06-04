@@ -341,7 +341,7 @@ const ListaCompra = ({ showListaCompra, setListaCompra, refreshTrigger }) => {
         <div className="offcanvas-body" style={{ position: 'relative', display: 'flex', flexDirection: 'column' }}>
           {/* Botón para añadir ingrediente */}
           <div className="mb-3">
-            <button className="btn btn-success no-hover btn-sm me-2" onClick={handleShowAddModal}>
+            <button className="btn btn-success no-hover btn-sm me-2 volver-receta" onClick={handleShowAddModal}>
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-plus-lg" viewBox="0 0 16 16">
                 <path fillRule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2z"/>
               </svg>
@@ -417,7 +417,7 @@ const ListaCompra = ({ showListaCompra, setListaCompra, refreshTrigger }) => {
               Vaciar Lista
             </button>
             <button
-              className="btn btn-secondary"
+              className="btn btn-secondary volver-receta"
               style={{ flexGrow: 1 }}
               onClick={() => navigate("/recetas")}
             >
