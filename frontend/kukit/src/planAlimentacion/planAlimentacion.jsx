@@ -370,10 +370,12 @@ function PlanificacionSemanal() {
         >
           Vaciar Plan
         </button>
-          {mostrarConfirmacion && (
-            <div className="modal-confirmacion">
-              <div className="modal-contenido">
-                <p>¿Estás seguro de que quieres vaciar todo el plan? Esta acción no se puede deshacer.</p>
+        {mostrarConfirmacion && (
+          <div className="modal-confirmacion">
+            <div className="modal-contenido">
+              <p>¿Estás seguro de que quieres vaciar todo el plan? Esta acción no se puede deshacer.</p>
+
+              <div className="botones-confirmacion">
                 <button
                   className="btn btn-si"
                   onClick={() => {
@@ -392,7 +394,11 @@ function PlanificacionSemanal() {
                 </button>
               </div>
             </div>
-          )}
+          </div>
+        )}
+
+
+
         {/* Offcanvas para Selector de Recetas */}
         <div
           className="offcanvas offcanvas-end"

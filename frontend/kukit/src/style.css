@@ -73,7 +73,7 @@ button {
 }
 
 .page-item {
-    border: 1px solid #ccc;
+    border: 1px solid #b635b6;
     border-radius: 4px;
     transition: all 0.2s ease-in-out;
 }
@@ -191,9 +191,7 @@ select:focus {
     color: #333;
     font-weight: 500;
     outline: none;
-    /* Elimina el borde azul por defecto */
     border-color: #666;
-    /* Opcional: mejora el contraste del borde al hacer focus */
 }
 
 header {
@@ -463,6 +461,8 @@ header .contenedor-header .sign-up:hover {
     background-color: var(--background-color);
     color: var(--primary-color);
     border: var(--primary-color) 1px solid;
+    font-weight: bold;
+    cursor:pointer;
 }
 
 .btn.ver-texto:hover {
@@ -470,6 +470,8 @@ header .contenedor-header .sign-up:hover {
     background-color: var(--primary-color);
     color: var(--background-color);
     border: none;
+    font-weight: bold;
+    cursor:pointer;
 }
 
 .btn.volver-receta {
@@ -477,13 +479,17 @@ header .contenedor-header .sign-up:hover {
     background-color: var(--background-color);
     color: var(--primary-color);
     border: var(--primary-color) 1px solid;
+    font-weight: bold;
+    cursor:pointer;
 }
 
 .btn.volver-receta:hover {
     margin: 10px;
-    background-color: var(--primary-color);
-    color: var(--background-color);
+    background-color: #fff;
+    color: var(--primary-color);
     border: none;
+    font-weight: bold;
+    cursor:pointer;
 }
 
 button.btn.btn-lectura {
@@ -491,12 +497,16 @@ button.btn.btn-lectura {
     background-color: var(--primary-color) !important;
     color: var(--background-color) !important;
     border: none !important;
+    font-weight: bold;
+    cursor:pointer;
 }
 
 button.btn.btn-lectura:hover {
     background-color: var(--primary-color) !important;
     color: var(--background-color) !important;
     border: none !important;
+    font-weight: bold;
+    cursor:pointer;
 }
 
 button.btn.btn-texto-toggle {
@@ -505,12 +515,16 @@ button.btn.btn-texto-toggle {
     background-color: var(--background-color) !important;
     color: var(--primary-color) !important;
     border: var(--primary-color) 1px solid !important;
+    font-weight: bold;
+    cursor:pointer;
 }
 
 button.btn.btn-texto-toggle:hover {
     background-color: var(--background-color) !important;
     color: var(--primary-color) !important;
     border: 1px solid var(--primary-color) !important;
+    font-weight: bold;
+    cursor:pointer;
 }
 
 
@@ -527,6 +541,7 @@ button.btn.btn-texto-toggle:hover {
     border: none !important;
     width: 10%;
     align-self: center;
+    font-weight: bold;
 }
 
 .limpiar-filtros:hover {
@@ -535,6 +550,7 @@ button.btn.btn-texto-toggle:hover {
     border: none !important;
     width: 10%;
     align-self: center;
+    font-weight: bold;
 }
 
 .btn-mostrar-filtros {
@@ -1487,26 +1503,6 @@ footer hr {
 }
 
 
-.facebook {
-    background-color: #4e71a8;
-    color: #ffffff;
-}
-
-.twitter {
-    background-color: #55acee;
-    color: #ffffff;
-}
-
-.google {
-    background-color: #d6492f;
-    color: #ffffff;
-}
-
-.apple {
-    background-color: #424041;
-    color: #ffffff;
-}
-
 .footer-alt {
     color: #acacac;
 }
@@ -2396,6 +2392,12 @@ header nav ul li.nav-link-li {
     text-align: center;
 }
 
+.botones-confirmacion {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
 .btn.btn-si {
     padding: 12px 24px;
     border: 2px solid transparent;
@@ -2405,14 +2407,15 @@ header nav ul li.nav-link-li {
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    background-color: #28a745;
-    border-color: #218838;
-    color: #fff;
+    background-color:#fff;
+    border-color: #c82333;
+    color: #000000;
 }
 
 .btn.btn-si:hover {
-    background-color: #218838;
-    border-color: #1e7e34;
+    background-color: #dc3545;
+    border-color: #c82333;
+    color:#fff;
     transform: scale(1.05);
 }
 
@@ -2446,4 +2449,9 @@ header nav ul li.nav-link-li {
     display: flex;
     justify-content: center; /* Centra horizontalmente */
     gap: 10px; /* Opcional, espacio entre botones */
+}
+
+.btn-success:hover {
+    background-color: #b30000; /* tu color personalizado */
+    border-color: #990000;
 }

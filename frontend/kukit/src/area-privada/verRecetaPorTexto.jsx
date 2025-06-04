@@ -245,7 +245,7 @@ const VerRecetaTexto = () => {
                         </div>
                     </div>
                     <button
-                        className="btn btn-outline-secondary mt-2 mb-3 volver-receta"
+                        className="btn btn-outline-secondary mt-2 mb-3 volver-receta"                        
                         onClick={handleVerReceta}
                     >
                         Volver
@@ -295,9 +295,9 @@ const VerRecetaTexto = () => {
 
                                     <h5>INGREDIENTES ({raciones} {raciones === 1 ? 'ración' : 'raciones'})</h5>
                                     <div>
-                                        <button className="btn btn-outline-secondary btn-sm me-2" onClick={() => ajustarRaciones(-1)} disabled={raciones <= 1}>-</button>
+                                        <button className="btn btn-outline-secondary btn-sm me-2 volver-receta" onClick={() => ajustarRaciones(-1)} disabled={raciones <= 1}>-</button>
                                         <span>{raciones}</span>
-                                        <button className="btn btn-outline-secondary btn-sm ms-2" onClick={() => ajustarRaciones(1)}>+</button>
+                                        <button className="btn btn-outline-secondary btn-sm ms-2 volver-receta" onClick={() => ajustarRaciones(1)}>+</button>
                                     </div>
                                     <div className="row g-2 mt-2">
                                         {receta.ingredientes.map((ing, idx) => {
