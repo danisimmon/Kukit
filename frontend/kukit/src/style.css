@@ -48,7 +48,7 @@ button {
     justify-content: center;
     align-items: center;
     gap: 10px;
-    border-radius: 50%;
+    border-radius: 10px !important;
     border: none;
     background-color: var(--primary-color);
     font-size: 14px;
@@ -380,7 +380,7 @@ header .contenedor-header .sign-up:hover {
     background-color: #fff;
     padding: 2rem;
     border-radius: 12px;
-    width: 20vw;
+    width: 30vw;
     max-width: 90%;
     height: auto;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
@@ -403,8 +403,19 @@ header .contenedor-header .sign-up:hover {
     display: flex;
     justify-content: center;
     align-items: center;
+    justify-self: center;
+    border-radius: 10px;
     margin: 10px;
     width: 95%;
+}
+
+.formulario-inicio-sesion {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
 }
 
 #recordarme {
@@ -442,7 +453,7 @@ header .contenedor-header .sign-up:hover {
     justify-content: center;
     align-items: flex-start;
     gap: 10px;
-    width: 20vw;
+    width: 100%;
 }
 
 #contenedor-recetas {
@@ -977,6 +988,15 @@ footer hr {
     background-color: var(--background-color);
     color: var(--primary-color);
     border: 1px solid var(--primary-color);
+    margin: 10px;
+    width: 95%;
+    border-radius: 10px;
+}
+
+#googleSignInButton{
+    margin: 5px;
+    width: 95% !important;
+    border-radius: 10px;
 }
 
 .botones-inversos:hover {
