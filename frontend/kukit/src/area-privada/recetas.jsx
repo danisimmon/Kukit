@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import logo from '../img/logo_kukit.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import CorazonRelleno from '../img/corazonRelleno.png'
@@ -20,8 +19,6 @@ const Recetas = () => {
   const [error, setError] = useState(null);
   const [n_recetas, setN_recetas] = useState(0);
   const [showListaCompra, setListaCompra] = useState(false);
-  const [showLogin, setShowLogin] = useState(false);
-  const [showRegistro, setShowRegistro] = useState(false);
   const [likes, setLikes] = useState({});
   const [liked, setLiked] = useState({});
   const [favoritos, setFavoritos] = useState({});
@@ -57,19 +54,34 @@ const Recetas = () => {
     { value: "false", label: "No" }
   ];
 
-  const manejarLike = (idReceta) => {
-    const yaLeGusta = liked[idReceta];
-    setLiked((prev) => ({
-      ...prev,
-      [idReceta]: !yaLeGusta,
-    }));
-    setLikes((prev) => ({
-      ...prev,
-      [idReceta]: yaLeGusta
-        ? Math.max((prev[idReceta] || 0) - 1, 0)
-        : (prev[idReceta] || 0) + 1,
-    }));
-  };
+  const manejarLike = async (idReceta) => {
+  try {
+    const respuesta = await axios.post('http://localhost/api/area_privada/recetas/guardarMeGustas.php', {
+      id_receta: idReceta
+    });
+
+    if (respuesta.data.success) {
+      const nuevoEstado = respuesta.data.liked;
+
+      setLiked(prev => ({
+        ...prev,
+        [idReceta]: nuevoEstado,
+      }));
+
+      setLikes(prev => ({
+        ...prev,
+        [idReceta]: nuevoEstado
+          ? (prev[idReceta] || 0) + 1
+          : Math.max((prev[idReceta] || 1) - 1, 0),
+      }));
+    } else {
+      console.error("No se pudo cambiar el estado de me gusta");
+    }
+  } catch (error) {
+    console.error("Error al manejar el like:", error);
+  }
+};
+
 
   // useEffect(() => {
   //   const obtenerRecetas = async () => {
@@ -111,6 +123,9 @@ const Recetas = () => {
           dificultad: (r.dificultad || '').toLowerCase().trim(),
           pais: r.pais || '',
           tiempo: r.tiempo || '',
+          // Asume que la API devuelve un campo como 'usuarioDioLike' (true/false)
+          // para cada receta, indicando si el usuario actual ya le dio "me gusta".
+          usuarioDioLike: r.usuarioDioLike || false // Normaliza este campo si existe
         }));
 
         setRecetas(recetasNormalizadas);
@@ -118,12 +133,16 @@ const Recetas = () => {
         // Likes y favoritos
         const likesIniciales = {};
         const favoritosIniciales = {};
+        const likedStatusInicial = {}; // Para el estado de "me gusta" del usuario
         recetasNormalizadas.forEach(r => {
           likesIniciales[r._id] = r.likes || 0;
           favoritosIniciales[r._id] = r.favorito || false;
+          // Usa el campo de la API para el estado inicial de "me gusta"
+          likedStatusInicial[r._id] = r.usuarioDioLike;
         });
         setLikes(likesIniciales);
         setFavoritos(favoritosIniciales);
+        setLiked(likedStatusInicial); // Inicializar el estado 'liked'
         setN_recetas(respuesta.data.n_recetas);
         setCargando(false);
         setPaginaActual(1);

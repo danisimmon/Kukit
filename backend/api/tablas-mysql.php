@@ -222,6 +222,15 @@ $sql = "CREATE TABLE IF NOT EXISTS favoritos (
 )";
 mysqli_query($conexion, $sql);
 
+$sql = "CREATE TABLE IF NOT EXISTS me_gusta (
+  id INT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  id_usuario INT(20) UNSIGNED NOT NULL,
+  id_receta VARCHAR(100) NOT NULL,
+  fecha DATETIME DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (id_usuario) REFERENCES usuario(id)
+)";
+mysqli_query($conexion, $sql);
+
 // tabla para almacenar las recetas que ha creado el usuario
 $sql = "CREATE TABLE IF NOT EXISTS recetas_creadas (
     id INT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -251,3 +260,4 @@ $sql = "CREATE TABLE IF NOT EXISTS plan_alimentacion_semanas (
   UNIQUE KEY idx_plan_semana_unica (id_plan_alimentacion, numero_semana)
 )";
 mysqli_query($conexion, $sql);
+
