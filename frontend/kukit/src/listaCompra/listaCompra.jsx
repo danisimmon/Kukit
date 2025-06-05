@@ -358,22 +358,23 @@ const ListaCompra = ({ showListaCompra, setListaCompra, refreshTrigger }) => {
           )}
 
           {/* Contenido de la lista de la compra */}
-          <div className="lista-compra-contenido" style={{ flexGrow: 1, overflowY: 'auto', paddingRight: '10px' }}>
+          <div style={{ flexGrow: 1, overflowY: 'auto', paddingRight: '10px' }}>
             <h6 style={{ marginTop: '0', marginBottom: '15px', fontSize: '1rem', fontWeight: 'bold', color: '#495057' }}>
               TUS INGREDIENTES
             </h6>
+            <div className="lista-compra-contenido">
             {listaCompra.length === 0 && (
               <p style={{ textAlign: 'center', color: '#6c757d', marginTop: '20px' }}>
                 Tu lista de la compra está vacía.
               </p>
             )}
-            <ul style={{ listStyleType: 'none', paddingLeft: '0', margin: '0' }}>
+            <ul className="list-group" style={{ listStyleType: 'none', paddingLeft: '0', margin: '0' }}>
               {listaCompra.map((producto) => (
-                <li
+                <li className="lista-compra-item"
                   key={producto.id_producto}
                   style={{
                     display: 'flex',
-                    alignItems: 'center', // Alineación vertical centrada
+                    alignItems: 'center', 
                     padding: '12px 8px',
                     borderBottom: '1px solid #e9ecef',
                     marginBottom: '0',
@@ -386,6 +387,7 @@ const ListaCompra = ({ showListaCompra, setListaCompra, refreshTrigger }) => {
                   >
                     &times;
                   </button>
+                  
                   <button
                     onClick={() => handleShowEditModal(producto)}
                     className="btn btn-secondary btn-sm no-hover me-2" // Añadido me-2 para margen derecho
@@ -403,12 +405,14 @@ const ListaCompra = ({ showListaCompra, setListaCompra, refreshTrigger }) => {
                       color: '#212529'
                     }}
                   >
+                    
                     <strong style={{ fontWeight: '500' }}>{producto.nombre}</strong>
                     {producto.cantidad && <span style={{ color: '#6c757d', marginLeft: '5px' }}>- Cantidad: {producto.cantidad}</span>}
                   </span>
                 </li>
-              ))}
+              ))} 
             </ul>
+            </div>
           </div>
 
           {/* Botones principales del offcanvas */}

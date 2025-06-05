@@ -617,7 +617,7 @@ const EditarPerfil = () => {
                 <div className="contenedores-info-perfil">
                   <h3 className="titulos-perfil">Usuario</h3>
                   {/* Se cambia <h3> por <p> ya que no es un input editable en esta vista */}
-                  <p id="usuario" name="usuario">{formData.usuario}</p>
+                  <p className='nombreUsuarioEditarPerfil' id="usuario" name="usuario">{formData.usuario}</p>
                 </div>
               </div>
 
@@ -629,7 +629,7 @@ const EditarPerfil = () => {
               </div>
 
               <div className="info-perfil">
-                <p class="mensaje-subrayado" ><a href="/login/restablecer-password">Reestablecer contraseña</a></p>
+                <p className="mensaje-subrayado" ><a className='mensajeSubrayadoA' href="/login/restablecer-password">Reestablecer contraseña</a></p>
               </div>
               <div className="botones-perfil">
                 <button className="botones-inversos" type="button" onClick={() => setMostrarModalEliminar(true)}>
@@ -756,6 +756,7 @@ const EditarPerfil = () => {
             <div className="crear-receta">
               <div className="crear-receta-info">
                 <h3>Nombre de la Receta</h3>
+                <p className="info-racion">*Los datos son para 1 ración*</p>
                 <input
                   type="text"
                   id="nombre-receta-nueva"
@@ -940,11 +941,6 @@ const EditarPerfil = () => {
                 </div>
               </div>
 
-              <div className="racion-ingredientes">
-                <h5>Ración</h5>
-                <h2>1</h2>
-              </div>
-
               <div className="ingredientes-pasos">
                 <div className="ingredientes-crear-receta">
                   <div className="contenedor-ingredientes">
@@ -957,7 +953,6 @@ const EditarPerfil = () => {
                             <th>Nombre</th>
                             <th>Cantidad</th>
                             <th>Unidad</th>
-                            <th>Acciones</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -1017,9 +1012,8 @@ const EditarPerfil = () => {
                     <table className="tabla-pasos">
                       <thead>
                         <tr>
-                          <th>Paso #</th>
+                          <th>Paso</th>
                           <th>Descripción</th>
-                          <th>Acciones</th>
                         </tr>
                       </thead>
                       <tbody>

@@ -651,6 +651,11 @@ button.btn.btn-texto-toggle:hover {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
+.lista-compra-item:hover {
+    background-color: transparent !important;
+    color: inherit !important;
+}
+
 /* footer {
     display: flex;
     flex-direction: column;
@@ -991,12 +996,18 @@ footer hr {
     border: 1px solid var(--primary-color) !important;
     color: var(--primary-color) !important;
     cursor: pointer;
+    font-weight: bold;
 }
 
 .perfil-opciones li:hover {
     background-color: var(--primary-color) !important;
     color: var(--background-color) !important;
     cursor: pointer;
+}
+
+.nombreUsuarioEditarPerfil {
+    font-weight: bold;
+    font-size: 1.5rem;
 }
 
 .titulo-pagina ul {
@@ -1745,6 +1756,15 @@ footer.section.bg-footer {
     font-size: 1.2rem;
 }
 
+.info-racion {
+    font-size: 0.9rem;
+    color: #555;
+    font-style: italic;
+    text-align: center;
+    margin-top: -10px;
+}
+
+
 .mensaje-subrayado {
     text-align: center;
     font-size: 1.1rem;
@@ -1754,6 +1774,8 @@ footer.section.bg-footer {
     display: inline-block;
     margin: 2rem auto;
     padding-bottom: 0.2rem;
+    text-decoration: none !important;
+
 }
 
 .mensaje-subrayado::after {
@@ -1767,10 +1789,16 @@ footer.section.bg-footer {
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.3s ease;
+    text-decoration: none !important;
 }
 
 .mensaje-subrayado:hover::after {
     transform: scaleX(1);
+}
+
+.mensajeSubrayadoA {
+    color: #c33333;
+    text-decoration: none;
 }
 
 
@@ -2520,4 +2548,26 @@ header nav ul li.nav-link-li {
 .btn-success:hover {
     background-color: #b30000; /* tu color personalizado */
     border-color: #990000;
+}
+
+.tabla-ingredientes th,
+.tabla-ingredientes td {
+    padding: 8px 16px; /* Puedes ajustar estos valores */
+    text-align: left;
+}
+
+.tabla-pasos th,
+.tabla-pasos td {
+    padding: 8px 16px; /* Puedes ajustar estos valores */
+    text-align: left;
+}
+
+/* .lista-compra-item :hover {
+    background-color: #f0f0f0;
+    cursor: pointer;
+} */
+
+.lista-compra-contenido :hover {
+    background-color: #f0f0f0;
+    cursor: pointer;
 }
