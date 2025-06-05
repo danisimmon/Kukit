@@ -135,12 +135,12 @@ function Header() {
       </header>
       <div id="pop-up-sign-in" style={{ display: showLogin ? 'flex' : 'none' }} onClick={() => setShowLogin(false)}>
         <div className="modal-content" onClick={e => e.stopPropagation()}>
-          <Login setShowLogin={setShowLogin} />
+          <Login setShowLogin={setShowLogin} setShowRegistro={setShowRegistro}/>
         </div>
       </div>
       <div id="pop-up-sign-up" style={{ display: showRegistro ? 'flex' : 'none' }} onClick={() => setShowRegistro(false)}>
         <div className="modal-content-2" onClick={e => e.stopPropagation()}>
-          <Registro setShowRegistro={setShowRegistro} />
+          <Registro setShowRegistro={setShowRegistro} setShowLogin={setShowLogin}/>
         </div>
       </div>
       {showListaCompra && (

@@ -2,14 +2,16 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import logo from '../../img/logo_kukit.png';
+import Login from '../login';
 
-const Registro = ({ setShowRegistro }) => {
+const Registro = ({ setShowRegistro, setShowLogin  }) => {
   const [formData, setFormData] = useState({
     usuario: '',
     correo: '',
     password: '',
     recordarme: false // Asegúrate de que este campo esté en el estado si lo usas
   });
+
 
   const [mensaje, setMensaje] = useState('');
   const [exito, setExito] = useState(false);
@@ -44,8 +46,8 @@ const Registro = ({ setShowRegistro }) => {
       setErrorCorreo('El correo electrónico es obligatorio');
       esValido = false;
     } else if (!/\S+@\S+\.\S+/.test(formData.correo)) { // Validación básica de formato de email
-        setErrorCorreo('El formato del correo electrónico no es válido');
-        esValido = false;
+      setErrorCorreo('El formato del correo electrónico no es válido');
+      esValido = false;
     }
     if (!formData.password) { // Para contraseñas, no se suele usar .trim()
       setErrorPassword('La contraseña es obligatoria');
@@ -81,83 +83,88 @@ const Registro = ({ setShowRegistro }) => {
   };
 
   return (
-    <div className="pop-up-sign-up">
-      <section className="contenedor-sign-up">
-        <figure>
-          <a href="/">
-            <img src={logo} alt="Logo de Kukit" />
-          </a>
-        </figure>
+    <>
+      <div className="pop-up-sign-up">
+        <section className="contenedor-sign-up">
+          <figure>
+            <a href="/">
+              <img src={logo} alt="Logo de Kukit" />
+            </a>
+          </figure>
 
-        <h1>CREAR CUENTA</h1>
-        <hr className="linea-inicio-sesion" />
+          <h1>CREAR CUENTA</h1>
+          <hr className="linea-inicio-sesion" />
 
-        <form onSubmit={manejarEnvio}>
-          <div>
-            <label htmlFor="usuario">Nombre de usuario:</label>
-            <input
-              type="text"
-              name="usuario"
-              id="usuario"
-              value={formData.usuario}
-              onChange={manejarCambio}
-            />
-            <span className="error" style={{ color: 'red', display: 'block', marginBottom: '10px', minHeight: '1em' }}>{errorUsuario}</span>
-          </div>
+          <form onSubmit={manejarEnvio}>
+            <div>
+              <label htmlFor="usuario">Nombre de usuario:</label>
+              <input
+                type="text"
+                name="usuario"
+                id="usuario"
+                value={formData.usuario}
+                onChange={manejarCambio}
+              />
+              <span className="error" style={{ color: 'red', display: 'block', marginBottom: '10px', minHeight: '1em' }}>{errorUsuario}</span>
+            </div>
 
-          <div>
-            <label htmlFor="correo">Correo electrónico:</label>
-            <input
-              type="email"
-              name="correo"
-              id="correo"
-              value={formData.correo}
-              onChange={manejarCambio}
-            />
-            <span className="error" style={{ color: 'red', display: 'block', marginBottom: '10px', minHeight: '1em' }}>{errorCorreo}</span>
-          </div>
+            <div>
+              <label htmlFor="correo">Correo electrónico:</label>
+              <input
+                type="email"
+                name="correo"
+                id="correo"
+                value={formData.correo}
+                onChange={manejarCambio}
+              />
+              <span className="error" style={{ color: 'red', display: 'block', marginBottom: '10px', minHeight: '1em' }}>{errorCorreo}</span>
+            </div>
 
-          <div>
-            <label htmlFor="password">Contraseña:</label>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              value={formData.password}
-              onChange={manejarCambio}
-            />
-            <span className="error" style={{ color: 'red', display: 'block', marginBottom: '10px', minHeight: '1em' }}>{errorPassword}</span>
-          </div>
+            <div>
+              <label htmlFor="password">Contraseña:</label>
+              <input
+                type="password"
+                name="password"
+                id="password"
+                value={formData.password}
+                onChange={manejarCambio}
+              />
+              <span className="error" style={{ color: 'red', display: 'block', marginBottom: '10px', minHeight: '1em' }}>{errorPassword}</span>
+            </div>
 
-          <label className="checkbox-label">
-            <input
-              type="checkbox"
-              name="recordarme"
-              id="recordarme"
-              checked={formData.recordarme}
-              onChange={manejarCambio}
-            />
-            <span>Recordarme</span>
-          </label>
+            <label className="checkbox-label">
+              <input
+                type="checkbox"
+                name="recordarme"
+                id="recordarme"
+                checked={formData.recordarme}
+                onChange={manejarCambio}
+              />
+              <span>Recordarme</span>
+            </label>
 
-          <p className="aceptar-terminos">
-            Al hacer clic en «Aceptar y crear cuenta», aceptas las <b><u>Condiciones de uso</u></b>, la <b><u>Política de privacidad</u></b> y la <b><u>Política de cookies</u></b> de Kukit.
-          </p>
+            <p className="aceptar-terminos">
+              Al hacer clic en «Aceptar y crear cuenta», aceptas las <b><u>Condiciones de uso</u></b>, la <b><u>Política de privacidad</u></b> y la <b><u>Política de cookies</u></b> de Kukit.
+            </p>
 
-          <button type="submit" className="botones-inicio-sesion">Aceptar y crear cuenta</button>
-        </form>
+            <button type="submit" className="botones-inicio-sesion">Aceptar y crear cuenta</button>
+          </form>
 
-        {mensaje && (
-          <p style={{ color: exito ? 'green' : 'red', marginTop: '1rem' }}>{mensaje}</p>
-        )}
+          {mensaje && (
+            <p style={{ color: exito ? 'green' : 'red', marginTop: '1rem' }}>{mensaje}</p>
+          )}
 
-        <p>¿Ya tienes cuenta?</p>
-        {/* Este botón debería probablemente abrir el pop-up de Login en lugar de ser un submit */}
-        <button type="button" className="botones-inicio-sesion" id="inicio-google" onClick={() => { /* Lógica para mostrar Login */ }}>Iniciar sesión</button>
-        <hr />
-        <button type="button" onClick={() => setShowRegistro(false)}>Cerrar</button>
-      </section>
-    </div>
+          <p>¿Ya tienes cuenta?</p>
+          {/* Este botón debería probablemente abrir el pop-up de Login en lugar de ser un submit */}
+          <button type="button" className="botones-inicio-sesion" id="inicio-google" onClick={() => {
+            setShowRegistro(false);
+            setShowLogin(true);
+          }}>Iniciar sesión</button>
+          <hr />
+          <button type="button" onClick={() => setShowRegistro(false)}>Cerrar</button>
+        </section>
+      </div>
+    </>
   );
 };
 

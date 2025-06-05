@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import logo from '../img/logo_kukit.png';
 
-const Login = ({ setShowLogin }) => {
+const Login = ({ setShowLogin, setShowRegistro}) => {
   const [formData, setFormData] = useState({
     correo: '',
     password: ''
@@ -168,7 +168,7 @@ const Login = ({ setShowLogin }) => {
         <hr className="linea-inicio-sesion" />
         <hr />
 
-        <form onSubmit={manejarEnvio}>
+        <form onSubmit={manejarEnvio} className='formulario-inicio-sesion'>
           <div className="contenedor-email-password">
             <label htmlFor="correo" className="mail">Correo electrónico:</label>
             <input
@@ -211,6 +211,15 @@ const Login = ({ setShowLogin }) => {
         <hr style={{ margin: '1rem 0' }} />
 
         <div id="googleSignInButton"></div>
+
+        <p>¿No tienes cuenta?</p>
+
+        <button type="submit" className="botones-inversos" onClick={() => {
+            setShowLogin(false);
+            setShowRegistro(true);
+          }}>
+            Crear Cuenta
+          </button>
 
         {mensaje && (
           <p style={{ color: exito ? 'green' : 'red', marginTop: '1rem' }}>{mensaje}</p>
