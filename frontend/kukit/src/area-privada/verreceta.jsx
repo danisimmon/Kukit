@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect} from 'react';
 import axios from 'axios';
 // import logo from '../img/logo_kukit.png'; // No usado directamente en el JSX visible
 import 'bootstrap/dist/css/bootstrap.min.css';

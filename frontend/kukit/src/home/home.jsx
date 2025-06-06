@@ -267,14 +267,8 @@ function Home() {
                   Esto te permitirá ahorrar tiempo en tus compras y asegurarte de tener todo lo necesario para
                   tus platos. ¡Cocinar nunca fue tan fácil!
                 </p>
-                <div class="registro-animado" onClick={() => {
-                  if (isAuthenticated) {
-                    navigate('/recetas');
-                  } else {
-                    setShowRegistro(true);
-                  }
-                }}>
-                  🚀 ¡Accede a tu espacio de recetas personalizadas! Regístrate gratis.
+                <div className="texto-llamada-accion-home">
+                  <p>✨ Accede a tu espacio de recetas personalizadas y organiza tus comidas como un profesional.</p>
                 </div>
               </div>
             </div>
@@ -292,17 +286,8 @@ function Home() {
                   En Kukit te lo ponemos fácil para encontrar la receta perfecta. Explora platos según su país
                   de origen, filtra por los ingredientes que tienes en casa o elige opciones que se adapten a tus
                   necesidades: sin gluten, veganas, bajas en carbohidratos y mucho más. Así ahorras tiempo y
-                  disfrutas justo lo que necesitas, sin complicaciones.
+                  disfrutas justo lo que necesitas, sin complicaciones. ¡Todo al alcance de tu mano!
                 </p>
-                <span class="registro-pill" onClick={() => {
-                  if (isAuthenticated) {
-                    navigate('/recetas');
-                  } else {
-                    setShowRegistro(true);
-                  }
-                }}>
-                  🔐 Solo para usuarios registrados
-                </span>
               </div>
             </div>
           </div>
@@ -318,19 +303,31 @@ function Home() {
                 <p>
                   Organiza tus comidas con facilidad y encuentra inspiración para cada día. Con nuestro calendario semanal, podrás agregar recetas, adaptar tu menú y gestionar tu alimentación de manera práctica. Convierte la planificación en una experiencia sencilla y deliciosa.
                 </p>
-                <p class="mensaje-subrayado" onClick={() => {
-                  if (isAuthenticated) {
-                    navigate('/planAlimentacion');
-                  } else {
-                    setShowRegistro(true);
-                  }
-                }}>Crea tu cuenta y descubre todo lo que Kukit tiene preparado para ti.</p>
+                <p className="texto-llamada-accion-home">
+                  🥗 Planifica tus semanas y disfruta de una alimentación equilibrada y llena de sabor.
+                </p>
               </div>
             </div>
           </div>
+
+          {/* Nueva sección de llamada a la acción para registrarse */}
+          {!isAuthenticated && (
+            <div className="container text-center my-5 py-5" id="cta-registro-home">
+              <h2 className="mb-4" style={{ color: '#C33333', fontWeight: 'bold' }}>¿Listo para transformar tu cocina?</h2>
+              <p className="lead mb-4" style={{ fontSize: '1.2rem' }}>
+                Únete a la comunidad Kukit y desbloquea un universo de recetas, herramientas de planificación y mucho más. 
+                ¡Crear tu cuenta es gratis y solo te tomará un minuto!
+              </p>
+              <button 
+                className="btn btn-lg btn-primary" 
+                style={{ backgroundColor: '#C33333', borderColor: '#C33333', padding: '15px 30px', fontSize: '1.25rem' }}
+                onClick={() => setShowRegistro(true)}>
+                ¡Quiero Registrarme Ahora!
+              </button>
+            </div>
+          )}
         </section>
       </main>
-      {/* <Footer /> */}
     </>
   );
 }

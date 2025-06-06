@@ -9,6 +9,7 @@ export const AuthProvider = ({ children }) => {
     const checkAuthStatus = useCallback(async () => {
         // Envolver en una promesa para asegurar que se pueda esperar su finalización completa,
         // incluyendo las actualizaciones de estado.
+        // eslint-disable-next-line no-async-promise-executor
         return new Promise(async (resolve, reject) => {
             try {
                 const response = await fetch("http://localhost/api/login/gestion-autenticacion/gestion-autenticacion.php", {

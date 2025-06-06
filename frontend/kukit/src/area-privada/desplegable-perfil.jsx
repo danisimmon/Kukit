@@ -27,7 +27,7 @@ const DesplegablePerfil = ({ showDesplegablePerfil, setDesplegablePerfil }) => {
             bsOffcanvasRef.current?.hide();
         }
 
-    }, [showDesplegablePerfil]);
+    }, [setDesplegablePerfil, showDesplegablePerfil]);
 
     const navegarYCerrar = (path, state) => {
         bsOffcanvasRef.current?.hide();
@@ -65,6 +65,7 @@ const DesplegablePerfil = ({ showDesplegablePerfil, setDesplegablePerfil }) => {
                     setDesplegablePerfil(false);
                 }
             })
+            // eslint-disable-next-line no-unused-vars
             .catch((error) => {
                 setDesplegablePerfil(false);
             })

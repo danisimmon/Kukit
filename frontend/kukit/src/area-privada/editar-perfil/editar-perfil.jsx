@@ -3,9 +3,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
-import logo from '../../img/logo_kukit.png';
-import comida from "../../img/comida.jpg";
-import bookmark from "../../img/bookmark.png";
 import Footer from '../../footer/footer';
 import Header from '../../header/header';
 import { useNavigate } from 'react-router-dom';
@@ -26,13 +23,12 @@ const EditarPerfil = () => {
   const [errorNuevoIngrediente, setErrorNuevoIngrediente] = useState('');
   const [likes, setLikes] = useState({});
   const [liked, setLiked] = useState({});
-  const [favoritos, setFavoritos] = useState({});
-  const [n_recetas, setN_recetas] = useState(0);
-  const [cargando, setCargando] = useState(true);
-  const [error, setError] = useState(null);
+  const [setFavoritos] = useState({});
+  const [setN_recetas] = useState(0);
+  const [setCargando] = useState(true);
   const [newPaso, setNewPaso] = useState('');
   const [errorNuevoPaso, setErrorNuevoPaso] = useState('');
-  const [paginaActual, setPaginaActual] = useState(1);
+  const [setPaginaActual] = useState(1);
 
   // Estados para errores de validación del perfil
   const [errorUsuario, setErrorUsuario] = useState('');
@@ -47,18 +43,6 @@ const EditarPerfil = () => {
   const [errorIngredientesLista, setErrorIngredientesLista] = useState('');
   const [errorPasosLista, setErrorPasosLista] = useState('');
 
-  const direccionRecetasCreadas = () => {
-    navigate("/area-privada/editar-perfil", {
-      state: { seccion: "recetas" },
-    });
-  };
-
-  // Llamar esta función después de crear la receta
-  const mostrarPopupExito = () => {
-    console.log("Mostrando popup");
-    setMostrarPopup(true);
-  };
-
   const [mostrarModalEliminar, setMostrarModalEliminar] = useState(false);
 
   const handleEliminarCuenta = async () => {
@@ -72,6 +56,7 @@ const EditarPerfil = () => {
       } else {
         alert(respuesta.data.message || "No se pudo eliminar la cuenta.");
       }
+    // eslint-disable-next-line no-unused-vars
     } catch (error) {
       alert("Error al eliminar la cuenta.");
     }
@@ -248,26 +233,6 @@ const EditarPerfil = () => {
     setPasos(newPasos);
   };
 
-  // Los manejadores originales handleIngredienteChange y handlePasoChange ya no son necesarios
-  // para la entrada de nuevos elementos, ya que usamos los estados newIngrediente... y newPaso.
-  // Si se usaban para editar elementos existentes en una tabla, se deberían mantener y adaptar.
-  // Como la petición es solo añadir y borrar, y no modificar elementos en la tabla, los omitimos.
-  // const handleIngredienteChange = (index, field, value) => {
-  //   const newIngredientes = [...ingredientes];
-  //   newIngredientes[index] = {
-  //     ...newIngredientes[index],
-  //     [field]: value,
-  //   };
-  //   setIngredientes(newIngredientes);
-  // };
-
-  // const handlePasoChange = (index, value) => {
-  //   const newPasos = [...pasos];
-  //   newPasos[index] = value;
-  //   setPasos(newPasos);
-  // };
-
-
   const manejarCambioReceta = (e) => {
     const { name, value } = e.target;
     setRecetaNueva({
@@ -287,13 +252,9 @@ const EditarPerfil = () => {
       ...formData,
       [name]: value
     });
-    // Limpiar errores específicos del campo al escribir
     if (name === 'usuario') {
       setErrorUsuario('');
     }
-    // if (name === 'correo') { // Ya no se necesita si el correo no es editable
-    //   setErrorCorreo('');
-    // }
   };
 
   const handleProfileBlur = (e) => {
@@ -301,13 +262,6 @@ const EditarPerfil = () => {
     if (name === 'usuario' && !value.trim()) {
       setErrorUsuario('El nombre de usuario es obligatorio.');
     }
-    // if (name === 'correo') { // Ya no se necesita si el correo no es editable
-    //     if (!value.trim()) {
-    //         setErrorCorreo('El correo electrónico es obligatorio.');
-    //     } else if (!/\S+@\S+\.\S+/.test(value)) {
-    //         setErrorCorreo('El formato del correo electrónico no es válido.');
-    //     }
-    // }
   };
 
   const handleRecipeFieldBlur = (e) => {
@@ -355,10 +309,6 @@ const EditarPerfil = () => {
     }
     if (error) {
       setErrorNuevoIngrediente(error);
-    } else {
-      // Si el campo actual es válido, pero otros podrían tener error al intentar añadir, no limpiar globalmente aquí.
-      // Se podría limpiar solo si el error actual es específicamente sobre este campo.
-      // Por simplicidad, el error general se limpia al escribir o al añadir con éxito.
     }
   };
 
@@ -455,15 +405,6 @@ const EditarPerfil = () => {
       setErrorUsuario('El nombre de usuario es obligatorio.');
       formIsValid = false;
     }
-
-    // Validar correo
-    // if (!formData.correo.trim()) { // Ya no se valida el correo si no es editable
-    //   setErrorCorreo('El correo electrónico es obligatorio.');
-    //   formIsValid = false;
-    // } else if (!/\S+@\S+\.\S+/.test(formData.correo)) {
-    //   setErrorCorreo('El formato del correo electrónico no es válido.');
-    //   formIsValid = false;
-    // }
 
     if (!formIsValid) return;
 
@@ -752,16 +693,6 @@ const EditarPerfil = () => {
                         />
                         <p className="likesNumero">{likes[receta._id] || 0}</p>
                       </div>
-                      {/* <img
-                        src={favoritos[receta._id] ? Favorito : NoFavorito}
-                        alt={favoritos[receta._id] ? "En favoritos" : "No en favoritos"}
-                        className="icono-bookmark"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          guardarFavorito(receta._id);
-                        }}
-                        style={{ cursor: 'pointer' }}
-                      /> */}
                     </div>
                   </div>
                 </div>
