@@ -73,7 +73,7 @@ button {
 }
 
 .page-item {
-    border: 1px solid #b635b6;
+    /* border: 1px solid var(--primary-color); */
     border-radius: 4px;
     transition: all 0.2s ease-in-out;
 }
@@ -521,7 +521,6 @@ button.btn.btn-lectura:hover {
 }
 
 button.btn.btn-texto-toggle {
-    margin: 10px;
     margin: 10px;
     background-color: var(--background-color) !important;
     color: var(--primary-color) !important;
@@ -2590,4 +2589,11 @@ header nav ul li.nav-link-li {
 .lista-compra-contenido :hover {
     background-color: #f0f0f0;
     cursor: pointer;
+}
+
+.editarImagen {
+    width: 50%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
 }

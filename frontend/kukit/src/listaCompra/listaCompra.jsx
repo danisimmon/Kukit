@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
+import editar from '../img/editar.png'; 
 
 const ListaCompra = ({ showListaCompra, setListaCompra, refreshTrigger }) => {
   const navigate = useNavigate();
@@ -378,11 +379,12 @@ const ListaCompra = ({ showListaCompra, setListaCompra, refreshTrigger }) => {
                     padding: '12px 8px',
                     borderBottom: '1px solid #e9ecef',
                     marginBottom: '0',
+                    flexDirection: "row-reverse"
                   }}
                 >
                   <button
                     onClick={() => deleteListaCompra(producto.nombre, producto.cantidad)}
-                    className="btn btn-danger btn-sm no-hover me-2" // Añadido me-2 para margen derecho
+                    className="btn btn-sm no-hover me-2" // Añadido me-2 para margen derecho
                     style={{ padding: '2px 6px', lineHeight: '1.2', borderRadius: '50%' }}
                   >
                     &times;
@@ -390,13 +392,10 @@ const ListaCompra = ({ showListaCompra, setListaCompra, refreshTrigger }) => {
                   
                   <button
                     onClick={() => handleShowEditModal(producto)}
-                    className="btn btn-secondary btn-sm no-hover me-2" // Añadido me-2 para margen derecho
+                    className="btn btn-sm no-hover me-2" // Añadido me-2 para margen derecho
                     style={{ padding: '2px 6px', lineHeight: '1.2', borderRadius: '50%' }}
                   >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-pencil" viewBox="0 0 16 16">
-                      <path d="M11.497.007a.5.5 0 0 1 .17.689L12.052 1.29a.5.5 0 0 1-.099.68l-5 5a.5.5 0 0 1-.294.133h-2.077a.5.5 0 0 1-.474-.656L5.915 6.593a.5.5 0 0 1 .215-.475l5-5a.5.5 0 0 1 .682-.17z"/>
-                      <path fillRule="evenodd" d="M12.83.134a1 1 0 0 0-1.414 0L6.48 6.854a.5.5 0 0 0-.145.269L3 13s-3 0-3-3l5-5a.5.5 0 0 0 .27-.145L12.83.134z"/>
-                    </svg>
+                    <img src={editar} alt="editar" className="editarImagen" />
                   </button>
                   <span
                     style={{
@@ -518,8 +517,10 @@ const ListaCompra = ({ showListaCompra, setListaCompra, refreshTrigger }) => {
               </div>
             </div>
             <div className="modal-footer">
-              <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={handleCloseAddModal}>Cancelar</button>
-              <button type="button" className="btn btn-primary" onClick={addListaCompra}>Añadir</button>
+              <button type="button" className="btn" style={{ backgroundColor: '#fff', color: '#c33333', borderColor: '#c33333',fontweight: "bold" }} data-bs-dismiss="modal" onClick={handleCloseAddModal}>Cancelar</button>
+              <button type="button" className="btn"
+              style={{ backgroundColor: '#c33333', color: '#fff',fontweight: "bold" }}
+              onClick={addListaCompra}>Añadir</button>
             </div>
           </div>
         </div>
@@ -585,8 +586,8 @@ const ListaCompra = ({ showListaCompra, setListaCompra, refreshTrigger }) => {
               </div>
             </div>
             <div className="modal-footer">
-              <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={handleCloseEditModal}>Cancelar</button>
-              <button type="button" className="btn btn-primary boton-popup-guardar" onClick={updateListaCompra}>Guardar Cambios</button>
+              <button type="button" className="btn" style={{ backgroundColor: '#fff', color: '#c33333',fontweight: "bold" }} data-bs-dismiss="modal" onClick={handleCloseEditModal}>Cancelar</button>
+              <button type="button" className="btn boton-popup-guardar" style={{ backgroundColor: '#c33333', color: '#fff',fontweight: "bold" }} onClick={updateListaCompra}>Guardar Cambios</button>
             </div>
           </div>
         </div>

@@ -216,7 +216,7 @@ const VerRecetaTexto = () => {
                     </div>
                     {/* Contenedor de botones alineado a la derecha */}
                     <div className="d-flex justify-content-end mb-3">
-                        <div>
+                        <div style={{ display: 'flex', gap: '10px' }}>
                             <button
                                 className={`btn ${isSpeaking ? 'btn-danger' : 'btn-primary'} btn-sm me-2 btn-lectura`}
                                 onClick={handleToggleSpeak}
@@ -225,6 +225,23 @@ const VerRecetaTexto = () => {
                             >
                                 {isSpeaking ? 'Detener Lectura' : 'Pasar a Texto y Leer'}
                             </button>
+                            {showPlainText && (
+                                <button
+                                    className="btn btn-sm btn-outline-primary"
+                                    style={{
+                                        margin: "10px",
+                                        backgroundColor: "var(--background-color)",
+                                        color: "var(--primary-color)",
+                                        border: "1px solid var(--primary-color)",
+                                        fontWeight: "bold",
+                                        cursor: "pointer"
+                                    }}
+                                    onClick={handlePrint}
+                                    aria-label={`Imprimir versión en texto de la receta ${receta.nombre}`}
+                                >
+                                    Imprimir Texto
+                                </button>
+                            )}
                             <button
                                 className={`btn btn-sm btn-texto-toggle ${showPlainText ? 'btn-activo' : ''}`}
                                 onClick={toggleShowPlainText}
@@ -233,19 +250,11 @@ const VerRecetaTexto = () => {
                             >
                                 {showPlainText ? 'Ocultar Texto' : 'Mostrar Texto'}
                             </button>
-                            {showPlainText && (
-                                <button
-                                    className="btn btn-success btn-sm ms-2"
-                                    onClick={handlePrint}
-                                    aria-label={`Imprimir versión en texto de la receta ${receta.nombre}`}
-                                >
-                                    Imprimir Texto
-                                </button>
-                            )}
+                            
                         </div>
                     </div>
                     <button
-                        className="btn btn-outline-secondary mt-2 mb-3 volver-receta"                        
+                        className="btn btn-outline-secondary mt-2 mb-3 volver-receta"
                         onClick={handleVerReceta}
                     >
                         Volver
