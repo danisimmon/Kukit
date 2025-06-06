@@ -11,6 +11,7 @@ import imgHome1 from '../img/imgHome1.png';
 import imgHome2 from '../img/imgHome2.jpg';
 import imgHome3 from '../img/imgHome3.jpg';
 import Header from '../header/header';
+import { useAuth } from '../logout/AuthContext'; // Importar useAuth
 
 function Home() {
   const [showLogin, setShowLogin] = useState(false);
@@ -20,8 +21,8 @@ function Home() {
   const [currentIndexImprescindibles, setCurrentIndexImprescindibles] = useState(0);
   const [recetasNovedades, setRecetasNovedades] = useState([]);
   const [currentIndexNovedades, setCurrentIndexNovedades] = useState(0);
-  const [loggedIn, setLoggedIn] = useState(false);
   const navigate = useNavigate();
+  const { isAuthenticated} = useAuth(); // Usar el contexto de autenticación
 
 
   useEffect(() => {
@@ -100,31 +101,9 @@ function Home() {
 
   const recetaNovedadActual = recetasNovedades[currentIndexNovedades];
 
-  // Los useEffect para el carrusel automático han sido eliminados.
-  // La navegación manual seguirá funcionando con los botones.
-
-  // Comprobación de si se ha iniciado sesión
-
-  useEffect(() => {
-    fetch("http://localhost/api/login/gestion-autenticacion/gestion-autenticacion.php", {
-      credentials: "include"
-    })
-      .then(res => res.json())
-      .then(data => {
-        console.log("Respuesta del backend:", data);
-        setLoggedIn(data.loggedIn);
-        if (data.loggedIn) {
-          setUser(data.user); // opcional, si quieres guardar el correo del usuario
-        } else {
-          setUser(null);
-        }
-      })
-      .catch(err => console.error(err));
-  }, []);
-
   return (
     <>
-      <Header />
+      <Header loggedIn={isAuthenticated} /> {/* Pasar isAuthenticated como prop loggedIn */}
       {/* Renderizado condicional de modales de Login y Registro */}
       {showLogin && <Login onClose={() => setShowLogin(false)} setShowRegistro={setShowRegistro} setShowLogin={setShowLogin} />}
       {showRegistro && <Registro onClose={() => setShowRegistro(false)} setShowLogin={setShowLogin} setShowRegistro={setShowRegistro} />}
@@ -160,8 +139,8 @@ function Home() {
                         className="tarjeta-receta"
                         key={recetaImprescindibleActual._id || currentIndexImprescindibles}
                         style={{
-                          minHeight: '300px', // Altura mínima consistente para la tarjeta
-                          width: '100%',      // Ancho consistente
+                          minHeight: '300px',
+                          width: '100%',
                           display: 'flex',
                           flexDirection: 'column'
                         }}
@@ -171,9 +150,9 @@ function Home() {
                           alt={recetaImprescindibleActual.nombre}
                           onError={(e) => { e.target.onerror = null; e.target.src = "/img/comida_default.jpg"; }}
                           style={{
-                            height: '200px',    // Altura fija para la caja de la imagen
-                            width: '100%',      // La imagen ocupa todo el ancho de la tarjeta
-                            objectFit: 'cover' // La imagen cubre el área, puede recortarse
+                            height: '200px',
+                            width: '100%',
+                            objectFit: 'cover'
                           }}
                         />
                         <div style={{ padding: '10px 15px', textAlign: 'center', flexGrow: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
@@ -221,8 +200,8 @@ function Home() {
                         className="tarjeta-receta"
                         key={recetaNovedadActual._id || currentIndexNovedades}
                         style={{
-                          minHeight: '300px', // Altura mínima consistente para la tarjeta
-                          width: '100%',      // Ancho consistente
+                          minHeight: '300px',
+                          width: '100%',
                           display: 'flex',
                           flexDirection: 'column'
                         }}
@@ -232,9 +211,9 @@ function Home() {
                           alt={recetaNovedadActual.nombre}
                           onError={(e) => { e.target.onerror = null; e.target.src = "/img/comida_default.jpg"; }}
                           style={{
-                            height: '200px',    // Altura fija para la caja de la imagen
-                            width: '100%',      // La imagen ocupa todo el ancho de la tarjeta
-                            objectFit: 'cover' // La imagen cubre el área, puede recortarse
+                            height: '200px',
+                            width: '100%',
+                            objectFit: 'cover'
                           }}
                         />
                         <div style={{ padding: '10px 15px', textAlign: 'center', flexGrow: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
@@ -242,7 +221,7 @@ function Home() {
                         </div>
                       </div>
                     ) : (
-                      // Tarjeta de Login/Registro para Novedades
+                      
                       <div className="tarjeta-receta tarjeta-login-extra" key="login-novedades" style={{ textAlign: 'center', padding: '20px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', minHeight: '300px', width: '100%' }}>
                         <h4>¡Explora Más!</h4>
                         <p style={{ fontSize: '0.9rem', margin: '10px 0' }}>Inicia sesión para acceder a todas las funcionalidades y guardar tus recetas favoritas.</p>
@@ -281,7 +260,7 @@ function Home() {
               </div>
               <div className="contenedor-lista-compra-texto">
                 <h3>Organiza tu compra de manera rápida y sencilla con solo un clic.</h3>
-                <p>
+                <p> 
                   Ahora, con nuestra nueva funcionalidad, podrás buscar fácilmente tus recetas favoritas y añadir
                   los ingredientes directamente a tu lista. Cuando te guste una receta, haz clic en "Añadir a la
                   lista" y los ingredientes necesarios se agregarán a tu lista de la compra.
@@ -289,7 +268,7 @@ function Home() {
                   tus platos. ¡Cocinar nunca fue tan fácil!
                 </p>
                 <div class="registro-animado" onClick={() => {
-                  if (loggedIn) {
+                  if (isAuthenticated) {
                     navigate('/recetas');
                   } else {
                     setShowRegistro(true);
@@ -316,7 +295,7 @@ function Home() {
                   disfrutas justo lo que necesitas, sin complicaciones.
                 </p>
                 <span class="registro-pill" onClick={() => {
-                  if (loggedIn) {
+                  if (isAuthenticated) {
                     navigate('/recetas');
                   } else {
                     setShowRegistro(true);
@@ -340,7 +319,7 @@ function Home() {
                   Organiza tus comidas con facilidad y encuentra inspiración para cada día. Con nuestro calendario semanal, podrás agregar recetas, adaptar tu menú y gestionar tu alimentación de manera práctica. Convierte la planificación en una experiencia sencilla y deliciosa.
                 </p>
                 <p class="mensaje-subrayado" onClick={() => {
-                  if (loggedIn) {
+                  if (isAuthenticated) {
                     navigate('/planAlimentacion');
                   } else {
                     setShowRegistro(true);

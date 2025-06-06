@@ -1,12 +1,14 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, {useEffect, useRef } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import 'bootstrap/dist/js/bootstrap.bundle.min'; // Asegúrate de importar Bootstrap JS
+import 'bootstrap/dist/js/bootstrap.bundle.min';
+import { useAuth } from '../logout/AuthContext';
 
 const DesplegablePerfil = ({ showDesplegablePerfil, setDesplegablePerfil }) => {
     const navigate = useNavigate();
     const offcanvasRef = useRef();
     const bsOffcanvasRef = useRef(null);
+    const auth = useAuth();
 
     useEffect(() => {
         if (!offcanvasRef.current || !window.bootstrap?.Offcanvas) return;
@@ -22,18 +24,17 @@ const DesplegablePerfil = ({ showDesplegablePerfil, setDesplegablePerfil }) => {
         if (showDesplegablePerfil) {
             bsOffcanvasRef.current.show();
         } else {
-            bsOffcanvasRef.current?.hide(); // Ocultar cuando showDesplegablePerfil es false
+            bsOffcanvasRef.current?.hide();
         }
 
     }, [showDesplegablePerfil]);
 
     const navegarYCerrar = (path, state) => {
         bsOffcanvasRef.current?.hide();
-        // Esperar un breve momento para que la animación de cierre termine (opcional)
         setTimeout(() => {
             navigate(path, { state });
-        }, 150); // Ajusta el tiempo según la duración de la animación del offcanvas
-        setDesplegablePerfil(false); // Asegúrate de que el estado también se actualice
+        }, 150);
+        setDesplegablePerfil(false);
     };
 
     const editarPerfil = () => {
@@ -52,25 +53,22 @@ const DesplegablePerfil = ({ showDesplegablePerfil, setDesplegablePerfil }) => {
                 withCredentials: true,
             })
             .then((response) => {
-                console.log("Respuesta del backend:", response.data);
                 if (response.data.success) {
-                    // Navegar después de cerrar el offcanvas
+                    auth.logout();
+                    
                     bsOffcanvasRef.current?.hide();
                     setTimeout(() => {
                         navigate("/home");
-                    }, 150); // Ajusta el tiempo si es necesario
+                    }, 150);
                     setDesplegablePerfil(false);
                 } else {
-                    console.error("Error al cerrar sesión:", response.data.message);
-                    setDesplegablePerfil(false); // Asegúrate de actualizar el estado en caso de error también
+                    setDesplegablePerfil(false);
                 }
             })
             .catch((error) => {
-                console.error("Error en la solicitud:", error);
-                setDesplegablePerfil(false); // Asegúrate de actualizar el estado en caso de error también
+                setDesplegablePerfil(false);
             })
             .finally(() => {
-                // No es necesario llamar a setDesplegablePerfil aquí, ya se hace en then/catch
             });
     };
 
@@ -92,7 +90,7 @@ const DesplegablePerfil = ({ showDesplegablePerfil, setDesplegablePerfil }) => {
                         className="btn-close"
                         data-bs-dismiss="offcanvas"
                         aria-label="Close"
-                        onClick={() => setDesplegablePerfil(false)} // Asegúrate de que el estado se actualice al cerrar con el botón
+                        onClick={() => setDesplegablePerfil(false)}
                     ></button>
                 </div>
                 <div className="offcanvas-body">

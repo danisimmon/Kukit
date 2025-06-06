@@ -10,7 +10,6 @@ import Home from './home/home';
 // import Home from './Home';
 import './style.css';
 //importo las imagenes de la carpeta img
-import hero from './img/hero.jpg';
 import RecetasGuardadas from './area-privada/recetasguardadas/recetasguardadas.jsx';
 import Recetas from './area-privada/recetas';
 import VerReceta from './area-privada/verreceta.jsx';
@@ -24,11 +23,13 @@ import { useState } from 'react';
 import Partners from './footer/partners.jsx';
 import SobreKukit from './footer/sobrekukit.jsx';
 import TerminosCondiciones from './footer/terminosycondiciones.jsx';
+import { AuthProvider } from './logout/AuthContext.jsx';
 // import './bootstrap/dist/js/bootstrap.bundle.min.js';
 
 function App() {
   const [showListaCompra, setShowListaCompra] = useState(false);
   return (
+    <AuthProvider>
     <BrowserRouter>
       <Routes>
         <Route path="/home" element={<Home />} />
@@ -51,6 +52,7 @@ function App() {
       <Footer setShowListaCompra={setShowListaCompra} />
       <ListaCompra showListaCompra={showListaCompra} setListaCompra={setShowListaCompra} />
     </BrowserRouter>
+    </AuthProvider>
   );
 }
 

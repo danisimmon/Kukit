@@ -1,11 +1,13 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from './AuthContext'; // Importar useAuth
 
 const Logout = () => {
     const [mensaje, setMensaje] = useState('');
-    const [exito, setExito] = useState(false);
+    const [setExito] = useState(false);
     const navigate = useNavigate();
+    const auth = useAuth(); // Obtener el contexto de autenticación
 
     const manejarEnvio = async (e) => {
         e.preventDefault();
@@ -18,6 +20,7 @@ const Logout = () => {
             if (respuesta.data.success) {
                 setExito(true);
                 setMensaje(respuesta.data.message);
+                auth.logout();
                 navigate('/home');
             } else {
                 setExito(false);
@@ -26,7 +29,6 @@ const Logout = () => {
         } catch (error) {
             setExito(false);
             setMensaje('Hubo un error al procesar la solicitud.');
-            console.error('Error:', error);
         }
     };
 
