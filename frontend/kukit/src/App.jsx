@@ -25,6 +25,7 @@ import SobreKukit from './footer/sobrekukit.jsx';
 import TerminosCondiciones from './footer/terminosycondiciones.jsx';
 import { AuthProvider } from './logout/AuthContext.jsx';
 import EditarRecetaCreada from './area-privada/editarRecetaCreadaUsuario.jsx';
+import ProtectedRoute from './ProtectedRoute.jsx'; // Importar ProtectedRoute
 // import './bootstrap/dist/js/bootstrap.bundle.min.js';
 
 function App() {
@@ -38,13 +39,15 @@ function App() {
         <Route path="/Registro" element={<Registro />} />
         <Route path="/login/restablecer-password" element={<PasswordReset />} />
         <Route path="/login/restablecer-password/nueva-password" element={<NuevaPassword />} />
-        <Route path="/recetas" element={<Recetas />} />
-        <Route path="/recetas/recetasguardadas" element={<RecetasGuardadas />} />
-        <Route path="/area-privada/editar-perfil" element={<EditarPerfil />} />
-        <Route path="/planAlimentacion" element={<PlanificacionSemanal />} />
-        <Route path="/area-privada/editarrecetacreada/:recetaId" element={<EditarRecetaCreada />} />
-        <Route path="/area-privada/verreceta/:recetaId" element={<VerReceta />} />
-        <Route path="/area-privada/verrecetaportexto/:recetaId" element={<VerRecetaTexto />} />
+        {/* Rutas protegidas */}
+        <Route path="/recetas" element={<ProtectedRoute element={<Recetas />} />} />
+        <Route path="/recetas/recetasguardadas" element={<ProtectedRoute element={<RecetasGuardadas />} />} />
+        <Route path="/area-privada/editar-perfil" element={<ProtectedRoute element={<EditarPerfil />} />} />
+        <Route path="/planAlimentacion" element={<ProtectedRoute element={<PlanificacionSemanal />} />} />
+        <Route path="/area-privada/editarrecetacreada/:recetaId" element={<ProtectedRoute element={<EditarRecetaCreada />} />} />
+        <Route path="/area-privada/verreceta/:recetaId" element={<ProtectedRoute element={<VerReceta />} />} />
+        <Route path="/area-privada/verrecetaportexto/:recetaId" element={<ProtectedRoute element={<VerRecetaTexto />} />} />
+        {/* Rutas públicas */}
         <Route path="/partners" element={<Partners />} />
         <Route path="/sobrekukit" element={<SobreKukit />} />
         <Route path="/terminosycondiciones" element={<TerminosCondiciones />} />

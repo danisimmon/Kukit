@@ -56,7 +56,7 @@ const EditarPerfil = () => {
       } else {
         alert(respuesta.data.message || "No se pudo eliminar la cuenta.");
       }
-    // eslint-disable-next-line no-unused-vars
+      // eslint-disable-next-line no-unused-vars
     } catch (error) {
       alert("Error al eliminar la cuenta.");
     }
@@ -481,8 +481,8 @@ const EditarPerfil = () => {
     }
     // Validar si hay un error de imagen pendiente (por ejemplo, si se intentó subir una muy grande)
     if (errorImagenReceta) {
-        // No es necesario establecer formIsValid = false aquí si el error ya impidió que 'imagen' se estableciera.
-        // Pero es bueno tenerlo en cuenta si la lógica cambia.
+      // No es necesario establecer formIsValid = false aquí si el error ya impidió que 'imagen' se estableciera.
+      // Pero es bueno tenerlo en cuenta si la lógica cambia.
     }
 
     if (!formIsValid) return;
@@ -559,7 +559,7 @@ const EditarPerfil = () => {
     <>
       <Header />
       <main>
-      <div className='container'>
+        <div className='container'>
           <div className="d-flex align-items-center mb-4">
             <button
               onClick={() => navigate(-1)}
@@ -576,8 +576,8 @@ const EditarPerfil = () => {
                 <div className="linea-vertical mx-2"></div>
                 <li onClick={() => setSeccionActiva("crear")} role="button" tabIndex="0" className="ms-2 nav-item-editar-perfil"><h4 className="numero-recetas mb-0">Crear Receta</h4></li>
               </ul>
-            </div>          
             </div>
+          </div>
 
           {/* Apartado Perfil Usuario */}
           {seccionActiva === "perfil" && (
@@ -768,7 +768,7 @@ const EditarPerfil = () => {
                   <div className="apartado-tiempo">
                     <h5>Introduce el tiempo</h5>
                     <input
-                      type="text"
+                      type="number"
                       name="tiempo"
                       id="tiempo"
                       placeholder='Tiempo en minutos'
@@ -952,13 +952,24 @@ const EditarPerfil = () => {
                         onBlur={() => handleNewIngredientFieldBlur('cantidad')}
                       />
                       <span>Unidad</span>
-                      <input
-                        type="text"
-                        placeholder="Ej: gramos"
+                      <select
                         value={newIngredienteUnidad}
-                        onChange={(e) => { setNewIngredienteUnidad(e.target.value); setErrorNuevoIngrediente(''); }}
+                        onChange={(e) => {
+                          setNewIngredienteUnidad(e.target.value);
+                          setErrorNuevoIngrediente('');
+                        }}
                         onBlur={() => handleNewIngredientFieldBlur('unidad')}
-                      />
+                      >
+                        <option value="">Selecciona una unidad</option>
+                        <option value="unidad">Unidad</option>
+                        <option value="gramos">Gramos</option>
+                        <option value="kilos">Kilos</option>
+                        <option value="mililitros">Mililitros</option>
+                        <option value="litros">Litros</option>
+                        <option value="cucharadas">Cucharadas</option>
+                        <option value="cucharaditas">Cucharaditas</option>
+                      </select>
+
                       <button type="button" onClick={handleAddIngrediente} className="anadir-ingrediente-btn">
                         Añadir Ingrediente
                       </button>
