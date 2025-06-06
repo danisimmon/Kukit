@@ -3,6 +3,10 @@ include '../../conecta-mongo.php';
 include '../../conecta-mysql.php';
 
 session_start();
+if (!isset($_SESSION['user']) || !isset($_SESSION['user']['id'])) {
+    echo json_encode(["success" => false, "message" => "Usuario no autenticado"]);
+    exit();
+}
 
 header('Content-Type: application/json');
 
