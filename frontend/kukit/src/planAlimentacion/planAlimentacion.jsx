@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import Footer from '../footer/footer';
 import Header from '../header/header';
+import {useNavigate } from 'react-router-dom';
 
 
 
@@ -38,6 +39,7 @@ function PlanificacionSemanal() {
   const [recetasGuardadas, setRecetasGuardadas] = useState([]);
   const [recetasCreadas, setRecetasCreadas] = useState([]);
   const [slotParaEliminar, setSlotParaEliminar] = useState(null);
+  const navigate = useNavigate();
   const [mostrarConfirmacion, setMostrarConfirmacion] = React.useState(false);
 
   const recipeSelectorOffcanvasRef = useRef(null);
@@ -284,9 +286,23 @@ function PlanificacionSemanal() {
   return (
     <>
       <Header />
+      {/* Contenedor para el botón de volver y el título, fuera del main */}
+      <div className="container mt-3 mb-3"> {/* Ajusta mt-3 y mb-3 según necesites para el espaciado */}
+        <div className="d-flex align-items-center">
+          {/* Botón para volver atrás */}
+          <button
+            onClick={() => navigate(-1)}
+            className="btn btn-outline-secondary me-3" /* Estilo de botón y margen a la derecha */
+            title="Volver a la página anterior"
+          >
+            &lt; Volver
+          </button>
+          {/* Título principal de la página */}
+          <h2 className="mb-0">Planificación Semanal de Comidas</h2> {/* mb-0 para quitar margen inferior si el contenedor d-flex ya lo maneja */}
+        </div>
+      </div>
       <main>
-        <div className="container mt-4">
-          <h2 className="mb-4 text-center">Planificación Semanal de Comidas</h2>
+        <div className="container">
 
           <div className="d-flex justify-content-between align-items-center mb-3 semana-navegacion">
             <button

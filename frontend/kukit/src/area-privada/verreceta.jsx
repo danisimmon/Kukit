@@ -152,13 +152,17 @@ const VerReceta = () => {
             <Header />
             <main>
                 <div className="container mt-4">
-                    <h4>Recetas <span className="text-danger">| {receta.nombre}</span></h4>
-                    {mensajeListaCompra.text && (
-                        <div className={`alert alert-${mensajeListaCompra.type || 'info'} alert-dismissible fade show`} role="alert">
-                            {mensajeListaCompra.text}
-                            <button type="button" className="btn-close" onClick={() => setMensajeListaCompra({ text: '', type: '' })} aria-label="Close"></button>
-                        </div>
-                    )}
+                <div className="d-flex align-items-center mb-3"> {/* mb-3 para un margen inferior */}
+                        {/* Botón para volver atrás */}
+                        <button
+                            onClick={() => navigate(-1)}
+                            className="btn btn-outline-secondary me-3" /* Estilo y margen a la derecha */
+                            title="Volver a la página anterior"
+                        >
+                            &lt; Volver
+                        </button>
+                        <h4 className="mb-0">Recetas <span className="text-danger">| {receta.nombre}</span></h4> {/* mb-0 para que no afecte la alineación vertical */}
+                    </div>                        
 
                     <button
                         className="btn btn-outline-secondary mt-2 mb-3 ver-texto"

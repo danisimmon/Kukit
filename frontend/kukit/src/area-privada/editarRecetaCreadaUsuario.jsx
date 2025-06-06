@@ -397,11 +397,20 @@ const EditarRecetaCreada = () => {
     return (
         <>
             <Header />
-            <main>
-                <div className="container">
+                <main>
+                <div className="container mt-4">
+                    <div className="d-flex align-items-center mb-3">
+                        <button
+                            onClick={() => navigate(-1)}
+                            className="btn btn-outline-secondary me-3" /* Estilo de botón más integrado y margen a la derecha */
+                            title="Volver a la página anterior" /* Tooltip para accesibilidad y claridad */
+                        >
+                            &lt; Volver
+                        </button>
+                        <h2 className="mb-0 flex-grow-1 text-center">Editar Receta: {formReceta.nombre || "Cargando..."}</h2> {/* Título principal con mb-0 para alineación */}
+                    </div>
                     {/* Aplicamos la misma estructura y clases que en EditarPerfil.jsx para la sección "crear" */}
                     <div className="crear-receta"> 
-                        <h2 className="text-center mb-4">Editar Receta: {formReceta.nombre || "Cargando..."}</h2>
                         <form onSubmit={manejarEnvioEdicionReceta}>
                             <div className="crear-receta-info"> {/* Clase de EditarPerfil.jsx */}
                                 <h3>Nombre de la Receta</h3>

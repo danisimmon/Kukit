@@ -272,10 +272,22 @@ const Recetas = () => {
 
 
         <div className="container">
-          <div className="titulo-pagina">
-            <h2>Recetas</h2>
-            <div className="linea-vertical"></div>
-            <h2 className="numero-recetas">{`${n_recetas} recetas`}</h2>
+        {/* Contenedor para alinear el botón de volver y el título */}
+          <div className="d-flex align-items-center mb-4"> {/* Contenedor Flex para alinear elementos en la misma línea y centrados verticalmente */}
+            {/* Botón para volver atrás */}
+            <button
+              onClick={() => navigate(-1)}
+              className="btn btn-outline-secondary me-3" /* Estilo de botón más integrado y margen a la derecha */
+              title="Volver a la página anterior" /* Tooltip para accesibilidad y claridad */
+            >
+              &lt; Volver
+            </button>
+            <div className="titulo-pagina d-flex align-items-center flex-grow-1"> {/* El título ocupa el espacio restante y alinea sus items */}
+              <h2>Recetas</h2>
+              <div className="linea-vertical mx-2"></div> {/* Margen horizontal para el separador */}
+              <h2 className="numero-recetas">{`${n_recetas} recetas`}</h2>
+            </div>
+
           </div>
 
           {/* Barra de búsqueda */}

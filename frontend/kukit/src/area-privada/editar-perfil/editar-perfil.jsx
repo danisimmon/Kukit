@@ -23,12 +23,12 @@ const EditarPerfil = () => {
   const [errorNuevoIngrediente, setErrorNuevoIngrediente] = useState('');
   const [likes, setLikes] = useState({});
   const [liked, setLiked] = useState({});
-  const [setFavoritos] = useState({});
-  const [setN_recetas] = useState(0);
-  const [setCargando] = useState(true);
+  const [Favoritos, setFavoritos] = useState({});
+  const [N_recetas, setN_recetas] = useState(0);
+  const [Cargando, setCargando] = useState(true);
   const [newPaso, setNewPaso] = useState('');
   const [errorNuevoPaso, setErrorNuevoPaso] = useState('');
-  const [setPaginaActual] = useState(1);
+  const [PaginaActual, setPaginaActual] = useState(1);
 
   // Estados para errores de validación del perfil
   const [errorUsuario, setErrorUsuario] = useState('');
@@ -559,16 +559,25 @@ const EditarPerfil = () => {
     <>
       <Header />
       <main>
-        <div className="container">
-          <div className="titulo-pagina">
-            <ul>
-              <li onClick={() => setSeccionActiva("perfil")}><h4 className="numero-recetas">Mi Perfil</h4></li>
-              <div className="linea-vertical"></div>
-              <li onClick={() => setSeccionActiva("recetas")}><h4 className="numero-recetas">Recetas creadas</h4></li>
-              <div className="linea-vertical"></div>
-              <li onClick={() => setSeccionActiva("crear")}><h4 className="numero-recetas">Crear Receta</h4></li>
-            </ul>
-          </div>
+      <div className='container'>
+          <div className="d-flex align-items-center mb-4">
+            <button
+              onClick={() => navigate(-1)}
+              className="btn btn-outline-secondary me-3"
+              title="Volver a la página anterior"
+            >
+              &lt; Volver
+            </button>
+            <div className="titulo-pagina d-flex align-items-center justify-content-start">
+              <ul className="d-flex list-unstyled mb-0"> {/* ul con d-flex para alinear items y limpiar estilos */}
+                <li onClick={() => setSeccionActiva("perfil")} role="button" tabIndex="0" className="me-2 nav-item-editar-perfil"><h4 className="numero-recetas mb-0">Mi Perfil</h4></li>
+                <div className="linea-vertical mx-2"></div>
+                <li onClick={() => setSeccionActiva("recetas")} role="button" tabIndex="0" className="mx-2 nav-item-editar-perfil"><h4 className="numero-recetas mb-0">Recetas creadas</h4></li>
+                <div className="linea-vertical mx-2"></div>
+                <li onClick={() => setSeccionActiva("crear")} role="button" tabIndex="0" className="ms-2 nav-item-editar-perfil"><h4 className="numero-recetas mb-0">Crear Receta</h4></li>
+              </ul>
+            </div>          
+            </div>
 
           {/* Apartado Perfil Usuario */}
           {seccionActiva === "perfil" && (
