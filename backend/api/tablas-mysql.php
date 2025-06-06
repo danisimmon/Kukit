@@ -9,18 +9,9 @@ $sql = "CREATE TABLE IF NOT EXISTS usuario (
     password VARCHAR(100),
     google_id VARCHAR(255) DEFAULT NULL
 )";
-
 mysqli_query($conexion, $sql);
 
 // Insertamos usuarios
-$password = password_hash('TrenZapato@81', PASSWORD_DEFAULT);
-$sql = "INSERT INTO usuario (nombre, email, password) VALUES ('Pepe Viyuela', 'pepeviyuela@gmail.com', '$password')";
-mysqli_query($conexion, $sql);
-
-$password = password_hash('RanaVelcro@33', PASSWORD_DEFAULT);
-$sql = "INSERT INTO usuario (nombre, email, password) VALUES ('Operación Camarón', 'operacioncamaron@gmail.es', '$password')";
-mysqli_query($conexion, $sql);
-
 $password = password_hash('Sara.Villanueva', PASSWORD_DEFAULT);
 $sql = "INSERT INTO usuario (nombre, email, password) VALUES ('Sara Villanueva', 'SARA.VILLANUEVA@universidadeuropea.es', '$password')";
 mysqli_query($conexion, $sql);
@@ -45,9 +36,6 @@ $password = password_hash('Manu@123', PASSWORD_DEFAULT);
 $sql = "INSERT INTO usuario (nombre, email, password) VALUES ('Manuel Gómez', '22301982@live.uem.es', '$password')";
 mysqli_query($conexion, $sql);
 
-
-
-
 //Tabla password reset
 $sql = "CREATE TABLE IF NOT EXISTS password_reset (
     id INT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -58,14 +46,6 @@ $sql = "CREATE TABLE IF NOT EXISTS password_reset (
 )";
 
 mysqli_query($conexion, $sql);
-
-// Obtener los IDs de los nuevos tutores
-
-// Obtener el id.
-// $id_tutor1 = mysqli_insert_id($conexion) - 3;
-// $id_tutor2 = $id_tutor1 + 1;
-// $id_tutor3 = $id_tutor1 + 2;
-// $id_tutor4 = $id_tutor1 + 3;
 
 //Tabla lista compra
 $sql = "CREATE TABLE IF NOT EXISTS lista_compra (
@@ -250,14 +230,3 @@ $sql = "CREATE TABLE IF NOT EXISTS plan_alimentacion (
   UNIQUE KEY idx_usuario_plan_unico (id_usuario)
 )";
 mysqli_query($conexion, $sql);
-
-$sql = "CREATE TABLE IF NOT EXISTS plan_alimentacion_semanas (
-  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  id_plan_alimentacion INT UNSIGNED NOT NULL,
-  numero_semana TINYINT NOT NULL,
-  datos_semana JSON,
-  FOREIGN KEY (id_plan_alimentacion) REFERENCES plan_alimentacion(id) ON DELETE CASCADE,
-  UNIQUE KEY idx_plan_semana_unica (id_plan_alimentacion, numero_semana)
-)";
-mysqli_query($conexion, $sql);
-
