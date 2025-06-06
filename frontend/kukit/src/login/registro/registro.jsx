@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import logo from '../../img/logo_kukit.png';
+import { useAuth } from '../../logout/AuthContext'; // Importar useAuth
 import Login from '../login';
 
 const Registro = ({ setShowRegistro, setShowLogin  }) => {
@@ -20,6 +21,7 @@ const Registro = ({ setShowRegistro, setShowLogin  }) => {
   const [errorPassword, setErrorPassword] = useState('');
 
   const navigate = useNavigate();
+  const auth = useAuth(); // Obtener el contexto de autenticación
 
   const manejarCambio = (e) => {
     const { name, value, type, checked } = e.target;
@@ -68,8 +70,14 @@ const Registro = ({ setShowRegistro, setShowLogin  }) => {
       if (respuesta.data.success) {
         setExito(true);
         setMensaje(respuesta.data.message);
-        console.log('Usuario:', respuesta.data.user);
+        // console.log('Usuario:', respuesta.data.user); // Puedes descomentar para depuración
 
+        // Actualizar el estado de autenticación y esperar
+        await auth.checkAuthStatus();
+        // Cerrar el modal de registro
+        if (setShowRegistro) {
+          setShowRegistro(false);
+        }
         navigate('/recetas');
       } else {
         setExito(false);

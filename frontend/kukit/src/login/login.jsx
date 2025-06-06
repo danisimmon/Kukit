@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import logo from '../img/logo_kukit.png';
+import { useAuth } from '../logout/AuthContext'; // Importar useAuth
 
 const Login = ({ setShowLogin, setShowRegistro}) => {
   const [formData, setFormData] = useState({
@@ -16,6 +17,7 @@ const Login = ({ setShowLogin, setShowRegistro}) => {
   const [scriptLoaded, setScriptLoaded] = useState(false);
 
   const navigate = useNavigate();
+  const auth = useAuth(); // Obtener el contexto de autenticación
 
   // Cargar script de Google Identity Services dinámicamente
   useEffect(() => {
@@ -73,7 +75,14 @@ const Login = ({ setShowLogin, setShowRegistro}) => {
       if (res.data.success) {
         setExito(true);
         setMensaje('Login con Google exitoso');
-        navigate('/recetas');
+        // Actualizar el estado de autenticación y esperar
+        await auth.checkAuthStatus();
+        // Cerrar el modal de login
+        if (setShowLogin) {
+          setShowLogin(false);
+        }
+        // Navegar a la página de recetas
+        navigate('/recetas'); 
       } else {
         setExito(false);
         setMensaje(res.data.message || 'Error en login con Google');
@@ -143,7 +152,14 @@ const Login = ({ setShowLogin, setShowRegistro}) => {
       if (respuesta.data.success) {
         setExito(true);
         setMensaje(respuesta.data.message);
-        navigate('/recetas');
+        // Actualizar el estado de autenticación y esperar
+        await auth.checkAuthStatus();
+        // Cerrar el modal de login
+        if (setShowLogin) {
+          setShowLogin(false);
+        }
+        // Navegar a la página de recetas
+        navigate('/recetas'); 
       } else {
         setExito(false);
         setMensaje(respuesta.data.message || 'Correo o contraseña incorrectos.');

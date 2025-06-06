@@ -106,24 +106,10 @@ const VerReceta = () => {
     };
 
     const handleAddToShoppingList = (nombreIngrediente, cantidadNum, unidad) => {
-        if (!receta?.informacionNutricional) {
-            console.error('Información nutricional no disponible para esta receta.');
-            setMensajeListaCompra({ text: 'Información nutricional no disponible.', type: 'danger' });
-            setTimeout(() => {
-                setMensajeListaCompra({ text: '', type: '' });
-            }, 3000);
-            return;
-        }
-
         const itemParaBackend = {
             nombre: nombreIngrediente,
             cantidad: cantidadNum, // Enviar cantidad numérica al backend
             unidad: unidad,
-            calorias: receta.informacionNutricional.calorias,
-            proteinas: receta.informacionNutricional.proteina,
-            carbohidratos: receta.informacionNutricional.carbohidratos,
-            grasas: receta.informacionNutricional.grasas,
-            fibra: receta.informacionNutricional.fibra,
         };
 
         // Ajusta la URL a tu endpoint real del backend
@@ -246,37 +232,6 @@ const VerReceta = () => {
                                                     </div>
                                                 );
                                             })}
-                                        </div>
-                                    </div>
-
-                                    <div className="mt-4">
-                                        <h5>INFORMACIÓN NUTRICIONAL POR RACIÓN</h5>
-                                        <div className="row g-3 mt-2 contenedor-info-nutricional">
-                                            <div className="col-12"> {/* Usar col-12 para que apilen bien en esta columna */}
-                                                <div className="bg-white rounded shadow-sm p-3">
-                                                    <strong>Calorías:</strong> {receta.informacionNutricional?.calorias}
-                                                </div>
-                                            </div>
-                                            <div className="col-12">
-                                                <div className="bg-white rounded shadow-sm p-3">
-                                                    <strong>Proteína:</strong> {receta.informacionNutricional?.proteina}
-                                                </div>
-                                            </div>
-                                            <div className="col-12">
-                                                <div className="bg-white rounded shadow-sm p-3">
-                                                    <strong>Grasas:</strong> {receta.informacionNutricional?.grasas}
-                                                </div>
-                                            </div>
-                                            <div className="col-12">
-                                                <div className="bg-white rounded shadow-sm p-3">
-                                                    <strong>Carbohidratos:</strong> {receta.informacionNutricional?.carbohidratos}
-                                                </div>
-                                            </div>
-                                            <div className="col-12">
-                                                <div className="bg-white rounded shadow-sm p-3">
-                                                    <strong>Fibra:</strong> {receta.informacionNutricional?.fibra ?? 'N/A'}
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>

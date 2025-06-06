@@ -24,6 +24,7 @@ import Partners from './footer/partners.jsx';
 import SobreKukit from './footer/sobrekukit.jsx';
 import TerminosCondiciones from './footer/terminosycondiciones.jsx';
 import { AuthProvider } from './logout/AuthContext.jsx';
+import EditarRecetaCreada from './area-privada/editarRecetaCreadaUsuario.jsx';
 // import './bootstrap/dist/js/bootstrap.bundle.min.js';
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
         <Route path="/recetas/recetasguardadas" element={<RecetasGuardadas />} />
         <Route path="/area-privada/editar-perfil" element={<EditarPerfil />} />
         <Route path="/planAlimentacion" element={<PlanificacionSemanal />} />
+        <Route path="/area-privada/editarrecetacreada/:recetaId" element={<EditarRecetaCreada />} />
         <Route path="/area-privada/verreceta/:recetaId" element={<VerReceta />} />
         <Route path="/area-privada/verrecetaportexto/:recetaId" element={<VerRecetaTexto />} />
         <Route path="/partners" element={<Partners />} />

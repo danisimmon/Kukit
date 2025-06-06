@@ -41,6 +41,7 @@ const EditarPerfil = () => {
   // Estados para errores de validación de la receta
   const [errorNombreReceta, setErrorNombreReceta] = useState('');
   const [errorDificultad, setErrorDificultad] = useState('');
+  const [errorImagenReceta, setErrorImagenReceta] = useState('');
   const [errorTiempo, setErrorTiempo] = useState('');
   const [errorPais, setErrorPais] = useState('');
   const [errorIngredientesLista, setErrorIngredientesLista] = useState('');
@@ -129,9 +130,20 @@ const EditarPerfil = () => {
   // Handler para la subida de la imagen
   const manejarCambioImagen = (e) => {
     const file = e.target.files[0];
+    setErrorImagenReceta(''); // Limpiar error previo de imagen
+
     if (file) {
-      setImagen(file);
-      setImagenPreview(URL.createObjectURL(file));
+      // Validar tamaño del archivo (40MB = 40 * 1024 * 1024 bytes)
+      const maxSize = 40 * 1024 * 1024;
+      if (file.size > maxSize) {
+        setErrorImagenReceta('La imagen no puede superar los 40MB.');
+        setImagen(null);
+        setImagenPreview(null);
+        e.target.value = null; // Limpiar el input file
+        return;
+      }
+      setImagen(file); // Guardar el archivo si es válido
+      setImagenPreview(URL.createObjectURL(file)); // Mostrar vista previa
     } else {
       setImagen(null);
       setImagenPreview(null);
@@ -227,7 +239,8 @@ const EditarPerfil = () => {
   };
 
   const abrirReceta = (receta) => {
-    navigate(`/area-privada/verreceta/${receta._id}`);
+    // Cambiar la navegación para ir a la página de edición en lugar de la vista
+    navigate(`/area-privada/editarrecetacreada/${receta._id}`);
   };
 
   const handleRemovePaso = (index) => {
@@ -493,6 +506,7 @@ const EditarPerfil = () => {
     setErrorTiempo('');
     setErrorPais('');
     setErrorIngredientesLista('');
+    setErrorImagenReceta('');
     setErrorPasosLista('');
     setMensaje('');
     setExito(false);
@@ -523,6 +537,11 @@ const EditarPerfil = () => {
     if (pasos.length === 0) {
       setErrorPasosLista('Debes añadir al menos un paso.');
       formIsValid = false;
+    }
+    // Validar si hay un error de imagen pendiente (por ejemplo, si se intentó subir una muy grande)
+    if (errorImagenReceta) {
+        // No es necesario establecer formIsValid = false aquí si el error ya impidió que 'imagen' se estableciera.
+        // Pero es bueno tenerlo en cuenta si la lógica cambia.
     }
 
     if (!formIsValid) return;
@@ -580,6 +599,7 @@ const EditarPerfil = () => {
         setNewPaso('');
         setImagen(null); // Limpiar la imagen seleccionada
         setImagenPreview(null); // Limpiar la vista previa de la imagen
+        setErrorImagenReceta(''); // Limpiar error de imagen
         // Redirigir inmediatamente after successful creation
         navigate("/area-privada/editar-perfil", { state: { seccion: "recetas" } });
         // Optionally show the popup after navigation
@@ -778,6 +798,7 @@ const EditarPerfil = () => {
                     accept="image/*"
                     onChange={manejarCambioImagen}
                   />
+                  {errorImagenReceta && <span className="error-mensaje" style={{ color: 'red', display: 'block', minHeight: '1em' }}>{errorImagenReceta}</span>}
                   {imagenPreview && (
                     <div className="vista-previa-imagen">
                       <img src={imagenPreview} alt="Vista previa" style={{ maxWidth: '100px', maxHeight: '100px' }} />
@@ -947,7 +968,7 @@ const EditarPerfil = () => {
                     <h5>INGREDIENTES</h5>
                     {/* Tabla para mostrar los ingredientes añadidos */}
                     {ingredientes.length > 0 && (
-                      <table className="tabla-ingredientes">
+                      <table className="tabla-ingredientes table table-striped table-sm">
                         <thead>
                           <tr>
                             <th>Nombre</th>
@@ -1009,7 +1030,7 @@ const EditarPerfil = () => {
                   <h5>PASOS</h5>
                   {/* Tabla para mostrar los pasos añadidos */}
                   {pasos.length > 0 && (
-                    <table className="tabla-pasos">
+                    <table className="tabla-pasos table table-striped table-sm">
                       <thead>
                         <tr>
                           <th>Paso</th>
@@ -1074,7 +1095,7 @@ const EditarPerfil = () => {
                     setNewPaso('');
                     setErrorNuevoPaso('');
                     // Limpiar también los errores de validación del formulario de receta
-                    setErrorNombreReceta(''); setErrorDificultad(''); setErrorTiempo(''); setErrorPais(''); setErrorIngredientesLista(''); setErrorPasosLista(''); setMensaje('');
+                    setErrorNombreReceta(''); setErrorDificultad(''); setErrorTiempo(''); setErrorPais(''); setErrorIngredientesLista(''); setErrorPasosLista(''); setMensaje(''); setErrorImagenReceta('');
                   }}
                 >
                   Cancelar

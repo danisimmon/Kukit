@@ -7,22 +7,28 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
 
     const checkAuthStatus = useCallback(async () => {
-        try {
-            const response = await fetch("http://localhost/api/login/gestion-autenticacion/gestion-autenticacion.php", {
-                credentials: "include"
-            });
-            const data = await response.json();
+        // Envolver en una promesa para asegurar que se pueda esperar su finalización completa,
+        // incluyendo las actualizaciones de estado.
+        return new Promise(async (resolve, reject) => {
+            try {
+                const response = await fetch("http://localhost/api/login/gestion-autenticacion/gestion-autenticacion.php", {
+                    credentials: "include"
+                });
+                const data = await response.json();
 
-            setIsAuthenticated(data.loggedIn);
-            if (data.loggedIn && data.user) {
-                setUser(data.user);
-            } else {
+                setIsAuthenticated(data.loggedIn);
+                if (data.loggedIn && data.user) {
+                    setUser(data.user);
+                } else {
+                    setUser(null);
+                }
+                resolve(data.loggedIn); // Resuelve con el estado de autenticación
+            } catch (err) {
                 setUser(null);
+                setIsAuthenticated(false);
+                reject(err); // Rechaza en caso de error
             }
-        } catch (err) {
-            setIsAuthenticated(false);
-            setUser(null);
-        }
+        });
     }, []);
 
     useEffect(() => {
