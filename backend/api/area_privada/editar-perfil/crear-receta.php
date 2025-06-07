@@ -31,6 +31,7 @@ if (!isset($_SESSION['user']['id'])) {
     exit;
 }
 $id_usuario = $_SESSION['user']['id'];
+$nombre_usuario = $_SESSION['user']['nombre'] ?? '';
 
 // Procesa los datos de la receta
 $nombre = $_POST['nombre'] ?? '';
@@ -107,7 +108,7 @@ $receta = [
     'vegana' => $vegana,
     'ingredientes' => $ingredientes,
     'pasos' => $pasos,
-    'id_usuario' => $id_usuario,
+    'idUsuario' => $nombre_usuario,
     'href' => $imageUrl 
 ];
 
