@@ -381,7 +381,14 @@ const EditarPerfil = () => {
       // Default section if no state is passed
       setSeccionActiva("perfil");
     }
-  }, []);
+  }, []); // Array de dependencias vacío, se ejecuta solo una vez al montar
+
+  // Actualizar la sección activa cuando location.state.seccion cambie
+  useEffect(() => {
+    // Si location.state existe y tiene una propiedad 'seccion', la usa.
+    // De lo contrario, usa "perfil" como valor por defecto (útil si se navega a la página sin estado o en el montaje inicial).
+    setSeccionActiva(location.state?.seccion || "perfil");
+  }, [location.state]); // Se ejecuta cuando location.state cambia
 
   // Cargar las recetas creadas cuando la sección "recetas" esté activa
   useEffect(() => {
