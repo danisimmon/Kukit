@@ -423,9 +423,11 @@ const ListaCompra = ({ showListaCompra, setListaCompra, refreshTrigger }) => {
 
           {/* Botones principales del offcanvas */}
           <div className="botones-lista-compra pt-3 mt-auto border-top" style={{ display: 'flex', justifyContent: 'space-between', gap: '10px', paddingBottom: '10px' }}>
-            <button className="btn btn-danger no-hover" style={{ flexGrow: 1 }} onClick={handleMostrarConfirmacion}>
-              Vaciar Lista
-            </button>
+            {listaCompra.length > 0 && (
+              <button className="btn btn-danger no-hover" style={{ flexGrow: 1 }} onClick={handleMostrarConfirmacion}>
+                Vaciar Lista
+              </button>
+            )}
             <button
               className="btn btn-secondary volver-receta"
               style={{ flexGrow: 1 }}
