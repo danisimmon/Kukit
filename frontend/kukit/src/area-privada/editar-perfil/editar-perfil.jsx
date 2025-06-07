@@ -605,7 +605,7 @@ const EditarPerfil = () => {
                 <button className="botones-inversos" type="button" onClick={() => setMostrarModalEliminar(true)}>
                   Eliminar Cuenta
                 </button>
-                <button onClick={() => setSeccionActiva("editar-perfil")}>Editar Perfil</button>
+                <button className='botones-editar-perfil' type='button' onClick={() => setSeccionActiva("editar-perfil")}>Editar Perfil</button>
 
               </div>
             </div>
@@ -663,7 +663,7 @@ const EditarPerfil = () => {
 
                 <div className="botones-perfil">
                   <button className="botones-inversos" type='button' onClick={() => setSeccionActiva("perfil")}>Cancelar</button>
-                  <button type="submit">Guardar</button>
+                  <button className='botones-editar-perfil' type="submit">Guardar</button>
                 </div>
               </form>
             </div>
@@ -766,7 +766,7 @@ const EditarPerfil = () => {
                     {errorDificultad && <span className="error-mensaje" style={{ color: 'red', display: 'block', minHeight: '1em' }}>{errorDificultad}</span>}
                   </div>
                   <div className="apartado-tiempo">
-                    <h5>Introduce el tiempo</h5>
+                    <h5>Introduce el tiempo (min)</h5>
                     <input
                       type="number"
                       name="tiempo"
@@ -781,7 +781,7 @@ const EditarPerfil = () => {
                   </div>
 
                   <div className="apartado-pais">
-                    <h5>Selecciona el país</h5>
+                    <h5>Selecciona el país de la receta</h5>
                     <select
                       className="form-select"
                       name="pais"
