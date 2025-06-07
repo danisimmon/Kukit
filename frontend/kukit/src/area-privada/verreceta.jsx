@@ -226,10 +226,10 @@ const VerReceta = () => {
                                                             {ing.nombre}: {cantidadFinal.toFixed(1)} {ing.unidad}
                                                         </span>
                                                         <button
-                                                            className="btn btn-outline-success btn-sm py-0 px-1"
+                                                            className="btn btn-sm py-0 px-1"
                                                             onClick={() => handleAddToShoppingList(ing.nombre, cantidadFinal, ing.unidad)}
                                                             title={`Añadir ${ing.nombre} a la lista`}
-                                                            style={{ lineHeight: '1', fontSize: '0.9rem', padding: '0.2rem 0.4rem' }}
+                                                            style={{ lineHeight: '1', fontSize: '0.9rem', padding: '0.2rem 0.4rem',borderColor: '#c00000', color: '#c00000' } /* Estilo del botón */}
                                                         >
                                                             +
                                                         </button>

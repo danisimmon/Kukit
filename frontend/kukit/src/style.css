@@ -497,7 +497,7 @@ header .contenedor-header .sign-up:hover {
 .btn.volver-receta:hover {
     margin: 10px;
     background-color: #fff;
-    color: var(--primary-color);
+    color: var(--primary-color) !important;
     border: none;
     font-weight: bold;
     cursor:pointer;
@@ -2454,14 +2454,14 @@ header nav ul li.nav-link-li {
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    background-color: #28a745;
-    border-color: #218838;
-    color: #fff;
+    background-color: #FFF;
+    border-color: var(--primary-color);
+    color: var(--primary-color);
 }
 
 .btn.btn-si:hover {
-    background-color: #dc3545;
-    border-color: #c82333;
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
     color:#fff;
     transform: scale(1.05);
 }

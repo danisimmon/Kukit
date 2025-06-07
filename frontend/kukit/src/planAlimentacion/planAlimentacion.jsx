@@ -309,6 +309,7 @@ function PlanificacionSemanal() {
               className="btn btn-outline-primary"
               onClick={() => cambiarSemana(-1)}
               disabled={semanaActualVisualizada === 0}
+              style={{fontWeight: 'bold'}}
             >
               &laquo; Semana Anterior
             </button>
@@ -317,6 +318,7 @@ function PlanificacionSemanal() {
               className="btn btn-outline-primary"
               onClick={() => cambiarSemana(1)}
               disabled={semanaActualVisualizada === NUMERO_SEMANAS_PLAN - 1}
+              style={{fontWeight: 'bold'}}
             >
               Semana Siguiente &raquo;
             </button>
@@ -346,9 +348,10 @@ function PlanificacionSemanal() {
                               <span>{comidaPlanificada.nombre}</span>
                               <div className="mt-1">
                                 <button
-                                  className="btn btn-sm btn-outline-secondary me-1"
+                                  className="btn btn-sm me-1"
                                   onClick={() => abrirSelectorRecetas(semanaActualVisualizada, diaIndex, tipoComida.key)}
                                   title="Cambiar receta"
+                                  style={{borderColor: '#c00000'}}
                                 >
                                   ✏️
                                 </button>
@@ -363,7 +366,7 @@ function PlanificacionSemanal() {
                             </div>
                           ) : (
                             <button
-                              className="btn btn-light btn-sm"
+                              className="btn btn-sm"
                               onClick={() => abrirSelectorRecetas(semanaActualVisualizada, diaIndex, tipoComida.key)}
                             >
                               + Añadir
