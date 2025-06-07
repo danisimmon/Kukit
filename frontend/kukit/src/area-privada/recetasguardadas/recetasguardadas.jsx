@@ -204,10 +204,10 @@ const RecetasGuardadas = () => {
             {/* Botón para volver atrás */}
             <button
               onClick={() => navigate(-1)}
-              className="btn btn-outline-secondary me-3" /* Estilo de botón más integrado y margen a la derecha */
+              className="btn volver me-3" /* Estilo de botón más integrado y margen a la derecha */
               title="Volver a la página anterior" /* Tooltip para accesibilidad y claridad */
             >
-              &lt; Volver
+              Volver
             </button>
             <div className="titulo-pagina d-flex align-items-center flex-grow-1"> {/* El título ocupa el espacio restante y alinea sus items */}
               <h2>Recetas Guardadas</h2>

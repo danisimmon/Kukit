@@ -292,10 +292,10 @@ function PlanificacionSemanal() {
           {/* Botón para volver atrás */}
           <button
             onClick={() => navigate(-1)}
-            className="btn btn-outline-secondary me-3" /* Estilo de botón y margen a la derecha */
+            className="btn volver me-3" /* Estilo de botón y margen a la derecha */
             title="Volver a la página anterior"
           >
-            &lt; Volver
+            Volver
           </button>
           {/* Título principal de la página */}
           <h2 className="mb-0">Planificación Semanal de Comidas</h2> {/* mb-0 para quitar margen inferior si el contenedor d-flex ya lo maneja */}

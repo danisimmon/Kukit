@@ -563,10 +563,10 @@ const EditarPerfil = () => {
           <div className="d-flex align-items-center mb-4">
             <button
               onClick={() => navigate(-1)}
-              className="btn btn-outline-secondary me-3"
+              className="btn volver me-3"
               title="Volver a la página anterior"
             >
-              &lt; Volver
+              Volver
             </button>
             <div className="titulo-pagina d-flex align-items-center justify-content-start">
               <ul className="d-flex list-unstyled mb-0"> {/* ul con d-flex para alinear items y limpiar estilos */}

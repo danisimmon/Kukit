@@ -2597,3 +2597,31 @@ header nav ul li.nav-link-li {
     object-fit: cover;
     border-radius: 8px;
 }
+
+.btn.volver {
+    margin: 10px;
+    background-color: var(--background-color);
+    color: var(--primary-color);
+    border: var(--primary-color) 1px solid;
+    font-weight: bold;
+    cursor:pointer;
+}
+
+.btn.volver:active {
+    margin: 10px;
+    background-color: var(--background-color);
+    color: var(--primary-color);
+    border: var(--primary-color) 1px solid;
+    font-weight: bold;
+    cursor:pointer;
+}
+
+
+.btn.volver:hover {
+    margin: 10px;
+    background-color: #fff;
+    color: var(--primary-color);
+    border: none;
+    font-weight: bold;
+    cursor:pointer;
+}
