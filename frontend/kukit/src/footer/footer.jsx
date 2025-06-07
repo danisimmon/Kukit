@@ -51,10 +51,11 @@ function Footer({ setShowListaCompra }) {
 
                         {/* Sección 4 */}
                         <div className="col-lg-3">
-                            <div>
-                                <h6 className="footer-heading text-uppercase text-white">Contáctanos</h6>
-                                <p className="contact-info mt-4">Contacta con nosotros si necesitas ayuda</p>
-                                <p className="contact-info">kukit.contacto@gmail.com</p>
+                            <div
+                            style={{color: '#fff'}}>
+                                <h6 className="footer-heading text-uppercase text-white" style={{color: '#fff'}}>Contáctanos</h6>
+                                <p className="contact-info mt-4" style={{color: '#fff'}}>Contacta con nosotros si necesitas ayuda</p>
+                                <p className="contact-info" style={{color: '#fff'}}>kukit.contacto@gmail.com</p>
                                 <div className="mt-5">
                                     <ul className="list-inline">
                                         <li className="list-inline-item">
@@ -81,8 +82,10 @@ function Footer({ setShowListaCompra }) {
                 </div>
 
                 <div className="text-center mt-5">
-                    <p className="footer-alt mb-0 f-14">
-                        {currentYear} © Ainhoa Blanca, Manuel Gómez, Rubén Peña, Daniel Simón. All Rights Reserved
+                    <p className="footer-alt mb-0 f-14"
+                    style={{color: '#fff'}}>
+
+                        © {currentYear} Ainhoa Blanca, Manuel Gómez, Rubén Peña, Daniel Simón. All Rights Reserved
                     </p>
                 </div>
             </footer>
