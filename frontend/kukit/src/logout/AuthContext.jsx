@@ -5,31 +5,29 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [user, setUser] = useState(null);
+    const [isLoading, setIsLoading] = useState(true); // <--- NEW: Add isLoading state
 
     const checkAuthStatus = useCallback(async () => {
-        // Envolver en una promesa para asegurar que se pueda esperar su finalización completa,
-        // incluyendo las actualizaciones de estado.
-        // eslint-disable-next-line no-async-promise-executor
-        return new Promise(async (resolve, reject) => {
-            try {
-                const response = await fetch("http://localhost/api/login/gestion-autenticacion/gestion-autenticacion.php", {
-                    credentials: "include"
-                });
-                const data = await response.json();
+        setIsLoading(true); // <--- Set loading to true when starting the check
+        try {
+            const response = await fetch("http://localhost/api/login/gestion-autenticacion/gestion-autenticacion.php", {
+                credentials: "include"
+            });
+            const data = await response.json();
 
-                setIsAuthenticated(data.loggedIn);
-                if (data.loggedIn && data.user) {
-                    setUser(data.user);
-                } else {
-                    setUser(null);
-                }
-                resolve(data.loggedIn); // Resuelve con el estado de autenticación
-            } catch (err) {
+            setIsAuthenticated(data.loggedIn);
+            if (data.loggedIn && data.user) {
+                setUser(data.user);
+            } else {
                 setUser(null);
-                setIsAuthenticated(false);
-                reject(err); // Rechaza en caso de error
             }
-        });
+        } catch (err) {
+            console.error("Error checking auth status:", err);
+            setUser(null);
+            setIsAuthenticated(false);
+        } finally {
+            setIsLoading(false); // <--- Set loading to false when the check is complete (success or error)
+        }
     }, []);
 
     useEffect(() => {
@@ -39,15 +37,19 @@ export const AuthProvider = ({ children }) => {
     const login = (userData) => {
         setIsAuthenticated(true);
         setUser(userData);
+        // After successful login, you might want to re-check status or simply rely on this state update
+        // If your PHP script sets a session/cookie, subsequent reloads will pick it up
     };
 
     const logout = () => {
+        // You might want to also call a backend endpoint here to destroy the session/cookie
+        // For example: fetch("http://localhost/api/logout.php", { credentials: "include" })
         setIsAuthenticated(false);
         setUser(null);
     };
 
     return (
-        <AuthContext.Provider value={{ isAuthenticated, user, login, logout, checkAuthStatus }}>
+        <AuthContext.Provider value={{ isAuthenticated, user, isLoading, login, logout, checkAuthStatus }}>
             {children}
         </AuthContext.Provider>
     );

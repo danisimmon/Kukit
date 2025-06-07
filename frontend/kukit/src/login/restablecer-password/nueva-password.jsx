@@ -51,7 +51,10 @@ const NuevaPassword = () => {
             if (respuesta.data.success) {
                 setExito(true);
                 setMensaje(respuesta.data.message);
-                console.log('Usuario:', respuesta.data.user);
+                // Redirigir al usuario a la página de inicio de sesión o donde sea necesario
+                setTimeout(() => {
+                    window.location.href = '/home'; // Redirigir a la página de inicio
+                }, 2000); // Esperar 2 segundos antes de redirigir
             } else {
                 setExito(false);
                 setMensaje(respuesta.data.message);
@@ -70,13 +73,14 @@ const NuevaPassword = () => {
                 <div className="form-container">
                     <form onSubmit={manejarEnvio} className="form-box">
                         <div className="form-group">
-                            <label htmlFor="token">Token:</label>
+                            {/* <label htmlFor="token">Token:</label> */}
                             <input
                                 type="text"
                                 id="token"
                                 name="token"
                                 value={formData.token}
                                 onChange={manejarCambio}
+                                hidden
                                 required
                                 disabled
                             />

@@ -156,10 +156,10 @@ const VerReceta = () => {
                         {/* Botón para volver atrás */}
                         <button
                             onClick={() => navigate(-1)}
-                            className="btn btn-outline-secondary me-3" /* Estilo y margen a la derecha */
+                            className="btn volver me-3" /* Estilo y margen a la derecha */
                             title="Volver a la página anterior"
                         >
-                            &lt; Volver
+                            Volver
                         </button>
                         <h4 className="mb-0">Recetas <span className="text-danger">| {receta.nombre}</span></h4> {/* mb-0 para que no afecte la alineación vertical */}
                     </div>                        
