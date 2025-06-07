@@ -57,16 +57,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 "message" => "No se pudo enviar el correo. Error: " . $mail->ErrorInfo
             ]);
         }
-
-        $reset_link = $token;
-
-
-        echo json_encode([
-            "success" => true,
-            "message" => "Se ha enviado un correo con las instrucciones para recuperar tu contraseña",
-            "token" => $reset_link,
-            "codigo_verificacion" => $codigo_verificacion
-        ]);
     } else {
         echo json_encode(["success" => false, "message" => "Correo no encontrado"]);
     }

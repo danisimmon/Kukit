@@ -3,20 +3,19 @@ import { Navigate } from 'react-router-dom';
 import { useAuth } from './logout/AuthContext'; // Asegúrate de que la ruta sea correcta
 
 const ProtectedRoute = ({ element }) => {
-  const { isAuthenticated, isLoading } = useAuth();
+  const { isAuthenticated, isLoading } = useAuth(); // Now isLoading is available
 
-  // Si aún estamos cargando el estado de autenticación, puedes renderizar un spinner o null
-  // para evitar la redirección inmediata antes de saber si está autenticado.
+  // If still loading, render nothing or a loading spinner
   if (isLoading) {
-    return null; // O un componente de carga
+    return null; // Or <LoadingSpinner />
   }
 
+  // If not authenticated (and no longer loading), redirect to home
   if (!isAuthenticated) {
-    // Si no está autenticado, redirige al home
     return <Navigate to="/home" replace />;
   }
 
-  // Si está autenticado, renderiza el elemento (la página solicitada)
+  // If authenticated (and no longer loading), render the protected element
   return element;
 };
 
