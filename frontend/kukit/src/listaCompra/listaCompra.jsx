@@ -429,7 +429,12 @@ const ListaCompra = ({ showListaCompra, setListaCompra, refreshTrigger }) => {
             <button
               className="btn btn-secondary volver-receta"
               style={{ flexGrow: 1 }}
-              onClick={() => navigate("/recetas")}
+              onClick={() => {
+                if (bsOffcanvasRef.current) {
+                  bsOffcanvasRef.current.hide(); // Oculta el offcanvas de Bootstrap
+                }
+                navigate("/recetas"); // Navega después de iniciar el cierre
+              }}
             >
               Ir a recetas
             </button>

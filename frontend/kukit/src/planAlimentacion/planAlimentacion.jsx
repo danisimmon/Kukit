@@ -40,12 +40,13 @@ function PlanificacionSemanal() {
   const [recetasCreadas, setRecetasCreadas] = useState([]);
   const [slotParaEliminar, setSlotParaEliminar] = useState(null);
   const navigate = useNavigate();
-  const [mostrarConfirmacion, setMostrarConfirmacion] = React.useState(false);
 
   const recipeSelectorOffcanvasRef = useRef(null);
   const recipeSelectorOffcanvasInstance = useRef(null);
   const confirmDeleteModalRef = useRef(null);
   const confirmDeleteModalInstance = useRef(null);
+  const vaciarPlanModalRef = useRef(null); // Ref para el modal de vaciar plan
+  const vaciarPlanModalInstance = useRef(null); // Instancia del modal de vaciar plan
 
   useEffect(() => {
     const cargarPlan = async () => {
@@ -126,6 +127,9 @@ function PlanificacionSemanal() {
       if (confirmDeleteModalRef.current && !confirmDeleteModalInstance.current) {
         confirmDeleteModalInstance.current = new bootstrap.Modal(confirmDeleteModalRef.current);
       }
+      if (vaciarPlanModalRef.current && !vaciarPlanModalInstance.current) { // Inicializar modal de vaciar plan
+        vaciarPlanModalInstance.current = new bootstrap.Modal(vaciarPlanModalRef.current);
+      }
     }).catch(err => console.error("No se pudo cargar Bootstrap JS", err));
 
     return () => {
@@ -136,6 +140,10 @@ function PlanificacionSemanal() {
       if (confirmDeleteModalInstance.current) {
         confirmDeleteModalInstance.current.dispose();
         confirmDeleteModalInstance.current = null;
+      }
+      if (vaciarPlanModalInstance.current) { // Limpiar instancia del modal de vaciar plan
+        vaciarPlanModalInstance.current.dispose();
+        vaciarPlanModalInstance.current = null;
       }
     };
   }, []);
@@ -267,6 +275,43 @@ function PlanificacionSemanal() {
     setSlotParaEliminar(null);
   };
 
+  const abrirConfirmacionVaciarPlan = () => {
+    // Primero, verificar si la instancia del modal existe y tiene el método show
+    if (vaciarPlanModalInstance.current && typeof vaciarPlanModalInstance.current.show === 'function') {
+      vaciarPlanModalInstance.current.show();
+    } else if (vaciarPlanModalRef.current) {
+      // Si la instancia no existe (o no es válida) pero el ref al elemento DOM sí, intentar crearla
+      // Esto es una salvaguarda si la inicialización en useEffect falló o aún no se completó.
+      console.warn("Instancia de vaciarPlanModal no encontrada o inválida al intentar abrir, intentando inicializar dinámicamente...");
+      // @ts-ignore
+      import('bootstrap/dist/js/bootstrap.bundle.min.js').then(bootstrap => {
+        // Volver a verificar por si se creó en el intertanto o por el useEffect inicial
+        // y asegurarse de que no se re-inicialice innecesariamente si ya existe.
+        if (!vaciarPlanModalInstance.current || typeof vaciarPlanModalInstance.current.show !== 'function') {
+            vaciarPlanModalInstance.current = new bootstrap.Modal(vaciarPlanModalRef.current);
+        }
+        // Asegurarse de que la instancia se creó correctamente antes de llamar a show()
+        if (vaciarPlanModalInstance.current && typeof vaciarPlanModalInstance.current.show === 'function') {
+            vaciarPlanModalInstance.current.show();
+        } else {
+            console.error("No se pudo crear o encontrar la instancia del modal de vaciar plan para mostrarla después del intento de inicialización.");
+        }
+      }).catch(err => {
+        console.error("Error al importar Bootstrap o crear modal de vaciar plan dinámicamente:", err);
+      });
+    } else {
+      console.error("Referencia al DOM del modal de vaciar plan (vaciarPlanModalRef) no encontrada. No se puede abrir el modal.");
+    }
+  };
+
+  const confirmarVaciarPlan = async () => {
+    setPlan(getDefaultPlan());
+    await guardarPlan(getDefaultPlan());
+    if (vaciarPlanModalInstance.current) {
+      vaciarPlanModalInstance.current.hide();
+    }
+  };
+
   if (cargandoPlanInicial) {
     return (
       <div className="container mt-5 text-center">
@@ -382,40 +427,13 @@ function PlanificacionSemanal() {
           </div>
         </div>
 
-        {/*Botón guardar cambios*/}
+        {/*Botón vaciar plan*/}
         <button id="vaciarPlanButton"
           className="btn vaciar-plan"
-          onClick={() => setMostrarConfirmacion(true)}
+          onClick={abrirConfirmacionVaciarPlan}
         >
           Vaciar Plan
         </button>
-        {mostrarConfirmacion && (
-          <div className="modal-confirmacion">
-            <div className="modal-contenido">
-              <p>¿Estás seguro de que quieres vaciar todo el plan? Esta acción no se puede deshacer.</p>
-
-              <div className="botones-confirmacion">
-                <button
-                  className="btn btn-si"
-                  onClick={() => {
-                    setPlan(getDefaultPlan());
-                    guardarPlan(getDefaultPlan());
-                    setMostrarConfirmacion(false);
-                  }}
-                >
-                  Sí
-                </button>
-                <button
-                  className="btn btn-no"
-                  onClick={() => setMostrarConfirmacion(false)}
-                >
-                  No
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
-
 
 
         {/* Offcanvas para Selector de Recetas */}
@@ -445,9 +463,9 @@ function PlanificacionSemanal() {
             <h6>Recetas Guardadas</h6>
             <ul className="list-group mb-3">
               {recetasGuardadas.length > 0 ? (
-                recetasGuardadas.map(receta => (
+                recetasGuardadas.map((receta, index) => (
                   <li
-                    key={receta.id_receta || receta.id}
+                    key={receta.id_receta ?? receta.id ?? `receta-guardada-${index}`}
                     className="list-group-item list-group-item-action"
                     style={{ cursor: 'pointer' }}
                     onClick={() => seleccionarRecetaParaSlot(receta)}
@@ -463,9 +481,9 @@ function PlanificacionSemanal() {
             <h6>Mis Recetas Creadas</h6>
             <ul className="list-group">
               {recetasCreadas.length > 0 ? (
-                recetasCreadas.map(receta => (
+                recetasCreadas.map((receta, index) => (
                   <li
-                    key={receta.id}
+                    key={receta.id ?? `receta-creada-${index}`}
                     className="list-group-item list-group-item-action"
                     style={{ cursor: 'pointer' }}
                     onClick={() => seleccionarRecetaParaSlot(receta)}
@@ -506,6 +524,47 @@ function PlanificacionSemanal() {
               <div className="modal-footer">
                 <button type="button" className="btn btn-secondary" onClick={cancelarEliminacion}>Cancelar</button>
                 <button type="button" className="btn btn-danger" onClick={confirmarEliminacionComida}>Eliminar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Modal de Confirmación para Vaciar Plan */}
+        <div
+          className="modal fade"
+          id="confirmVaciarPlanModal"
+          tabIndex="-1"
+          aria-labelledby="confirmVaciarPlanModalLabel"
+          aria-hidden="true"
+          ref={vaciarPlanModalRef}
+        >
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title" id="confirmVaciarPlanModalLabel">Confirmar Vaciar Plan</h5>
+                <button
+                  type="button"
+                  className="btn-close"
+                  onClick={() => vaciarPlanModalInstance.current && vaciarPlanModalInstance.current.hide()}
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div className="modal-body">
+                ¿Estás seguro de que quieres vaciar todo el plan? Esta acción no se puede deshacer.
+              </div>
+              <div className="modal-footer">
+                <button 
+                  type="button" 
+                  className="btn btn-danger" 
+                  onClick={() => vaciarPlanModalInstance.current && vaciarPlanModalInstance.current.hide()}
+                >
+                  No
+                </button>
+                <button 
+                  type="button" 
+                  className="btn" 
+                  style={{ backgroundColor: '#fff', color: '#c00000', borderColor: '#c00000', fontWeight: 'bold' }} 
+                  onClick={confirmarVaciarPlan}>Sí, Vaciar</button>
               </div>
             </div>
           </div>
