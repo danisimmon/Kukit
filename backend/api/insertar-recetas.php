@@ -472,20 +472,20 @@ $recetas = [
         ["nombre" => "Aceite vegetal", "cantidad" => 1, "unidad" => "cucharada"]
     ],
     "pasos" => [
-        "1.Calentar la salsa  
+        "Calentar la salsa  
         Coloca la salsa verde en una cacerola pequeña y caliéntala a fuego medio hasta que hierva suavemente.  
         Reserva caliente.",
 
-        "2.Freír las tortillas  
+        "Freír las tortillas  
         En una sartén, calienta el aceite vegetal.  
         Fríe ligeramente las tortillas una por una durante unos segundos por lado, lo justo para que se ablanden.  
         Colócalas sobre papel absorbente para quitar el exceso de grasa.",
 
-        "3.Rellenar y enrollar  
+        "Rellenar y enrollar  
         Coloca una porción de pollo deshebrado en el centro de cada tortilla.  
         Enróllalas con cuidado y colócalas en un plato.",
 
-        "4.Bañar y decorar  
+        "Bañar y decorar  
         Vierte la salsa verde caliente sobre las enchiladas.  
         Añade la crema agria por encima, espolvorea el queso fresco y agrega cebolla picada al gusto.  
         Sirve caliente."
@@ -512,22 +512,22 @@ $recetas = [
         ["nombre" => "Mayonesa", "cantidad" => 1, "unidad" => "cucharada"]
     ],
     "pasos" => [
-        "1.Cocer el arroz  
+        "Cocer el arroz  
         Lava el arroz con agua fría hasta que el agua salga clara.  
         Coloca el arroz con los 300 ml de agua en una olla y cocina a fuego medio-alto hasta que hierva.  
         Luego baja el fuego y cocina tapado durante 10-12 minutos.  
         Deja reposar 10 minutos sin destapar.",
 
-        "2.Preparar el relleno  
+        "Preparar el relleno  
         Mezcla el atún escurrido con la mayonesa en un bol pequeño.  
         Reserva para usar como relleno.",
 
-        "3.Formar los onigiri  
+        "Formar los onigiri  
         Humedece tus manos con agua y un poco de sal.  
         Toma una porción de arroz, aplánala ligeramente y coloca una cucharadita del relleno en el centro.  
         Cierra con más arroz y forma un triángulo compacto con las manos.",
 
-        "4.Decorar con alga nori  
+        "Decorar con alga nori  
         Corta las hojas de alga nori en tiras y colócalas alrededor o en la base del onigiri.  
         Sirve a temperatura ambiente o ligeramente tibios."
     ],
@@ -552,21 +552,21 @@ $recetas = [
         ["nombre" => "Sal", "cantidad" => 1, "unidad" => "cucharadita"]
     ],
     "pasos" => [
-        "1.Preparar las patatas y la cebolla  
+        "Preparar las patatas y la cebolla  
         Pela las patatas y córtalas en rodajas finas o en dados pequeños.  
         Pela y pica la cebolla en juliana o trozos pequeños, según tu preferencia.",
 
-        "2.Freír las patatas y cebolla  
+        "Freír las patatas y cebolla  
         Calienta el aceite de oliva en una sartén grande a fuego medio.  
         Añade las patatas y la cebolla, y cocina lentamente durante unos 20 minutos, removiendo de vez en cuando hasta que estén blandas pero no crujientes.  
         Escurre el aceite y reserva las patatas y cebolla en un bol.",
 
-        "3.Batir los huevos y mezclar  
+        "Batir los huevos y mezclar  
         Bate los huevos en un bol grande con una pizca de sal.  
         Añade las patatas y cebolla escurridas y mezcla bien.  
         Deja reposar la mezcla 5 minutos para que los sabores se integren.",
 
-        "4.Cocinar la tortilla  
+        "Cocinar la tortilla  
         Calienta una sartén antiadherente con un chorrito de aceite.  
         Vierte la mezcla y cocina a fuego medio durante 4-5 minutos.  
         Da la vuelta con cuidado usando un plato o tapa, y cocina otros 3-4 minutos por el otro lado.  
@@ -599,21 +599,21 @@ $recetas = [
         ["nombre" => "Cilantro fresco", "cantidad" => 2, "unidad" => "cucharadas"]
     ],
     "pasos" => [
-        "1.Preparar la base  
+        "Preparar la base  
         Pela y pica finamente la cebolla, el ajo y el jengibre.  
         Ralla o tritura los tomates.",
 
-        "2.Sofreír las especias  
+        "Sofreír las especias  
         En una sartén grande, calienta el aceite vegetal.  
         Añade la cebolla y sofríe a fuego medio hasta que esté dorada.  
         Agrega el ajo, el jengibre y todas las especias (garam masala, comino, cúrcuma). Cocina 1 minuto más.",
 
-        "3.Añadir tomate y garbanzos  
+        "Añadir tomate y garbanzos  
         Incorpora el tomate triturado y cocina unos 5-7 minutos hasta que espese.  
         Añade los garbanzos cocidos y mezcla bien.  
         Agrega un poco de agua si es necesario para ajustar la consistencia. Cocina 10 minutos a fuego medio.",
 
-        "4.Servir  
+        "Servir  
         Corrige de sal si es necesario.  
         Sirve caliente, decorado con cilantro fresco picado.  
         Acompaña con arroz basmati o pan naan."
@@ -641,18 +641,18 @@ $recetas = [
         ["nombre" => "Sal y pimienta", "cantidad" => "al gusto", "unidad" => ""]
     ],
     "pasos" => [
-        "1.Preparar la base y el relleno  
+        "Preparar la base y el relleno  
         Precalienta el horno a 180 °C.  
         Forra un molde con la masa quebrada y pínchala con un tenedor. Reserva.",
 
-        "2.Sofreír el tocino y la cebolla  
+        "Sofreír el tocino y la cebolla  
         Corta el tocino en tiras y la cebolla en juliana.  
         En una sartén, sofríe el tocino hasta que esté dorado, luego añade la cebolla y cocina 3-4 minutos. Escurre el exceso de grasa.",
 
-        "3.Batir los huevos y nata  
+        "Batir los huevos y nata  
         En un bol, bate los huevos con la nata, añade sal, pimienta y nuez moscada. Incorpora el tocino y la cebolla.",
 
-        "4.Hornear  
+        "Hornear  
         Vierte la mezcla sobre la masa.  
         Hornea durante 30-35 minutos hasta que cuaje y la superficie esté dorada.  
         Deja enfriar unos minutos antes de desmoldar y servir."
@@ -679,14 +679,14 @@ $recetas = [
         ["nombre" => "Pimienta negra", "cantidad" => 0.5, "unidad" => "cucharadita"]
     ],
     "pasos" => [
-        "1.Dorar las salchichas  
+        "Dorar las salchichas  
         En una sartén con aceite, dora las bratwurst a fuego medio-alto durante 5-6 minutos por cada lado hasta que estén bien marcadas. Reserva.",
 
-        "2.Sofreír la cebolla y chucrut  
+        "Sofreír la cebolla y chucrut  
         En la misma sartén, añade la cebolla picada y sofríela hasta que se torne transparente.  
         Agrega el chucrut y la cerveza, mezcla y cocina a fuego medio durante 8-10 minutos.",
 
-        "3.Servir  
+        "Servir  
         Apoya las bratwurst sobre una cama de chucrut caliente.  
         Espolvorea con pimienta negra molida y sirve con pan o patatas."
     ],
@@ -712,19 +712,19 @@ $recetas = [
         ["nombre" => "Sal y pimienta", "cantidad" => "al gusto", "unidad" => ""]
     ],
     "pasos" => [
-        "1.Cocer la pasta  
+        "Cocer la pasta  
         Cocina los macarrones en abundante agua con sal según el tiempo del paquete, generalmente 8-10 minutos. Escurre y reserva.",
 
-        "2.Preparar la bechamel ligera  
+        "Preparar la bechamel ligera  
         En una cacerola, derrite la mantequilla a fuego medio.  
         Añade la harina y cocina 1 minuto, removiendo.  
         Poco a poco, añade la leche sin dejar de remover hasta que espese y tenga consistencia cremosa.",
 
-        "3.Añadir el queso  
+        "Añadir el queso  
         Retira la cacerola del fuego y añade el queso cheddar rallado.  
         Remueve hasta que se funda y obtengas una salsa homogénea. Sazona al gusto.",
 
-        "4.Mezclar y gratinar  
+        "Mezclar y gratinar  
         Incorpora los macarrones a la salsa de queso.  
         Coloca todo en una fuente apta para horno y gratina a 200 °C durante 10 minutos hasta que la superficie esté dorada."
     ],
@@ -753,18 +753,18 @@ $recetas = [
         ["nombre" => "Sal y pimienta", "cantidad" => "al gusto", "unidad" => ""]
     ],
     "pasos" => [
-        "1.Sofreír tocino y chorizo  
+        "Sofreír tocino y chorizo  
         En una sartén grande, calienta el aceite y fríe el tocino picado hasta que esté dorado.  
         Añade el chorizo y cocina unos minutos más.",
 
-        "2.Añadir cebolla y ajo  
+        "Añadir cebolla y ajo  
         Incorpora la cebolla picada y el ajo; sofríe hasta que la cebolla esté transparente.",
 
-        "3.Incorporar frijoles y mandioca  
+        "Incorporar frijoles y mandioca  
         Agrega los frijoles cocidos y mezcla bien.  
         Añade la farinha de mandioca (harina de yuca), remueve y cocina 5 minutos.",
 
-        "4.Finalizar con huevo  
+        "Finalizar con huevo  
         En una sartén aparte, fríe los huevos al gusto.  
         Sirve los frijoles con un huevo encima y sazona con sal y pimienta."
     ],
@@ -795,21 +795,21 @@ $recetas = [
         ["nombre" => "Ají seco (opcional)", "cantidad" => 2, "unidad" => "unidades"]
     ],
     "pasos" => [
-        "1.Marinado rápido  
+        "Marinado rápido  
         Corta el pollo en dados y marínalo con una cucharada de salsa de soja y una cucharadita de aceite de sésamo durante 10 minutos.",
 
-        "2.Salta ajo, jengibre y pimiento  
+        "Salta ajo, jengibre y pimiento  
         En un wok o sartén grande, calienta una cucharada de aceite.  
         Añade el ajo picado, el jengibre y el pimiento cortado en trozos. Saltea 2–3 minutos.",
 
-        "3.Cocina el pollo  
+        "Cocina el pollo  
         Agrega el pollo marinado al wok. Cocina hasta que esté dorado y bien cocido.",
 
-        "4.Salsa y cacahuetes  
+        "Salsa y cacahuetes  
         Incorpora la otra cucharada de soja, el vinagre, azúcar y ají seco.  
         Mezcla bien y añade los cacahuetes. Cocina 2 minutos más.",
 
-        "5.Servir  
+        "Servir  
         Retira y sirve caliente sobre arroz blanco."
     ],
     "idUsuario" => "usuario456",
@@ -839,18 +839,18 @@ $recetas = [
         ["nombre" => "Chile en polvo (opcional)", "cantidad" => "al gusto", "unidad" => ""]
     ],
     "pasos" => [
-        "1.Preparar los fideos  
+        "Preparar los fideos  
         Remoja los fideos en agua tibia durante 10 minutos hasta que estén blandos. Escurre y reserva.",
 
-        "2.Cocinar gambas y huevo  
+        "Cocinar gambas y huevo  
         Calienta aceite en wok. Añade las gambas y cocina 2 minutos.  
         Empuja las gambas a un lado y rompe el huevo; revuélvelo hasta que cuaje.",
 
-        "3.Incorporar salsa y fideos  
+        "Incorporar salsa y fideos  
         Añade la salsa de pescado, tamarindo y azúcar; mezcla.  
         Incorpora los fideos y los brotes de soja. Saltea todo junto un par de minutos.",
 
-        "4.Terminar y servir  
+        "Terminar y servir  
         Retira del fuego, añade los cacahuetes picados y cebolla verde en rodajas.  
         Sirve caliente, con chile en polvo si gustas."
     ],
@@ -880,18 +880,18 @@ $recetas = [
         ["nombre" => "Aceite vegetal", "cantidad" => 1, "unidad" => "cucharada"]
     ],
     "pasos" => [
-        "1.Preparar los ingredientes  
+        "Preparar los ingredientes  
         Corta la zanahoria en tiras, saltea las espinacas y brotes de soja por separado.  
         Cocina la carne con ajo picado y aceite de sésamo.",
 
-        "2.Cocinar el arroz y el huevo  
+        "Cocinar el arroz y el huevo  
         Cocina el arroz blanco y fríe un huevo con la yema líquida (estilo sunny side up).",
 
-        "3.Montar el plato  
+        "Montar el plato  
         Sirve el arroz en un bol y coloca por encima la carne y las verduras.  
         Añade el huevo frito en el centro y una cucharada de gochujang.",
 
-        "4.Servir  
+        "Servir  
         Mezclar todo bien antes de comer."
     ],
     "idUsuario" => "usuario456",
@@ -920,17 +920,17 @@ $recetas = [
         ["nombre" => "Sal y pimienta", "cantidad" => "al gusto", "unidad" => ""]
     ],
     "pasos" => [
-        "1.Preparar las berenjenas  
+        "Preparar las berenjenas  
         Corta las berenjenas en rodajas y fríelas ligeramente o ásalas.",
 
-        "2.Cocinar la carne  
+        "Cocinar la carne  
         Sofríe la cebolla y el ajo, añade la carne picada y cocina hasta que se dore.  
         Agrega el tomate y la canela. Cocina a fuego lento 15 minutos.",
 
-        "3.Montar el plato  
+        "Montar el plato  
         En una fuente para horno, coloca una capa de berenjenas, luego la carne, repite y termina con la bechamel.",
 
-        "4.Hornear  
+        "Hornear  
         Espolvorea con queso y hornea a 180°C durante 30–35 minutos.  
         Deja reposar antes de servir."
     ],
@@ -958,17 +958,17 @@ $recetas = [
         ["nombre" => "Sal", "cantidad" => "al gusto", "unidad" => ""]
     ],
     "pasos" => [
-        "1.Hidratar el bulgur  
+        "Hidratar el bulgur  
         Coloca el bulgur en un bol con agua caliente durante 20 minutos. Escurre y deja enfriar.",
 
-        "2.Picar los ingredientes  
+        "Picar los ingredientes  
         Pica finamente el perejil, hierbabuena, tomates y cebolleta.",
 
-        "3.Mezclar todo  
+        "Mezclar todo  
         En un bol grande, mezcla el bulgur con los vegetales.  
         Añade el zumo de limón, aceite y sal al gusto. Mezcla bien.",
 
-        "4.Servir frío  
+        "Servir frío  
         Sirve como entrante o acompañamiento frío."
     ],
     "idUsuario" => "usuario456",
@@ -993,16 +993,16 @@ $recetas = [
         ["nombre" => "Sal y pimienta", "cantidad" => "al gusto", "unidad" => ""]
     ],
     "pasos" => [
-        "1.Picar y sofreír  
+        "Picar y sofreír  
         Pica los tomates, el pimiento y la cebolla si la usas. Sofríe todo en aceite caliente.",
 
-        "2.Añadir los huevos  
+        "Añadir los huevos  
         Bate ligeramente los huevos y añádelos a la sartén. Remueve lentamente.",
 
-        "3.Cocinar al gusto  
+        "Cocinar al gusto  
         Cocina hasta que los huevos estén en el punto deseado (jugosos o más firmes).",
 
-        "4.Servir  
+        "Servir  
         Sirve caliente, acompañado de pan fresco."
     ],
     "idUsuario" => "usuario456",
@@ -1026,11 +1026,11 @@ $recetas = [
     ["nombre" => "Parmesano", "cantidad" => 30, "unidad" => "g"]
 ],
 "pasos" => [
-    "1. Sofreír la cebolla picada hasta que esté transparente.",
-    "2. Añadir los champiñones troceados y cocinar 5 minutos.",
-    "3. Incorporar el arroz y remover durante 2 minutos.",
-    "4. Ir añadiendo el caldo caliente poco a poco mientras se remueve.",
-    "5. Cocinar durante unos 18-20 minutos. Añadir el parmesano y servir."
+    "Sofreír la cebolla picada hasta que esté transparente.",
+    "Añadir los champiñones troceados y cocinar 5 minutos.",
+    "Incorporar el arroz y remover durante 2 minutos.",
+    "Ir añadiendo el caldo caliente poco a poco mientras se remueve.",
+    "Cocinar durante unos 18-20 minutos. Añadir el parmesano y servir."
 ],
 "idUsuario" => "usuario456",
 "compartido" => true,
@@ -1053,11 +1053,11 @@ $recetas = [
     ["nombre" => "Chile pasilla", "cantidad" => 1, "unidad" => "unidad"]
 ],
 "pasos" => [
-    "1. Freír las tortillas en tiras hasta que estén crujientes.",
-    "2. Licuar los tomates con ajo y chile pasilla.",
-    "3. Cocinar esta salsa en una olla con un poco de aceite.",
-    "4. Añadir el caldo y cocinar 15 minutos.",
-    "5. Servir con las tiras de tortilla, aguacate y queso fresco."
+    "Freír las tortillas en tiras hasta que estén crujientes.",
+    "Licuar los tomates con ajo y chile pasilla.",
+    "Cocinar esta salsa en una olla con un poco de aceite.",
+    "Añadir el caldo y cocinar 15 minutos.",
+    "Servir con las tiras de tortilla, aguacate y queso fresco."
 ],
 "idUsuario" => "usuario456",
 "compartido" => true,
@@ -1081,11 +1081,11 @@ $recetas = [
     ["nombre" => "Brochetas de bambú", "cantidad" => 6, "unidad" => "unidad"]
 ],
 "pasos" => [
-    "1. Cortar el pollo en cubos y ensartar en las brochetas.",
-    "2. Mezclar la salsa de soja, mirin y azúcar en una sartén.",
-    "3. Cocinar las brochetas en una sartén o parrilla.",
-    "4. Pintar con la salsa varias veces durante la cocción.",
-    "5. Servir caliente como aperitivo o plato principal."
+    "Cortar el pollo en cubos y ensartar en las brochetas.",
+    "Mezclar la salsa de soja, mirin y azúcar en una sartén.",
+    "Cocinar las brochetas en una sartén o parrilla.",
+    "Pintar con la salsa varias veces durante la cocción.",
+    "Servir caliente como aperitivo o plato principal."
 ],
 "idUsuario" => "usuario456",
 "compartido" => true,
@@ -1108,11 +1108,11 @@ $recetas = [
     ["nombre" => "Ajo", "cantidad" => 2, "unidad" => "diente"]
 ],
 "pasos" => [
-    "1. Hervir las espinacas y licuarlas hasta obtener un puré.",
-    "2. Sofreír cebolla, ajo y tomate picado hasta formar una pasta.",
-    "3. Añadir el puré de espinacas y cocinar 5 minutos.",
-    "4. Incorporar el paneer en cubos y cocinar 5 minutos más.",
-    "5. Servir con arroz o pan naan caliente."
+    "Hervir las espinacas y licuarlas hasta obtener un puré.",
+    "Sofreír cebolla, ajo y tomate picado hasta formar una pasta.",
+    "Añadir el puré de espinacas y cocinar 5 minutos.",
+    "Incorporar el paneer en cubos y cocinar 5 minutos más.",
+    "Servir con arroz o pan naan caliente."
 ],
 "idUsuario" => "usuario456",
 "compartido" => true,
@@ -1136,11 +1136,11 @@ $recetas = [
     ["nombre" => "Cebolla", "cantidad" => 1, "unidad" => "unidad"]
 ],
 "pasos" => [
-    "1. Cortar todas las verduras en rodajas finas.",
-    "2. Sofreír cebolla y tomate en una sartén hasta que se ablanden.",
-    "3. En una fuente para horno, colocar las verduras alternando colores.",
-    "4. Hornear a 180°C durante 40 minutos con un poco de aceite y hierbas.",
-    "5. Servir caliente como plato principal o acompañamiento."
+    "Cortar todas las verduras en rodajas finas.",
+    "Sofreír cebolla y tomate en una sartén hasta que se ablanden.",
+    "En una fuente para horno, colocar las verduras alternando colores.",
+    "Hornear a 180°C durante 40 minutos con un poco de aceite y hierbas.",
+    "Servir caliente como plato principal o acompañamiento."
 ],
 "idUsuario" => "usuario456",
 "compartido" => true,
@@ -1163,11 +1163,11 @@ $recetas = [
     ["nombre" => "Sal", "cantidad" => 1, "unidad" => "cucharadita"]
 ],
 "pasos" => [
-    "1. Mezclar harina, huevos, leche y sal hasta obtener una masa densa.",
-    "2. Colocar la masa en un rallador especial o tabla de Spätzle sobre agua hirviendo.",
-    "3. Cocer hasta que floten, unos 2-3 minutos.",
-    "4. Escurrir y saltear con mantequilla o acompañar con salsa.",
-    "5. Servir como guarnición o plato principal con queso fundido."
+    "Mezclar harina, huevos, leche y sal hasta obtener una masa densa.",
+    "Colocar la masa en un rallador especial o tabla de Spätzle sobre agua hirviendo.",
+    "Cocer hasta que floten, unos 2-3 minutos.",
+    "Escurrir y saltear con mantequilla o acompañar con salsa.",
+    "Servir como guarnición o plato principal con queso fundido."
 ],
 "idUsuario" => "usuario456",
 "compartido" => true,
@@ -1191,11 +1191,11 @@ $recetas = [
     ["nombre" => "Bacon", "cantidad" => 100, "unidad" => "g"]
 ],
 "pasos" => [
-    "1. Sofreír el bacon y la cebolla hasta que estén dorados.",
-    "2. Añadir las papas en cubos y las almejas.",
-    "3. Incorporar la leche y cocer a fuego medio.",
-    "4. Cocinar hasta que las papas estén tiernas.",
-    "5. Servir caliente con perejil picado."
+    "Sofreír el bacon y la cebolla hasta que estén dorados.",
+    "Añadir las papas en cubos y las almejas.",
+    "Incorporar la leche y cocer a fuego medio.",
+    "Cocinar hasta que las papas estén tiernas.",
+    "Servir caliente con perejil picado."
 ],
 "idUsuario" => "usuario456",
 "compartido" => true,
@@ -1222,11 +1222,11 @@ $recetas = [
         ["nombre" => "Zumo de lima", "cantidad" => 2, "unidad" => "cucharadas"]
     ],
     "pasos" => [
-        "1. Marinar el pescado con lima, sal y cilantro.",
-        "2. En una olla, saltear cebolla, pimiento y tomate en aceite de palma.",
-        "3. Añadir el pescado y leche de coco; cocinar a fuego bajo 15–20 min.",
-        "4. Corregir sal y decorar con más cilantro.",
-        "5. Servir con arroz blanco."
+        "Marinar el pescado con lima, sal y cilantro.",
+        "En una olla, saltear cebolla, pimiento y tomate en aceite de palma.",
+        "Añadir el pescado y leche de coco; cocinar a fuego bajo 15–20 min.",
+        "Corregir sal y decorar con más cilantro.",
+        "Servir con arroz blanco."
     ],
     "idUsuario" => "usuario456",
     "compartido" => true,
@@ -1253,11 +1253,11 @@ $recetas = [
         ["nombre" => "Sal", "cantidad" => "al gusto", "unidad" => ""]
     ],
     "pasos" => [
-        "1. Lavar y trocear todas las verduras en cubos pequeños.",
-        "2. En una sartén grande, añadir el aceite y sofreír la cebolla y los pimientos hasta que estén blandos.",
-        "3. Añadir la berenjena y el calabacín, y cocinar durante 10 minutos más.",
-        "4. Incorporar el tomate triturado y una pizca de sal. Cocinar a fuego medio durante 20–25 minutos removiendo ocasionalmente.",
-        "5. Servir caliente como plato principal o acompañamiento. Puede añadirse un huevo frito por encima si se desea."
+        "Lavar y trocear todas las verduras en cubos pequeños.",
+        "En una sartén grande, añadir el aceite y sofreír la cebolla y los pimientos hasta que estén blandos.",
+        "Añadir la berenjena y el calabacín, y cocinar durante 10 minutos más.",
+        "Incorporar el tomate triturado y una pizca de sal. Cocinar a fuego medio durante 20–25 minutos removiendo ocasionalmente.",
+        "Servir caliente como plato principal o acompañamiento. Puede añadirse un huevo frito por encima si se desea."
     ],
     "idUsuario" => "usuario456",
     "compartido" => true,
@@ -1281,11 +1281,11 @@ $recetas = [
     ["nombre" => "Salsa de soja", "cantidad" => 2, "unidad" => "cucharadas"]
 ],
 "pasos" => [
-    "1. Amasar la harina con agua hasta formar una masa suave.",
-    "2. Mezclar la carne con col picada, jengibre y soja.",
-    "3. Formar discos con la masa y rellenarlos.",
-    "4. Cocinar los dumplings al vapor durante 15 minutos.",
-    "5. Servir con salsa de soja o vinagre."
+    "Amasar la harina con agua hasta formar una masa suave.",
+    "Mezclar la carne con col picada, jengibre y soja.",
+    "Formar discos con la masa y rellenarlos.",
+    "Cocinar los dumplings al vapor durante 15 minutos.",
+    "Servir con salsa de soja o vinagre."
 ],
 "idUsuario" => "usuario456",
 "compartido" => true,
@@ -1313,11 +1313,11 @@ $recetas = [
         ["nombre" => "Zumo de lima", "cantidad" => 2, "unidad" => "cucharadas"]
     ],
     "pasos" => [
-        "1. Hervir el caldo con hierba limón, galanga y hojas de lima durante 5 minutos.",
-        "2. Añadir las setas y cocinar 3 minutos más.",
-        "3. Incorporar las gambas y el chile; cocinar 2–3 minutos hasta que cambien de color.",
-        "4. Apagar el fuego, añadir salsa de pescado y zumo de lima.",
-        "5. Servir caliente, con algo de picante."
+        "Hervir el caldo con hierba limón, galanga y hojas de lima durante 5 minutos.",
+        "Añadir las setas y cocinar 3 minutos más.",
+        "Incorporar las gambas y el chile; cocinar 2–3 minutos hasta que cambien de color.",
+        "Apagar el fuego, añadir salsa de pescado y zumo de lima.",
+        "Servir caliente, con algo de picante."
     ],
     "idUsuario" => "usuario456",
     "compartido" => true,
@@ -1342,11 +1342,11 @@ $recetas = [
         ["nombre" => "Caldo (vegetal o dashi)", "cantidad" => 300, "unidad" => "ml"]
     ],
     "pasos" => [
-        "1. Hervir el caldo con gochujang, azúcar y soja.",
-        "2. Añadir los tteok y cocinar 5–7 minutos hasta que estén tiernos.",
-        "3. Incorporar la cebolla verde en rodajas.",
-        "4. Cocinar un par de minutos más.",
-        "5. Servir caliente y algo picante."
+        "Hervir el caldo con gochujang, azúcar y soja.",
+        "Añadir los tteok y cocinar 5–7 minutos hasta que estén tiernos.",
+        "Incorporar la cebolla verde en rodajas.",
+        "Cocinar un par de minutos más.",
+        "Servir caliente y algo picante."
     ],
     "idUsuario" => "usuario456",
     "compartido" => true,
@@ -1371,10 +1371,10 @@ $recetas = [
         ["nombre" => "Brochetas de madera", "cantidad" => 4, "unidad" => "unidades"]
     ],
     "pasos" => [
-        "1. Cortar la carne en dados y marinar con aceite, orégano, limón y ajo 30 minutos.",
-        "2. Ensartar la carne en brochetas.",
-        "3. Cocinar en parrilla o sartén durante 8–10 minutos, girando para dorar por todos lados.",
-        "4. Servir con pan pita, quizá tzatziki o verduras."
+        "Cortar la carne en dados y marinar con aceite, orégano, limón y ajo 30 minutos.",
+        "Ensartar la carne en brochetas.",
+        "Cocinar en parrilla o sartén durante 8–10 minutos, girando para dorar por todos lados.",
+        "Servir con pan pita, quizá tzatziki o verduras."
     ],
     "idUsuario" => "usuario456",
     "compartido" => true,
@@ -1399,10 +1399,10 @@ $recetas = [
         ["nombre" => "Sal", "cantidad" => "al gusto", "unidad" => ""]
     ],
     "pasos" => [
-        "1. Triturar los garbanzos con tahini, ajo y limón.",
-        "2. Añadir aceite y sal y mezclar hasta textura cremosa.",
-        "3. Ajustar limón o sal al gusto.",
-        "4. Servir con aceite y pimentón encima, acompañado de pan."
+        "Triturar los garbanzos con tahini, ajo y limón.",
+        "Añadir aceite y sal y mezclar hasta textura cremosa.",
+        "Ajustar limón o sal al gusto.",
+        "Servir con aceite y pimentón encima, acompañado de pan."
     ],
     "idUsuario" => "usuario456",
     "compartido" => true,
@@ -1426,11 +1426,11 @@ $recetas = [
         ["nombre" => "Azúcar", "cantidad" => 50, "unidad" => "g"]
     ],
     "pasos" => [
-        "1. Colocar hojas de filo pinceladas con mantequilla en una fuente.",
-        "2. Añadir capa de nueces y repetir filo y mantequilla.",
-        "3. Cortar en porciones y hornear a 180 °C 25–30 minutos hasta dorar.",
-        "4. Calentar miel con azúcar y verter sobre el baklava caliente.",
-        "5. Dejar enfriar y servir como dulce."
+        "Colocar hojas de filo pinceladas con mantequilla en una fuente.",
+        "Añadir capa de nueces y repetir filo y mantequilla.",
+        "Cortar en porciones y hornear a 180 °C 25–30 minutos hasta dorar.",
+        "Calentar miel con azúcar y verter sobre el baklava caliente.",
+        "Dejar enfriar y servir como dulce."
     ],
     "idUsuario" => "usuario456",
     "compartido" => true,
@@ -1454,11 +1454,11 @@ $recetas = [
         ["nombre" => "Sal gruesa", "cantidad" => "al gusto", "unidad" => ""]
     ],
     "pasos" => [
-        "1. Cocer las patatas con piel en agua con sal. Pelar y cortar en rodajas.",
-        "2. Cortar el pulpo cocido en rodajas de 1 cm.",
-        "3. Colocar una base de patata en un plato y encima el pulpo.",
-        "4. Espolvorear con pimentón dulce y sal gruesa.",
-        "5. Rociar con aceite de oliva antes de servir."
+        "Cocer las patatas con piel en agua con sal. Pelar y cortar en rodajas.",
+        "Cortar el pulpo cocido en rodajas de 1 cm.",
+        "Colocar una base de patata en un plato y encima el pulpo.",
+        "Espolvorear con pimentón dulce y sal gruesa.",
+        "Rociar con aceite de oliva antes de servir."
     ],
     "idUsuario" => "usuario456",
     "compartido" => true,
@@ -1485,11 +1485,11 @@ $recetas = [
         ["nombre" => "Sal", "cantidad" => "al gusto", "unidad" => ""]
     ],
     "pasos" => [
-        "1. Dejar las fabes en remojo la noche anterior.",
-        "2. Escurrir y colocar en una olla con agua limpia. Añadir chorizo, morcilla, panceta y ajos enteros.",
-        "3. Cocinar a fuego lento durante 2 horas. Espumar si es necesario.",
-        "4. Añadir sal y pimentón. Cocinar 30 minutos más.",
-        "5. Dejar reposar antes de servir para intensificar el sabor."
+        "Dejar las fabes en remojo la noche anterior.",
+        "Escurrir y colocar en una olla con agua limpia. Añadir chorizo, morcilla, panceta y ajos enteros.",
+        "Cocinar a fuego lento durante 2 horas. Espumar si es necesario.",
+        "Añadir sal y pimentón. Cocinar 30 minutos más.",
+        "Dejar reposar antes de servir para intensificar el sabor."
     ],
     "idUsuario" => "usuario456",
     "compartido" => true,
@@ -1515,11 +1515,11 @@ $recetas = [
         ["nombre" => "Pimentón", "cantidad" => 1, "unidad" => "cucharadita"]
     ],
     "pasos" => [
-        "1. Cocer los callos previamente limpios en agua con sal. Escurrir.",
-        "2. Sofreír ajo, cebolla y pimiento choricero picado.",
-        "3. Añadir los callos, chorizo y morcilla en rodajas. Añadir pimentón.",
-        "4. Cubrir con agua o caldo y cocinar a fuego lento 2 horas.",
-        "5. Dejar reposar para intensificar el sabor. Servir caliente."
+        "Cocer los callos previamente limpios en agua con sal. Escurrir.",
+        "Sofreír ajo, cebolla y pimiento choricero picado.",
+        "Añadir los callos, chorizo y morcilla en rodajas. Añadir pimentón.",
+        "Cubrir con agua o caldo y cocinar a fuego lento 2 horas.",
+        "Dejar reposar para intensificar el sabor. Servir caliente."
     ],
     "idUsuario" => "usuario456",
     "compartido" => true,
@@ -1545,11 +1545,11 @@ $recetas = [
         ["nombre" => "Aceite para freír", "cantidad" => 250, "unidad" => "ml"]
     ],
     "pasos" => [
-        "1. Derretir mantequilla en un cazo y añadir la harina, cocinando unos minutos.",
-        "2. Añadir la leche poco a poco sin dejar de remover para formar una bechamel.",
-        "3. Agregar el jamón picado y cocinar hasta que espese bien.",
-        "4. Dejar enfriar la masa en la nevera varias horas.",
-        "5. Formar las croquetas, pasarlas por huevo y pan rallado, y freír en aceite caliente."
+        "Derretir mantequilla en un cazo y añadir la harina, cocinando unos minutos.",
+        "Añadir la leche poco a poco sin dejar de remover para formar una bechamel.",
+        "Agregar el jamón picado y cocinar hasta que espese bien.",
+        "Dejar enfriar la masa en la nevera varias horas.",
+        "Formar las croquetas, pasarlas por huevo y pan rallado, y freír en aceite caliente."
     ],
     "idUsuario" => "usuario456",
     "compartido" => true,
@@ -1575,21 +1575,21 @@ $recetas = [
         ["nombre" => "Agua", "cantidad" => 100, "unidad" => "ml"]
     ],
     "pasos" => [
-        "1.Preparar el pan  
+        "Preparar el pan  
         Corta el pan duro en trozos pequeños y colócalo en un bol.  
         Humedécelo con el agua y cúbrelo con un paño húmedo. Deja reposar al menos 1 hora.",
         
-        "2.Freír los ingredientes  
+        "Freír los ingredientes  
         En una sartén grande, calienta el aceite.  
         Sofríe los ajos enteros y luego añade el chorizo y la panceta cortados en trozos.  
         Añade el pimentón y remueve bien.",
         
-        "3.Cocinar las migas  
+        "Cocinar las migas  
         Incorpora el pan y cocina a fuego medio-alto.  
         Remueve constantemente para que se suelten las migas y se doren.  
         Cocina durante 20-25 minutos hasta que estén sueltas y crujientes.",
         
-        "4.Servir  
+        "Servir  
         Sirve caliente, acompañadas si se desea de uvas o huevo frito."
     ],
     "idUsuario" => "usuario456",
@@ -1615,20 +1615,20 @@ $recetas = [
         ["nombre" => "Sal", "cantidad" => 1, "unidad" => "pizca"]
     ],
     "pasos" => [
-        "1.Preparar las alcachofas  
+        "Preparar las alcachofas  
         Limpia las alcachofas retirando las hojas duras y corta las puntas.  
         Frota con limón para que no se oxiden.  
         Corta en cuartos y cuécelas en agua con sal durante 15 minutos.",
         
-        "2.Sofreír  
+        "Sofreír  
         En una sartén, calienta el aceite y sofríe los ajos picados.  
         Añade el jamón cortado en taquitos y cocina un par de minutos.",
         
-        "3.Mezclar  
+        "Mezclar  
         Escurre las alcachofas y añádelas a la sartén.  
         Saltea todo junto durante 5 minutos para que se mezclen los sabores.",
         
-        "4.Servir  
+        "Servir  
         Sirve caliente como entrante o acompañamiento."
     ],
     "idUsuario" => "usuario456",
@@ -1656,21 +1656,21 @@ $recetas = [
         ["nombre" => "Sal", "cantidad" => 1, "unidad" => "pizca"]
     ],
     "pasos" => [
-        "1.Montar el cachopo  
+        "Montar el cachopo  
         Extiende un filete de ternera.  
         Coloca encima una loncha de jamón y otra de queso.  
         Tapa con el otro filete y presiona bien los bordes.",
         
-        "2.Empanar  
+        "Empanar  
         Pasa el cachopo por harina, luego por huevo batido y finalmente por pan rallado.  
         Asegúrate de que queda bien cubierto.",
         
-        "3.Freír  
+        "Freír  
         Calienta el aceite en una sartén amplia.  
         Fríe el cachopo por ambos lados hasta que esté dorado y crujiente.  
         Retira y escurre sobre papel absorbente.",
         
-        "4.Servir  
+        "Servir  
         Sirve caliente, acompañado de patatas fritas o ensalada."
     ],
     "idUsuario" => "usuario456",
