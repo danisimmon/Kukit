@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import editar from '../img/editar.png'; 
+import eliminar from '../img/cerrar.png';
 
 const ListaCompra = ({ showListaCompra, setListaCompra, refreshTrigger }) => {
   const navigate = useNavigate();
@@ -342,7 +343,7 @@ const ListaCompra = ({ showListaCompra, setListaCompra, refreshTrigger }) => {
         <div className="offcanvas-body" style={{ position: 'relative', display: 'flex', flexDirection: 'column' }}>
           {/* Botón para añadir ingrediente */}
           <div className="mb-3">
-            <button className="btn btn-success no-hover btn-sm me-2 volver-receta" onClick={handleShowAddModal}>
+            <button className="btn no-hover btn-sm me-2 volver-receta" onClick={handleShowAddModal}>
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-plus-lg" viewBox="0 0 16 16">
                 <path fillRule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2z"/>
               </svg>
@@ -364,11 +365,7 @@ const ListaCompra = ({ showListaCompra, setListaCompra, refreshTrigger }) => {
               TUS INGREDIENTES
             </h6>
             <div className="lista-compra-contenido">
-            {listaCompra.length === 0 && (
-              <p style={{ textAlign: 'center', color: '#6c757d', marginTop: '20px' }}>
-                Tu lista de la compra está vacía.
-              </p>
-            )}
+            
             <ul className="list-group" style={{ listStyleType: 'none', paddingLeft: '0', margin: '0' }}>
               {listaCompra.map((producto) => (
                 <li className="lista-compra-item"
@@ -382,21 +379,26 @@ const ListaCompra = ({ showListaCompra, setListaCompra, refreshTrigger }) => {
                     flexDirection: "row-reverse"
                   }}
                 >
-                  <button
-                    onClick={() => deleteListaCompra(producto.nombre, producto.cantidad)}
-                    className="btn btn-sm no-hover me-2" // Añadido me-2 para margen derecho
+                  {/* Imágenes editar / eliminar */}
+                  <img src={eliminar}
+                  alt="eliminar"
+                  className="eliminarImagen me-2"
+                  style={{padding: '2px 6px', lineHeight: '1.2', borderRadius: '50%', maxWidth: "13%"}}
+                  onClick={() => deleteListaCompra(producto.nombre, producto.cantidad)}
+                  />
+                  {/* <button
+                    
+                    className="btn btn-sm no-hover " // Añadido me-2 para margen derecho
                     style={{ padding: '2px 6px', lineHeight: '1.2', borderRadius: '50%' }}
-                  >
-                    &times;
-                  </button>
+                  > */}
+                    {/* &times;
+                  </button> */}
+                    <img src={editar}
+                    alt="editar"
+                    className="editarImagen me-2"
+                    style={{ padding: '2px 6px', lineHeight: '1.2', borderRadius: '50%',maxWidth: "13%"}}
+                    onClick={() => handleShowEditModal(producto)}/>
                   
-                  <button
-                    onClick={() => handleShowEditModal(producto)}
-                    className="btn btn-sm no-hover me-2" // Añadido me-2 para margen derecho
-                    style={{ padding: '2px 6px', lineHeight: '1.2', borderRadius: '50%' }}
-                  >
-                    <img src={editar} alt="editar" className="editarImagen" />
-                  </button>
                   <span
                     style={{
                       flexGrow: 1,
@@ -412,17 +414,29 @@ const ListaCompra = ({ showListaCompra, setListaCompra, refreshTrigger }) => {
               ))} 
             </ul>
             </div>
+            {listaCompra.length === 0 && (
+              <p style={{ textAlign: 'center', color: '#6c757d', marginTop: '20px' }}>
+                Tu lista de la compra está vacía.
+              </p>
+            )}
           </div>
 
           {/* Botones principales del offcanvas */}
           <div className="botones-lista-compra pt-3 mt-auto border-top" style={{ display: 'flex', justifyContent: 'space-between', gap: '10px', paddingBottom: '10px' }}>
-            <button className="btn btn-danger no-hover" style={{ flexGrow: 1 }} onClick={handleMostrarConfirmacion}>
-              Vaciar Lista
-            </button>
+            {listaCompra.length > 0 && (
+              <button className="btn btn-danger no-hover" style={{ flexGrow: 1 }} onClick={handleMostrarConfirmacion}>
+                Vaciar Lista
+              </button>
+            )}
             <button
               className="btn btn-secondary volver-receta"
               style={{ flexGrow: 1 }}
-              onClick={() => navigate("/recetas")}
+              onClick={() => {
+                if (bsOffcanvasRef.current) {
+                  bsOffcanvasRef.current.hide(); // Oculta el offcanvas de Bootstrap
+                }
+                navigate("/recetas"); // Navega después de iniciar el cierre
+              }}
             >
               Ir a recetas
             </button>
@@ -442,11 +456,12 @@ const ListaCompra = ({ showListaCompra, setListaCompra, refreshTrigger }) => {
               <p style={{ marginBottom: '15px', fontSize: '0.95rem', color: '#343a40' }}>
                 ¿Seguro que quieres vaciar tu lista de la compra?
               </p>
-              <div style={{ display: 'flex', justifyContent: 'center', gap: '10px' }}>
+              <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', fontWeight: 'bold' }}>
                 <button className="btn btn-danger no-hover btn-sm" onClick={handleConfirmarVaciado}>
                   Sí, Vaciar
                 </button>
-                <button className="btn btn-secondary btn-sm" onClick={handleCancelarVaciado}>
+                <button className="btn btn-sm" onClick={handleCancelarVaciado}
+                style={{borderColor: '#c33333', backgroundColor: '#fff', color: '#c33333', fontWeight: 'bold'}}>
                   Cancelar
                 </button>
               </div>

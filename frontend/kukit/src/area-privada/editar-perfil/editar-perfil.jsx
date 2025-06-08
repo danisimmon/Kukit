@@ -381,7 +381,14 @@ const EditarPerfil = () => {
       // Default section if no state is passed
       setSeccionActiva("perfil");
     }
-  }, []);
+  }, []); // Array de dependencias vacío, se ejecuta solo una vez al montar
+
+  // Actualizar la sección activa cuando location.state.seccion cambie
+  useEffect(() => {
+    // Si location.state existe y tiene una propiedad 'seccion', la usa.
+    // De lo contrario, usa "perfil" como valor por defecto (útil si se navega a la página sin estado o en el montaje inicial).
+    setSeccionActiva(location.state?.seccion || "perfil");
+  }, [location.state]); // Se ejecuta cuando location.state cambia
 
   // Cargar las recetas creadas cuando la sección "recetas" esté activa
   useEffect(() => {
@@ -563,10 +570,10 @@ const EditarPerfil = () => {
           <div className="d-flex align-items-center mb-4">
             <button
               onClick={() => navigate(-1)}
-              className="btn btn-outline-secondary me-3"
+              className="btn volver me-3"
               title="Volver a la página anterior"
             >
-              &lt; Volver
+              Volver
             </button>
             <div className="titulo-pagina d-flex align-items-center justify-content-start">
               <ul className="d-flex list-unstyled mb-0"> {/* ul con d-flex para alinear items y limpiar estilos */}
@@ -605,7 +612,7 @@ const EditarPerfil = () => {
                 <button className="botones-inversos" type="button" onClick={() => setMostrarModalEliminar(true)}>
                   Eliminar Cuenta
                 </button>
-                <button onClick={() => setSeccionActiva("editar-perfil")}>Editar Perfil</button>
+                <button className='botones-editar-perfil' type='button' onClick={() => setSeccionActiva("editar-perfil")}>Editar Perfil</button>
 
               </div>
             </div>
@@ -663,7 +670,7 @@ const EditarPerfil = () => {
 
                 <div className="botones-perfil">
                   <button className="botones-inversos" type='button' onClick={() => setSeccionActiva("perfil")}>Cancelar</button>
-                  <button type="submit">Guardar</button>
+                  <button className='botones-editar-perfil' type="submit">Guardar</button>
                 </div>
               </form>
             </div>
@@ -766,7 +773,7 @@ const EditarPerfil = () => {
                     {errorDificultad && <span className="error-mensaje" style={{ color: 'red', display: 'block', minHeight: '1em' }}>{errorDificultad}</span>}
                   </div>
                   <div className="apartado-tiempo">
-                    <h5>Introduce el tiempo</h5>
+                    <h5>Introduce el tiempo (min)</h5>
                     <input
                       type="number"
                       name="tiempo"
@@ -781,7 +788,7 @@ const EditarPerfil = () => {
                   </div>
 
                   <div className="apartado-pais">
-                    <h5>Selecciona el país</h5>
+                    <h5>Selecciona el país de la receta</h5>
                     <select
                       className="form-select"
                       name="pais"

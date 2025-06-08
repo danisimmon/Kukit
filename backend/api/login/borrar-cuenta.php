@@ -20,6 +20,7 @@ $stmt->bind_param("i", $id);
 
 if ($stmt->execute()) {
     session_destroy();
+    unset($_SESSION);
     echo json_encode(['success' => true]);
     exit();
 } else {

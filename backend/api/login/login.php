@@ -34,6 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $data['message'] = "Inicio de sesión exitoso.";
             $data['user'] = [
                 'correo' => $user['email'],
+                'nombre' => $user['nombre'],
             ];
         } else {
             $data['message'] = "Contraseña incorrecta.";

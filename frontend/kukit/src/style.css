@@ -473,7 +473,7 @@ header .contenedor-header .sign-up:hover {
     color: var(--primary-color);
     border: var(--primary-color) 1px solid;
     font-weight: bold;
-    cursor:pointer;
+    cursor: pointer;
 }
 
 .btn.ver-texto:hover {
@@ -482,7 +482,7 @@ header .contenedor-header .sign-up:hover {
     color: var(--background-color);
     border: none;
     font-weight: bold;
-    cursor:pointer;
+    cursor: pointer;
 }
 
 .btn.volver-receta {
@@ -491,16 +491,16 @@ header .contenedor-header .sign-up:hover {
     color: var(--primary-color);
     border: var(--primary-color) 1px solid;
     font-weight: bold;
-    cursor:pointer;
+    cursor: pointer;
 }
 
 .btn.volver-receta:hover {
     margin: 10px;
     background-color: #fff;
-    color: var(--primary-color);
+    color: var(--primary-color) !important;
     border: none;
     font-weight: bold;
-    cursor:pointer;
+    cursor: pointer;
 }
 
 button.btn.btn-lectura {
@@ -509,7 +509,7 @@ button.btn.btn-lectura {
     color: var(--background-color) !important;
     border: none !important;
     font-weight: bold;
-    cursor:pointer;
+    cursor: pointer;
 }
 
 button.btn.btn-lectura:hover {
@@ -517,7 +517,7 @@ button.btn.btn-lectura:hover {
     color: var(--background-color) !important;
     border: none !important;
     font-weight: bold;
-    cursor:pointer;
+    cursor: pointer;
 }
 
 button.btn.btn-texto-toggle {
@@ -526,7 +526,7 @@ button.btn.btn-texto-toggle {
     color: var(--primary-color) !important;
     border: var(--primary-color) 1px solid !important;
     font-weight: bold;
-    cursor:pointer;
+    cursor: pointer;
 }
 
 button.btn.btn-texto-toggle:hover {
@@ -534,7 +534,7 @@ button.btn.btn-texto-toggle:hover {
     color: var(--primary-color) !important;
     border: 1px solid var(--primary-color) !important;
     font-weight: bold;
-    cursor:pointer;
+    cursor: pointer;
 }
 
 
@@ -997,7 +997,12 @@ footer hr {
     border-radius: 10px;
 }
 
-#googleSignInButton{
+.botones-editar-perfil {
+    margin: 10px;
+    width: 95%;
+}
+
+#googleSignInButton {
     margin: 5px;
     width: 95% !important;
     border-radius: 10px;
@@ -1370,6 +1375,10 @@ footer hr {
 }
 
 .popup-contenido-receta-creada {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     background: #fff;
     padding: 30px 40px;
     border-radius: 15px;
@@ -1378,15 +1387,22 @@ footer hr {
     max-width: 400px;
 }
 
+.boton-cerrar-popup-receta-creada:hover {
+    background-color: var(--primary-color);
+    /* Más translúcido */
+    transform: scale(1.05);
+    box-shadow: 0px 0px 10px var(--dark-primary-color);
+}
+
 .popup-contenido-receta-creada h2 {
     margin-bottom: 20px;
     font-size: 20px;
-    color: #2ecc71;
+    color: var(--primary-color);
 }
 
 .boton-cerrar-popup-receta-creada {
     padding: 10px 20px;
-    background-color: #2ecc71;
+    background-color: var(--primary-color);
     color: white;
     border: none;
     border-radius: 8px;
@@ -2456,14 +2472,14 @@ header nav ul li.nav-link-li {
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    background-color: #28a745;
-    border-color: #218838;
-    color: #fff;
+    background-color: #FFF;
+    border-color: var(--primary-color);
+    color: var(--primary-color);
 }
 
 .btn.btn-si:hover {
-    background-color: #dc3545;
-    border-color: #c82333;
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
     color:#fff;
     transform: scale(1.05);
 }
@@ -2567,19 +2583,22 @@ header nav ul li.nav-link-li {
 }
 
 .btn-success:hover {
-    background-color: #b30000; /* tu color personalizado */
+    background-color: #b30000;
+    /* tu color personalizado */
     border-color: #990000;
 }
 
 .tabla-ingredientes th,
 .tabla-ingredientes td {
-    padding: 8px 16px; /* Puedes ajustar estos valores */
+    padding: 8px 16px;
+    /* Puedes ajustar estos valores */
     text-align: left;
 }
 
 .tabla-pasos th,
 .tabla-pasos td {
-    padding: 8px 16px; /* Puedes ajustar estos valores */
+    padding: 8px 16px;
+    /* Puedes ajustar estos valores */
     text-align: left;
 }
 
@@ -2599,6 +2618,7 @@ header nav ul li.nav-link-li {
     object-fit: cover;
     border-radius: 8px;
 }
+<<<<<<< HEAD
 /* --- Responsive Design --- */
 
 /* Tablets and larger mobile devices */
@@ -2768,4 +2788,33 @@ header nav ul li.nav-link-li {
     .limpiar-filtros { width: 60%; }
     .botones-crear-receta button, .botones-perfil button, #terminar-receta, #cancelar-receta { width: 80%; font-size: 1rem; } /* Si estos botones están en home */
     .crear-receta-info, .tarjeta-perfil, .contenedor-ingredientes, .pasos-crear-receta { width: 95vw; padding: 15px; } /* Si estos formularios están en home */
+=======
+
+.btn.volver {
+    margin: 10px;
+    background-color: var(--background-color);
+    color: var(--primary-color);
+    border: var(--primary-color) 1px solid;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn.volver:active {
+    margin: 10px;
+    background-color: var(--background-color);
+    color: var(--primary-color);
+    border: var(--primary-color) 1px solid;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+.btn.volver:hover {
+    margin: 10px;
+    background-color: #fff;
+    color: var(--primary-color);
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+>>>>>>> 73a4f5d0fdf9da4dc8f7a14a13e3486914af35a1
 }
