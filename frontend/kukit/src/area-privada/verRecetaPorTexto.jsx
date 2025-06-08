@@ -127,7 +127,7 @@ const VerRecetaTexto = () => {
         textParts.push(`Receta: ${receta.nombre}.`);
         textParts.push(`Para ${raciones} ${raciones === 1 ? 'ración' : 'raciones'}.`);
         textParts.push(`Dificultad: ${receta.dificultad}.`);
-        textParts.push(`Tiempo estimado: ${receta.tiempo_estimado}.`);
+        textParts.push(`Tiempo estimado: ${receta.tiempo} minutos.`);
 
         textParts.push("Ingredientes:");
         receta.ingredientes.forEach(ing => {

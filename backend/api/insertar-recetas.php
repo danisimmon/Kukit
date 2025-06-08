@@ -40,7 +40,6 @@ $recetas = [
         "tiempo" => "15 min",
         "dificultad" => "facil",
         "likes" => 5,
-        "informacionNutricional" => ["calorias" => 350, "proteinas" => 12, "carbohidratos" => 50, "grasas" => 10],
         "href" => "http://localhost/api/img/recetas/pasta-al-pesto.jpg",
         "fecha_creacion" => "2023-10-01T10:00:00.000Z"
     ],
@@ -79,7 +78,6 @@ $recetas = [
         "tiempo" => "20 min",
         "dificultad" => "intermedio",
         "likes" => 10,
-        "informacionNutricional" => ["calorias" => 400, "proteinas" => 25, "carbohidratos" => 35, "grasas" => 15],
         "href" => "http://localhost/api/img/recetas/tacosPollo.jpg",
         "fecha_creacion" => "2023-10-15T11:30:00.000Z"
     ],
@@ -120,7 +118,6 @@ $recetas = [
         "tiempo" => "30 min",
         "dificultad" => "dificil",
         "likes" => 8,
-        "informacionNutricional" => ["calorias" => 250, "proteinas" => 6, "carbohidratos" => 40, "grasas" => 5],
         "href" => "http://localhost/api/img/recetas/sushiVegetal.png",
         "fecha_creacion" => "2023-09-20T09:15:00.000Z"
     ],
@@ -168,7 +165,6 @@ $recetas = [
         "tiempo" => "10 min",
         "dificultad" => "facil",
         "likes" => 15,
-        "informacionNutricional" => ["calorias" => 120, "proteinas" => 2, "carbohidratos" => 10, "grasas" => 5],
         "href" => "http://localhost/api/img/recetas/gazpacho.png",
         "fecha_creacion" => "2024-01-05T14:00:00.000Z"
     ],
@@ -216,7 +212,6 @@ $recetas = [
         "tiempo" => "25 min",
         "dificultad" => "intermedio",
         "likes" => 12,
-        "informacionNutricional" => ["calorias" => 420, "proteinas" => 14, "carbohidratos" => 35, "grasas" => 18],
         "href" => "http://localhost/api/img/recetas/curryGarbanzos.jpg",
         "fecha_creacion" => "2023-11-10T16:45:00.000Z"
     ],
@@ -259,7 +254,6 @@ $recetas = [
         "tiempo" => "50 min",
         "dificultad" => "intermedio",
         "likes" => 7,
-        "informacionNutricional" => ["calorias" => 500, "proteinas" => 35, "carbohidratos" => 30, "grasas" => 20],
         "href" => "http://localhost/api/img/recetas/polloHornoPatatas.jpg",
         "fecha_creacion" => "2024-02-20T12:00:00.000Z"
     ],
@@ -309,7 +303,6 @@ $recetas = [
         "tiempo" => "20 min",
         "dificultad" => "facil",
         "likes" => 6,
-        "informacionNutricional" => ["calorias" => 300, "proteinas" => 5, "carbohidratos" => 45, "grasas" => 7],
         "href" => "http://localhost/api/img/recetas/arrozFrito.jpg",
         "fecha_creacion" => "2023-12-01T18:20:00.000Z"
     ],
@@ -361,7 +354,6 @@ $recetas = [
         "tiempo" => "15 min",
         "dificultad" => "facil",
         "likes" => 3,
-        "informacionNutricional" => ["calorias" => 250, "proteinas" => 6, "carbohidratos" => 35, "grasas" => 8],
         "href" => "http://localhost/api/img/recetas/crepesDulces.jpg",
         "fecha_creacion" => "2024-03-10T08:00:00.000Z"
     ],
@@ -409,7 +401,6 @@ $recetas = [
         "tiempo" => "15 min",
         "dificultad" => "facil",
         "likes" => 9,
-        "informacionNutricional" => ["calorias" => 280, "proteinas" => 15, "carbohidratos" => 10, "grasas" => 14],
         "href" => "http://localhost/api/img/recetas/salteadoTofu.jpg",
         "fecha_creacion" => "2024-03-25T13:10:00.000Z"
     ],
@@ -466,10 +457,1235 @@ $recetas = [
         "tiempo" => "25 min",
         "dificultad" => "intermedio",
         "likes" => 11,
-        "informacionNutricional" => ["calorias" => 450, "proteinas" => 20, "carbohidratos" => 40, "grasas" => 18],
         "href" => "http://localhost/api/img/recetas/pizzaMargarita.jpg",
         "fecha_creacion" => "2024-04-01T19:00:00.000Z"
-    ]
+    ],
+    [
+    "nombre" => "Enchiladas verdes",
+    "ingredientes" => [
+        ["nombre" => "Tortillas de maíz", "cantidad" => 4, "unidad" => "unidades"],
+        ["nombre" => "Pechuga de pollo deshebrada", "cantidad" => 150, "unidad" => "g"],
+        ["nombre" => "Salsa verde", "cantidad" => 200, "unidad" => "ml"],
+        ["nombre" => "Crema agria", "cantidad" => 2, "unidad" => "cucharadas"],
+        ["nombre" => "Queso fresco", "cantidad" => 50, "unidad" => "g"],
+        ["nombre" => "Cebolla", "cantidad" => 30, "unidad" => "g"],
+        ["nombre" => "Aceite vegetal", "cantidad" => 1, "unidad" => "cucharada"]
+    ],
+    "pasos" => [
+        "1.Calentar la salsa  
+        Coloca la salsa verde en una cacerola pequeña y caliéntala a fuego medio hasta que hierva suavemente.  
+        Reserva caliente.",
+
+        "2.Freír las tortillas  
+        En una sartén, calienta el aceite vegetal.  
+        Fríe ligeramente las tortillas una por una durante unos segundos por lado, lo justo para que se ablanden.  
+        Colócalas sobre papel absorbente para quitar el exceso de grasa.",
+
+        "3.Rellenar y enrollar  
+        Coloca una porción de pollo deshebrado en el centro de cada tortilla.  
+        Enróllalas con cuidado y colócalas en un plato.",
+
+        "4.Bañar y decorar  
+        Vierte la salsa verde caliente sobre las enchiladas.  
+        Añade la crema agria por encima, espolvorea el queso fresco y agrega cebolla picada al gusto.  
+        Sirve caliente."
+    ],
+    "idUsuario" => "usuario456",
+    "compartido" => true,
+    "alergias" => ["lactosa", "gluten"],
+    "pais" => "México",
+    "otrasCategorias" => ["tradicional", "picante"],
+    "tiempo" => "25 min",
+    "dificultad" => "media",
+    "likes" => 9,
+    "href" => "http://localhost/api/img/recetas/enchiladasVerdes.jpg",
+    "fecha_creacion" => "2023-10-03T13:30:00.000Z"
+],
+[
+    "nombre" => "Onigiri (bolas de arroz)",
+    "ingredientes" => [
+        ["nombre" => "Arroz japonés", "cantidad" => 200, "unidad" => "g"],
+        ["nombre" => "Agua", "cantidad" => 300, "unidad" => "ml"],
+        ["nombre" => "Sal", "cantidad" => 1, "unidad" => "cucharadita"],
+        ["nombre" => "Alga nori", "cantidad" => 2, "unidad" => "hojas"],
+        ["nombre" => "Atún enlatado", "cantidad" => 50, "unidad" => "g"],
+        ["nombre" => "Mayonesa", "cantidad" => 1, "unidad" => "cucharada"]
+    ],
+    "pasos" => [
+        "1.Cocer el arroz  
+        Lava el arroz con agua fría hasta que el agua salga clara.  
+        Coloca el arroz con los 300 ml de agua en una olla y cocina a fuego medio-alto hasta que hierva.  
+        Luego baja el fuego y cocina tapado durante 10-12 minutos.  
+        Deja reposar 10 minutos sin destapar.",
+
+        "2.Preparar el relleno  
+        Mezcla el atún escurrido con la mayonesa en un bol pequeño.  
+        Reserva para usar como relleno.",
+
+        "3.Formar los onigiri  
+        Humedece tus manos con agua y un poco de sal.  
+        Toma una porción de arroz, aplánala ligeramente y coloca una cucharadita del relleno en el centro.  
+        Cierra con más arroz y forma un triángulo compacto con las manos.",
+
+        "4.Decorar con alga nori  
+        Corta las hojas de alga nori en tiras y colócalas alrededor o en la base del onigiri.  
+        Sirve a temperatura ambiente o ligeramente tibios."
+    ],
+    "idUsuario" => "usuario456",
+    "compartido" => true,
+    "alergias" => ["pescado", "gluten"],
+    "pais" => "Japón",
+    "otrasCategorias" => ["tradicional", "snack"],
+    "tiempo" => "30 min",
+    "dificultad" => "media",
+    "likes" => 7,
+    "href" => "http://localhost/api/img/recetas/onigiri.jpg",
+    "fecha_creacion" => "2023-10-04T11:15:00.000Z"
+],
+[
+    "nombre" => "Tortilla de patatas",
+    "ingredientes" => [
+        ["nombre" => "Patatas", "cantidad" => 400, "unidad" => "g"],
+        ["nombre" => "Huevos", "cantidad" => 4, "unidad" => "unidades"],
+        ["nombre" => "Cebolla", "cantidad" => 100, "unidad" => "g"],
+        ["nombre" => "Aceite de oliva", "cantidad" => 100, "unidad" => "ml"],
+        ["nombre" => "Sal", "cantidad" => 1, "unidad" => "cucharadita"]
+    ],
+    "pasos" => [
+        "1.Preparar las patatas y la cebolla  
+        Pela las patatas y córtalas en rodajas finas o en dados pequeños.  
+        Pela y pica la cebolla en juliana o trozos pequeños, según tu preferencia.",
+
+        "2.Freír las patatas y cebolla  
+        Calienta el aceite de oliva en una sartén grande a fuego medio.  
+        Añade las patatas y la cebolla, y cocina lentamente durante unos 20 minutos, removiendo de vez en cuando hasta que estén blandas pero no crujientes.  
+        Escurre el aceite y reserva las patatas y cebolla en un bol.",
+
+        "3.Batir los huevos y mezclar  
+        Bate los huevos en un bol grande con una pizca de sal.  
+        Añade las patatas y cebolla escurridas y mezcla bien.  
+        Deja reposar la mezcla 5 minutos para que los sabores se integren.",
+
+        "4.Cocinar la tortilla  
+        Calienta una sartén antiadherente con un chorrito de aceite.  
+        Vierte la mezcla y cocina a fuego medio durante 4-5 minutos.  
+        Da la vuelta con cuidado usando un plato o tapa, y cocina otros 3-4 minutos por el otro lado.  
+        La tortilla puede quedar jugosa o bien hecha, según tu gusto."
+    ],
+    "idUsuario" => "usuario456",
+    "compartido" => true,
+    "alergias" => ["huevo"],
+    "pais" => "España",
+    "otrasCategorias" => ["tradicional", "vegetariana"],
+    "tiempo" => "35 min",
+    "dificultad" => "media",
+    "likes" => 12,
+    "href" => "http://localhost/api/img/recetas/tortillaPatatas.jpg",
+    "fecha_creacion" => "2023-10-05T17:45:00.000Z"
+],
+[
+    "nombre" => "Chana Masala",
+    "ingredientes" => [
+        ["nombre" => "Garbanzos cocidos", "cantidad" => 400, "unidad" => "g"],
+        ["nombre" => "Cebolla", "cantidad" => 1, "unidad" => "unidad"],
+        ["nombre" => "Tomate", "cantidad" => 2, "unidad" => "unidades"],
+        ["nombre" => "Ajo", "cantidad" => 2, "unidad" => "dientes"],
+        ["nombre" => "Jengibre fresco", "cantidad" => 1, "unidad" => "cucharadita"],
+        ["nombre" => "Aceite vegetal", "cantidad" => 2, "unidad" => "cucharadas"],
+        ["nombre" => "Garam masala", "cantidad" => 1, "unidad" => "cucharadita"],
+        ["nombre" => "Comino en polvo", "cantidad" => 1, "unidad" => "cucharadita"],
+        ["nombre" => "Cúrcuma", "cantidad" => 0.5, "unidad" => "cucharadita"],
+        ["nombre" => "Sal", "cantidad" => 1, "unidad" => "cucharadita"],
+        ["nombre" => "Cilantro fresco", "cantidad" => 2, "unidad" => "cucharadas"]
+    ],
+    "pasos" => [
+        "1.Preparar la base  
+        Pela y pica finamente la cebolla, el ajo y el jengibre.  
+        Ralla o tritura los tomates.",
+
+        "2.Sofreír las especias  
+        En una sartén grande, calienta el aceite vegetal.  
+        Añade la cebolla y sofríe a fuego medio hasta que esté dorada.  
+        Agrega el ajo, el jengibre y todas las especias (garam masala, comino, cúrcuma). Cocina 1 minuto más.",
+
+        "3.Añadir tomate y garbanzos  
+        Incorpora el tomate triturado y cocina unos 5-7 minutos hasta que espese.  
+        Añade los garbanzos cocidos y mezcla bien.  
+        Agrega un poco de agua si es necesario para ajustar la consistencia. Cocina 10 minutos a fuego medio.",
+
+        "4.Servir  
+        Corrige de sal si es necesario.  
+        Sirve caliente, decorado con cilantro fresco picado.  
+        Acompaña con arroz basmati o pan naan."
+    ],
+    "idUsuario" => "usuario456",
+    "compartido" => true,
+    "alergias" => [],
+    "pais" => "India",
+    "otrasCategorias" => ["vegana", "sin gluten", "tradicional"],
+    "tiempo" => "40 min",
+    "dificultad" => "media",
+    "likes" => 9,
+    "href" => "http://localhost/api/img/recetas/chanaMasala.jpg",
+    "fecha_creacion" => "2023-10-06T14:30:00.000Z"
+],
+[
+    "nombre" => "Quiche Lorraine",
+    "ingredientes" => [
+        ["nombre" => "Masa quebrada", "cantidad" => 1, "unidad" => "base"],
+        ["nombre" => "Tocino ahumado", "cantidad" => 150, "unidad" => "g"],
+        ["nombre" => "Cebolla", "cantidad" => 1, "unidad" => "unidad"],
+        ["nombre" => "Huevos", "cantidad" => 3, "unidad" => "unidades"],
+        ["nombre" => "Nata para cocinar", "cantidad" => 200, "unidad" => "ml"],
+        ["nombre" => "Nuez moscada", "cantidad" => 0.25, "unidad" => "cucharadita"],
+        ["nombre" => "Sal y pimienta", "cantidad" => "al gusto", "unidad" => ""]
+    ],
+    "pasos" => [
+        "1.Preparar la base y el relleno  
+        Precalienta el horno a 180 °C.  
+        Forra un molde con la masa quebrada y pínchala con un tenedor. Reserva.",
+
+        "2.Sofreír el tocino y la cebolla  
+        Corta el tocino en tiras y la cebolla en juliana.  
+        En una sartén, sofríe el tocino hasta que esté dorado, luego añade la cebolla y cocina 3-4 minutos. Escurre el exceso de grasa.",
+
+        "3.Batir los huevos y nata  
+        En un bol, bate los huevos con la nata, añade sal, pimienta y nuez moscada. Incorpora el tocino y la cebolla.",
+
+        "4.Hornear  
+        Vierte la mezcla sobre la masa.  
+        Hornea durante 30-35 minutos hasta que cuaje y la superficie esté dorada.  
+        Deja enfriar unos minutos antes de desmoldar y servir."
+    ],
+    "idUsuario" => "usuario456",
+    "compartido" => true,
+    "alergias" => ["lactosa", "gluten", "huevo"],
+    "pais" => "Francia",
+    "otrasCategorias" => ["entrante", "tradicional"],
+    "tiempo" => "50 min",
+    "dificultad" => "media",
+    "likes" => 14,
+    "href" => "http://localhost/api/img/recetas/quicheLorraine.jpg",
+    "fecha_creacion" => "2023-10-07T12:00:00.000Z"
+],
+[
+    "nombre" => "Bratwurst con chucrut",
+    "ingredientes" => [
+        ["nombre" => "Bratwurst (salchichas alemanas)", "cantidad" => 4, "unidad" => "unidades"],
+        ["nombre" => "Chucrut (col fermentada)", "cantidad" => 300, "unidad" => "g"],
+        ["nombre" => "Cerveza alemana", "cantidad" => 100, "unidad" => "ml"],
+        ["nombre" => "Cebolla", "cantidad" => 1, "unidad" => "unidad"],
+        ["nombre" => "Aceite", "cantidad" => 1, "unidad" => "cucharada"],
+        ["nombre" => "Pimienta negra", "cantidad" => 0.5, "unidad" => "cucharadita"]
+    ],
+    "pasos" => [
+        "1.Dorar las salchichas  
+        En una sartén con aceite, dora las bratwurst a fuego medio-alto durante 5-6 minutos por cada lado hasta que estén bien marcadas. Reserva.",
+
+        "2.Sofreír la cebolla y chucrut  
+        En la misma sartén, añade la cebolla picada y sofríela hasta que se torne transparente.  
+        Agrega el chucrut y la cerveza, mezcla y cocina a fuego medio durante 8-10 minutos.",
+
+        "3.Servir  
+        Apoya las bratwurst sobre una cama de chucrut caliente.  
+        Espolvorea con pimienta negra molida y sirve con pan o patatas."
+    ],
+    "idUsuario" => "usuario456",
+    "compartido" => true,
+    "alergias" => ["gluten"],
+    "pais" => "Alemania",
+    "otrasCategorias" => ["principal", "tradicional"],
+    "tiempo" => "30 min",
+    "dificultad" => "fácil",
+    "likes" => 8,
+    "href" => "http://localhost/api/img/recetas/bratwurst.jpg",
+    "fecha_creacion" => "2023-10-08T18:00:00.000Z"
+],
+[
+    "nombre" => "Mac and Cheese",
+    "ingredientes" => [
+        ["nombre" => "Macarrones", "cantidad" => 200, "unidad" => "g"],
+        ["nombre" => "Mantequilla", "cantidad" => 30, "unidad" => "g"],
+        ["nombre" => "Harina", "cantidad" => 2, "unidad" => "cucharadas"],
+        ["nombre" => "Leche", "cantidad" => 300, "unidad" => "ml"],
+        ["nombre" => "Queso cheddar rallado", "cantidad" => 200, "unidad" => "g"],
+        ["nombre" => "Sal y pimienta", "cantidad" => "al gusto", "unidad" => ""]
+    ],
+    "pasos" => [
+        "1.Cocer la pasta  
+        Cocina los macarrones en abundante agua con sal según el tiempo del paquete, generalmente 8-10 minutos. Escurre y reserva.",
+
+        "2.Preparar la bechamel ligera  
+        En una cacerola, derrite la mantequilla a fuego medio.  
+        Añade la harina y cocina 1 minuto, removiendo.  
+        Poco a poco, añade la leche sin dejar de remover hasta que espese y tenga consistencia cremosa.",
+
+        "3.Añadir el queso  
+        Retira la cacerola del fuego y añade el queso cheddar rallado.  
+        Remueve hasta que se funda y obtengas una salsa homogénea. Sazona al gusto.",
+
+        "4.Mezclar y gratinar  
+        Incorpora los macarrones a la salsa de queso.  
+        Coloca todo en una fuente apta para horno y gratina a 200 °C durante 10 minutos hasta que la superficie esté dorada."
+    ],
+    "idUsuario" => "usuario456",
+    "compartido" => true,
+    "alergias" => ["gluten", "lactosa"],
+    "pais" => "Estados Unidos",
+    "otrasCategorias" => ["confort", "familiar"],
+    "tiempo" => "40 min",
+    "dificultad" => "media",
+    "likes" => 15,
+    "href" => "http://localhost/api/img/recetas/macAndCheese.jpg",
+    "fecha_creacion" => "2023-10-09T16:20:00.000Z"
+],
+[
+    "nombre" => "Feijão Tropeiro",
+    "ingredientes" => [
+        ["nombre" => "Frijoles cocidos", "cantidad" => 400, "unidad" => "g"],
+        ["nombre" => "Tocino picado", "cantidad" => 100, "unidad" => "g"],
+        ["nombre" => "Chorizo", "cantidad" => 100, "unidad" => "g"],
+        ["nombre" => "Farinha de mandioca", "cantidad" => 100, "unidad" => "g"],
+        ["nombre" => "Huevos", "cantidad" => 2, "unidad" => "unidades"],
+        ["nombre" => "Cebolla", "cantidad" => 1, "unidad" => "unidad"],
+        ["nombre" => "Ajo", "cantidad" => 2, "unidad" => "dientes"],
+        ["nombre" => "Aceite vegetal", "cantidad" => 2, "unidad" => "cucharadas"],
+        ["nombre" => "Sal y pimienta", "cantidad" => "al gusto", "unidad" => ""]
+    ],
+    "pasos" => [
+        "1.Sofreír tocino y chorizo  
+        En una sartén grande, calienta el aceite y fríe el tocino picado hasta que esté dorado.  
+        Añade el chorizo y cocina unos minutos más.",
+
+        "2.Añadir cebolla y ajo  
+        Incorpora la cebolla picada y el ajo; sofríe hasta que la cebolla esté transparente.",
+
+        "3.Incorporar frijoles y mandioca  
+        Agrega los frijoles cocidos y mezcla bien.  
+        Añade la farinha de mandioca (harina de yuca), remueve y cocina 5 minutos.",
+
+        "4.Finalizar con huevo  
+        En una sartén aparte, fríe los huevos al gusto.  
+        Sirve los frijoles con un huevo encima y sazona con sal y pimienta."
+    ],
+    "idUsuario" => "usuario456",
+    "compartido" => true,
+    "alergias" => ["gluten"],
+    "pais" => "Brasil",
+    "otrasCategorias" => ["tradicional", "principal"],
+    "tiempo" => "35 min",
+    "dificultad" => "media",
+    "likes" => 10,
+    "href" => "http://localhost/api/img/recetas/feijaoTropeiro.jpg",
+    "fecha_creacion" => "2023-10-10T14:00:00.000Z"
+],
+[
+    "nombre" => "Pollo Kung Pao",
+    "ingredientes" => [
+        ["nombre" => "Pechuga de pollo", "cantidad" => 300, "unidad" => "g"],
+        ["nombre" => "Cacahuetes", "cantidad" => 50, "unidad" => "g"],
+        ["nombre" => "Pimiento rojo", "cantidad" => 1, "unidad" => "unidad"],
+        ["nombre" => "Cebolla tierna", "cantidad" => 2, "unidad" => "unidades"],
+        ["nombre" => "Ajo", "cantidad" => 2, "unidad" => "dientes"],
+        ["nombre" => "Jengibre fresco", "cantidad" => 1, "unidad" => "cucharadita"],
+        ["nombre" => "Salsa de soja", "cantidad" => 2, "unidad" => "cucharadas"],
+        ["nombre" => "Vinagre de arroz", "cantidad" => 1, "unidad" => "cucharada"],
+        ["nombre" => "Azúcar", "cantidad" => 1, "unidad" => "cucharadita"],
+        ["nombre" => "Aceite de sésamo (o vegetal)", "cantidad" => 2, "unidad" => "cucharadas"],
+        ["nombre" => "Ají seco (opcional)", "cantidad" => 2, "unidad" => "unidades"]
+    ],
+    "pasos" => [
+        "1.Marinado rápido  
+        Corta el pollo en dados y marínalo con una cucharada de salsa de soja y una cucharadita de aceite de sésamo durante 10 minutos.",
+
+        "2.Salta ajo, jengibre y pimiento  
+        En un wok o sartén grande, calienta una cucharada de aceite.  
+        Añade el ajo picado, el jengibre y el pimiento cortado en trozos. Saltea 2–3 minutos.",
+
+        "3.Cocina el pollo  
+        Agrega el pollo marinado al wok. Cocina hasta que esté dorado y bien cocido.",
+
+        "4.Salsa y cacahuetes  
+        Incorpora la otra cucharada de soja, el vinagre, azúcar y ají seco.  
+        Mezcla bien y añade los cacahuetes. Cocina 2 minutos más.",
+
+        "5.Servir  
+        Retira y sirve caliente sobre arroz blanco."
+    ],
+    "idUsuario" => "usuario456",
+    "compartido" => true,
+    "alergias" => ["frutos secos", "gluten"],
+    "pais" => "China",
+    "otrasCategorias" => ["picante", "principal"],
+    "tiempo" => "30 min",
+    "dificultad" => "media",
+    "likes" => 13,
+    "href" => "http://localhost/api/img/recetas/kungPao.jpg",
+    "fecha_creacion" => "2023-10-11T13:00:00.000Z"
+],
+[
+    "nombre" => "Pad Thai",
+    "ingredientes" => [
+        ["nombre" => "Fideos de arroz", "cantidad" => 200, "unidad" => "g"],
+        ["nombre" => "Gambas peladas", "cantidad" => 150, "unidad" => "g"],
+        ["nombre" => "Huevo", "cantidad" => 1, "unidad" => "unidad"],
+        ["nombre" => "Brotes de soja", "cantidad" => 100, "unidad" => "g"],
+        ["nombre" => "Cacahuetes picados", "cantidad" => 30, "unidad" => "g"],
+        ["nombre" => "Cebolla verde", "cantidad" => 2, "unidad" => "unidades"],
+        ["nombre" => "Salsa de pescado", "cantidad" => 2, "unidad" => "cucharadas"],
+        ["nombre" => "Azúcar de palma o moreno", "cantidad" => 1, "unidad" => "cucharada"],
+        ["nombre" => "Tamarindo en pasta", "cantidad" => 1, "unidad" => "cucharada"],
+        ["nombre" => "Aceite vegetal", "cantidad" => 2, "unidad" => "cucharadas"],
+        ["nombre" => "Chile en polvo (opcional)", "cantidad" => "al gusto", "unidad" => ""]
+    ],
+    "pasos" => [
+        "1.Preparar los fideos  
+        Remoja los fideos en agua tibia durante 10 minutos hasta que estén blandos. Escurre y reserva.",
+
+        "2.Cocinar gambas y huevo  
+        Calienta aceite en wok. Añade las gambas y cocina 2 minutos.  
+        Empuja las gambas a un lado y rompe el huevo; revuélvelo hasta que cuaje.",
+
+        "3.Incorporar salsa y fideos  
+        Añade la salsa de pescado, tamarindo y azúcar; mezcla.  
+        Incorpora los fideos y los brotes de soja. Saltea todo junto un par de minutos.",
+
+        "4.Terminar y servir  
+        Retira del fuego, añade los cacahuetes picados y cebolla verde en rodajas.  
+        Sirve caliente, con chile en polvo si gustas."
+    ],
+    "idUsuario" => "usuario456",
+    "compartido" => true,
+    "alergias" => ["frutos secos", "marisco", "gluten"],
+    "pais" => "Tailandia",
+    "otrasCategorias" => ["callejera", "picante"],
+    "tiempo" => "35 min",
+    "dificultad" => "media",
+    "likes" => 11,
+    "href" => "http://localhost/api/img/recetas/padThai.jpg",
+    "fecha_creacion" => "2023-10-12T12:30:00.000Z"
+],
+[
+    "nombre" => "Bibimbap",
+    "ingredientes" => [
+        ["nombre" => "Arroz blanco cocido", "cantidad" => 300, "unidad" => "g"],
+        ["nombre" => "Carne de ternera", "cantidad" => 150, "unidad" => "g"],
+        ["nombre" => "Zanahoria", "cantidad" => 1, "unidad" => "unidad"],
+        ["nombre" => "Espinacas", "cantidad" => 100, "unidad" => "g"],
+        ["nombre" => "Brotes de soja", "cantidad" => 100, "unidad" => "g"],
+        ["nombre" => "Huevo", "cantidad" => 1, "unidad" => "unidad"],
+        ["nombre" => "Pasta gochujang", "cantidad" => 1, "unidad" => "cucharada"],
+        ["nombre" => "Aceite de sésamo", "cantidad" => 1, "unidad" => "cucharada"],
+        ["nombre" => "Ajo", "cantidad" => 1, "unidad" => "diente"],
+        ["nombre" => "Aceite vegetal", "cantidad" => 1, "unidad" => "cucharada"]
+    ],
+    "pasos" => [
+        "1.Preparar los ingredientes  
+        Corta la zanahoria en tiras, saltea las espinacas y brotes de soja por separado.  
+        Cocina la carne con ajo picado y aceite de sésamo.",
+
+        "2.Cocinar el arroz y el huevo  
+        Cocina el arroz blanco y fríe un huevo con la yema líquida (estilo sunny side up).",
+
+        "3.Montar el plato  
+        Sirve el arroz en un bol y coloca por encima la carne y las verduras.  
+        Añade el huevo frito en el centro y una cucharada de gochujang.",
+
+        "4.Servir  
+        Mezclar todo bien antes de comer."
+    ],
+    "idUsuario" => "usuario456",
+    "compartido" => true,
+    "alergias" => ["gluten", "huevo"],
+    "pais" => "Corea del Sur",
+    "otrasCategorias" => ["completo", "picante"],
+    "tiempo" => "40 min",
+    "dificultad" => "media",
+    "likes" => 14,
+    "href" => "http://localhost/api/img/recetas/bibimbap.jpg",
+    "fecha_creacion" => "2023-10-13T11:30:00.000Z"
+],
+[
+    "nombre" => "Moussaka",
+    "ingredientes" => [
+        ["nombre" => "Berenjenas", "cantidad" => 2, "unidad" => "unidades"],
+        ["nombre" => "Carne picada de cordero o ternera", "cantidad" => 300, "unidad" => "g"],
+        ["nombre" => "Cebolla", "cantidad" => 1, "unidad" => "unidad"],
+        ["nombre" => "Ajo", "cantidad" => 2, "unidad" => "dientes"],
+        ["nombre" => "Tomate triturado", "cantidad" => 200, "unidad" => "g"],
+        ["nombre" => "Canela en polvo", "cantidad" => 1, "unidad" => "cucharadita"],
+        ["nombre" => "Bechamel", "cantidad" => 300, "unidad" => "ml"],
+        ["nombre" => "Queso rallado", "cantidad" => 50, "unidad" => "g"],
+        ["nombre" => "Aceite de oliva", "cantidad" => 3, "unidad" => "cucharadas"],
+        ["nombre" => "Sal y pimienta", "cantidad" => "al gusto", "unidad" => ""]
+    ],
+    "pasos" => [
+        "1.Preparar las berenjenas  
+        Corta las berenjenas en rodajas y fríelas ligeramente o ásalas.",
+
+        "2.Cocinar la carne  
+        Sofríe la cebolla y el ajo, añade la carne picada y cocina hasta que se dore.  
+        Agrega el tomate y la canela. Cocina a fuego lento 15 minutos.",
+
+        "3.Montar el plato  
+        En una fuente para horno, coloca una capa de berenjenas, luego la carne, repite y termina con la bechamel.",
+
+        "4.Hornear  
+        Espolvorea con queso y hornea a 180°C durante 30–35 minutos.  
+        Deja reposar antes de servir."
+    ],
+    "idUsuario" => "usuario456",
+    "compartido" => true,
+    "alergias" => ["lácteos", "gluten"],
+    "pais" => "Grecia",
+    "otrasCategorias" => ["horno", "principal"],
+    "tiempo" => "1 h",
+    "dificultad" => "alta",
+    "likes" => 9,
+    "href" => "http://localhost/api/img/recetas/moussaka.jpg",
+    "fecha_creacion" => "2023-10-14T16:00:00.000Z"
+],
+[
+    "nombre" => "Tabbouleh",
+    "ingredientes" => [
+        ["nombre" => "Bulgur fino", "cantidad" => 100, "unidad" => "g"],
+        ["nombre" => "Perejil fresco", "cantidad" => 1, "unidad" => "manojo"],
+        ["nombre" => "Hierbabuena fresca", "cantidad" => 1, "unidad" => "puñado"],
+        ["nombre" => "Tomates", "cantidad" => 2, "unidad" => "unidades"],
+        ["nombre" => "Cebolleta", "cantidad" => 2, "unidad" => "unidades"],
+        ["nombre" => "Zumo de limón", "cantidad" => 3, "unidad" => "cucharadas"],
+        ["nombre" => "Aceite de oliva", "cantidad" => 3, "unidad" => "cucharadas"],
+        ["nombre" => "Sal", "cantidad" => "al gusto", "unidad" => ""]
+    ],
+    "pasos" => [
+        "1.Hidratar el bulgur  
+        Coloca el bulgur en un bol con agua caliente durante 20 minutos. Escurre y deja enfriar.",
+
+        "2.Picar los ingredientes  
+        Pica finamente el perejil, hierbabuena, tomates y cebolleta.",
+
+        "3.Mezclar todo  
+        En un bol grande, mezcla el bulgur con los vegetales.  
+        Añade el zumo de limón, aceite y sal al gusto. Mezcla bien.",
+
+        "4.Servir frío  
+        Sirve como entrante o acompañamiento frío."
+    ],
+    "idUsuario" => "usuario456",
+    "compartido" => true,
+    "alergias" => ["gluten"],
+    "pais" => "Líbano",
+    "otrasCategorias" => ["vegano", "ensalada", "fresco"],
+    "tiempo" => "30 min",
+    "dificultad" => "fácil",
+    "likes" => 8,
+    "href" => "http://localhost/api/img/recetas/tabbouleh.jpg",
+    "fecha_creacion" => "2023-10-15T12:15:00.000Z"
+],
+[
+    "nombre" => "Menemen",
+    "ingredientes" => [
+        ["nombre" => "Huevos", "cantidad" => 3, "unidad" => "unidades"],
+        ["nombre" => "Tomates maduros", "cantidad" => 3, "unidad" => "unidades"],
+        ["nombre" => "Pimiento verde", "cantidad" => 1, "unidad" => "unidad"],
+        ["nombre" => "Cebolla (opcional)", "cantidad" => 0.5, "unidad" => "unidad"],
+        ["nombre" => "Aceite de oliva", "cantidad" => 2, "unidad" => "cucharadas"],
+        ["nombre" => "Sal y pimienta", "cantidad" => "al gusto", "unidad" => ""]
+    ],
+    "pasos" => [
+        "1.Picar y sofreír  
+        Pica los tomates, el pimiento y la cebolla si la usas. Sofríe todo en aceite caliente.",
+
+        "2.Añadir los huevos  
+        Bate ligeramente los huevos y añádelos a la sartén. Remueve lentamente.",
+
+        "3.Cocinar al gusto  
+        Cocina hasta que los huevos estén en el punto deseado (jugosos o más firmes).",
+
+        "4.Servir  
+        Sirve caliente, acompañado de pan fresco."
+    ],
+    "idUsuario" => "usuario456",
+    "compartido" => true,
+    "alergias" => ["huevo"],
+    "pais" => "Turquía",
+    "otrasCategorias" => ["desayuno", "rápido", "vegetariano"],
+    "tiempo" => "20 min",
+    "dificultad" => "fácil",
+    "likes" => 7,
+    "href" => "http://localhost/api/img/recetas/menemen.jpg",
+    "fecha_creacion" => "2023-10-16T09:45:00.000Z"
+],
+[
+"nombre" => "Risotto ai Funghi",
+"ingredientes" => [
+    ["nombre" => "Arroz arborio", "cantidad" => 200, "unidad" => "g"],
+    ["nombre" => "Champiñones", "cantidad" => 150, "unidad" => "g"],
+    ["nombre" => "Caldo de verduras", "cantidad" => 800, "unidad" => "ml"],
+    ["nombre" => "Cebolla", "cantidad" => 1, "unidad" => "unidad"],
+    ["nombre" => "Parmesano", "cantidad" => 30, "unidad" => "g"]
+],
+"pasos" => [
+    "1. Sofreír la cebolla picada hasta que esté transparente.",
+    "2. Añadir los champiñones troceados y cocinar 5 minutos.",
+    "3. Incorporar el arroz y remover durante 2 minutos.",
+    "4. Ir añadiendo el caldo caliente poco a poco mientras se remueve.",
+    "5. Cocinar durante unos 18-20 minutos. Añadir el parmesano y servir."
+],
+"idUsuario" => "usuario456",
+"compartido" => true,
+"alergias" => ["gluten", "lactosa"],
+"pais" => "Italia",
+"otrasCategorias" => ["vegetariana"],
+"tiempo" => "30 min",
+"dificultad" => "media",
+"likes" => 8,
+"href" => "http://localhost/api/img/recetas/risotoFunghi.jpg",
+"fecha_creacion" => "2023-10-02T12:00:00.000Z"
+],
+[
+"nombre" => "Sopa Azteca",
+"ingredientes" => [
+    ["nombre" => "Tortillas de maíz", "cantidad" => 4, "unidad" => "unidad"],
+    ["nombre" => "Tomate", "cantidad" => 3, "unidad" => "unidad"],
+    ["nombre" => "Ajo", "cantidad" => 2, "unidad" => "diente"],
+    ["nombre" => "Caldo de pollo", "cantidad" => 500, "unidad" => "ml"],
+    ["nombre" => "Chile pasilla", "cantidad" => 1, "unidad" => "unidad"]
+],
+"pasos" => [
+    "1. Freír las tortillas en tiras hasta que estén crujientes.",
+    "2. Licuar los tomates con ajo y chile pasilla.",
+    "3. Cocinar esta salsa en una olla con un poco de aceite.",
+    "4. Añadir el caldo y cocinar 15 minutos.",
+    "5. Servir con las tiras de tortilla, aguacate y queso fresco."
+],
+"idUsuario" => "usuario456",
+"compartido" => true,
+"alergias" => [],
+"pais" => "Mexico",
+"otrasCategorias" => ["sin gluten"],
+"tiempo" => "25 min",
+"dificultad" => "media",
+"likes" => 6,
+"href" => "http://localhost/api/img/recetas/sopaAzteca.jpg",
+"fecha_creacion" => "2023-10-03T14:00:00.000Z"
+],
+
+[
+"nombre" => "Yakitori",
+"ingredientes" => [
+    ["nombre" => "Pollo (muslo)", "cantidad" => 300, "unidad" => "g"],
+    ["nombre" => "Salsa de soja", "cantidad" => 50, "unidad" => "ml"],
+    ["nombre" => "Mirin", "cantidad" => 30, "unidad" => "ml"],
+    ["nombre" => "Azúcar", "cantidad" => 1, "unidad" => "cucharada"],
+    ["nombre" => "Brochetas de bambú", "cantidad" => 6, "unidad" => "unidad"]
+],
+"pasos" => [
+    "1. Cortar el pollo en cubos y ensartar en las brochetas.",
+    "2. Mezclar la salsa de soja, mirin y azúcar en una sartén.",
+    "3. Cocinar las brochetas en una sartén o parrilla.",
+    "4. Pintar con la salsa varias veces durante la cocción.",
+    "5. Servir caliente como aperitivo o plato principal."
+],
+"idUsuario" => "usuario456",
+"compartido" => true,
+"alergias" => ["soja"],
+"pais" => "Japon",
+"otrasCategorias" => ["sin gluten si se usa soja especial"],
+"tiempo" => "20 min",
+"dificultad" => "facil",
+"likes" => 7,
+"href" => "http://localhost/api/img/recetas/yakitori.jpg",
+"fecha_creacion" => "2023-10-04T16:00:00.000Z"
+],
+[
+"nombre" => "Palak Paneer",
+"ingredientes" => [
+    ["nombre" => "Espinacas", "cantidad" => 300, "unidad" => "g"],
+    ["nombre" => "Paneer", "cantidad" => 150, "unidad" => "g"],
+    ["nombre" => "Cebolla", "cantidad" => 1, "unidad" => "unidad"],
+    ["nombre" => "Tomate", "cantidad" => 1, "unidad" => "unidad"],
+    ["nombre" => "Ajo", "cantidad" => 2, "unidad" => "diente"]
+],
+"pasos" => [
+    "1. Hervir las espinacas y licuarlas hasta obtener un puré.",
+    "2. Sofreír cebolla, ajo y tomate picado hasta formar una pasta.",
+    "3. Añadir el puré de espinacas y cocinar 5 minutos.",
+    "4. Incorporar el paneer en cubos y cocinar 5 minutos más.",
+    "5. Servir con arroz o pan naan caliente."
+],
+"idUsuario" => "usuario456",
+"compartido" => true,
+"alergias" => ["lactosa"],
+"pais" => "India",
+"otrasCategorias" => ["vegetariana", "sin gluten"],
+"tiempo" => "30 min",
+"dificultad" => "media",
+"likes" => 9,
+"href" => "http://localhost/api/img/recetas/palakPaneer.jpg",
+"fecha_creacion" => "2023-10-06T10:00:00.000Z"
+],
+
+[
+"nombre" => "Ratatouille",
+"ingredientes" => [
+    ["nombre" => "Berenjena", "cantidad" => 1, "unidad" => "unidad"],
+    ["nombre" => "Calabacín", "cantidad" => 1, "unidad" => "unidad"],
+    ["nombre" => "Pimiento rojo", "cantidad" => 1, "unidad" => "unidad"],
+    ["nombre" => "Tomate", "cantidad" => 2, "unidad" => "unidad"],
+    ["nombre" => "Cebolla", "cantidad" => 1, "unidad" => "unidad"]
+],
+"pasos" => [
+    "1. Cortar todas las verduras en rodajas finas.",
+    "2. Sofreír cebolla y tomate en una sartén hasta que se ablanden.",
+    "3. En una fuente para horno, colocar las verduras alternando colores.",
+    "4. Hornear a 180°C durante 40 minutos con un poco de aceite y hierbas.",
+    "5. Servir caliente como plato principal o acompañamiento."
+],
+"idUsuario" => "usuario456",
+"compartido" => true,
+"alergias" => [],
+"pais" => "Francia",
+"otrasCategorias" => ["vegana", "sin gluten"],
+"tiempo" => "1 h",
+"dificultad" => "media",
+"likes" => 6,
+"href" => "http://localhost/api/img/recetas/ratatouille.jpg",
+"fecha_creacion" => "2023-10-07T11:00:00.000Z"
+],
+
+[
+"nombre" => "Spätzle",
+"ingredientes" => [
+    ["nombre" => "Harina", "cantidad" => 250, "unidad" => "g"],
+    ["nombre" => "Huevos", "cantidad" => 3, "unidad" => "unidad"],
+    ["nombre" => "Leche", "cantidad" => 100, "unidad" => "ml"],
+    ["nombre" => "Sal", "cantidad" => 1, "unidad" => "cucharadita"]
+],
+"pasos" => [
+    "1. Mezclar harina, huevos, leche y sal hasta obtener una masa densa.",
+    "2. Colocar la masa en un rallador especial o tabla de Spätzle sobre agua hirviendo.",
+    "3. Cocer hasta que floten, unos 2-3 minutos.",
+    "4. Escurrir y saltear con mantequilla o acompañar con salsa.",
+    "5. Servir como guarnición o plato principal con queso fundido."
+],
+"idUsuario" => "usuario456",
+"compartido" => true,
+"alergias" => ["gluten", "huevo", "lactosa"],
+"pais" => "Alemania",
+"otrasCategorias" => [],
+"tiempo" => "30 min",
+"dificultad" => "media",
+"likes" => 4,
+"href" => "http://localhost/api/img/recetas/spatzel.jpg",
+"fecha_creacion" => "2023-10-07T13:00:00.000Z"
+],
+
+[
+"nombre" => "Clam Chowder",
+"ingredientes" => [
+    ["nombre" => "Almejas", "cantidad" => 300, "unidad" => "g"],
+    ["nombre" => "Papas", "cantidad" => 2, "unidad" => "unidad"],
+    ["nombre" => "Cebolla", "cantidad" => 1, "unidad" => "unidad"],
+    ["nombre" => "Leche", "cantidad" => 200, "unidad" => "ml"],
+    ["nombre" => "Bacon", "cantidad" => 100, "unidad" => "g"]
+],
+"pasos" => [
+    "1. Sofreír el bacon y la cebolla hasta que estén dorados.",
+    "2. Añadir las papas en cubos y las almejas.",
+    "3. Incorporar la leche y cocer a fuego medio.",
+    "4. Cocinar hasta que las papas estén tiernas.",
+    "5. Servir caliente con perejil picado."
+],
+"idUsuario" => "usuario456",
+"compartido" => true,
+"alergias" => ["marisco", "lactosa"],
+"pais" => "Estados Unidos",
+"otrasCategorias" => ["sopa"],
+"tiempo" => "45 min",
+"dificultad" => "media",
+"likes" => 5,
+"href" => "http://localhost/api/img/recetas/clamChowder.jpg",
+"fecha_creacion" => "2023-10-08T10:30:00.000Z"
+],
+
+[
+    "nombre" => "Moqueca de Peixe",
+    "ingredientes" => [
+        ["nombre" => "Filetes de pescado blanco", "cantidad" => 400, "unidad" => "g"],
+        ["nombre" => "Pimiento rojo", "cantidad" => 1, "unidad" => "unidad"],
+        ["nombre" => "Cebolla", "cantidad" => 1, "unidad" => "unidad"],
+        ["nombre" => "Tomates", "cantidad" => 2, "unidad" => "unidades"],
+        ["nombre" => "Leche de coco", "cantidad" => 200, "unidad" => "ml"],
+        ["nombre" => "Aceite de palma (dendê)", "cantidad" => 2, "unidad" => "cucharadas"],
+        ["nombre" => "Cilantro fresco", "cantidad" => "al gusto", "unidad" => ""],
+        ["nombre" => "Zumo de lima", "cantidad" => 2, "unidad" => "cucharadas"]
+    ],
+    "pasos" => [
+        "1. Marinar el pescado con lima, sal y cilantro.",
+        "2. En una olla, saltear cebolla, pimiento y tomate en aceite de palma.",
+        "3. Añadir el pescado y leche de coco; cocinar a fuego bajo 15–20 min.",
+        "4. Corregir sal y decorar con más cilantro.",
+        "5. Servir con arroz blanco."
+    ],
+    "idUsuario" => "usuario456",
+    "compartido" => true,
+    "alergias" => ["pescado", "coco"],
+    "pais" => "Brasil",
+    "otrasCategorias" => ["guiso", "sin gluten", "tradicional"],
+    "tiempo" => "50 min",
+    "dificultad" => "media",
+    "likes" => 14,
+    "href" => "http://localhost/api/img/recetas/moquecaPeixe.jpg",
+    "fecha_creacion" => "2025-06-08T12:05:00.000Z"
+],
+
+[
+    "nombre" => "Pisto Manchego",
+    "ingredientes" => [
+        ["nombre" => "Calabacín", "cantidad" => 1, "unidad" => "unidad"],
+        ["nombre" => "Berenjena", "cantidad" => 1, "unidad" => "unidad"],
+        ["nombre" => "Pimiento rojo", "cantidad" => 1, "unidad" => "unidad"],
+        ["nombre" => "Pimiento verde", "cantidad" => 1, "unidad" => "unidad"],
+        ["nombre" => "Cebolla", "cantidad" => 1, "unidad" => "unidad"],
+        ["nombre" => "Tomate triturado", "cantidad" => 400, "unidad" => "g"],
+        ["nombre" => "Aceite de oliva", "cantidad" => 50, "unidad" => "ml"],
+        ["nombre" => "Sal", "cantidad" => "al gusto", "unidad" => ""]
+    ],
+    "pasos" => [
+        "1. Lavar y trocear todas las verduras en cubos pequeños.",
+        "2. En una sartén grande, añadir el aceite y sofreír la cebolla y los pimientos hasta que estén blandos.",
+        "3. Añadir la berenjena y el calabacín, y cocinar durante 10 minutos más.",
+        "4. Incorporar el tomate triturado y una pizca de sal. Cocinar a fuego medio durante 20–25 minutos removiendo ocasionalmente.",
+        "5. Servir caliente como plato principal o acompañamiento. Puede añadirse un huevo frito por encima si se desea."
+    ],
+    "idUsuario" => "usuario456",
+    "compartido" => true,
+    "alergias" => [],
+    "pais" => "España",
+    "otrasCategorias" => ["vegetariana", "vegana", "tradicional", "sin gluten"],
+    "tiempo" => "45 min",
+    "dificultad" => "media",
+    "likes" => 16,
+    "href" => "http://localhost/api/img/recetas/pistoManchego.jpg",
+    "fecha_creacion" => "2025-06-08T12:30:00.000Z"
+],
+
+[
+"nombre" => "Dumplings al vapor",
+"ingredientes" => [
+    ["nombre" => "Harina", "cantidad" => 200, "unidad" => "g"],
+    ["nombre" => "Carne picada", "cantidad" => 150, "unidad" => "g"],
+    ["nombre" => "Col china", "cantidad" => 100, "unidad" => "g"],
+    ["nombre" => "Jengibre", "cantidad" => 1, "unidad" => "cucharadita"],
+    ["nombre" => "Salsa de soja", "cantidad" => 2, "unidad" => "cucharadas"]
+],
+"pasos" => [
+    "1. Amasar la harina con agua hasta formar una masa suave.",
+    "2. Mezclar la carne con col picada, jengibre y soja.",
+    "3. Formar discos con la masa y rellenarlos.",
+    "4. Cocinar los dumplings al vapor durante 15 minutos.",
+    "5. Servir con salsa de soja o vinagre."
+],
+"idUsuario" => "usuario456",
+"compartido" => true,
+"alergias" => ["gluten", "soja"],
+"pais" => "China",
+"otrasCategorias" => [],
+"tiempo" => "1 h",
+"dificultad" => "alta",
+"likes" => 8,
+"href" => "http://localhost/api/img/recetas/dumplingVapor.jpg",
+"fecha_creacion" => "2023-10-09T12:00:00.000Z"
+],
+
+[
+    "nombre" => "Tom Yum",
+    "ingredientes" => [
+        ["nombre" => "Gambas", "cantidad" => 200, "unidad" => "g"],
+        ["nombre" => "Caldo de pollo o marisco", "cantidad" => 500, "unidad" => "ml"],
+        ["nombre" => "Hierba limón", "cantidad" => 2, "unidad" => "tallos"],
+        ["nombre" => "Galanga (o jengibre)", "cantidad" => 3, "unidad" => "rodajas"],
+        ["nombre" => "Hojas de lima kaffir", "cantidad" => 3, "unidad" => "hojas"],
+        ["nombre" => "Setas", "cantidad" => 100, "unidad" => "g"],
+        ["nombre" => "Chile", "cantidad" => 2, "unidad" => "unidades"],
+        ["nombre" => "Salsa de pescado", "cantidad" => 2, "unidad" => "cucharadas"],
+        ["nombre" => "Zumo de lima", "cantidad" => 2, "unidad" => "cucharadas"]
+    ],
+    "pasos" => [
+        "1. Hervir el caldo con hierba limón, galanga y hojas de lima durante 5 minutos.",
+        "2. Añadir las setas y cocinar 3 minutos más.",
+        "3. Incorporar las gambas y el chile; cocinar 2–3 minutos hasta que cambien de color.",
+        "4. Apagar el fuego, añadir salsa de pescado y zumo de lima.",
+        "5. Servir caliente, con algo de picante."
+    ],
+    "idUsuario" => "usuario456",
+    "compartido" => true,
+    "alergias" => ["marisco"],
+    "pais" => "Tailandia",
+    "otrasCategorias" => ["sopa", "picante"],
+    "tiempo" => "30 min",
+    "dificultad" => "media",
+    "likes" => 13,
+    "href" => "http://localhost/api/img/recetas/tomYum.jpg",
+    "fecha_creacion" => "2023-10-10T15:00:00.000Z"
+],
+
+[
+    "nombre" => "Tteokbokki",
+    "ingredientes" => [
+        ["nombre" => "Tteok (pasteles de arroz)", "cantidad" => 200, "unidad" => "g"],
+        ["nombre" => "Gochujang", "cantidad" => 2, "unidad" => "cucharadas"],
+        ["nombre" => "Azúcar", "cantidad" => 1, "unidad" => "cucharada"],
+        ["nombre" => "Salsa de soja", "cantidad" => 1, "unidad" => "cucharada"],
+        ["nombre" => "Cebolla verde", "cantidad" => 1, "unidad" => "unidad"],
+        ["nombre" => "Caldo (vegetal o dashi)", "cantidad" => 300, "unidad" => "ml"]
+    ],
+    "pasos" => [
+        "1. Hervir el caldo con gochujang, azúcar y soja.",
+        "2. Añadir los tteok y cocinar 5–7 minutos hasta que estén tiernos.",
+        "3. Incorporar la cebolla verde en rodajas.",
+        "4. Cocinar un par de minutos más.",
+        "5. Servir caliente y algo picante."
+    ],
+    "idUsuario" => "usuario456",
+    "compartido" => true,
+    "alergias" => ["gluten", "picante"],
+    "pais" => "Corea del Sur",
+    "otrasCategorias" => ["callejera", "picante"],
+    "tiempo" => "25 min",
+    "dificultad" => "media",
+    "likes" => 11,
+    "href" => "http://localhost/api/img/recetas/tteokbokki.jpg",
+    "fecha_creacion" => "2023-10-11T13:00:00.000Z"
+],
+
+[
+    "nombre" => "Souvlaki",
+    "ingredientes" => [
+        ["nombre" => "Carne de cerdo o pollo", "cantidad" => 300, "unidad" => "g"],
+        ["nombre" => "Aceite de oliva", "cantidad" => 2, "unidad" => "cucharadas"],
+        ["nombre" => "Orégano seco", "cantidad" => 1, "unidad" => "cucharadita"],
+        ["nombre" => "Limón", "cantidad" => 1, "unidad" => "unidad"],
+        ["nombre" => "Ajo", "cantidad" => 2, "unidad" => "dientes"],
+        ["nombre" => "Brochetas de madera", "cantidad" => 4, "unidad" => "unidades"]
+    ],
+    "pasos" => [
+        "1. Cortar la carne en dados y marinar con aceite, orégano, limón y ajo 30 minutos.",
+        "2. Ensartar la carne en brochetas.",
+        "3. Cocinar en parrilla o sartén durante 8–10 minutos, girando para dorar por todos lados.",
+        "4. Servir con pan pita, quizá tzatziki o verduras."
+    ],
+    "idUsuario" => "usuario456",
+    "compartido" => true,
+    "alergias" => [],
+    "pais" => "Grecia",
+    "otrasCategorias" => ["callejera", "principal"],
+    "tiempo" => "40 min",
+    "dificultad" => "media",
+    "likes" => 10,
+    "href" => "http://localhost/api/img/recetas/souvlaki.jpg",
+    "fecha_creacion" => "2023-10-12T17:00:00.000Z"
+],
+
+[
+    "nombre" => "Hummus",
+    "ingredientes" => [
+        ["nombre" => "Garbanzos cocidos", "cantidad" => 400, "unidad" => "g"],
+        ["nombre" => "Tahini", "cantidad" => 2, "unidad" => "cucharadas"],
+        ["nombre" => "Ajo", "cantidad" => 1, "unidad" => "diente"],
+        ["nombre" => "Zumo de limón", "cantidad" => 2, "unidad" => "cucharadas"],
+        ["nombre" => "Aceite de oliva", "cantidad" => 2, "unidad" => "cucharadas"],
+        ["nombre" => "Sal", "cantidad" => "al gusto", "unidad" => ""]
+    ],
+    "pasos" => [
+        "1. Triturar los garbanzos con tahini, ajo y limón.",
+        "2. Añadir aceite y sal y mezclar hasta textura cremosa.",
+        "3. Ajustar limón o sal al gusto.",
+        "4. Servir con aceite y pimentón encima, acompañado de pan."
+    ],
+    "idUsuario" => "usuario456",
+    "compartido" => true,
+    "alergias" => ["sésamo"],
+    "pais" => "Líbano",
+    "otrasCategorias" => ["vegano", "aperitivo"],
+    "tiempo" => "15 min",
+    "dificultad" => "fácil",
+    "likes" => 13,
+    "href" => "http://localhost/api/img/recetas/humus.jpg",
+    "fecha_creacion" => "2023-10-13T12:00:00.000Z"
+],
+
+[
+    "nombre" => "Baklava",
+    "ingredientes" => [
+        ["nombre" => "Masa filo", "cantidad" => 200, "unidad" => "g"],
+        ["nombre" => "Nueces picadas", "cantidad" => 150, "unidad" => "g"],
+        ["nombre" => "Mantequilla derretida", "cantidad" => 100, "unidad" => "g"],
+        ["nombre" => "Miel o jarabe", "cantidad" => 100, "unidad" => "ml"],
+        ["nombre" => "Azúcar", "cantidad" => 50, "unidad" => "g"]
+    ],
+    "pasos" => [
+        "1. Colocar hojas de filo pinceladas con mantequilla en una fuente.",
+        "2. Añadir capa de nueces y repetir filo y mantequilla.",
+        "3. Cortar en porciones y hornear a 180 °C 25–30 minutos hasta dorar.",
+        "4. Calentar miel con azúcar y verter sobre el baklava caliente.",
+        "5. Dejar enfriar y servir como dulce."
+    ],
+    "idUsuario" => "usuario456",
+    "compartido" => true,
+    "alergias" => ["frutos secos", "gluten", "lácteos"],
+    "pais" => "Turquía",
+    "otrasCategorias" => ["postre"],
+    "tiempo" => "1 h",
+    "dificultad" => "media",
+    "likes" => 12,
+    "href" => "http://localhost/api/img/recetas/baklava.jpg",
+    "fecha_creacion" => "2023-10-14T11:00:00.000Z"
+],
+
+[
+    "nombre" => "Pulpo a la gallega",
+    "ingredientes" => [
+        ["nombre" => "Pulpo cocido", "cantidad" => 500, "unidad" => "g"],
+        ["nombre" => "Patatas", "cantidad" => 3, "unidad" => "unidad"],
+        ["nombre" => "Pimentón dulce", "cantidad" => 1, "unidad" => "cucharadita"],
+        ["nombre" => "Aceite de oliva virgen extra", "cantidad" => 50, "unidad" => "ml"],
+        ["nombre" => "Sal gruesa", "cantidad" => "al gusto", "unidad" => ""]
+    ],
+    "pasos" => [
+        "1. Cocer las patatas con piel en agua con sal. Pelar y cortar en rodajas.",
+        "2. Cortar el pulpo cocido en rodajas de 1 cm.",
+        "3. Colocar una base de patata en un plato y encima el pulpo.",
+        "4. Espolvorear con pimentón dulce y sal gruesa.",
+        "5. Rociar con aceite de oliva antes de servir."
+    ],
+    "idUsuario" => "usuario456",
+    "compartido" => true,
+    "alergias" => ["marisco"],
+    "pais" => "España",
+    "otrasCategorias" => ["tapa", "tradicional"],
+    "tiempo" => "25 min",
+    "dificultad" => "fácil",
+    "likes" => 30,
+    "href" => "http://localhost/api/img/recetas/pulpoGallega.jpg",
+    "fecha_creacion" => "2025-06-08T13:05:00.000Z"
+],
+
+[
+    "nombre" => "Fabada asturiana",
+    "ingredientes" => [
+        ["nombre" => "Fabes (alubias blancas)", "cantidad" => 400, "unidad" => "g"],
+        ["nombre" => "Chorizo", "cantidad" => 2, "unidad" => "unidad"],
+        ["nombre" => "Morcilla", "cantidad" => 2, "unidad" => "unidad"],
+        ["nombre" => "Panceta", "cantidad" => 150, "unidad" => "g"],
+        ["nombre" => "Ajo", "cantidad" => 2, "unidad" => "dientes"],
+        ["nombre" => "Pimentón", "cantidad" => 1, "unidad" => "cucharadita"],
+        ["nombre" => "Agua", "cantidad" => 1.5, "unidad" => "litros"],
+        ["nombre" => "Sal", "cantidad" => "al gusto", "unidad" => ""]
+    ],
+    "pasos" => [
+        "1. Dejar las fabes en remojo la noche anterior.",
+        "2. Escurrir y colocar en una olla con agua limpia. Añadir chorizo, morcilla, panceta y ajos enteros.",
+        "3. Cocinar a fuego lento durante 2 horas. Espumar si es necesario.",
+        "4. Añadir sal y pimentón. Cocinar 30 minutos más.",
+        "5. Dejar reposar antes de servir para intensificar el sabor."
+    ],
+    "idUsuario" => "usuario456",
+    "compartido" => true,
+    "alergias" => [],
+    "pais" => "España",
+    "otrasCategorias" => ["tradicional", "invierno"],
+    "tiempo" => "3 h",
+    "dificultad" => "alta",
+    "likes" => 18,
+    "href" => "http://localhost/api/img/recetas/fabada.jpg",
+    "fecha_creacion" => "2025-06-08T13:10:00.000Z"
+],
+
+[
+    "nombre" => "Callos a la madrileña",
+    "ingredientes" => [
+        ["nombre" => "Callos de ternera", "cantidad" => 500, "unidad" => "g"],
+        ["nombre" => "Chorizo", "cantidad" => 1, "unidad" => "unidad"],
+        ["nombre" => "Morcilla", "cantidad" => 1, "unidad" => "unidad"],
+        ["nombre" => "Pimiento choricero", "cantidad" => 2, "unidad" => "unidad"],
+        ["nombre" => "Ajo", "cantidad" => 2, "unidad" => "dientes"],
+        ["nombre" => "Cebolla", "cantidad" => 1, "unidad" => "unidad"],
+        ["nombre" => "Pimentón", "cantidad" => 1, "unidad" => "cucharadita"]
+    ],
+    "pasos" => [
+        "1. Cocer los callos previamente limpios en agua con sal. Escurrir.",
+        "2. Sofreír ajo, cebolla y pimiento choricero picado.",
+        "3. Añadir los callos, chorizo y morcilla en rodajas. Añadir pimentón.",
+        "4. Cubrir con agua o caldo y cocinar a fuego lento 2 horas.",
+        "5. Dejar reposar para intensificar el sabor. Servir caliente."
+    ],
+    "idUsuario" => "usuario456",
+    "compartido" => true,
+    "alergias" => [],
+    "pais" => "España",
+    "otrasCategorias" => ["tradicional", "invierno"],
+    "tiempo" => "2 h 30 min",
+    "dificultad" => "alta",
+    "likes" => 21,
+    "href" => "http://localhost/api/img/recetas/callosMadrilena.jpg",
+    "fecha_creacion" => "2025-06-08T13:35:00.000Z"
+],
+
+[
+    "nombre" => "Croquetas de jamón",
+    "ingredientes" => [
+        ["nombre" => "Leche entera", "cantidad" => 500, "unidad" => "ml"],
+        ["nombre" => "Harina", "cantidad" => 50, "unidad" => "g"],
+        ["nombre" => "Mantequilla", "cantidad" => 50, "unidad" => "g"],
+        ["nombre" => "Jamón serrano", "cantidad" => 100, "unidad" => "g"],
+        ["nombre" => "Huevo", "cantidad" => 2, "unidad" => "unidad"],
+        ["nombre" => "Pan rallado", "cantidad" => 100, "unidad" => "g"],
+        ["nombre" => "Aceite para freír", "cantidad" => 250, "unidad" => "ml"]
+    ],
+    "pasos" => [
+        "1. Derretir mantequilla en un cazo y añadir la harina, cocinando unos minutos.",
+        "2. Añadir la leche poco a poco sin dejar de remover para formar una bechamel.",
+        "3. Agregar el jamón picado y cocinar hasta que espese bien.",
+        "4. Dejar enfriar la masa en la nevera varias horas.",
+        "5. Formar las croquetas, pasarlas por huevo y pan rallado, y freír en aceite caliente."
+    ],
+    "idUsuario" => "usuario456",
+    "compartido" => true,
+    "alergias" => ["gluten", "huevo", "lácteos"],
+    "pais" => "España",
+    "otrasCategorias" => ["tapa", "casera"],
+    "tiempo" => "1 h 30 min",
+    "dificultad" => "media",
+    "likes" => 35,
+    "href" => "http://localhost/api/img/recetas/croquetasJamon.jpg",
+    "fecha_creacion" => "2025-06-08T13:45:00.000Z"
+],
+
+[
+    "nombre" => "Migas extremeñas",
+    "ingredientes" => [
+        ["nombre" => "Pan duro", "cantidad" => 300, "unidad" => "g"],
+        ["nombre" => "Chorizo", "cantidad" => 100, "unidad" => "g"],
+        ["nombre" => "Panceta", "cantidad" => 100, "unidad" => "g"],
+        ["nombre" => "Ajo", "cantidad" => 5, "unidad" => "dientes"],
+        ["nombre" => "Aceite de oliva", "cantidad" => 3, "unidad" => "cucharadas"],
+        ["nombre" => "Pimentón", "cantidad" => 1, "unidad" => "cucharadita"],
+        ["nombre" => "Agua", "cantidad" => 100, "unidad" => "ml"]
+    ],
+    "pasos" => [
+        "1.Preparar el pan  
+        Corta el pan duro en trozos pequeños y colócalo en un bol.  
+        Humedécelo con el agua y cúbrelo con un paño húmedo. Deja reposar al menos 1 hora.",
+        
+        "2.Freír los ingredientes  
+        En una sartén grande, calienta el aceite.  
+        Sofríe los ajos enteros y luego añade el chorizo y la panceta cortados en trozos.  
+        Añade el pimentón y remueve bien.",
+        
+        "3.Cocinar las migas  
+        Incorpora el pan y cocina a fuego medio-alto.  
+        Remueve constantemente para que se suelten las migas y se doren.  
+        Cocina durante 20-25 minutos hasta que estén sueltas y crujientes.",
+        
+        "4.Servir  
+        Sirve caliente, acompañadas si se desea de uvas o huevo frito."
+    ],
+    "idUsuario" => "usuario456",
+    "compartido" => true,
+    "alergias" => ["gluten"],
+    "pais" => "España",
+    "otrasCategorias" => ["tradicional", "de cuchara"],
+    "tiempo" => "40 min",
+    "dificultad" => "media",
+    "likes" => 3,
+    "href" => "http://localhost/api/img/recetas/migas.jpg",
+    "fecha_creacion" => "2025-06-08T10:00:00.000Z"
+],
+
+[
+    "nombre" => "Alcachofas con jamón",
+    "ingredientes" => [
+        ["nombre" => "Alcachofas", "cantidad" => 8, "unidad" => "unidades"],
+        ["nombre" => "Jamón serrano", "cantidad" => 100, "unidad" => "g"],
+        ["nombre" => "Ajo", "cantidad" => 2, "unidad" => "dientes"],
+        ["nombre" => "Aceite de oliva", "cantidad" => 2, "unidad" => "cucharadas"],
+        ["nombre" => "Limón", "cantidad" => 1, "unidad" => "unidad"],
+        ["nombre" => "Sal", "cantidad" => 1, "unidad" => "pizca"]
+    ],
+    "pasos" => [
+        "1.Preparar las alcachofas  
+        Limpia las alcachofas retirando las hojas duras y corta las puntas.  
+        Frota con limón para que no se oxiden.  
+        Corta en cuartos y cuécelas en agua con sal durante 15 minutos.",
+        
+        "2.Sofreír  
+        En una sartén, calienta el aceite y sofríe los ajos picados.  
+        Añade el jamón cortado en taquitos y cocina un par de minutos.",
+        
+        "3.Mezclar  
+        Escurre las alcachofas y añádelas a la sartén.  
+        Saltea todo junto durante 5 minutos para que se mezclen los sabores.",
+        
+        "4.Servir  
+        Sirve caliente como entrante o acompañamiento."
+    ],
+    "idUsuario" => "usuario456",
+    "compartido" => true,
+    "alergias" => [],
+    "pais" => "España",
+    "otrasCategorias" => ["ligera", "sin gluten"],
+    "tiempo" => "30 min",
+    "dificultad" => "fácil",
+    "likes" => 4,
+    "href" => "http://localhost/api/img/recetas/alcachofasJamon.jpg",
+    "fecha_creacion" => "2025-06-08T10:05:00.000Z"
+],
+
+[
+    "nombre" => "Cachopo asturiano",
+    "ingredientes" => [
+        ["nombre" => "Filetes de ternera", "cantidad" => 2, "unidad" => "unidades grandes"],
+        ["nombre" => "Jamón serrano", "cantidad" => 2, "unidad" => "lonchas"],
+        ["nombre" => "Queso (tipo Cabrales o fundente)", "cantidad" => 2, "unidad" => "lonchas"],
+        ["nombre" => "Huevo", "cantidad" => 2, "unidad" => "unidades"],
+        ["nombre" => "Pan rallado", "cantidad" => 100, "unidad" => "g"],
+        ["nombre" => "Harina", "cantidad" => 50, "unidad" => "g"],
+        ["nombre" => "Aceite de oliva", "cantidad" => 250, "unidad" => "ml"],
+        ["nombre" => "Sal", "cantidad" => 1, "unidad" => "pizca"]
+    ],
+    "pasos" => [
+        "1.Montar el cachopo  
+        Extiende un filete de ternera.  
+        Coloca encima una loncha de jamón y otra de queso.  
+        Tapa con el otro filete y presiona bien los bordes.",
+        
+        "2.Empanar  
+        Pasa el cachopo por harina, luego por huevo batido y finalmente por pan rallado.  
+        Asegúrate de que queda bien cubierto.",
+        
+        "3.Freír  
+        Calienta el aceite en una sartén amplia.  
+        Fríe el cachopo por ambos lados hasta que esté dorado y crujiente.  
+        Retira y escurre sobre papel absorbente.",
+        
+        "4.Servir  
+        Sirve caliente, acompañado de patatas fritas o ensalada."
+    ],
+    "idUsuario" => "usuario456",
+    "compartido" => true,
+    "alergias" => ["gluten", "lactosa", "huevo"],
+    "pais" => "España",
+    "otrasCategorias" => ["contundente", "tradicional"],
+    "tiempo" => "35 min",
+    "dificultad" => "media",
+    "likes" => 6,
+    "href" => "http://localhost/api/img/recetas/cachopo.jpg",
+    "fecha_creacion" => "2025-06-08T10:10:00.000Z"
+],
+// Conexión a la base de datos MongoDB
+
 ];
 
 try {
