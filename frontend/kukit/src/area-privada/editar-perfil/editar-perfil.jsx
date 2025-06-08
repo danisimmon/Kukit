@@ -912,7 +912,7 @@ const EditarPerfil = () => {
               <div className="ingredientes-pasos">
                 <div className="ingredientes-crear-receta">
                   <div className="contenedor-ingredientes">
-                    <h5>INGREDIENTES</h5>
+                    <h5>Ingredientes</h5>
                     {/* Tabla para mostrar los ingredientes añadidos */}
                     {ingredientes.length > 0 && (
                       <table className="tabla-ingredientes table table-striped table-sm">
@@ -985,7 +985,7 @@ const EditarPerfil = () => {
                   </div>
                 </div>
                 <div className="pasos-crear-receta">
-                  <h5>PASOS</h5>
+                  <h5>Pasos</h5>
                   {/* Tabla para mostrar los pasos añadidos */}
                   {pasos.length > 0 && (
                     <table className="tabla-pasos table table-striped table-sm">

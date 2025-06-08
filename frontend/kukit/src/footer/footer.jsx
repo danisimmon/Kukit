@@ -16,7 +16,7 @@ function Footer({ setShowListaCompra }) {
                         {/* Sección 1 */}
                         <div className="col-lg-3">
                             <div>
-                                <h6 className="footer-heading text-uppercase text-white">Visita nuestras secciones</h6>
+                                <h6 className="footer-heading text-white">Visita nuestras secciones</h6>
                                 <ul className="list-unstyled footer-link mt-4">
                                     <li><a href="/recetas" className="enlace-footer">Recetas</a></li>
                                     <li><a className="enlace-footer" onClick={() => setShowListaCompra(true)}>Lista de la compra</a></li>
@@ -28,7 +28,7 @@ function Footer({ setShowListaCompra }) {
                         {/* Sección 2 */}
                         <div className="col-lg-3">
                             <div>
-                                <h6 className="footer-heading text-uppercase text-white">Información Corporativa</h6>
+                                <h6 className="footer-heading text-white">Información Corporativa</h6>
                                 <ul className="list-unstyled footer-link mt-4">
                                     <li><a href="/sobrekukit" className="enlace-footer">Sobre Kukit</a></li>
                                     <li><a href="/partners" className="enlace-footer">Partners o Colaboradores</a></li>
@@ -40,7 +40,7 @@ function Footer({ setShowListaCompra }) {
                         {/* Sección 3 */}
                         <div className="col-lg-3">
                             <div style={{ color: '#fff' }}>
-                                <h6 className="footer-heading text-uppercase text-white" style={{ color: '#fff' }}>Contáctanos</h6>
+                                <h6 className="footer-heading text-white" style={{ color: '#fff' }}>Contáctanos</h6>
                                 <p className="contact-info mt-4" style={{ color: '#fff' }}>Contacta con nosotros si necesitas ayuda</p>
                                 <p className="contact-info" style={{ color: '#fff' }}>kukit.contacto@gmail.com</p>
                                 <div className="mt-5">

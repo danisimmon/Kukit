@@ -111,7 +111,7 @@ function Home() {
       <main>
         <div className="hero">
           <div className="textos-hero">
-            <h1 className='rojopasion'>ORGANIZA LO QUE COMES SIN COMERTE LA CABEZA</h1>
+            <h1 className='rojopasion'>Organiza lo que comes sin comerte la cabeza</h1>
             <p className="subtitulo-hero">Descubre un nuevo mundo culinario y simplifica tu cocina.</p>
           </div>
           <div className="fondo">
@@ -125,130 +125,129 @@ function Home() {
           {/* Contenedor para las secciones de Imprescindibles y Novedades */}
           {/* Usamos container-fluid para ancho completo y my-5 para margen vertical. La clase 'row' de Bootstrap permite que los elementos hijos se coloquen en línea. */}
           <div className="container-fluid my-5" id="contenedor-imprescindibles-novedades">
-            <div className="row gap-3">
 
-              {/* Sección Imprescindibles Kukit - Ocupa la mitad del ancho en pantallas medianas y superiores */}
-              <div className="col-12 bg-light ms-auto">
-                <div className="seccion-home-recetas text-center mb-4 mb-md-0"> {/* mb-4 para móviles, mb-md-0 para resetear en medianas+ */}
-                  <h2>Imprescindibles Kukit</h2>
-                  <div className="imprescindibles-kukit-recetas" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    {currentIndexImprescindibles < recetasImprescindibles.length && recetaImprescindibleActual ? (
-                      <div
-                        className="tarjeta-receta"
-                        key={recetaImprescindibleActual._id || currentIndexImprescindibles}
-                        style={{
-                          minHeight: '300px',
-                          width: '100%',
-                          display: 'flex',
-                          flexDirection: 'column'
-                        }}
-                      >
-                        <img
-                          src={recetaImprescindibleActual.href || '/img/comida_default.jpg'}
-                          alt={recetaImprescindibleActual.nombre}
-                          onError={(e) => { e.target.onerror = null; e.target.src = "/img/comida_default.jpg"; }}
-                          style={{
-                            height: '200px',
-                            width: '100%',
-                            objectFit: 'cover'
-                          }}
-                        />
-                        <div style={{ padding: '10px 15px', textAlign: 'center', flexGrow: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                          <h3 style={{ margin: 0, fontSize: '1.1rem' }}>{recetaImprescindibleActual.nombre}</h3>
-                        </div>
-                      </div>
-                    ) : (
-                      // Tarjeta de Login/Registro para Imprescindibles
-                      <div className="tarjeta-receta tarjeta-login-extra" key="login-imprescindibles" style={{ textAlign: 'center', padding: '20px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', minHeight: '300px', width: '100%' }}>
-                        <h4>¡Únete a Kukit!</h4>
-                        <p style={{ fontSize: '0.9rem', margin: '10px 0' }}>Regístrate o inicia sesión para descubrir un mundo de recetas y funcionalidades.</p>
-                        <button
-                          className="btn btn-primary mt-2 w-75"
-                          style={{ backgroundColor: '#C33333', color: '#FFFFFF', borderColor: '#C33333' }}
-                          onClick={() => setShowLogin(true)}
-                        >
-                          Iniciar Sesión
-                        </button>
-                        <button
-                          className="btn btn-outline-primary mt-2 w-75"
-                          style={{ backgroundColor: '#FFFFFF', color: '#C33333', borderColor: '#C33333' }}
-                          onClick={() => setShowRegistro(true)}
-                        >
-                          Registrarse
-                        </button>                      </div>
-                    )}
-                    <div className='contenedor-boton'>
-                      {/* Los botones se deshabilitan si solo hay un slide (la tarjeta de login/registro cuando no hay recetas) */}
-                      <button onClick={handlePrevImprescindibles} disabled={(recetasImprescindibles.length + 1) <= 1}>&lt;</button>
-                      <button onClick={handleNextImprescindibles} disabled={(recetasImprescindibles.length + 1) <= 1}>&gt;</button>
+
+            {/* Sección Imprescindibles Kukit - Ocupa la mitad del ancho en pantallas medianas y superiores */}
+
+            <div className="seccion-home-recetas text-center mb-4 mb-md-0"> {/* mb-4 para móviles, mb-md-0 para resetear en medianas+ */}
+              <h2>Imprescindibles Kukit</h2>
+              <div className="imprescindibles-kukit-recetas" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                {currentIndexImprescindibles < recetasImprescindibles.length && recetaImprescindibleActual ? (
+                  <div
+                    className="tarjeta-receta"
+                    key={recetaImprescindibleActual._id || currentIndexImprescindibles}
+                    style={{
+                      minHeight: '300px',
+                      width: '100%',
+                      display: 'flex',
+                      flexDirection: 'column'
+                    }}
+                  >
+                    <img
+                      src={recetaImprescindibleActual.href || '/img/comida_default.jpg'}
+                      alt={recetaImprescindibleActual.nombre}
+                      onError={(e) => { e.target.onerror = null; e.target.src = "/img/comida_default.jpg"; }}
+                      style={{
+                        height: '200px',
+                        width: '100%',
+                        objectFit: 'cover'
+                      }}
+                    />
+                    <div style={{ padding: '10px 15px', textAlign: 'center', flexGrow: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                      <h3 style={{ margin: 0, fontSize: '1.1rem' }}>{recetaImprescindibleActual.nombre}</h3>
                     </div>
                   </div>
-                </div>
-              </div>
-              <div className="col-auto d-none d-md-flex align-items-center">
-                <div class="vr"></div>
-              </div>
-              {/* Sección Novedades de la semana - Ocupa la mitad del ancho en pantallas medianas y superiores */}
-              <div className="col-12 bg-light">
-                <div className="seccion-home-recetas text-center">
-                  <h2>Novedades de la semana</h2>
-                  <div className="imprescindibles-kukit-recetas" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    {currentIndexNovedades < recetasNovedades.length && recetaNovedadActual ? (
-                      <div
-                        className="tarjeta-receta"
-                        key={recetaNovedadActual._id || currentIndexNovedades}
-                        style={{
-                          minHeight: '300px',
-                          width: '100%',
-                          display: 'flex',
-                          flexDirection: 'column'
-                        }}
-                      >
-                        <img
-                          src={recetaNovedadActual.href || '/img/comida_default.jpg'}
-                          alt={recetaNovedadActual.nombre}
-                          onError={(e) => { e.target.onerror = null; e.target.src = "/img/comida_default.jpg"; }}
-                          style={{
-                            height: '200px',
-                            width: '100%',
-                            objectFit: 'cover'
-                          }}
-                        />
-                        <div style={{ padding: '10px 15px', textAlign: 'center', flexGrow: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                          <h3 style={{ margin: 0, fontSize: '1.1rem' }}>{recetaNovedadActual.nombre}</h3>
-                        </div>
-                      </div>
-                    ) : (
-
-                      <div className="tarjeta-receta tarjeta-login-extra" key="login-novedades" style={{ textAlign: 'center', padding: '20px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', minHeight: '300px', width: '100%' }}>
-                        <h4>¡Explora Más!</h4>
-                        <p style={{ fontSize: '0.9rem', margin: '10px 0' }}>Inicia sesión para acceder a todas las funcionalidades y guardar tus recetas favoritas.</p>
-                        <button
-                          className="btn btn-primary mt-2 w-75"
-                          style={{ backgroundColor: '#C33333', color: '#FFFFFF', borderColor: '#C33333' }}
-                          onClick={() => setShowLogin(true)}
-                        >
-                          Iniciar Sesión
-                        </button>
-                        <button
-                          className="btn btn-outline-primary mt-2 w-75"
-                          style={{ backgroundColor: '#FFFFFF', color: '#C33333', borderColor: '#C33333' }}
-                          onClick={() => setShowRegistro(true)}
-                        >
-                          Registrarse
-                        </button>
-                      </div>
-                    )}
-                    <div className='contenedor-boton'>
-                      <button onClick={handlePrevNovedades} disabled={(recetasNovedades.length + 1) <= 1}>&lt;</button>
-                      <button onClick={handleNextNovedades} disabled={(recetasNovedades.length + 1) <= 1}>&gt;</button>
-                    </div>
-                  </div>
+                ) : (
+                  // Tarjeta de Login/Registro para Imprescindibles
+                  <div className="tarjeta-receta tarjeta-login-extra" key="login-imprescindibles" style={{ textAlign: 'center', padding: '20px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', minHeight: '300px', width: '100%' }}>
+                    <h4>¡Únete a Kukit!</h4>
+                    <p style={{ fontSize: '0.9rem', margin: '10px 0' }}>Regístrate o inicia sesión para descubrir un mundo de recetas y funcionalidades.</p>
+                    <button
+                      className="btn btn-primary mt-2 w-75"
+                      style={{ backgroundColor: '#C33333', color: '#FFFFFF', borderColor: '#C33333' }}
+                      onClick={() => setShowLogin(true)}
+                    >
+                      Iniciar Sesión
+                    </button>
+                    <button
+                      className="btn btn-outline-primary mt-2 w-75"
+                      style={{ backgroundColor: '#FFFFFF', color: '#C33333', borderColor: '#C33333' }}
+                      onClick={() => setShowRegistro(true)}
+                    >
+                      Registrarse
+                    </button>                      </div>
+                )}
+                <div className='contenedor-boton'>
+                  {/* Los botones se deshabilitan si solo hay un slide (la tarjeta de login/registro cuando no hay recetas) */}
+                  <button onClick={handlePrevImprescindibles} disabled={(recetasImprescindibles.length + 1) <= 1}>&lt;</button>
+                  <button onClick={handleNextImprescindibles} disabled={(recetasImprescindibles.length + 1) <= 1}>&gt;</button>
                 </div>
               </div>
             </div>
+            <div className="col-auto d-none d-md-flex align-items-center">
+              <div class="vr"></div>
+            </div>
+            {/* Sección Novedades de la semana - Ocupa la mitad del ancho en pantallas medianas y superiores */}
 
+            <div className="seccion-home-recetas text-center">
+              <h2>Novedades de la semana</h2>
+              <div className="imprescindibles-kukit-recetas" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                {currentIndexNovedades < recetasNovedades.length && recetaNovedadActual ? (
+                  <div
+                    className="tarjeta-receta"
+                    key={recetaNovedadActual._id || currentIndexNovedades}
+                    style={{
+                      minHeight: '300px',
+                      width: '100%',
+                      display: 'flex',
+                      flexDirection: 'column'
+                    }}
+                  >
+                    <img
+                      src={recetaNovedadActual.href || '/img/comida_default.jpg'}
+                      alt={recetaNovedadActual.nombre}
+                      onError={(e) => { e.target.onerror = null; e.target.src = "/img/comida_default.jpg"; }}
+                      style={{
+                        height: '200px',
+                        width: '100%',
+                        objectFit: 'cover'
+                      }}
+                    />
+                    <div style={{ padding: '10px 15px', textAlign: 'center', flexGrow: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                      <h3 style={{ margin: 0, fontSize: '1.1rem' }}>{recetaNovedadActual.nombre}</h3>
+                    </div>
+                  </div>
+                ) : (
+
+                  <div className="tarjeta-receta tarjeta-login-extra" key="login-novedades" style={{ textAlign: 'center', padding: '20px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', minHeight: '300px', width: '100%' }}>
+                    <h4>¡Explora Más!</h4>
+                    <p style={{ fontSize: '0.9rem', margin: '10px 0' }}>Inicia sesión para acceder a todas las funcionalidades y guardar tus recetas favoritas.</p>
+                    <button
+                      className="btn btn-primary mt-2 w-75"
+                      style={{ backgroundColor: '#C33333', color: '#FFFFFF', borderColor: '#C33333' }}
+                      onClick={() => setShowLogin(true)}
+                    >
+                      Iniciar Sesión
+                    </button>
+                    <button
+                      className="btn btn-outline-primary mt-2 w-75"
+                      style={{ backgroundColor: '#FFFFFF', color: '#C33333', borderColor: '#C33333' }}
+                      onClick={() => setShowRegistro(true)}
+                    >
+                      Registrarse
+                    </button>
+                  </div>
+                )}
+                <div className='contenedor-boton'>
+                  <button onClick={handlePrevNovedades} disabled={(recetasNovedades.length + 1) <= 1}>&lt;</button>
+                  <button onClick={handleNextNovedades} disabled={(recetasNovedades.length + 1) <= 1}>&gt;</button>
+                </div>
+              </div>
+            </div>
           </div>
+
+
+
 
           <div className="contenedor-lista-compra-elementos flex-column flex-md-row">
             <div className="contenedor-home-checks order-1 order-md-1">

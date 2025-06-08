@@ -365,7 +365,7 @@ const Recetas = () => {
                   </select>
                 </div>
               </div>
-              <button className="btn btn-secondary mt-3 limpiar-filtros w-100" onClick={resetFilters}>Limpiar Filtros</button>
+              <button className="btn btn-secondary mt-2 limpiar-filtros volver-receta" onClick={resetFilters}>Limpiar Filtros</button>
             </div>
           )}
           {/* Mensaje cuando no hay resultados con los filtros aplicados */}

@@ -362,7 +362,7 @@ const ListaCompra = ({ showListaCompra, setListaCompra, refreshTrigger }) => {
           {/* Contenido de la lista de la compra */}
           <div style={{ flexGrow: 1, overflowY: 'auto', paddingRight: '10px' }}>
             <h6 style={{ marginTop: '0', marginBottom: '15px', fontSize: '1rem', fontWeight: 'bold', color: '#495057' }}>
-              TUS INGREDIENTES
+              Tus Ingredientes
             </h6>
             <div className="lista-compra-contenido">
             

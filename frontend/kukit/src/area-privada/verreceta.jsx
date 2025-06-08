@@ -213,7 +213,7 @@ const VerReceta = () => {
                                 {/* Columna Izquierda: Ingredientes e Información Nutricional */}
                                 <div className="col-md-5">
                                     <div className="mb-4">
-                                        <h5>INGREDIENTES</h5>
+                                        <h5>Ingredientes</h5>
                                         <div className="d-flex flex-column gap-3">
                                             {receta.ingredientes.map((ing, idx) => {
                                                 const cantidadBase = ing.cantidad || 0;
@@ -242,7 +242,7 @@ const VerReceta = () => {
 
                                 {/* Columna Derecha: Pasos y Paginación */}
                                 <div className="col-md-7">
-                                    <h5>PASOS</h5>
+                                    <h5>Pasos</h5>
                                     <div className="d-flex flex-column gap-3 mb-3">
                                         {pasosEnPaginaActual.map((paso, idx) => (
                                             <div key={indexPrimerPaso + idx} className="d-flex align-items-start bg-white rounded shadow-sm p-3">

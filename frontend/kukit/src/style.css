@@ -1,8 +1,15 @@
 /* @import url('https://fonts.googleapis.com/css2?family=Germania+One&display=swap'); */
 
 @font-face {
-    font-family: 'titulos';
+    font-family: 'texto';
     src: url(./font/Nunito-Regular.ttf) format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'titulos';
+    src: url(./font/SansitaSwashed-VariableFont_wght.ttf) format('truetype');
     font-weight: normal;
     font-style: normal;
 }
@@ -10,7 +17,7 @@
 html,
 body,
 #root {
-    font-family: 'titulos';
+    font-family: 'texto';
     /* Aseguramos que #root también pueda ocupar toda la altura */
     height: 100%;
     /* Asegura que html ocupe toda la altura si body usa % */
@@ -19,12 +26,12 @@ body,
     padding: 0;
 }
 
-h1 {
+h1, h2, h3, h4, h5, h6 {
     font-family: 'titulos';
 }
 
 body {
-    font-family: "titulos";
+    font-family: "texto";
     font-weight: 400;
     font-style: normal;
     min-height: 100vh;
@@ -509,7 +516,7 @@ header .contenedor-header .sign-up:hover {
 .btn.volver-receta:hover {
     margin: 10px;
     background-color: #fff;
-    color: var(--primary-color) !important;
+    /* color: var(--primary-color) !important; */
     border: none;
     font-weight: bold;
     cursor: pointer;
@@ -595,14 +602,14 @@ button.btn.btn-texto-toggle:hover {
 
 #contenedor-imprescindibles-novedades {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
     gap: 10px;
     padding: 20px;
     background-color: var(--background-color);
     border-radius: 8px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    flex-direction: column;
+    flex-direction: row;
 }
 
 #contenedor-lista-compra {
@@ -774,7 +781,6 @@ footer hr {
     width: 100vw;
     height: 450px;
     object-fit: cover;
-    border-radius: 8px;
     /* oscurecemos la imagen un poquito */
     filter: brightness(0.6);
 }
@@ -1278,7 +1284,7 @@ footer hr {
 .ingredientes-pasos {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     flex-wrap: wrap;
     gap: 20px;
@@ -1347,6 +1353,7 @@ footer hr {
 .rellenar-pasos {
     display: flex;
     flex-direction: column;
+    width: 100%;
     gap: 10px;
     margin-bottom: 20px;
     padding: 10px;
@@ -2694,7 +2701,8 @@ header nav ul li.nav-link-li {
 }
 
 /* Popup login y registro: centrado, responsive y sin desbordar */
-.contenedor-sign-in, .contenedor-sign-up {
+.contenedor-sign-in,
+.contenedor-sign-up {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -2712,7 +2720,8 @@ header nav ul li.nav-link-li {
     margin: 2vh auto;
 }
 
-.pop-up-sign-up, .pop-up-sign-in {
+.pop-up-sign-up,
+.pop-up-sign-in {
     display: flex;
     position: fixed;
     top: 0;
@@ -2915,8 +2924,6 @@ header nav ul li.nav-link-li {
         /* Altura automática para ajustarse al contenido */
         min-height: 350px;
         /* Altura mínima para que no colapse */
-        padding: 20px 0;
-        /* Espaciado vertical */
     }
 
     .textos-hero h1 {
@@ -2953,7 +2960,9 @@ header nav ul li.nav-link-li {
         /* Espacio entre elementos apilados */
     }
 
-    #contenedor-img1, #contenedor-img2, #contenedor-img3 {
+    #contenedor-img1,
+    #contenedor-img2,
+    #contenedor-img3 {
         display: flex;
         /* Asegura que sea flex si no lo era */
         flex-direction: column;
@@ -2962,7 +2971,9 @@ header nav ul li.nav-link-li {
         height: auto;
     }
 
-    .imgHome1, .imgHome2, .imgHome3 {
+    .imgHome1,
+    .imgHome2,
+    .imgHome3 {
         height: 220px;
         /* Altura ajustada para las imágenes */
     }
@@ -2989,7 +3000,8 @@ header nav ul li.nav-link-li {
     }
 
     /* Franjas */
-    .franja-registro, .registro-animado {
+    .franja-registro,
+    .registro-animado {
         width: 85%;
         /* Ancho ajustado */
         padding: 0.7rem 1.2rem;
@@ -3081,7 +3093,8 @@ header nav ul li.nav-link-li {
     }
 
     /* Una tarjeta por fila */
-    .contenedor-sign-up, .contenedor-sign-in {
+    .contenedor-sign-up,
+    .contenedor-sign-in {
         width: 90vw;
     }
 
@@ -3089,13 +3102,19 @@ header nav ul li.nav-link-li {
         width: 60%;
     }
 
-    .botones-crear-receta button, .botones-perfil button, #terminar-receta, #cancelar-receta {
+    .botones-crear-receta button,
+    .botones-perfil button,
+    #terminar-receta,
+    #cancelar-receta {
         width: 80%;
         font-size: 1rem;
     }
 
     /* Si estos botones están en home */
-    .crear-receta-info, .tarjeta-perfil, .contenedor-ingredientes, .pasos-crear-receta {
+    .crear-receta-info,
+    .tarjeta-perfil,
+    .contenedor-ingredientes,
+    .pasos-crear-receta {
         width: 95vw;
         padding: 15px;
     }
@@ -3132,12 +3151,20 @@ header nav ul li.nav-link-li {
 }
 
 @media (max-width: 576px) {
-    .contenedor-sign-in, .contenedor-sign-up {
+
+    .contenedor-home-checks {
+        width: 75%;
+        height: 100%;
+    }
+
+    .contenedor-sign-in,
+    .contenedor-sign-up {
         max-width: 98vw;
         padding: 1rem 0.5rem;
     }
 
-    .col-md-5, .col-md-7 {
+    .col-md-5,
+    .col-md-7 {
         max-width: 100% !important;
         flex: 0 0 100% !important;
     }
@@ -3180,6 +3207,14 @@ header nav ul li.nav-link-li {
         padding-left: 0;
         margin-top: 10px;
         margin-bottom: 0;
+    }
+
+    #imprescindibles-kukit-recetas {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
     }
 
     .list-inline-item {
@@ -3269,30 +3304,34 @@ header nav ul li.nav-link-li {
         text-align: center;
     }
 }
+
 @media (min-width: 998px) {
-  #contenedor-imprescindibles-novedades-row {
-    display: flex;
-    flex-direction: row;
-    align-items: stretch;
-    gap: 24px;
-  }
-  #contenedor-imprescindibles-novedades-row .col-12 {
-    width: 48%;
-    max-width: 48%;
-    margin-bottom: 0;
-  }
-  #contenedor-imprescindibles-novedades-row .col-auto {
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-    width: 4%;
-    min-width: 24px;
-    max-width: 40px;
-    padding: 0;
-  }
+    #contenedor-imprescindibles-novedades-row {
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+        gap: 24px;
+    }
+
+    #contenedor-imprescindibles-novedades-row .col-12 {
+        width: 48%;
+        max-width: 48%;
+        margin-bottom: 0;
+    }
+
+    #contenedor-imprescindibles-novedades-row .col-auto {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        width: 4%;
+        min-width: 24px;
+        max-width: 40px;
+        padding: 0;
+    }
 }
 
 @media (max-width: 768px) {
+
     /* Footer: apilar columnas y centrar contenido */
     footer .container-footer,
     .container-footer {
@@ -3300,14 +3339,15 @@ header nav ul li.nav-link-li {
         padding: 0 10px;
     }
 
-.btn.volver:hover {
-    margin: 10px;
-    background-color: #fff;
-    color: var(--primary-color);
-    border: none;
-    font-weight: bold;
-    cursor: pointer;
-}
+    .btn.volver:hover {
+        margin: 10px;
+        background-color: #fff;
+        color: var(--primary-color);
+        border: none;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
     footer .row,
     .container-footer .row {
         flex-direction: column !important;
@@ -3376,5 +3416,24 @@ header nav ul li.nav-link-li {
         font-size: 0.95rem;
         padding: 10px 0;
         text-align: center;
+    }
+
+    #contenedor-imprescindibles-novedades {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .contenedor-lista-compra-texto {
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    .contenedor-home-checks {
+        width: 75%;
+        height: 100%;
     }
 }
