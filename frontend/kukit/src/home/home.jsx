@@ -22,7 +22,7 @@ function Home() {
   const [recetasNovedades, setRecetasNovedades] = useState([]);
   const [currentIndexNovedades, setCurrentIndexNovedades] = useState(0);
   const navigate = useNavigate();
-  const { isAuthenticated} = useAuth(); // Usar el contexto de autenticación
+  const { isAuthenticated } = useAuth(); // Usar el contexto de autenticación
 
 
   useEffect(() => {
@@ -127,10 +127,10 @@ function Home() {
           {/* Contenedor para las secciones de Imprescindibles y Novedades */}
           {/* Usamos container-fluid para ancho completo y my-5 para margen vertical. La clase 'row' de Bootstrap permite que los elementos hijos se coloquen en línea. */}
           <div className="container-fluid my-5" id="contenedor-imprescindibles-novedades">
-            <div className="row gap-3">
+            <div className="row gap-3 flex-column flex-md-row">
 
               {/* Sección Imprescindibles Kukit - Ocupa la mitad del ancho en pantallas medianas y superiores */}
-              <div className="col-md-6 bg-light ms-auto">
+              <div className="col-12 col-md-6 bg-light ms-auto">
                 <div className="seccion-home-recetas text-center mb-4 mb-md-0"> {/* mb-4 para móviles, mb-md-0 para resetear en medianas+ */}
                   <h2>Imprescindibles Kukit</h2>
                   <div className="imprescindibles-kukit-recetas" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -187,11 +187,11 @@ function Home() {
                   </div>
                 </div>
               </div>
-              <div className="col-auto d-flex align-items-center">
+              <div className="col-auto d-none d-md-flex align-items-center">
                 <div class="vr"></div>
               </div>
               {/* Sección Novedades de la semana - Ocupa la mitad del ancho en pantallas medianas y superiores */}
-              <div className="col-md-6 bg-light">
+              <div className="col-12 col-md-6 bg-light">
                 <div className="seccion-home-recetas text-center">
                   <h2>Novedades de la semana</h2>
                   <div className="imprescindibles-kukit-recetas" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -221,7 +221,7 @@ function Home() {
                         </div>
                       </div>
                     ) : (
-                      
+
                       <div className="tarjeta-receta tarjeta-login-extra" key="login-novedades" style={{ textAlign: 'center', padding: '20px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', minHeight: '300px', width: '100%' }}>
                         <h4>¡Explora Más!</h4>
                         <p style={{ fontSize: '0.9rem', margin: '10px 0' }}>Inicia sesión para acceder a todas las funcionalidades y guardar tus recetas favoritas.</p>
@@ -252,35 +252,32 @@ function Home() {
 
           </div>
 
-          <div className="contenedor-home" id="contenedor-lista-compra">
-            <h2>Añade tus recetas y crea tu lista de la compra</h2>
-            <div className="contenedor-lista-compra-elementos">
-              <div className="contenedor-home-checks">
-                <img src={imgHome1} alt="imgHome1" className='imgHome1' />
-              </div>
-              <div className="contenedor-lista-compra-texto">
-                <h3>Organiza tu compra de manera rápida y sencilla con solo un clic.</h3>
-                <p> 
-                  Ahora, con nuestra nueva funcionalidad, podrás buscar fácilmente tus recetas favoritas y añadir
-                  los ingredientes directamente a tu lista. Cuando te guste una receta, haz clic en "Añadir a la
-                  lista" y los ingredientes necesarios se agregarán a tu lista de la compra.
-                  Esto te permitirá ahorrar tiempo en tus compras y asegurarte de tener todo lo necesario para
-                  tus platos. ¡Cocinar nunca fue tan fácil!
-                </p>
-                <div className="texto-llamada-accion-home">
-                  <p>✨ Accede a tu espacio de recetas personalizadas y organiza tus comidas como un profesional.</p>
-                </div>
+          <div className="contenedor-lista-compra-elementos flex-column flex-md-row">
+            <div className="contenedor-home-checks order-1 order-md-1">
+              <img src={imgHome1} alt="imgHome1" className='imgHome1' />
+            </div>
+            <div className="contenedor-lista-compra-texto order-2 order-md-2">
+              <h3>Organiza tu compra de manera rápida y sencilla con solo un clic.</h3>
+              <p>
+                Ahora, con nuestra nueva funcionalidad, podrás buscar fácilmente tus recetas favoritas y añadir
+                los ingredientes directamente a tu lista. Cuando te guste una receta, haz clic en "Añadir a la
+                lista" y los ingredientes necesarios se agregarán a tu lista de la compra.
+                Esto te permitirá ahorrar tiempo en tus compras y asegurarte de tener todo lo necesario para
+                tus platos. ¡Cocinar nunca fue tan fácil!
+              </p>
+              <div className="texto-llamada-accion-home">
+                <p>✨ Accede a tu espacio de recetas personalizadas y organiza tus comidas como un profesional.</p>
               </div>
             </div>
           </div>
 
           <div className="contenedor-home" id="contenedor-filtros-recetas">
             <h2>Filtra, Elige y Cocina tu próxima receta</h2>
-            <div className="contenedor-lista-compra-elementos">
-              <div className="contenedor-home-checks">
+            <div className="contenedor-lista-compra-elementos flex-column flex-md-row">
+              <div className="contenedor-home-checks order-1 order-md-1">
                 <img src={imgHome2} alt="imgHome2" className='imgHome2' />
               </div>
-              <div className="contenedor-lista-compra-texto">
+              <div className="contenedor-lista-compra-texto order-2 order-md-2">
                 <h3>Busca por país, ingredientes o necesidades especiales</h3>
                 <p>
                   En Kukit te lo ponemos fácil para encontrar la receta perfecta. Explora platos según su país
@@ -294,11 +291,11 @@ function Home() {
 
           <div className="contenedor-home" id="contenedor-calendario">
             <h2>Filtra tus recetas y descubre tu próxima receta</h2>
-            <div className="contenedor-lista-compra-elementos">
-              <div className="contenedor-home-checks">
+            <div className="contenedor-lista-compra-elementos flex-column flex-md-row">
+              <div className="contenedor-home-checks order-1 order-md-1">
                 <img src={imgHome3} alt="imgHome3" className='imgHome3' />
               </div>
-              <div className="contenedor-lista-compra-texto">
+              <div className="contenedor-lista-compra-texto order-2 order-md-2">
                 <h3>¿Cómo hacerlo?</h3>
                 <p>
                   Organiza tus comidas con facilidad y encuentra inspiración para cada día. Con nuestro calendario semanal, podrás agregar recetas, adaptar tu menú y gestionar tu alimentación de manera práctica. Convierte la planificación en una experiencia sencilla y deliciosa.
@@ -315,11 +312,11 @@ function Home() {
             <div className="container text-center my-5 py-5" id="cta-registro-home">
               <h2 className="mb-4" style={{ color: '#C33333', fontWeight: 'bold' }}>¿Listo para transformar tu cocina?</h2>
               <p className="lead mb-4" style={{ fontSize: '1.2rem' }}>
-                Únete a la comunidad Kukit y desbloquea un universo de recetas, herramientas de planificación y mucho más. 
+                Únete a la comunidad Kukit y desbloquea un universo de recetas, herramientas de planificación y mucho más.
                 ¡Crear tu cuenta es gratis y solo te tomará un minuto!
               </p>
-              <button 
-                className="btn btn-lg btn-primary" 
+              <button
+                className="btn btn-lg btn-primary"
                 style={{ backgroundColor: '#C33333', borderColor: '#C33333', padding: '15px 30px', fontSize: '1.25rem' }}
                 onClick={() => setShowRegistro(true)}>
                 ¡Quiero Registrarme Ahora!

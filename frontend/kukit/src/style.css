@@ -1,8 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Germania+One&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Germania+One&display=swap'); */
+
+@font-face {
+    font-family: 'titulos';
+    src: url(./font/ChocolateCookies.ttf) format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
 
 html,
 body,
 #root {
+    font-family: 'titulos';
     /* Aseguramos que #root también pueda ocupar toda la altura */
     height: 100%;
     /* Asegura que html ocupe toda la altura si body usa % */
@@ -11,8 +19,12 @@ body,
     padding: 0;
 }
 
+h1 {
+    font-family: 'titulos';
+}
+
 body {
-    font-family: "Germania One", system-ui;
+    font-family: "titulos";
     font-weight: 400;
     font-style: normal;
     min-height: 100vh;
@@ -1122,7 +1134,9 @@ footer hr {
     box-shadow: 4px 0px 40px 0px rgba(0, 0, 0, 0.25);
 }
 
-
+.boton-crear-receta {
+    margin: 10px;
+}
 
 .info-basica-receta h3 {
     margin-bottom: 10px;
@@ -1266,6 +1280,7 @@ footer hr {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
     gap: 20px;
     width: auto;
     height: auto;
@@ -1303,7 +1318,8 @@ footer hr {
 
 .subtitulo-hero {
     color: #fff;
-    font-size: 1.2rem;
+    font-weight: bold;
+    font-size: 18px;
     font-weight: 300;
     text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
     margin-top: 1rem;
@@ -2120,6 +2136,7 @@ header nav ul li.nav-link-li {
     /* Color de texto base */
     box-shadow: none;
     /* Elimina la sombra en focus/active si la hay */
+    transform: none;
 }
 
 
@@ -2469,7 +2486,7 @@ header nav ul li.nav-link-li {
     font-size: 16px;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     background-color: #FFF;
     border-color: var(--primary-color);
     color: var(--primary-color);
@@ -2478,7 +2495,7 @@ header nav ul li.nav-link-li {
 .btn.btn-si:hover {
     background-color: var(--primary-color);
     border-color: var(--primary-color);
-    color:#fff;
+    color: #fff;
     transform: scale(1.05);
 }
 
@@ -2617,30 +2634,554 @@ header nav ul li.nav-link-li {
     border-radius: 8px;
 }
 
-.btn.volver {
-    margin: 10px;
-    background-color: var(--background-color);
-    color: var(--primary-color);
-    border: var(--primary-color) 1px solid;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.btn.volver:active {
-    margin: 10px;
-    background-color: var(--background-color);
-    color: var(--primary-color);
-    border: var(--primary-color) 1px solid;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-
-.btn.volver:hover {
-    margin: 10px;
-    background-color: #fff;
-    color: var(--primary-color);
+/* Estilo para el icono del menú hamburguesa */
+#hamburger-menu {
+    width: 40px;
+    height: 40px;
+    background: none;
     border: none;
-    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    /* Más separación entre líneas */
     cursor: pointer;
+    padding: 0;
+}
+
+#hamburger-menu span {
+    display: block;
+    width: 26px;
+    height: 3px;
+    background-color: #C33333;
+    border-radius: 2px;
+    transition: all 0.3s;
+}
+
+/* Popup login y registro: centrado, responsive y sin desbordar */
+.contenedor-sign-in, .contenedor-sign-up {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    padding: 2rem 1.5rem;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 0.3s, transform 0.3s;
+    max-height: 95vh;
+    overflow-y: auto;
+    margin: 2vh auto;
+}
+
+.pop-up-sign-up, .pop-up-sign-in {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 300;
+    overflow-y: auto;
+}
+
+/* Inputs y botones alineados y del mismo ancho */
+.formulario-inicio-sesion,
+.contenedor-email-password,
+#googleSignInButton,
+.botones-inicio-sesion,
+.botones-inversos,
+.contenedor-sign-in button[type="button"] {
+    width: 100% !important;
+    max-width: 340px;
+    margin: 0 auto 10px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#googleSignInButton>div {
+    width: 100% !important;
+    justify-content: center;
+    display: flex !important;
+}
+
+#googleSignInButton {
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.contenedor-email-password input {
+    width: 100% !important;
+    max-width: 340px;
+}
+
+.botones-inicio-sesion,
+.botones-inversos {
+    margin-top: 10px;
+}
+
+.contenedor-sign-in figure img {
+    width: 80px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+/* --- REGISTRO: igualar alineación y ancho a login --- */
+.contenedor-sign-up {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    padding: 2rem 1.5rem;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 0.3s, transform 0.3s;
+    max-height: 95vh;
+    overflow-y: auto;
+    margin: 2vh auto;
+}
+
+.contenedor-sign-up figure img {
+    width: 80px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.contenedor-sign-up .formulario-inicio-sesion,
+.contenedor-sign-up .contenedor-email-password,
+.contenedor-sign-up #googleSignUpButton,
+.contenedor-sign-up .botones-inicio-sesion,
+.contenedor-sign-up .botones-inversos,
+.contenedor-sign-up button[type="button"] {
+    width: 100% !important;
+    max-width: 340px;
+    margin: 0 auto 10px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.contenedor-sign-up .contenedor-email-password input {
+    width: 100% !important;
+    max-width: 340px;
+}
+
+.contenedor-sign-up .botones-inicio-sesion,
+.contenedor-sign-up .botones-inversos {
+    margin-top: 10px;
+}
+
+#googleSignUpButton {
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    width: 100% !important;
+}
+
+#googleSignUpButton>div {
+    width: 100% !important;
+    justify-content: center;
+    display: flex !important;
+}
+
+/* --- Responsive Design --- */
+
+/* Tablets and larger mobile devices */
+@media (max-width: 768px) {
+
+    /* Header */
+    header nav ul {
+        display: none;
+        /* Oculta la navegación normal por defecto */
+        flex-direction: column;
+        position: absolute;
+        top: 80px;
+        /* Ajusta según la altura real de tu header */
+        left: 0;
+        width: 100%;
+        background-color: var(--background-color);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        z-index: 199;
+        /* Debajo del icono hamburguesa, encima del contenido */
+        padding-bottom: 10px;
+    }
+
+    /* Deberás añadir una clase 'active' mediante JavaScript para mostrar el menú móvil */
+    header nav ul.active {
+        display: flex;
+    }
+
+    header nav ul li {
+        text-align: center;
+        padding: 0.8rem 0;
+        width: 100%;
+    }
+
+    header nav ul li a::after {
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        /* Oculta la línea inferior por defecto en el menú móvil o estilízala diferente */
+    }
+
+    header nav ul li a:hover::after,
+    header nav ul li .nav-link.active::after {
+        /* Para el enlace activo */
+        width: 60%;
+        /* O un ancho fijo para la línea en el menú móvil */
+    }
+
+    #hamburger-menu {
+        display: block;
+        /* Muestra el icono de hamburguesa */
+        font-size: 1.8rem;
+        /* Tamaño del icono */
+        margin-right: 15px;
+        /* Margen a la derecha */
+        padding: 5px;
+        /* Espacio para hacer clic más fácil */
+    }
+
+    header .contenedor-header {
+        margin-right: 5px;
+        /* Espacio respecto al icono hamburguesa */
+    }
+
+    header .contenedor-header .sign-in,
+    header .contenedor-header .sign-up {
+        padding: 6px 8px;
+        font-size: 13px;
+    }
+
+    /* Hero Section */
+    .hero {
+        height: auto;
+        /* Altura automática para ajustarse al contenido */
+        min-height: 350px;
+        /* Altura mínima para que no colapse */
+        padding: 20px 0;
+        /* Espaciado vertical */
+    }
+
+    .textos-hero h1 {
+        font-size: 2em;
+        /* Tamaño de fuente más pequeño para h1 */
+    }
+
+    .subtitulo-hero {
+        font-size: 1rem;
+        /* Tamaño de fuente más pequeño para subtítulo */
+        padding: 0 10px;
+        /* Evita que el texto toque los bordes */
+    }
+
+    .btn-reservation {
+        width: 60%;
+        /* Botón más ancho */
+        padding: 10px 18px;
+        font-size: 0.95rem;
+    }
+
+    /* Contenedor Home Checks & Images */
+    .contenedor-home-checks {
+        flex-direction: column;
+        /* Apila los elementos verticalmente */
+        width: 90%;
+        /* Usa porcentaje para mejor escalabilidad */
+        margin-left: auto;
+        margin-right: auto;
+        height: auto;
+        /* Altura automática */
+        padding: 20px;
+        gap: 25px;
+        /* Espacio entre elementos apilados */
+    }
+
+    #contenedor-img1, #contenedor-img2, #contenedor-img3 {
+        display: flex;
+        /* Asegura que sea flex si no lo era */
+        flex-direction: column;
+        width: 100%;
+        /* Ocupa el ancho completo de su padre */
+        height: auto;
+    }
+
+    .imgHome1, .imgHome2, .imgHome3 {
+        height: 220px;
+        /* Altura ajustada para las imágenes */
+    }
+
+    /* Imprescindibles / Novedades */
+    .fila-navegacion-receta {
+        justify-content: center;
+        /* Centra los ítems */
+        flex-wrap: wrap;
+        /* Permite que los elementos pasen a la siguiente línea si no caben */
+    }
+
+    .tarjeta-receta {
+        max-width: 85%;
+        /* Permite que la tarjeta ocupe más ancho */
+        margin: 0.7rem auto;
+        /* Centra la tarjeta */
+        padding: 1.2rem;
+    }
+
+    .tarjeta-receta img {
+        height: 160px;
+        /* Altura ajustada para la imagen de la tarjeta */
+    }
+
+    /* Franjas */
+    .franja-registro, .registro-animado {
+        width: 85%;
+        /* Ancho ajustado */
+        padding: 0.7rem 1.2rem;
+        font-size: 0.9rem;
+    }
+
+    /* Tarjetas de recetas generales */
+    .tarjetas {
+        gap: 15px;
+        /* Espacio reducido entre tarjetas */
+    }
+
+    .tarjeta {
+        width: calc(50% - 15px);
+        /* Dos tarjetas por fila en tablets */
+    }
+
+    /* Footer */
+    footer .contenedor-footer .row {
+        /* Asumiendo que .row es el contenedor directo de las columnas */
+        flex-direction: column;
+        /* Apila las columnas */
+        align-items: center;
+        /* Centra las columnas apiladas */
+    }
+
+    footer .contenedor-footer .col-lg-3 {
+        /* Ajusta esto si tus clases de columna son diferentes */
+        width: 90% !important;
+        /* Ancho de columna ajustado, !important si es necesario por Bootstrap */
+        margin-bottom: 25px;
+        text-align: center;
+        /* Centra el texto dentro de cada columna */
+    }
+
+    footer .contenedor-footer div p {
+        width: 100%;
+        /* Párrafos ocupan todo el ancho disponible */
+    }
+
+    footer .footer-info {
+        flex-direction: column;
+        /* Apila la información del footer */
+        gap: 15px;
+    }
+
+    .container-footer {
+        max-height: none;
+        /* Elimina la altura máxima para permitir que el contenido fluya */
+    }
+
+    /* Pop-ups (Sign-up/Sign-in) */
+    .contenedor-sign-up,
+    .contenedor-sign-in {
+        width: 80vw;
+        /* Pop-ups más anchos */
+    }
+
+    .limpiar-filtros {
+        /* Si aparece en la home */
+        width: 40%;
+        /* Ancho más razonable */
+        font-size: 0.9rem;
+    }
+}
+
+/* Smaller mobile devices */
+@media (max-width: 480px) {
+    header nav ul {
+        top: 70px;
+        /* Ajusta si la altura del header cambia */
+    }
+
+    .textos-hero h1 {
+        font-size: 1.7em;
+    }
+
+    .subtitulo-hero {
+        font-size: 0.85rem;
+    }
+
+    .btn-reservation {
+        width: 80%;
+        font-size: 0.9rem;
+    }
+
+    .tarjeta {
+        width: 90%;
+    }
+
+    /* Una tarjeta por fila */
+    .contenedor-sign-up, .contenedor-sign-in {
+        width: 90vw;
+    }
+
+    .limpiar-filtros {
+        width: 60%;
+    }
+
+    .botones-crear-receta button, .botones-perfil button, #terminar-receta, #cancelar-receta {
+        width: 80%;
+        font-size: 1rem;
+    }
+
+    /* Si estos botones están en home */
+    .crear-receta-info, .tarjeta-perfil, .contenedor-ingredientes, .pasos-crear-receta {
+        width: 95vw;
+        padding: 15px;
+    }
+
+    /* Si estos formularios están en home */
+
+    .btn.volver {
+        margin: 10px;
+        background-color: var(--background-color);
+        color: var(--primary-color);
+        border: var(--primary-color) 1px solid;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .btn.volver:active {
+        margin: 10px;
+        background-color: var(--background-color);
+        color: var(--primary-color);
+        border: var(--primary-color) 1px solid;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+
+    .btn.volver:hover {
+        margin: 10px;
+        background-color: #fff;
+        color: var(--primary-color);
+        border: none;
+        font-weight: bold;
+        cursor: pointer;
+    }
+}
+
+@media (max-width: 768px) {
+    .contenedor-sign-in, .contenedor-sign-up {
+        max-width: 98vw;
+        padding: 1rem 0.5rem;
+    }
+
+    .row {
+        flex-wrap: wrap !important;
+    }
+
+    .col-md-5, .col-md-7 {
+        max-width: 100% !important;
+        flex: 0 0 100% !important;
+    }
+
+    .contenedor-sign-up {
+        max-width: 98vw;
+        padding: 1rem 0.5rem;
+    }
+
+    /* Footer: apilar columnas y centrar contenido */
+    footer .container-footer,
+    .container-footer {
+        width: 100%;
+        padding: 0 10px;
+    }
+
+    footer .row,
+    .container-footer .row {
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 0;
+    }
+
+    footer .col-lg-3 {
+        width: 100% !important;
+        margin-bottom: 25px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    footer .col-lg-3 ul {
+        padding-left: 0;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+    }
+
+    footer .col-lg-3 h6,
+    footer .col-lg-3 .footer-heading {
+        margin-bottom: 12px;
+        font-size: 1.1rem;
+    }
+
+    /* Centrar los iconos sociales */
+    .list-inline {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+        padding-left: 0;
+        margin-top: 10px;
+        margin-bottom: 0;
+    }
+
+    .list-inline-item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .footer-icon-img {
+        width: 32px;
+        height: 32px;
+        object-fit: contain;
+        margin: 0 2px;
+    }
+
+    /* Ajustar el texto de contacto */
+    .contact-info {
+        font-size: 1rem;
+        margin-bottom: 0.5em;
+    }
+
+    /* Ajustar el copyright */
+    .footer-alt {
+        font-size: 0.95rem;
+        padding: 10px 0;
+        text-align: center;
+    }
 }

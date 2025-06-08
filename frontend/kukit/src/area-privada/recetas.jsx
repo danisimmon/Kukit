@@ -55,32 +55,32 @@ const Recetas = () => {
   ];
 
   const manejarLike = async (idReceta) => {
-  try {
-    const respuesta = await axios.post('http://localhost/api/area_privada/recetas/guardarMeGustas.php', {
-      id_receta: idReceta
-    });
+    try {
+      const respuesta = await axios.post('http://localhost/api/area_privada/recetas/guardarMeGustas.php', {
+        id_receta: idReceta
+      });
 
-    if (respuesta.data.success) {
-      const nuevoEstado = respuesta.data.liked;
+      if (respuesta.data.success) {
+        const nuevoEstado = respuesta.data.liked;
 
-      setLiked(prev => ({
-        ...prev,
-        [idReceta]: nuevoEstado,
-      }));
+        setLiked(prev => ({
+          ...prev,
+          [idReceta]: nuevoEstado,
+        }));
 
-      setLikes(prev => ({
-        ...prev,
-        [idReceta]: nuevoEstado
-          ? (prev[idReceta] || 0) + 1
-          : Math.max((prev[idReceta] || 1) - 1, 0),
-      }));
-    } else {
-      console.error("No se pudo cambiar el estado de me gusta");
+        setLikes(prev => ({
+          ...prev,
+          [idReceta]: nuevoEstado
+            ? (prev[idReceta] || 0) + 1
+            : Math.max((prev[idReceta] || 1) - 1, 0),
+        }));
+      } else {
+        console.error("No se pudo cambiar el estado de me gusta");
+      }
+    } catch (error) {
+      console.error("Error al manejar el like:", error);
     }
-  } catch (error) {
-    console.error("Error al manejar el like:", error);
-  }
-};
+  };
 
 
   // useEffect(() => {
@@ -272,7 +272,7 @@ const Recetas = () => {
 
 
         <div className="container">
-        {/* Contenedor para alinear el botón de volver y el título */}
+          {/* Contenedor para alinear el botón de volver y el título */}
           <div className="d-flex align-items-center mb-4"> {/* Contenedor Flex para alinear elementos en la misma línea y centrados verticalmente */}
             {/* Botón para volver atrás */}
             <button
@@ -310,22 +310,22 @@ const Recetas = () => {
           {mostrarFiltros && (
             <div className="filtros-adicionales mb-4 p-3 border rounded">
               <h5 className="mb-3">Filtros Adicionales</h5>
-              <div className="row">
-                <div className="col-md-3 mb-3">
+              <div className="d-flex flex-column flex-md-row flex-wrap gap-2">
+                <div className="flex-fill">
                   <label htmlFor="filtroDificultad" className="form-label">Dificultad</label>
                   <select id="filtroDificultad" className="form-select" value={selectedDificultad} onChange={handleFilterChange(setSelectedDificultad)}>
                     <option value="">Cualquiera</option>
                     {DIFICULTADES.map(d => <option key={d.value} value={d.value}>{d.label}</option>)}
                   </select>
                 </div>
-                <div className="col-md-3 mb-3">
+                <div className="flex-fill">
                   <label htmlFor="filtroPais" className="form-label">País</label>
                   <select id="filtroPais" className="form-select" value={selectedPais} onChange={handleFilterChange(setSelectedPais)}>
                     <option value="">Cualquiera</option>
                     {PAISES_FILTRO.map(p => <option key={p} value={p}>{p}</option>)}
                   </select>
                 </div>
-                <div className="col-md-3 mb-3">
+                <div className="flex-fill">
                   <label htmlFor="filtroTiempo" className="form-label">Tiempo (ej: "30 min")</label>
                   <input
                     type="text"
@@ -336,30 +336,28 @@ const Recetas = () => {
                     placeholder="Ej: 30 min"
                   />
                 </div>
-              </div>
-              <div className="row">
-                <div className="col-md-3 mb-3">
+                <div className="flex-fill">
                   <label htmlFor="filtroGluten" className="form-label">Sin Gluten</label>
                   <select id="filtroGluten" className="form-select" value={filterGluten} onChange={handleFilterChange(setFilterGluten)}>
                     <option value="">Cualquiera</option>
                     {OPCIONES_BOOLEANAS.map(op => <option key={`gluten-${op.value}`} value={op.value}>{op.label}</option>)}
                   </select>
                 </div>
-                <div className="col-md-3 mb-3">
+                <div className="flex-fill">
                   <label htmlFor="filtroLactosa" className="form-label">Sin Lactosa</label>
                   <select id="filtroLactosa" className="form-select" value={filterLactosa} onChange={handleFilterChange(setFilterLactosa)}>
                     <option value="">Cualquiera</option>
                     {OPCIONES_BOOLEANAS.map(op => <option key={`lactosa-${op.value}`} value={op.value}>{op.label}</option>)}
                   </select>
                 </div>
-                <div className="col-md-3 mb-3">
+                <div className="flex-fill">
                   <label htmlFor="filtroVegetariana" className="form-label">Vegetariana</label>
                   <select id="filtroVegetariana" className="form-select" value={filterVegetariana} onChange={handleFilterChange(setFilterVegetariana)}>
                     <option value="">Cualquiera</option>
                     {OPCIONES_BOOLEANAS.map(op => <option key={`vegetariana-${op.value}`} value={op.value}>{op.label}</option>)}
                   </select>
                 </div>
-                <div className="col-md-3 mb-3">
+                <div className="flex-fill">
                   <label htmlFor="filtroVegana" className="form-label">Vegana</label>
                   <select id="filtroVegana" className="form-select" value={filterVegana} onChange={handleFilterChange(setFilterVegana)}>
                     <option value="">Cualquiera</option>
@@ -367,10 +365,9 @@ const Recetas = () => {
                   </select>
                 </div>
               </div>
-              <button className="btn btn-secondary mt-2 limpiar-filtros" onClick={resetFilters}>Limpiar Filtros</button>
+              <button className="btn btn-secondary mt-3 limpiar-filtros w-100" onClick={resetFilters}>Limpiar Filtros</button>
             </div>
           )}
-
           {/* Mensaje cuando no hay resultados con los filtros aplicados */}
           {recetasFiltradas.length === 0 && !cargando && (
             <div className="alert alert-info" role="alert">
