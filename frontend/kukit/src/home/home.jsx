@@ -127,10 +127,10 @@ function Home() {
           {/* Contenedor para las secciones de Imprescindibles y Novedades */}
           {/* Usamos container-fluid para ancho completo y my-5 para margen vertical. La clase 'row' de Bootstrap permite que los elementos hijos se coloquen en línea. */}
           <div className="container-fluid my-5" id="contenedor-imprescindibles-novedades">
-            <div className="row gap-3 flex-column flex-md-row">
+            <div className="row gap-3 flex-column">
 
               {/* Sección Imprescindibles Kukit - Ocupa la mitad del ancho en pantallas medianas y superiores */}
-              <div className="col-12 col-md-6 bg-light ms-auto">
+              <div className="col-12 bg-light ms-auto">
                 <div className="seccion-home-recetas text-center mb-4 mb-md-0"> {/* mb-4 para móviles, mb-md-0 para resetear en medianas+ */}
                   <h2>Imprescindibles Kukit</h2>
                   <div className="imprescindibles-kukit-recetas" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -191,7 +191,7 @@ function Home() {
                 <div class="vr"></div>
               </div>
               {/* Sección Novedades de la semana - Ocupa la mitad del ancho en pantallas medianas y superiores */}
-              <div className="col-12 col-md-6 bg-light">
+              <div className="col-12 bg-light">
                 <div className="seccion-home-recetas text-center">
                   <h2>Novedades de la semana</h2>
                   <div className="imprescindibles-kukit-recetas" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
