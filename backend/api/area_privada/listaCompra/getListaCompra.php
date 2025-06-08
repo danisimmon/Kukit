@@ -5,7 +5,7 @@ header('Content-Type: application/json');
 session_start();
 // Verificar si la sesión está iniciada
 if (!isset($_SESSION['user']['id'])) {
-    echo json_encode(array("success" => "false", "message" => "Sesion no iniciada"));
+    echo json_encode(array("success" => "false", "message" => "Sesión no iniciada"));
     exit();
 }
 

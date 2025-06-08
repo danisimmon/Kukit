@@ -4,7 +4,7 @@ import axios from 'axios';
 import logo from '../img/logo_kukit.png';
 import { useAuth } from '../logout/AuthContext'; // Importar useAuth
 
-const Login = ({ setShowLogin, setShowRegistro}) => {
+const Login = ({ setShowLogin, setShowRegistro }) => {
   const [formData, setFormData] = useState({
     correo: '',
     password: ''
@@ -55,17 +55,11 @@ const Login = ({ setShowLogin, setShowRegistro}) => {
         document.getElementById('googleSignInButton'),
         { theme: 'outline', size: 'large', width: 300 }
       );
-
-      // Opcional: mostrar el prompt de login Google
-      // window.google.accounts.id.prompt();
     }
   }, [scriptLoaded]);
 
   const handleGoogleResponse = async (response) => {
-    console.log('Google ID Token:', response.credential);
-
     try {
-      // Enviar token al backend para validación y login/registro
       const res = await axios.post(
         'http://localhost/api/login/google/login-google.php',
         { id_token: response.credential },
@@ -75,14 +69,9 @@ const Login = ({ setShowLogin, setShowRegistro}) => {
       if (res.data.success) {
         setExito(true);
         setMensaje('Login con Google exitoso');
-        // Actualizar el estado de autenticación y esperar
         await auth.checkAuthStatus();
-        // Cerrar el modal de login
-        if (setShowLogin) {
-          setShowLogin(false);
-        }
-        // Navegar a la página de recetas
-        navigate('/recetas'); 
+        if (setShowLogin) setShowLogin(false);
+        navigate('/recetas');
       } else {
         setExito(false);
         setMensaje(res.data.message || 'Error en login con Google');
@@ -152,14 +141,9 @@ const Login = ({ setShowLogin, setShowRegistro}) => {
       if (respuesta.data.success) {
         setExito(true);
         setMensaje(respuesta.data.message);
-        // Actualizar el estado de autenticación y esperar
         await auth.checkAuthStatus();
-        // Cerrar el modal de login
-        if (setShowLogin) {
-          setShowLogin(false);
-        }
-        // Navegar a la página de recetas
-        navigate('/recetas'); 
+        if (setShowLogin) setShowLogin(false);
+        navigate('/recetas');
       } else {
         setExito(false);
         setMensaje(respuesta.data.message || 'Correo o contraseña incorrectos.');
@@ -172,10 +156,26 @@ const Login = ({ setShowLogin, setShowRegistro}) => {
   };
 
   return (
-    <div className="pop-up-sign-up">
-      <section className="contenedor-sign-in" id="contenedor-sign-in">
+    <div
+      className="pop-up-sign-in"
+      onClick={() => setShowLogin(false)}
+      style={{ zIndex: 300 }}
+    >
+      <div
+        className="contenedor-sign-in"
+        id="contenedor-sign-in"
+        onClick={e => e.stopPropagation()}
+        style={{ position: 'relative' }}
+      >
+        <button
+          type="button"
+          className="btn-close"
+          aria-label="Close"
+          style={{ position: 'absolute', top: 10, right: 10, zIndex: 2 }}
+          onClick={() => setShowLogin(false)}
+        ></button>
         <figure>
-          <a href="/">
+          <a href="/home">
             <img src={logo} alt="Logo de Kukit" />
           </a>
         </figure>
@@ -230,21 +230,17 @@ const Login = ({ setShowLogin, setShowRegistro}) => {
 
         <p>¿No tienes cuenta?</p>
 
-        <button type="submit" className="botones-inversos" onClick={() => {
-            setShowLogin(false);
-            setShowRegistro(true);
-          }}>
-            Crear Cuenta
-          </button>
+        <button type="button" className="botones-inversos" onClick={() => {
+          setShowLogin(false);
+          setShowRegistro(true);
+        }}>
+          Crear Cuenta
+        </button>
 
         {mensaje && (
           <p style={{ color: exito ? 'green' : 'red', marginTop: '1rem' }}>{mensaje}</p>
         )}
-
-        <button type="button" onClick={() => setShowLogin(false)}>
-          Cerrar
-        </button>
-      </section>
+      </div>
     </div>
   );
 };

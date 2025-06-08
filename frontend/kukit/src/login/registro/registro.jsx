@@ -145,8 +145,23 @@ const Registro = ({ setShowRegistro, setShowLogin }) => {
   };
 
   return (
-    <div className="pop-up-sign-up">
-      <section className="contenedor-sign-up">
+    <div
+      className="pop-up-sign-up"
+      onClick={() => setShowRegistro(false)}
+      style={{ zIndex: 300 }}
+    >
+      <section
+        className="contenedor-sign-up"
+        onClick={e => e.stopPropagation()}
+        style={{ position: 'relative' }}
+      >
+        <button
+          type="button"
+          className="btn-close"
+          aria-label="Close"
+          style={{ position: 'absolute', top: 10, right: 10, zIndex: 2 }}
+          onClick={() => setShowRegistro(false)}
+        ></button>
         <figure>
           <a href="/">
             <img src={logo} alt="Logo de Kukit" />
@@ -205,12 +220,16 @@ const Registro = ({ setShowRegistro, setShowLogin }) => {
         <div id="googleSignUpButton"></div>
 
         <p>¿Ya tienes cuenta?</p>
-        <button type="button" className="botones-inicio-sesion" id="inicio-google" onClick={() => {
-          setShowRegistro(false);
-          setShowLogin(true);
-        }}>Iniciar sesión</button>
-        <hr />
-        <button type="button" onClick={() => setShowRegistro(false)}>Cerrar</button>
+        <button
+          type="button"
+          className="botones-inversos"
+          onClick={() => {
+            setShowRegistro(false);
+            setShowLogin(true);
+          }}
+        >
+          Iniciar sesión
+        </button>
         {mensaje && (
           <p style={{ color: exito ? 'green' : 'red', marginTop: '1rem' }}>{mensaje}</p>
         )}

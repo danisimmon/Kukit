@@ -265,14 +265,14 @@ const RecetasGuardadas = () => {
               </div>
               <div className="row">
                 <div className="col-md-3 mb-3">
-                  <label htmlFor="filtroGluten" className="form-label">Sin Gluten</label>
+                  <label htmlFor="filtroGluten" className="form-label">Gluten</label>
                   <select id="filtroGluten" className="form-select" value={filterGluten} onChange={handleFilterChange(setFilterGluten)}>
                     <option value="">Cualquiera</option>
                     {OPCIONES_BOOLEANAS.map(op => <option key={`gluten-${op.value}`} value={op.value}>{op.label}</option>)}
                   </select>
                 </div>
                 <div className="col-md-3 mb-3">
-                  <label htmlFor="filtroLactosa" className="form-label">Sin Lactosa</label>
+                  <label htmlFor="filtroLactosa" className="form-label">Lactosa</label>
                   <select id="filtroLactosa" className="form-select" value={filterLactosa} onChange={handleFilterChange(setFilterLactosa)}>
                     <option value="">Cualquiera</option>
                     {OPCIONES_BOOLEANAS.map(op => <option key={`lactosa-${op.value}`} value={op.value}>{op.label}</option>)}
