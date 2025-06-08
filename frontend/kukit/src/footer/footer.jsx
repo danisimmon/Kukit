@@ -5,12 +5,12 @@ import xLogo from '../img/x.png';
 import tiktokLogo from '../img/tikTok.png';
 
 function Footer({ setShowListaCompra }) {
-    const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
+    const [currentYear] = useState(new Date().getFullYear());
 
     return (
         <>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"></link>
-            <footer className="section bg-footer">
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"></link>
+            <footer className="section bg-footer footer-kukit">
                 <div className="container-footer">
                     <div className="row" style={{ justifyContent: 'space-around', alignItems: 'center' }}>
                         {/* Sección 1 */}
@@ -19,7 +19,7 @@ function Footer({ setShowListaCompra }) {
                                 <h6 className="footer-heading text-uppercase text-white">Visita nuestras secciones</h6>
                                 <ul className="list-unstyled footer-link mt-4">
                                     <li><a href="/recetas" className="enlace-footer">Recetas</a></li>
-                                    <li> <a className="enlace-footer" onClick={() => setShowListaCompra(true)}>Lista de la compra</a></li>
+                                    <li><a className="enlace-footer" onClick={() => setShowListaCompra(true)}>Lista de la compra</a></li>
                                     <li><a href="/planAlimentacion" className="enlace-footer">Plan de alimentación</a></li>
                                 </ul>
                             </div>
@@ -37,31 +37,33 @@ function Footer({ setShowListaCompra }) {
                             </div>
                         </div>
 
-
                         {/* Sección 3 */}
                         <div className="col-lg-3">
-                            <div
-                            style={{color: '#fff'}}>
-                                <h6 className="footer-heading text-uppercase text-white" style={{color: '#fff'}}>Contáctanos</h6>
-                                <p className="contact-info mt-4" style={{color: '#fff'}}>Contacta con nosotros si necesitas ayuda</p>
-                                <p className="contact-info" style={{color: '#fff'}}>kukit.contacto@gmail.com</p>
+                            <div style={{ color: '#fff' }}>
+                                <h6 className="footer-heading text-uppercase text-white" style={{ color: '#fff' }}>Contáctanos</h6>
+                                <p className="contact-info mt-4" style={{ color: '#fff' }}>Contacta con nosotros si necesitas ayuda</p>
+                                <p className="contact-info" style={{ color: '#fff' }}>kukit.contacto@gmail.com</p>
                                 <div className="mt-5">
                                     <ul className="list-inline">
                                         <li className="list-inline-item">
                                             <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
-                                            <img src={instagramLogo} alt="Instagram Logo" className="footer-icon-img" /></a>
+                                                <img src={instagramLogo} alt="Instagram Logo" className="footer-icon-img" />
+                                            </a>
                                         </li>
                                         <li className="list-inline-item">
                                             <a href="https://x.com/home" target="_blank" rel="noopener noreferrer">
-                                            <img src={xLogo} alt="X Logo" className="footer-icon-img" /></a>
+                                                <img src={xLogo} alt="X Logo" className="footer-icon-img" />
+                                            </a>
                                         </li>
                                         <li className="list-inline-item">
                                             <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
-                                            <img src={facebookLogo} alt="Facebook Logo" className="footer-icon-img"/></a>
+                                                <img src={facebookLogo} alt="Facebook Logo" className="footer-icon-img" />
+                                            </a>
                                         </li>
                                         <li className="list-inline-item">
                                             <a href="https://www.tiktok.com" target="_blank" rel="noopener noreferrer">
-                                            <img src={tiktokLogo} alt="TikTok Logo" className="footer-icon-img" /></a>
+                                                <img src={tiktokLogo} alt="TikTok Logo" className="footer-icon-img" />
+                                            </a>
                                         </li>
                                     </ul>
                                 </div>
@@ -69,11 +71,8 @@ function Footer({ setShowListaCompra }) {
                         </div>
                     </div>
                 </div>
-
-                <div className="text-center mt-5">
-                    <p className="footer-alt mb-0 f-14"
-                    style={{color: '#fff'}}>
-
+                <div className="footer-copyright">
+                    <p className="footer-alt mb-0 f-14">
                         © {currentYear} Ainhoa Blanca, Manuel Gómez, Rubén Peña, Daniel Simón. All Rights Reserved
                     </p>
                 </div>

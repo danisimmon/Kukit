@@ -121,13 +121,11 @@ function Home() {
           </div>
         </div>
 
-        <section>
-
-
+        <section className="homesection">
           {/* Contenedor para las secciones de Imprescindibles y Novedades */}
           {/* Usamos container-fluid para ancho completo y my-5 para margen vertical. La clase 'row' de Bootstrap permite que los elementos hijos se coloquen en línea. */}
           <div className="container-fluid my-5" id="contenedor-imprescindibles-novedades">
-            <div className="row gap-3 flex-column">
+            <div className="row gap-3">
 
               {/* Sección Imprescindibles Kukit - Ocupa la mitad del ancho en pantallas medianas y superiores */}
               <div className="col-12 bg-light ms-auto">
