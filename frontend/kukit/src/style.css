@@ -1,6 +1,6 @@
 /* @import url('https://fonts.googleapis.com/css2?family=Germania+One&display=swap'); */
 
-@font-face  {
+@font-face {
     font-family: 'titulos';
     src: url(./font/ChocolateCookies.ttf) format('truetype');
     font-weight: normal;
@@ -19,7 +19,7 @@ body,
     padding: 0;
 }
 
-h1{
+h1 {
     font-family: 'titulos';
 }
 
@@ -1134,7 +1134,7 @@ footer hr {
     box-shadow: 4px 0px 40px 0px rgba(0, 0, 0, 0.25);
 }
 
-.boton-crear-receta{
+.boton-crear-receta {
     margin: 10px;
 }
 
@@ -2644,7 +2644,8 @@ header nav ul li.nav-link-li {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 10px; /* Más separación entre líneas */
+    gap: 10px;
+    /* Más separación entre líneas */
     cursor: pointer;
     padding: 0;
 }
@@ -2656,6 +2657,144 @@ header nav ul li.nav-link-li {
     background-color: #C33333;
     border-radius: 2px;
     transition: all 0.3s;
+}
+
+/* Popup login y registro: centrado, responsive y sin desbordar */
+.contenedor-sign-in, .contenedor-sign-up {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    padding: 2rem 1.5rem;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 0.3s, transform 0.3s;
+    max-height: 95vh;
+    overflow-y: auto;
+    margin: 2vh auto;
+}
+
+.pop-up-sign-up, .pop-up-sign-in {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 300;
+    overflow-y: auto;
+}
+
+/* Inputs y botones alineados y del mismo ancho */
+.formulario-inicio-sesion,
+.contenedor-email-password,
+#googleSignInButton,
+.botones-inicio-sesion,
+.botones-inversos,
+.contenedor-sign-in button[type="button"] {
+    width: 100% !important;
+    max-width: 340px;
+    margin: 0 auto 10px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#googleSignInButton>div {
+    width: 100% !important;
+    justify-content: center;
+    display: flex !important;
+}
+
+#googleSignInButton {
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.contenedor-email-password input {
+    width: 100% !important;
+    max-width: 340px;
+}
+
+.botones-inicio-sesion,
+.botones-inversos {
+    margin-top: 10px;
+}
+
+.contenedor-sign-in figure img {
+    width: 80px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+/* --- REGISTRO: igualar alineación y ancho a login --- */
+.contenedor-sign-up {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    padding: 2rem 1.5rem;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 0.3s, transform 0.3s;
+    max-height: 95vh;
+    overflow-y: auto;
+    margin: 2vh auto;
+}
+
+.contenedor-sign-up figure img {
+    width: 80px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.contenedor-sign-up .formulario-inicio-sesion,
+.contenedor-sign-up .contenedor-email-password,
+.contenedor-sign-up #googleSignUpButton,
+.contenedor-sign-up .botones-inicio-sesion,
+.contenedor-sign-up .botones-inversos,
+.contenedor-sign-up button[type="button"] {
+    width: 100% !important;
+    max-width: 340px;
+    margin: 0 auto 10px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.contenedor-sign-up .contenedor-email-password input {
+    width: 100% !important;
+    max-width: 340px;
+}
+
+.contenedor-sign-up .botones-inicio-sesion,
+.contenedor-sign-up .botones-inversos {
+    margin-top: 10px;
+}
+
+#googleSignUpButton {
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    width: 100% !important;
+}
+
+#googleSignUpButton>div {
+    width: 100% !important;
+    justify-content: center;
+    display: flex !important;
 }
 
 /* --- Responsive Design --- */
@@ -2950,6 +3089,25 @@ header nav ul li.nav-link-li {
 }
 
 @media (max-width: 768px) {
+    .contenedor-sign-in, .contenedor-sign-up {
+        max-width: 98vw;
+        padding: 1rem 0.5rem;
+    }
+
+    .row {
+        flex-wrap: wrap !important;
+    }
+
+    .col-md-5, .col-md-7 {
+        max-width: 100% !important;
+        flex: 0 0 100% !important;
+    }
+
+    .contenedor-sign-up {
+        max-width: 98vw;
+        padding: 1rem 0.5rem;
+    }
+
     /* Footer: apilar columnas y centrar contenido */
     footer .container-footer,
     .container-footer {
