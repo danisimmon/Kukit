@@ -32,7 +32,7 @@ $recetas = [
                 "3.Servir
                 Sirve inmediatamente mientras está caliente.
                 Puedes añadir por encima un poco de queso parmesano rallado o nueces picadas si lo deseas."],
-        "idUsuario" => "usuario456",
+        "idUsuario" => "kukit",
         "compartido" => true,
         "alergias" => ["gluten", "lactosa"],
         "pais" => "Italia",
@@ -204,7 +204,7 @@ $recetas = [
 
             "Servir y acompañar
             Sirve caliente, decorado con un poco de cilantro fresco picado si lo deseas. Acompaña con arroz blanco, pan naan o solo."],
-        "idUsuario" => "usuario456",
+        "idUsuario" => "kukit",
         "compartido" => true,
         "alergias" => [],
         "pais" => "India",
@@ -490,7 +490,7 @@ $recetas = [
         Añade la crema agria por encima, espolvorea el queso fresco y agrega cebolla picada al gusto.  
         Sirve caliente."
     ],
-    "idUsuario" => "usuario456",
+    "idUsuario" => "kukit",
     "compartido" => true,
     "alergias" => ["lactosa", "gluten"],
     "pais" => "México",
@@ -531,7 +531,7 @@ $recetas = [
         Corta las hojas de alga nori en tiras y colócalas alrededor o en la base del onigiri.  
         Sirve a temperatura ambiente o ligeramente tibios."
     ],
-    "idUsuario" => "usuario456",
+    "idUsuario" => "kukit",
     "compartido" => true,
     "alergias" => ["pescado", "gluten"],
     "pais" => "Japón",
@@ -572,7 +572,7 @@ $recetas = [
         Da la vuelta con cuidado usando un plato o tapa, y cocina otros 3-4 minutos por el otro lado.  
         La tortilla puede quedar jugosa o bien hecha, según tu gusto."
     ],
-    "idUsuario" => "usuario456",
+    "idUsuario" => "kukit",
     "compartido" => true,
     "alergias" => ["huevo"],
     "pais" => "España",
@@ -618,7 +618,7 @@ $recetas = [
         Sirve caliente, decorado con cilantro fresco picado.  
         Acompaña con arroz basmati o pan naan."
     ],
-    "idUsuario" => "usuario456",
+    "idUsuario" => "kukit",
     "compartido" => true,
     "alergias" => [],
     "pais" => "India",
@@ -657,7 +657,7 @@ $recetas = [
         Hornea durante 30-35 minutos hasta que cuaje y la superficie esté dorada.  
         Deja enfriar unos minutos antes de desmoldar y servir."
     ],
-    "idUsuario" => "usuario456",
+    "idUsuario" => "kukit",
     "compartido" => true,
     "alergias" => ["lactosa", "gluten", "huevo"],
     "pais" => "Francia",
@@ -690,7 +690,7 @@ $recetas = [
         Apoya las bratwurst sobre una cama de chucrut caliente.  
         Espolvorea con pimienta negra molida y sirve con pan o patatas."
     ],
-    "idUsuario" => "usuario456",
+    "idUsuario" => "kukit",
     "compartido" => true,
     "alergias" => ["gluten"],
     "pais" => "Alemania",
@@ -728,7 +728,7 @@ $recetas = [
         Incorpora los macarrones a la salsa de queso.  
         Coloca todo en una fuente apta para horno y gratina a 200 °C durante 10 minutos hasta que la superficie esté dorada."
     ],
-    "idUsuario" => "usuario456",
+    "idUsuario" => "kukit",
     "compartido" => true,
     "alergias" => ["gluten", "lactosa"],
     "pais" => "Estados Unidos",
@@ -768,7 +768,7 @@ $recetas = [
         En una sartén aparte, fríe los huevos al gusto.  
         Sirve los frijoles con un huevo encima y sazona con sal y pimienta."
     ],
-    "idUsuario" => "usuario456",
+    "idUsuario" => "kukit",
     "compartido" => true,
     "alergias" => ["gluten"],
     "pais" => "Brasil",
@@ -812,7 +812,7 @@ $recetas = [
         "Servir  
         Retira y sirve caliente sobre arroz blanco."
     ],
-    "idUsuario" => "usuario456",
+    "idUsuario" => "kukit",
     "compartido" => true,
     "alergias" => ["frutos secos", "gluten"],
     "pais" => "China",
@@ -854,7 +854,7 @@ $recetas = [
         Retira del fuego, añade los cacahuetes picados y cebolla verde en rodajas.  
         Sirve caliente, con chile en polvo si gustas."
     ],
-    "idUsuario" => "usuario456",
+    "idUsuario" => "kukit",
     "compartido" => true,
     "alergias" => ["frutos secos", "marisco", "gluten"],
     "pais" => "Tailandia",
@@ -894,7 +894,7 @@ $recetas = [
         "Servir  
         Mezclar todo bien antes de comer."
     ],
-    "idUsuario" => "usuario456",
+    "idUsuario" => "kukit",
     "compartido" => true,
     "alergias" => ["gluten", "huevo"],
     "pais" => "Corea del Sur",
@@ -934,7 +934,7 @@ $recetas = [
         Espolvorea con queso y hornea a 180°C durante 30–35 minutos.  
         Deja reposar antes de servir."
     ],
-    "idUsuario" => "usuario456",
+    "idUsuario" => "kukit",
     "compartido" => true,
     "alergias" => ["lácteos", "gluten"],
     "pais" => "Grecia",
@@ -971,7 +971,7 @@ $recetas = [
         "Servir frío  
         Sirve como entrante o acompañamiento frío."
     ],
-    "idUsuario" => "usuario456",
+    "idUsuario" => "kukit",
     "compartido" => true,
     "alergias" => ["gluten"],
     "pais" => "Líbano",
@@ -1005,7 +1005,7 @@ $recetas = [
         "Servir  
         Sirve caliente, acompañado de pan fresco."
     ],
-    "idUsuario" => "usuario456",
+    "idUsuario" => "kukit",
     "compartido" => true,
     "alergias" => ["huevo"],
     "pais" => "Turquía",
@@ -1032,7 +1032,7 @@ $recetas = [
     "Ir añadiendo el caldo caliente poco a poco mientras se remueve.",
     "Cocinar durante unos 18-20 minutos. Añadir el parmesano y servir."
 ],
-"idUsuario" => "usuario456",
+"idUsuario" => "kukit",
 "compartido" => true,
 "alergias" => ["gluten", "lactosa"],
 "pais" => "Italia",
@@ -1059,7 +1059,7 @@ $recetas = [
     "Añadir el caldo y cocinar 15 minutos.",
     "Servir con las tiras de tortilla, aguacate y queso fresco."
 ],
-"idUsuario" => "usuario456",
+"idUsuario" => "kukit",
 "compartido" => true,
 "alergias" => [],
 "pais" => "Mexico",
@@ -1087,7 +1087,7 @@ $recetas = [
     "Pintar con la salsa varias veces durante la cocción.",
     "Servir caliente como aperitivo o plato principal."
 ],
-"idUsuario" => "usuario456",
+"idUsuario" => "kukit",
 "compartido" => true,
 "alergias" => ["soja"],
 "pais" => "Japon",
@@ -1114,7 +1114,7 @@ $recetas = [
     "Incorporar el paneer en cubos y cocinar 5 minutos más.",
     "Servir con arroz o pan naan caliente."
 ],
-"idUsuario" => "usuario456",
+"idUsuario" => "kukit",
 "compartido" => true,
 "alergias" => ["lactosa"],
 "pais" => "India",
@@ -1142,7 +1142,7 @@ $recetas = [
     "Hornear a 180°C durante 40 minutos con un poco de aceite y hierbas.",
     "Servir caliente como plato principal o acompañamiento."
 ],
-"idUsuario" => "usuario456",
+"idUsuario" => "kukit",
 "compartido" => true,
 "alergias" => [],
 "pais" => "Francia",
@@ -1169,7 +1169,7 @@ $recetas = [
     "Escurrir y saltear con mantequilla o acompañar con salsa.",
     "Servir como guarnición o plato principal con queso fundido."
 ],
-"idUsuario" => "usuario456",
+"idUsuario" => "kukit",
 "compartido" => true,
 "alergias" => ["gluten", "huevo", "lactosa"],
 "pais" => "Alemania",
@@ -1197,7 +1197,7 @@ $recetas = [
     "Cocinar hasta que las papas estén tiernas.",
     "Servir caliente con perejil picado."
 ],
-"idUsuario" => "usuario456",
+"idUsuario" => "kukit",
 "compartido" => true,
 "alergias" => ["marisco", "lactosa"],
 "pais" => "Estados Unidos",
@@ -1228,7 +1228,7 @@ $recetas = [
         "Corregir sal y decorar con más cilantro.",
         "Servir con arroz blanco."
     ],
-    "idUsuario" => "usuario456",
+    "idUsuario" => "kukit",
     "compartido" => true,
     "alergias" => ["pescado", "coco"],
     "pais" => "Brasil",
@@ -1259,7 +1259,7 @@ $recetas = [
         "Incorporar el tomate triturado y una pizca de sal. Cocinar a fuego medio durante 20–25 minutos removiendo ocasionalmente.",
         "Servir caliente como plato principal o acompañamiento. Puede añadirse un huevo frito por encima si se desea."
     ],
-    "idUsuario" => "usuario456",
+    "idUsuario" => "kukit",
     "compartido" => true,
     "alergias" => [],
     "pais" => "España",
@@ -1287,7 +1287,7 @@ $recetas = [
     "Cocinar los dumplings al vapor durante 15 minutos.",
     "Servir con salsa de soja o vinagre."
 ],
-"idUsuario" => "usuario456",
+"idUsuario" => "kukit",
 "compartido" => true,
 "alergias" => ["gluten", "soja"],
 "pais" => "China",
@@ -1319,7 +1319,7 @@ $recetas = [
         "Apagar el fuego, añadir salsa de pescado y zumo de lima.",
         "Servir caliente, con algo de picante."
     ],
-    "idUsuario" => "usuario456",
+    "idUsuario" => "kukit",
     "compartido" => true,
     "alergias" => ["marisco"],
     "pais" => "Tailandia",
@@ -1348,7 +1348,7 @@ $recetas = [
         "Cocinar un par de minutos más.",
         "Servir caliente y algo picante."
     ],
-    "idUsuario" => "usuario456",
+    "idUsuario" => "kukit",
     "compartido" => true,
     "alergias" => ["gluten", "picante"],
     "pais" => "Corea del Sur",
@@ -1376,7 +1376,7 @@ $recetas = [
         "Cocinar en parrilla o sartén durante 8–10 minutos, girando para dorar por todos lados.",
         "Servir con pan pita, quizá tzatziki o verduras."
     ],
-    "idUsuario" => "usuario456",
+    "idUsuario" => "kukit",
     "compartido" => true,
     "alergias" => [],
     "pais" => "Grecia",
@@ -1404,7 +1404,7 @@ $recetas = [
         "Ajustar limón o sal al gusto.",
         "Servir con aceite y pimentón encima, acompañado de pan."
     ],
-    "idUsuario" => "usuario456",
+    "idUsuario" => "kukit",
     "compartido" => true,
     "alergias" => ["sésamo"],
     "pais" => "Líbano",
@@ -1432,7 +1432,7 @@ $recetas = [
         "Calentar miel con azúcar y verter sobre el baklava caliente.",
         "Dejar enfriar y servir como dulce."
     ],
-    "idUsuario" => "usuario456",
+    "idUsuario" => "kukit",
     "compartido" => true,
     "alergias" => ["frutos secos", "gluten", "lácteos"],
     "pais" => "Turquía",
@@ -1460,7 +1460,7 @@ $recetas = [
         "Espolvorear con pimentón dulce y sal gruesa.",
         "Rociar con aceite de oliva antes de servir."
     ],
-    "idUsuario" => "usuario456",
+    "idUsuario" => "kukit",
     "compartido" => true,
     "alergias" => ["marisco"],
     "pais" => "España",
@@ -1491,7 +1491,7 @@ $recetas = [
         "Añadir sal y pimentón. Cocinar 30 minutos más.",
         "Dejar reposar antes de servir para intensificar el sabor."
     ],
-    "idUsuario" => "usuario456",
+    "idUsuario" => "kukit",
     "compartido" => true,
     "alergias" => [],
     "pais" => "España",
@@ -1521,7 +1521,7 @@ $recetas = [
         "Cubrir con agua o caldo y cocinar a fuego lento 2 horas.",
         "Dejar reposar para intensificar el sabor. Servir caliente."
     ],
-    "idUsuario" => "usuario456",
+    "idUsuario" => "kukit",
     "compartido" => true,
     "alergias" => [],
     "pais" => "España",
@@ -1551,7 +1551,7 @@ $recetas = [
         "Dejar enfriar la masa en la nevera varias horas.",
         "Formar las croquetas, pasarlas por huevo y pan rallado, y freír en aceite caliente."
     ],
-    "idUsuario" => "usuario456",
+    "idUsuario" => "kukit",
     "compartido" => true,
     "alergias" => ["gluten", "huevo", "lácteos"],
     "pais" => "España",
@@ -1592,7 +1592,7 @@ $recetas = [
         "Servir  
         Sirve caliente, acompañadas si se desea de uvas o huevo frito."
     ],
-    "idUsuario" => "usuario456",
+    "idUsuario" => "kukit",
     "compartido" => true,
     "alergias" => ["gluten"],
     "pais" => "España",
@@ -1631,7 +1631,7 @@ $recetas = [
         "Servir  
         Sirve caliente como entrante o acompañamiento."
     ],
-    "idUsuario" => "usuario456",
+    "idUsuario" => "kukit",
     "compartido" => true,
     "alergias" => [],
     "pais" => "España",
@@ -1673,7 +1673,7 @@ $recetas = [
         "Servir  
         Sirve caliente, acompañado de patatas fritas o ensalada."
     ],
-    "idUsuario" => "usuario456",
+    "idUsuario" => "kukit",
     "compartido" => true,
     "alergias" => ["gluten", "lactosa", "huevo"],
     "pais" => "España",
