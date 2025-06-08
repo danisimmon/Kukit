@@ -354,7 +354,7 @@ const ListaCompra = ({ showListaCompra, setListaCompra, refreshTrigger }) => {
           {mensaje && (
             <div className={`alert ${exito ? 'alert-success' : 'alert-danger'} alert-dismissible fade show`} role="alert">
               {mensaje}
-              <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close" onClick={() => setMensaje("")}></button>
+              <button type="button" className="btn-close no-hover" data-bs-dismiss="alert" aria-label="Close" onClick={() => setMensaje("")}></button>
             </div>
           )}
 

@@ -12,7 +12,7 @@ function Footer({ setShowListaCompra }) {
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"></link>
             <footer className="section bg-footer">
                 <div className="container-footer">
-                    <div className="row">
+                    <div className="row" style={{ justifyContent: 'space-around', alignItems: 'center' }}>
                         {/* Sección 1 */}
                         <div className="col-lg-3">
                             <div>
@@ -37,19 +37,8 @@ function Footer({ setShowListaCompra }) {
                             </div>
                         </div>
 
-                        {/* Sección 3 */}
-                        <div className="col-lg-3">
-                            <div>
-                                <h6 className="footer-heading text-uppercase text-white">Empieza con Kukit</h6>
-                                <ul className="list-unstyled footer-link mt-4">
-                                    <li><a href="/login" className="enlace-footer">Iniciar Sesión</a></li>
-                                    <li><a href="/Registro" className="enlace-footer">Crear Cuenta</a></li>
-                                    <li><a href="/login/restablecer-password" className="enlace-footer">¿Olvidaste tu contraseña?</a></li>
-                                </ul>
-                            </div>
-                        </div>
 
-                        {/* Sección 4 */}
+                        {/* Sección 3 */}
                         <div className="col-lg-3">
                             <div>
                                 <h6 className="footer-heading text-uppercase text-white">Contáctanos</h6>
