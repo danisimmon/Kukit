@@ -3269,7 +3269,6 @@ header nav ul li.nav-link-li {
         text-align: center;
     }
 }
-
 @media (min-width: 998px) {
   #contenedor-imprescindibles-novedades-row {
     display: flex;
@@ -3291,4 +3290,91 @@ header nav ul li.nav-link-li {
     max-width: 40px;
     padding: 0;
   }
+}
+
+@media (max-width: 768px) {
+    /* Footer: apilar columnas y centrar contenido */
+    footer .container-footer,
+    .container-footer {
+        width: 100%;
+        padding: 0 10px;
+    }
+
+.btn.volver:hover {
+    margin: 10px;
+    background-color: #fff;
+    color: var(--primary-color);
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+    footer .row,
+    .container-footer .row {
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 0;
+    }
+
+    footer .col-lg-3 {
+        width: 100% !important;
+        margin-bottom: 25px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    footer .col-lg-3 ul {
+        padding-left: 0;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+    }
+
+    footer .col-lg-3 h6,
+    footer .col-lg-3 .footer-heading {
+        margin-bottom: 12px;
+        font-size: 1.1rem;
+    }
+
+    /* Centrar los iconos sociales */
+    .list-inline {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+        padding-left: 0;
+        margin-top: 10px;
+        margin-bottom: 0;
+    }
+
+    .list-inline-item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .footer-icon-img {
+        width: 32px;
+        height: 32px;
+        object-fit: contain;
+        margin: 0 2px;
+    }
+
+    /* Ajustar el texto de contacto */
+    .contact-info {
+        font-size: 1rem;
+        margin-bottom: 0.5em;
+    }
+
+    /* Ajustar el copyright */
+    .footer-alt {
+        font-size: 0.95rem;
+        padding: 10px 0;
+        text-align: center;
+    }
 }
