@@ -26,7 +26,12 @@ body,
     padding: 0;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-family: 'titulos';
 }
 
@@ -2849,6 +2854,27 @@ header nav ul li.nav-link-li {
     max-width: 100%;
 }
 
+
+
+.footer-facebook-icon-img {
+    width: 37px;
+    height: 37px;
+}
+
+.ingredientes-pasos {
+    display: flex;
+    flex-direction: row;
+    /* Lado a lado por defecto */
+    gap: 20px;
+    /* Espacio entre las secciones de ingredientes y pasos */
+}
+
+.ingredientes-crear-receta,
+.pasos-crear-receta {
+    flex: 1;
+    /* Para que ambas secciones compartan el espacio disponible */
+}
+
 /* --- Responsive Design --- */
 
 /* Tablets and larger mobile devices */
@@ -3224,6 +3250,7 @@ header nav ul li.nav-link-li {
     }
 
 }
+
 
 @media screen and (max-width: 998px) {
 

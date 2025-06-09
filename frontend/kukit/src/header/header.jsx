@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import logo from '../img/logo_kukit.png';
+import perfilAnimado from '../img/perfil-animado.gif'; // Asumiendo que tu GIF se llama así y está en src/img/
 import Login from '../login/login';
 import Registro from '../login/registro/registro';
 import ListaCompra from '../listaCompra/listaCompra';
@@ -38,22 +39,6 @@ function Header() {
   const closeOffcanvas = () => {
     setShowOffcanvas(false);
   };
-
-  const getInitial = () => {
-    if (user) {
-      if (user.nombre) {
-        return user.nombre.charAt(0).toUpperCase();
-      } else if (user.email) {
-        return user.email.charAt(0).toUpperCase();
-      } else if (typeof user === 'string') {
-        return user.charAt(0).toUpperCase();
-      }
-    }
-    return 'Perfil';
-  };
-
-  const initialDisplay = getInitial();
-  const isFallbackText = initialDisplay === 'Perfil';
 
   return (
     <>
@@ -105,24 +90,24 @@ function Header() {
             <div
               onClick={() => setDesplegablePerfil(!showDesplegablePerfil)}
               style={{
-                width: '40px',
-                height: '40px',
+                width: '45px', // Ligeramente más grande para acomodar el GIF si es necesario
+                height: '45px',
                 borderRadius: '50%',
-                backgroundColor: '#C33333',
-                color: 'white',
+                backgroundColor: 'transparent', // Puedes mantener un color de fondo si tu GIF tiene transparencias
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 cursor: 'pointer',
-                fontSize: isFallbackText ? '0.7em' : '1.2em',
-                fontWeight: 'bold',
                 marginLeft: '10px',
-                padding: isFallbackText ? '2px' : '0',
-                textAlign: 'center'
+                overflow: 'hidden' // Para asegurar que el GIF no se salga del círculo
               }}
               title={user?.nombre || user?.email || 'Perfil'}
             >
-              {initialDisplay}
+              <img 
+                src={perfilAnimado} 
+                alt="Perfil" 
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+              />
             </div>
           )}
         </div>
@@ -170,24 +155,24 @@ function Header() {
               <div
                 onClick={() => { setDesplegablePerfil(true); closeOffcanvas(); }}
                 style={{
-                  width: '40px',
-                  height: '40px',
+                  width: '45px', // Ligeramente más grande para acomodar el GIF si es necesario
+                  height: '45px',
                   borderRadius: '50%',
-                  backgroundColor: '#C33333',
-                  color: 'white',
+                  backgroundColor: 'transparent', // Puedes mantener un color de fondo si tu GIF tiene transparencias
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   cursor: 'pointer',
-                  fontSize: isFallbackText ? '0.7em' : '1.2em',
-                  fontWeight: 'bold',
                   margin: '0 auto',
-                  padding: isFallbackText ? '2px' : '0',
-                  textAlign: 'center'
+                  overflow: 'hidden' // Para asegurar que el GIF no se salga del círculo
                 }}
                 title={user?.nombre || user?.email || 'Perfil'}
               >
-                {initialDisplay}
+                <img 
+                  src={perfilAnimado} 
+                  alt="Perfil" 
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+                />
               </div>
             )}
           </li>

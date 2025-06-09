@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import facebookLogo from '../img/Facebook.png';
+import facebookLogo from '../img/icons8-facebook-48.png';
 import instagramLogo from '../img/Instagram.png';
 import xLogo from '../img/x.png';
 import tiktokLogo from '../img/tikTok.png';
@@ -9,6 +9,21 @@ function Footer({ setShowListaCompra }) {
 
     return (
         <>
+            {/* Estilos para los iconos del footer */}
+            <style>
+                {`
+                    .footer-icon-img {
+                        width: 28px; /* Ajusta este valor según necesites */
+                        height: 28px; /* Ajusta este valor según necesites */
+                        object-fit: contain; /* Asegura que la imagen se escale bien sin distorsionarse */
+                    }
+                    .footer-facebook-icon-img { /* Nueva clase específica para Facebook */
+                        width: 40px; /* Tamaño deseado para Facebook */
+                        height: 40px; /* Tamaño deseado para Facebook */
+                        /* object-fit: contain; ya está en footer-icon-img, se hereda si ambas clases están presentes */
+                    }
+                `}
+            </style>
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"></link>
             <footer className="section bg-footer footer-kukit">
                 <div className="container-footer">
@@ -57,7 +72,7 @@ function Footer({ setShowListaCompra }) {
                                         </li>
                                         <li className="list-inline-item">
                                             <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
-                                                <img src={facebookLogo} alt="Facebook Logo" className="footer-icon-img" />
+                                                <img src={facebookLogo} alt="Facebook Logo" className="footer-icon-img footer-facebook-icon-img" />
                                             </a>
                                         </li>
                                         <li className="list-inline-item">
