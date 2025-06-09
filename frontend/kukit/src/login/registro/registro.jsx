@@ -168,7 +168,7 @@ const Registro = ({ setShowRegistro, setShowLogin }) => {
           </a>
         </figure>
 
-        <h1>CREAR CUENTA</h1>
+        <h1>Crear cuenta</h1>
         <hr className="linea-inicio-sesion" />
 
         <form onSubmit={manejarEnvio}>

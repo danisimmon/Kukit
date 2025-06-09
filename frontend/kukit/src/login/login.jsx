@@ -180,7 +180,7 @@ const Login = ({ setShowLogin, setShowRegistro }) => {
           </a>
         </figure>
 
-        <h1>INICIAR SESIÓN</h1>
+        <h1>Iniciar sesión</h1>
         <hr className="linea-inicio-sesion" />
         <hr />
 
