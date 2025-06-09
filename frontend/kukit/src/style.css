@@ -26,7 +26,12 @@ body,
     padding: 0;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-family: 'titulos';
 }
 
@@ -2457,8 +2462,7 @@ header nav ul li.nav-link-li {
 #vaciarPlanButton {
     display: flex;
     justify-content: center;
-    width: 10%;
-    padding: 10px 0;
+    padding: 10px 10px;
     box-sizing: border-box;
     align-self: center;
 
@@ -2849,9 +2853,9 @@ header nav ul li.nav-link-li {
     max-width: 100%;
 }
 
-/* --- Responsive Design --- */
+/* --- Responsive --- */
 
-/* Tablets and larger mobile devices */
+/* Móvil */
 @media (max-width: 576px) {
 
     /* Header */
@@ -3066,6 +3070,24 @@ header nav ul li.nav-link-li {
         /* Ancho más razonable */
         font-size: 0.9rem;
     }
+
+    .titulo-pagina ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        gap: 0px;
+        align-items: center;
+    }
+
+    .botones-crear-receta {
+        display: flex;
+        gap: 10vw;
+        justify-content: center;
+        margin-top: 20px;
+        flex-direction: column-reverse;
+    }
+
 }
 
 /* Smaller mobile devices */
@@ -3108,6 +3130,7 @@ header nav ul li.nav-link-li {
     #cancelar-receta {
         width: 80%;
         font-size: 1rem;
+        align-self: center;
     }
 
     /* Si estos botones están en home */
@@ -3117,6 +3140,7 @@ header nav ul li.nav-link-li {
     .pasos-crear-receta {
         width: 95vw;
         padding: 15px;
+        align-self: center;
     }
 
     /* Si estos formularios están en home */

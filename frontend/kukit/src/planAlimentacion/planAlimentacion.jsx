@@ -351,7 +351,7 @@ function PlanificacionSemanal() {
 
           <div className="d-flex justify-content-between align-items-center mb-3 semana-navegacion">
             <button
-              className="btn btn-outline-primary"
+              className="btn"
               onClick={() => cambiarSemana(-1)}
               disabled={semanaActualVisualizada === 0}
               style={{fontWeight: 'bold'}}
@@ -360,7 +360,7 @@ function PlanificacionSemanal() {
             </button>
             <h4>Semana {semanaActualVisualizada + 1} de {NUMERO_SEMANAS_PLAN}</h4>
             <button
-              className="btn btn-outline-primary"
+              className="btn"
               onClick={() => cambiarSemana(1)}
               disabled={semanaActualVisualizada === NUMERO_SEMANAS_PLAN - 1}
               style={{fontWeight: 'bold'}}
