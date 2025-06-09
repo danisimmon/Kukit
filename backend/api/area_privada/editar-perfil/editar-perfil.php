@@ -4,7 +4,7 @@ include '../../conecta-mysql.php';
 header('Content-Type: application/json');
 $input = json_decode(file_get_contents('php://input'), true);
 
-if (!$input || empty($input['usuario']) || empty($input['correo']) || empty($input['password'])) {
+if (!$input || empty($input['usuario']) || empty($input['correo'])) {
     $data = ["success" => false, "message" => "Todos los campos son obligatorios."];
     echo json_encode($data);
     exit;
