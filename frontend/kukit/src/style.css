@@ -596,7 +596,7 @@ button.btn.btn-texto-toggle:hover {
     background-color: var(--primary-color) !important;
     color: var(--background-color) !important;
     border: none !important;
-    width: 10%;
+    width: 20%;
     align-self: center;
     font-weight: bold;
 }
