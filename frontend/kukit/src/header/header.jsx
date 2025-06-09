@@ -126,8 +126,8 @@ function Header() {
         <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Cerrar" onClick={closeOffcanvas}></button>
       </div>
       <div className="offcanvas-body">
-        <ul style={{ listStyle: 'none', padding: 0 }}>
-          <li>
+        <ul style={{ listStyle: 'none', padding: 0 }} className='perfil-opciones'> 
+          <li >
             <NavLink to="/recetas" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"} end onClick={closeOffcanvas}>
               Recetas
             </NavLink>
@@ -144,10 +144,10 @@ function Header() {
             </NavLink>
           </li>
           {/* Botón perfil solo en mobile */}
-          <li style={{ marginTop: '1em' }}>
+          <li style={{ marginTop: '1em' }} className='perfil-menu-hamburguesa' onClick={() => { setDesplegablePerfil(true); closeOffcanvas(); }}>
             {!isAuthenticated && (
               <>
-                <button className="sign-in" style={{ width: '100%', marginBottom: '8px' }} onClick={() => { setShowLogin(true); closeOffcanvas(); }}>Iniciar sesión</button>
+                <button className="botones-inversos" style={{ width: '100%', marginBottom: '8px' }} onClick={() => { setShowLogin(true); closeOffcanvas(); }}>Iniciar sesión</button>
                 <button className="sign-up" style={{ width: '100%' }} onClick={() => { setShowRegistro(true); closeOffcanvas(); }}>Regístrate</button>
               </>
             )}

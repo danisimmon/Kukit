@@ -12,6 +12,7 @@ import Footer from '../footer/footer';
 import ListaCompra from '../listaCompra/listaCompra';
 import Header from '../header/header';
 import { useNavigate } from 'react-router-dom';
+import lupa from '../img/lupa.png';
 
 const Recetas = () => {
   const [recetas, setRecetas] = useState([]);
@@ -292,14 +293,16 @@ const Recetas = () => {
 
           {/* Barra de búsqueda */}
           <div className="search-container mb-4">
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Buscar recetas por nombre..."
-              value={searchTerm}
-              onChange={handleSearchChange}
-            />
-            <span className="search-icon">🔍</span>
+            <div className="input-wrapper">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Buscar recetas por nombre..."
+                value={searchTerm}
+                onChange={handleSearchChange}
+              />
+              <img src={lupa} alt="lupa" className="lupa" />
+            </div>
           </div>
 
           <button className="btn-mostrar-filtros" onClick={() => setMostrarFiltros(prev => !prev)}>

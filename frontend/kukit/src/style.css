@@ -142,6 +142,29 @@ button {
     max-width: 500px;
     width: 100%;
     margin: 0 auto;
+    display: flex;
+}
+
+.input-wrapper {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    overflow: hidden;
+    width:100%;
+}
+
+.input-wrapper input {
+    flex: 1;
+    border: none;
+    padding: 8px;
+    outline: none;
+}
+
+.input-wrapper .lupa {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
 }
 
 .form-control {
@@ -1497,6 +1520,10 @@ footer hr {
     font-size: 2.5vh;
 }
 
+.lupa {
+        width: 5%;
+    }
+
 #cancelar-receta {
     display: flex;
     width: 20vw;
@@ -2462,8 +2489,7 @@ header nav ul li.nav-link-li {
 #vaciarPlanButton {
     display: flex;
     justify-content: center;
-    width: 10%;
-    padding: 10px 0;
+    padding: 10px 10px;
     box-sizing: border-box;
     align-self: center;
 
@@ -2705,6 +2731,14 @@ header nav ul li.nav-link-li {
     transition: all 0.3s;
 }
 
+ul.perfil-opciones>li.perfil-menu-hamburguesa {
+    border: 1px solid var(--primary-color) !important;
+    background-color: var(--primary-color) !important;
+    color: var(--background-color) !important;
+    cursor: pointer;
+    font-weight: bold;
+}
+
 /* Popup login y registro: centrado, responsive y sin desbordar */
 .contenedor-sign-in,
 .contenedor-sign-up {
@@ -2877,7 +2911,36 @@ header nav ul li.nav-link-li {
 
 /* --- Responsive Design --- */
 
-/* Tablets and larger mobile devices */
+.btn.volver {
+    margin: 10px;
+    background-color: var(--background-color);
+    color: var(--primary-color);
+    border: var(--primary-color) 1px solid;
+    font-weight: bold;
+    cursor: pointer;
+}
+.btn.volver:active {
+    margin: 10px;
+    background-color: var(--background-color);
+    color: var(--primary-color);
+    border: var(--primary-color) 1px solid;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+.btn.volver:hover {
+    margin: 10px;
+    background-color: #fff;
+    color: var(--primary-color);
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* --- Responsive --- */
+
+/* Móvil */
 @media (max-width: 576px) {
 
     /* Header */
@@ -3092,6 +3155,24 @@ header nav ul li.nav-link-li {
         /* Ancho más razonable */
         font-size: 0.9rem;
     }
+
+    .titulo-pagina ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        gap: 0px;
+        align-items: center;
+    }
+
+    .botones-crear-receta {
+        display: flex;
+        gap: 10vw;
+        justify-content: center;
+        margin-top: 20px;
+        flex-direction: column-reverse;
+    }
+
 }
 
 /* Smaller mobile devices */
@@ -3134,6 +3215,7 @@ header nav ul li.nav-link-li {
     #cancelar-receta {
         width: 80%;
         font-size: 1rem;
+        align-self: center;
     }
 
     /* Si estos botones están en home */
@@ -3143,6 +3225,7 @@ header nav ul li.nav-link-li {
     .pasos-crear-receta {
         width: 95vw;
         padding: 15px;
+        align-self: center;
     }
 
     /* Si estos formularios están en home */
@@ -3463,4 +3546,6 @@ header nav ul li.nav-link-li {
         width: 75%;
         height: 100%;
     }
+
+    
 }
