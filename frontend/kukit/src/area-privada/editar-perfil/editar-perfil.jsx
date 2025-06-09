@@ -15,6 +15,7 @@ const EditarPerfil = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [mostrarPopup, setMostrarPopup] = useState(false);
+  const [mostrarPopupPerfilGuardado, setMostrarPopupPerfilGuardado] = useState(false); // Nuevo estado para el popup de perfil
 
   // Estados para los nuevos inputs de ingredientes y pasos
   const [newIngredienteNombre, setNewIngredienteNombre] = useState('');
@@ -67,6 +68,12 @@ const EditarPerfil = () => {
   const handleCerrarPopup = () => {
     setMostrarPopup(false);
     //navigate("/ruta-destino"); // o usar window.location.href = "/..."
+  };
+
+  // Nueva función para cerrar el popup de perfil guardado
+  const handleCerrarPopupPerfilGuardado = () => {
+    setMostrarPopupPerfilGuardado(false);
+    setSeccionActiva("perfil"); // Volver a la vista de "Mi Perfil"
   };
 
   const [formData, setFormData] = useState({
@@ -423,18 +430,22 @@ const EditarPerfil = () => {
         withCredentials: true
       });
 
+      console.log("Respuesta del servidor al guardar perfil:", respuesta.data); // LOG DE RESPUESTA
+
       if (respuesta.data.success) {
         setExito(true);
         setMensaje(respuesta.data.message);
+        setMostrarPopupPerfilGuardado(true); // Mostrar el popup de perfil guardado
         console.log('Usuario:', respuesta.data.user);
       } else {
         setExito(false);
         setMensaje(respuesta.data.message);
+        console.log("Error al guardar perfil (success false):", respuesta.data.message); // LOG DE ERROR DESDE BACKEND
       }
     } catch (error) {
       setExito(false);
       setMensaje('Hubo un error al procesar la solicitud.');
-      console.error('Error:', error);
+      console.error('Error en catch al guardar perfil:', error); // LOG DE ERROR EN PETICIÓN
     }
   };
   console.log({
@@ -664,7 +675,7 @@ const EditarPerfil = () => {
                   <div className="contenedores-info-perfil">
                     <h3 className="titulos-perfil">Correo Electrónico</h3>
                     {/* Campo de correo no editable */}
-                    <p id="correo" name="correo" style={{ padding: '10px', border: '1px solid #ccc', borderRadius: '4px', backgroundColor: '#f0f0f0' }}>{formData.correo}</p>
+                    <p id="correo" name="correo" className="correo-display-perfil" style={{ padding: '10px', border: '1px solid #ccc', borderRadius: '4px', backgroundColor: '#f0f0f0' }}>{formData.correo}</p>
                   </div>
                 </div>
 
@@ -1081,6 +1092,21 @@ const EditarPerfil = () => {
                 <button
                   className="boton-cerrar-popup-receta-creada"
                   onClick={handleCerrarPopup}
+                >
+                  Cerrar
+                </button>
+              </div>
+            </div>
+          )}
+          {console.log("Valor de mostrarPopupPerfilGuardado antes de renderizar:", mostrarPopupPerfilGuardado)} {/* LOG DE ESTADO DEL POPUP */}
+          {/* Popup para perfil guardado con éxito */}
+          {mostrarPopupPerfilGuardado && (
+            <div className="popup-receta-creada"> {/* Puedes reutilizar la clase o crear una nueva si el estilo es diferente */}
+              <div className="popup-contenido-receta-creada">
+                <h2>¡Perfil guardado con éxito!</h2>
+                <button
+                  className="boton-cerrar-popup-receta-creada"
+                  onClick={handleCerrarPopupPerfilGuardado}
                 >
                   Cerrar
                 </button>

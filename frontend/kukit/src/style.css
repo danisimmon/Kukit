@@ -142,6 +142,29 @@ button {
     max-width: 500px;
     width: 100%;
     margin: 0 auto;
+    display: flex;
+}
+
+.input-wrapper {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    overflow: hidden;
+    width:100%;
+}
+
+.input-wrapper input {
+    flex: 1;
+    border: none;
+    padding: 8px;
+    outline: none;
+}
+
+.input-wrapper .lupa {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
 }
 
 .form-control {
@@ -577,7 +600,7 @@ button.btn.btn-texto-toggle:hover {
     background-color: var(--primary-color) !important;
     color: var(--background-color) !important;
     border: none !important;
-    width: 10%;
+    width: 20%;
     align-self: center;
     font-weight: bold;
 }
@@ -1095,11 +1118,20 @@ footer hr {
     align-items: center;
     width: 30vw;
     gap: 10px;
-    margin: 20px;
+    margin: 20px auto;
     padding: 10px;
     background-color: var(--background-color);
     border: var(--primary-color) solid 1px;
     border-radius: 15px;
+}
+
+/* Ajuste para el contenedor del correo en pantallas de 915px o menos */
+@media (max-width: 915px) {
+    .contenedores-info-perfil {
+        width: 100%; /* Ocupa el ancho completo de su padre (.tarjeta-perfil) */
+        /* .tarjeta-perfil ya se ajusta en otros breakpoints, 
+           esto permitirá que .contenedores-info-perfil se adapte bien. */
+    }
 }
 
 .botones-perfil {
@@ -1117,6 +1149,13 @@ footer hr {
     /* font-size: 24px;
     font-weight: 700;
     margin-bottom: 30px; */
+}
+
+.correo-display-perfil {
+    overflow-wrap: break-word; /* Permite que el texto largo se rompa para evitar desbordamiento */
+    word-break: break-word; /* Alternativa o complemento, más compatibilidad */
+    max-width: 100%; /* Asegura que el párrafo no sea más ancho que su contenedor */
+    box-sizing: border-box; /* Para que padding y border se incluyan en el cálculo del ancho */
 }
 
 /* Apartado Crear Receta */
@@ -1500,6 +1539,10 @@ footer hr {
     background: #C33333;
     font-size: 2.5vh;
 }
+
+.lupa {
+        width: 5%;
+    }
 
 #cancelar-receta {
     display: flex;
@@ -2865,6 +2908,29 @@ ul.perfil-opciones>li>div.perfil-menu-hamburguesa {
     max-width: 100%;
 }
 
+
+
+.footer-facebook-icon-img {
+    width: 37px;
+    height: 37px;
+}
+
+.ingredientes-pasos {
+    display: flex;
+    flex-direction: row;
+    /* Lado a lado por defecto */
+    gap: 20px;
+    /* Espacio entre las secciones de ingredientes y pasos */
+}
+
+.ingredientes-crear-receta,
+.pasos-crear-receta {
+    flex: 1;
+    /* Para que ambas secciones compartan el espacio disponible */
+}
+
+/* --- Responsive Design --- */
+
 .btn.volver {
     margin: 10px;
     background-color: var(--background-color);
@@ -2873,7 +2939,6 @@ ul.perfil-opciones>li>div.perfil-menu-hamburguesa {
     font-weight: bold;
     cursor: pointer;
 }
-
 .btn.volver:active {
     margin: 10px;
     background-color: var(--background-color);
@@ -3289,6 +3354,7 @@ ul.perfil-opciones>li>div.perfil-menu-hamburguesa {
 
 }
 
+
 @media screen and (max-width: 998px) {
 
     /* Footer: apilar columnas y centrar contenido */
@@ -3367,6 +3433,17 @@ ul.perfil-opciones>li>div.perfil-menu-hamburguesa {
         padding: 10px 0;
         text-align: center;
     }
+
+    .list-inline{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+        padding-left: 0;
+        margin-top: 10px;
+        margin-bottom: 0;
+    }
 }
 
 @media (min-width: 998px) {
@@ -3391,7 +3468,7 @@ ul.perfil-opciones>li>div.perfil-menu-hamburguesa {
         min-width: 24px;
         max-width: 40px;
         padding: 0;
-    }
+    }        
 }
 
 @media (max-width: 768px) {
@@ -3401,8 +3478,7 @@ ul.perfil-opciones>li>div.perfil-menu-hamburguesa {
     .container-footer {
         width: 100%;
         padding: 0 10px;
-    }
-
+    }       
     .btn.volver:hover {
         margin: 10px;
         background-color: #fff;
@@ -3499,5 +3575,24 @@ ul.perfil-opciones>li>div.perfil-menu-hamburguesa {
     .contenedor-home-checks {
         width: 75%;
         height: 100%;
+    }
+
+    
+}
+@media (min-width: 768px) and (max-width: 892px) {
+    .ingredientes-pasos {
+      flex-direction: column; /* Se apilan verticalmente */
+      gap: 0; /* Reseteamos el gap horizontal, usaremos márgenes para el vertical */
+    }
+
+    .ingredientes-crear-receta,
+    .pasos-crear-receta {
+      width: 100%; /* Ocupan todo el ancho disponible */
+      flex: none; /* Quitamos la propiedad flex:1 para que width:100% funcione bien en columna */
+      margin-bottom: 20px; /* Espacio debajo de la sección de ingredientes cuando está apilada */
+    }
+
+    .pasos-crear-receta {
+      margin-bottom: 0; /* El último elemento no necesita margen inferior */
     }
 }

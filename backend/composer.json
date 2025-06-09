@@ -3,5 +3,8 @@
         "mongodb/mongodb": "^2.0",
         "phpmailer/phpmailer":"^6.10",
         "google/apiclient": "^2.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "*"
     }
 }

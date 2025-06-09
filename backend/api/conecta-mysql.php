@@ -1,4 +1,6 @@
-<?php 
+<?php
+ 
+global $conexion;
 
 $host = "kukit_mysql";
 $username = "root";

@@ -241,7 +241,7 @@ const VerReceta = () => {
                                 </div>
 
                                 {/* Columna Derecha: Pasos y Paginación */}
-                                <div className="col-md-7">
+                                <div >
                                     <h5>Pasos</h5>
                                     <div className="d-flex flex-column gap-3 mb-3">
                                         {pasosEnPaginaActual.map((paso, idx) => (
