@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import facebookLogo from '../img/Facebook.png';
+import facebookLogo from '../img/icons8-facebook-48.png';
 import instagramLogo from '../img/Instagram.png';
 import xLogo from '../img/x.png';
 import tiktokLogo from '../img/tikTok.png';
@@ -9,6 +9,7 @@ function Footer({ setShowListaCompra }) {
 
     return (
         <>
+            
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"></link>
             <footer className="section bg-footer footer-kukit">
                 <div className="container-footer">
@@ -43,8 +44,10 @@ function Footer({ setShowListaCompra }) {
                                 <h6 className="footer-heading text-white" style={{ color: '#fff' }}>Contáctanos</h6>
                                 <p className="contact-info mt-4" style={{ color: '#fff' }}>Contacta con nosotros si necesitas ayuda</p>
                                 <p className="contact-info" style={{ color: '#fff' }}>kukit.contacto@gmail.com</p>
-                                <div className="mt-5">
-                                    <ul className="list-inline">
+                                
+                            </div>
+                        </div>
+                        <ul className="list-inline">
                                         <li className="list-inline-item">
                                             <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
                                                 <img src={instagramLogo} alt="Instagram Logo" className="footer-icon-img" />
@@ -57,7 +60,7 @@ function Footer({ setShowListaCompra }) {
                                         </li>
                                         <li className="list-inline-item">
                                             <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
-                                                <img src={facebookLogo} alt="Facebook Logo" className="footer-icon-img" />
+                                                <img src={facebookLogo} alt="Facebook Logo" className="footer-icon-img footer-facebook-icon-img" />
                                             </a>
                                         </li>
                                         <li className="list-inline-item">
@@ -66,9 +69,6 @@ function Footer({ setShowListaCompra }) {
                                             </a>
                                         </li>
                                     </ul>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <div className="footer-copyright">
