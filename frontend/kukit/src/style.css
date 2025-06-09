@@ -142,6 +142,29 @@ button {
     max-width: 500px;
     width: 100%;
     margin: 0 auto;
+    display: flex;
+}
+
+.input-wrapper {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    overflow: hidden;
+    width:100%;
+}
+
+.input-wrapper input {
+    flex: 1;
+    border: none;
+    padding: 8px;
+    outline: none;
+}
+
+.input-wrapper .lupa {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
 }
 
 .form-control {
@@ -1496,6 +1519,10 @@ footer hr {
     background: #C33333;
     font-size: 2.5vh;
 }
+
+.lupa {
+        width: 5%;
+    }
 
 #cancelar-receta {
     display: flex;
@@ -3460,4 +3487,6 @@ header nav ul li.nav-link-li {
         width: 75%;
         height: 100%;
     }
+
+    
 }
