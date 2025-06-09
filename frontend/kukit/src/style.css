@@ -596,7 +596,7 @@ button.btn.btn-texto-toggle:hover {
     background-color: var(--primary-color) !important;
     color: var(--background-color) !important;
     border: none !important;
-    width: 10%;
+    width: 20%;
     align-self: center;
     font-weight: bold;
 }
@@ -3428,6 +3428,17 @@ ul.perfil-opciones>li.perfil-menu-hamburguesa {
         font-size: 0.95rem;
         padding: 10px 0;
         text-align: center;
+    }
+
+    .list-inline{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+        padding-left: 0;
+        margin-top: 10px;
+        margin-bottom: 0;
     }
 }
 

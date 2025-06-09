@@ -44,8 +44,10 @@ function Footer({ setShowListaCompra }) {
                                 <h6 className="footer-heading text-white" style={{ color: '#fff' }}>Contáctanos</h6>
                                 <p className="contact-info mt-4" style={{ color: '#fff' }}>Contacta con nosotros si necesitas ayuda</p>
                                 <p className="contact-info" style={{ color: '#fff' }}>kukit.contacto@gmail.com</p>
-                                <div className="mt-5">
-                                    <ul className="list-inline">
+                                
+                            </div>
+                        </div>
+                        <ul className="list-inline">
                                         <li className="list-inline-item">
                                             <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
                                                 <img src={instagramLogo} alt="Instagram Logo" className="footer-icon-img" />
@@ -67,9 +69,6 @@ function Footer({ setShowListaCompra }) {
                                             </a>
                                         </li>
                                     </ul>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <div className="footer-copyright">
