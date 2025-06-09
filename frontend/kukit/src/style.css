@@ -3437,7 +3437,7 @@ ul.perfil-opciones>li.perfil-menu-hamburguesa {
         min-width: 24px;
         max-width: 40px;
         padding: 0;
-    }
+    }        
 }
 
 @media (max-width: 768px) {
@@ -3447,8 +3447,7 @@ ul.perfil-opciones>li.perfil-menu-hamburguesa {
     .container-footer {
         width: 100%;
         padding: 0 10px;
-    }
-
+    }       
     .btn.volver:hover {
         margin: 10px;
         background-color: #fff;
@@ -3548,4 +3547,21 @@ ul.perfil-opciones>li.perfil-menu-hamburguesa {
     }
 
     
+}
+@media (min-width: 768px) and (max-width: 892px) {
+    .ingredientes-pasos {
+      flex-direction: column; /* Se apilan verticalmente */
+      gap: 0; /* Reseteamos el gap horizontal, usaremos márgenes para el vertical */
+    }
+
+    .ingredientes-crear-receta,
+    .pasos-crear-receta {
+      width: 100%; /* Ocupan todo el ancho disponible */
+      flex: none; /* Quitamos la propiedad flex:1 para que width:100% funcione bien en columna */
+      margin-bottom: 20px; /* Espacio debajo de la sección de ingredientes cuando está apilada */
+    }
+
+    .pasos-crear-receta {
+      margin-bottom: 0; /* El último elemento no necesita margen inferior */
+    }
 }
