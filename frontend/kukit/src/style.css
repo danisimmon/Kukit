@@ -3413,6 +3413,17 @@ ul.perfil-opciones>li.perfil-menu-hamburguesa {
         padding: 10px 0;
         text-align: center;
     }
+
+    .list-inline{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+        padding-left: 0;
+        margin-top: 10px;
+        margin-bottom: 0;
+    }
 }
 
 @media (min-width: 998px) {
