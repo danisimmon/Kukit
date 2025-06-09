@@ -159,7 +159,7 @@ function Header() {
             </NavLink>
           </li>
           {/* Botón perfil solo en mobile */}
-          <li style={{ marginTop: '1em' }} className='perfil-menu-hamburguesa' onClick={() => { setDesplegablePerfil(true); closeOffcanvas(); }}>
+          <li style={{ marginTop: '1em' }} >
             {!isAuthenticated && (
               <>
                 <button className="botones-inversos" style={{ width: '100%', marginBottom: '8px' }} onClick={() => { setShowLogin(true); closeOffcanvas(); }}>Iniciar sesión</button>
@@ -167,31 +167,30 @@ function Header() {
               </>
             )}
             {isAuthenticated && (
-              <>
-              Perfil
-              </>
-              // <div
-              //   onClick={() => { setDesplegablePerfil(true); closeOffcanvas(); }}
-              //   style={{
-              //     width: '40px',
-              //     height: '40px',
-              //     borderRadius: '50%',
-              //     backgroundColor: '#C33333',
-              //     color: 'white',
-              //     display: 'flex',
-              //     alignItems: 'center',
-              //     justifyContent: 'center',
-              //     cursor: 'pointer',
-              //     fontSize: isFallbackText ? '0.7em' : '1.2em',
-              //     fontWeight: 'bold',
-              //     margin: '0 auto',
-              //     padding: isFallbackText ? '2px' : '0',
-              //     textAlign: 'center'
-              //   }}
-              //   title={user?.nombre || user?.email || 'Perfil'}
-              // >
-              //   {initialDisplay}
-              // </div>
+              <div
+              // className='perfil-menu-hamburguesa'
+                onClick={() => { setDesplegablePerfil(true); closeOffcanvas(); }}
+                style={{
+                  width: '40px',
+                  height: '40px',
+                  borderRadius: '50%',
+                  backgroundColor: '#C33333',
+                  color: 'white',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'pointer',
+                  fontSize: isFallbackText ? '0.7em' : '1.2em',
+                  fontWeight: 'bold',
+                  margin: '0 auto',
+                  padding: isFallbackText ? '2px' : '0',
+                  textAlign: 'center'
+                }}
+                title={user?.nombre || user?.email || 'Perfil'}
+              >
+                {/* Perfil */}
+                {initialDisplay}
+              </div>
             )}
           </li>
         </ul>

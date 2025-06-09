@@ -159,7 +159,6 @@ const Registro = ({ setShowRegistro, setShowLogin }) => {
           type="button"
           className="btn-close"
           aria-label="Close"
-          style={{ position: 'absolute', top: 10, right: 10, zIndex: 2 }}
           onClick={() => setShowRegistro(false)}
         ></button>
         <figure>

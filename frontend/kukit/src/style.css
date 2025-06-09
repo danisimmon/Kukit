@@ -164,6 +164,10 @@ button {
     pointer-events: none;
 }
 
+#btn-cerrar-custom {
+    width: 5% !important;
+}
+
 
 /* hover de .btn-reservation */
 button:hover {
@@ -2704,7 +2708,7 @@ header nav ul li.nav-link-li {
     transition: all 0.3s;
 }
 
-ul.perfil-opciones>li.perfil-menu-hamburguesa {
+ul.perfil-opciones>li>div.perfil-menu-hamburguesa {
     border: 1px solid var(--primary-color) !important;
     background-color: var(--primary-color) !important;
     color: var(--background-color) !important;
