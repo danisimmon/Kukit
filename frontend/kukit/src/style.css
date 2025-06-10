@@ -2794,9 +2794,16 @@ ul.perfil-opciones>li.perfil-menu-hamburguesa {
 .formulario-inicio-sesion,
 .contenedor-email-password,
 #googleSignInButton,
-.botones-inicio-sesion,
 .botones-inversos,
 .contenedor-sign-in button[type="button"] {
+    max-width: 340px;
+    margin: 0 auto 10px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.botones-inicio-sesion,
+.botones-inversos{
     width: 100% !important;
     max-width: 340px;
     margin: 0 auto 10px auto;
@@ -2804,6 +2811,7 @@ ul.perfil-opciones>li.perfil-menu-hamburguesa {
     flex-direction: column;
     align-items: center;
 }
+
 
 #googleSignInButton>div {
     width: 100% !important;
@@ -2864,7 +2872,6 @@ ul.perfil-opciones>li.perfil-menu-hamburguesa {
 .contenedor-sign-up .botones-inicio-sesion,
 .contenedor-sign-up .botones-inversos,
 .contenedor-sign-up button[type="button"] {
-    width: 100% !important;
     max-width: 340px;
     margin: 0 auto 10px auto;
     display: flex;

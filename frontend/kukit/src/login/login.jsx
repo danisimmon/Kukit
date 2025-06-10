@@ -171,7 +171,7 @@ const Login = ({ setShowLogin, setShowRegistro }) => {
           type="button"
           className="btn-close"
           aria-label="Close"
-          style={{ position: 'absolute', top: 10, right: 10, zIndex: 2 }}
+          style={{ position: 'absolute', top: '15px', right: '15px', zIndex: 2 }}
           onClick={() => setShowLogin(false)}
         ></button>
         <figure>
