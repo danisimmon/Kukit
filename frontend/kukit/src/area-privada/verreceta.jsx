@@ -194,8 +194,8 @@ const VerReceta = () => {
                             </div>
 
                             <div className="row mt-4">
-                                {/* Columna Izquierda: Ingredientes*/}
-                                <div className="col-md-5">
+                                {/* Columna Izquierda: Ingredientes e Información Nutricional */}
+                                <div className="col-md-5" style={{width: '100%'}}>
                                     <div className="mb-4">
                                         <h5>Ingredientes</h5>
                                         <div className="d-flex flex-column gap-3">

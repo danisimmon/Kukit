@@ -3508,6 +3508,13 @@ ul.perfil-opciones>li>div.perfil-menu-hamburguesa {
 }
 
 @media (max-width: 768px) {
+    .list-inline {
+        display: flex;
+        flex-direction: row !important;
+        /* Cambia a columna en pantallas pequeñas */
+        align-items: center;
+        /* Centra los iconos */
+    }
 
     /* Crear receta */
     .crear-receta-info {

@@ -46,8 +46,7 @@ function Footer({ setShowListaCompra }) {
                                 <p className="contact-info" style={{ color: '#fff' }}>kukit.contacto@gmail.com</p>
                                 
                             </div>
-                        </div>
-                        <ul className="list-inline">
+                            <ul className="list-inline">
                                         <li className="list-inline-item">
                                             <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
                                                 <img src={instagramLogo} alt="Instagram Logo" className="footer-icon-img" />
@@ -69,6 +68,8 @@ function Footer({ setShowListaCompra }) {
                                             </a>
                                         </li>
                                     </ul>
+                        </div>
+                        
                     </div>
                 </div>
                 <div className="footer-copyright">
