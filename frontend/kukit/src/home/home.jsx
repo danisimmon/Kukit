@@ -1,9 +1,8 @@
 // src/pages/Home.jsx
 import React, { useEffect, useState, useCallback } from 'react';
 import hero from '../img/mesa-de-cocina-con-platos-preparados-e-ingredientes.jpg';
-import Login from '../login/login'; // Descomentado
-import Registro from '../login/registro/registro'; // Descomentado
-// import Footer from '../footer/footer';
+import Login from '../login/login'; 
+import Registro from '../login/registro/registro'; 
 import ListaCompra from '../listaCompra/listaCompra';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';

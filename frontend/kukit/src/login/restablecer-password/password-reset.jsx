@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Header from '../../header/header';
-// Import Bootstrap's Modal component if you're using react-bootstrap
-// import { Modal, Button } from 'react-bootstrap'; 
-// If not using react-bootstrap, ensure Bootstrap's JS is loaded globally or use plain Bootstrap classes.
 
 const PasswordReset = () => {
   const [formData, setFormData] = useState({
@@ -12,7 +9,7 @@ const PasswordReset = () => {
 
   const [mensaje, setMensaje] = useState('');
   const [exito, setExito] = useState(false);
-  const [showModal, setShowModal] = useState(false); // State to control modal visibility
+  const [showModal, setShowModal] = useState(false); 
 
   const manejarCambio = (e) => {
     const { name, value } = e.target;
@@ -24,9 +21,9 @@ const PasswordReset = () => {
 
   const manejarEnvio = async (e) => {
     e.preventDefault();
-    setMensaje(''); // Clear previous messages
-    setExito(false); // Reset success state
-    setShowModal(false); // Hide modal before new submission
+    setMensaje(''); 
+    setExito(false);
+    setShowModal(false); 
 
     try {
       const respuesta = await axios.post('http://localhost/api/login/password-reset/password-reset.php', formData, {
@@ -39,22 +36,22 @@ const PasswordReset = () => {
       if (respuesta.data.success) {
         setExito(true);
         setMensaje(respuesta.data.message);
-        setShowModal(true); // Show modal on success
+        setShowModal(true);
         console.log('Usuario:', respuesta.data.user);
       } else {
         setExito(false);
         setMensaje(respuesta.data.message);
-        setShowModal(true); // Show modal on error as well
+        setShowModal(true);
       }
     } catch (error) {
       setExito(false);
       setMensaje('Hubo un error al procesar la solicitud. Por favor, inténtalo de nuevo.');
-      setShowModal(true); // Show modal on catch error
+      setShowModal(true); 
       console.error('Error:', error);
     }
   };
 
-  const handleCloseModal = () => setShowModal(false); // Function to close the modal
+  const handleCloseModal = () => setShowModal(false);
 
   return (
     <>

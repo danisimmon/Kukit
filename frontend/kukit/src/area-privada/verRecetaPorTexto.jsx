@@ -1,14 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-// import logo from '../img/logo_kukit.png'; // No usado
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import dificultadIcon from '../img/velocidad.png';
 import tiempoIcon from '../img/tiempo.png';
-// import Login from '../login/login'; // No usado
-// import Registro from '../login/registro/registro'; // No usado
 import Footer from '../footer/footer';
-// import ListaCompra from '../listaCompra/listaCompra'; // No usado
 import Header from '../header/header';
 import { useParams, useNavigate } from 'react-router-dom';
 // import ImagenReceta from 'http://localhost/api/img/recetas/pasta-al-pesto.jpg';
@@ -20,7 +16,7 @@ const VerRecetaTexto = () => {
     const utteranceRef = useRef(null);
     // Estado para la paginación de los pasos
     const [paginaPasosActual, setPaginaPasosActual] = useState(1);
-    const PASOS_POR_PAGINA = 1; // Mostrar un paso a la vez, puedes cambiarlo si quieres mostrar más
+    const PASOS_POR_PAGINA = 1; 
     const [showSpeechErrorPopup, setShowSpeechErrorPopup] = useState(false); // Estado para el pop-up de error de lectura
     const [showPlainText, setShowPlainText] = useState(false); // Estado para mostrar/ocultar texto plano
     const { recetaId } = useParams(); // Obtener recetaId de los parámetros de la URL
@@ -63,7 +59,6 @@ const VerRecetaTexto = () => {
                 utteranceRef.current.onstart = null;
                 utteranceRef.current.onend = null;
                 utteranceRef.current.onerror = null;
-                // utteranceRef.current = null; // Opcional: limpiar la referencia si es necesario
             }
         };
     }, [recetaId]);
@@ -272,8 +267,6 @@ const VerRecetaTexto = () => {
                         <>
                             <div className="d-flex flex-column flex-md-row gap-4 mt-4">
                                 <div className="text-center">
-                                    {/* Aquí podrías poner la imagen de la receta si la tienes */}
-                                    {/* <img src={`http://localhost/api/img/recetas/${receta.imagen}`} alt={receta.nombre} className="img-fluid rounded shadow-sm" style={{ maxWidth: '300px', maxHeight: '300px', objectFit: 'cover' }} /> */}
                                 </div>
 
                                 <div className="flex-fill">
@@ -282,8 +275,6 @@ const VerRecetaTexto = () => {
                                         <p><strong>Creado por:</strong> {receta.idUsuario}</p>
                                     </div>
                                     
-                                    {/* El título ya está arriba, se puede omitir aquí si se prefiere */}
-                                    {/* <h3>{receta.nombre}</h3> */}
                                     <div className="d-flex gap-4">
                                         <div>
                                             <p className="mb-1 fw-bold">Dificultad</p>

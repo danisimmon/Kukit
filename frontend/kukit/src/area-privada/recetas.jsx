@@ -33,7 +33,7 @@ const Recetas = () => {
   const [selectedDificultad, setSelectedDificultad] = useState('');
   const [selectedPais, setSelectedPais] = useState('');
   const [filterTiempo, setFilterTiempo] = useState('');
-  const [filterGluten, setFilterGluten] = useState(''); // '' para cualquiera, 'true' para sí, 'false' para no
+  const [filterGluten, setFilterGluten] = useState(''); 
   const [filterVegetariana, setFilterVegetariana] = useState('');
   const [filterLactosa, setFilterLactosa] = useState('');
   const [filterVegana, setFilterVegana] = useState('');
@@ -82,33 +82,8 @@ const Recetas = () => {
       console.error("Error al manejar el like:", error);
     }
   };
-
-
-  // useEffect(() => {
-  //   const obtenerRecetas = async () => {
-  //     try {
-  //       const respuesta = await axios.get('http://localhost/api/area_privada/recetas/getRecetas.php');
-  //       setN_recetas(respuesta.data.n_recetas);
-  //       setRecetas(respuesta.data.recetas);
-  //       // Inicializa los likes y favoritos
-  //       const likesIniciales = {};
-  //       const favoritosIniciales = {};
-  //       respuesta.data.recetas.forEach(r => {
-  //         likesIniciales[r._id] = r.likes || 0;
-  //         favoritosIniciales[r._id] = r.favorito || false;
-  //       });
-  //       setLikes(likesIniciales);
-  //       setFavoritos(favoritosIniciales);
-  //       setCargando(false);
-  //       setPaginaActual(1);
-  //     } catch (err) {
-  //       setError('Error al cargar las recetas', err);
-  //       setCargando(false);
-  //     }
-  //   };
-  //   obtenerRecetas();
-  // }, []);
-
+  // Cargar recetas al montar el componente
+  // Se usa useEffect para cargar las recetas desde la API al montar el componente
   useEffect(() => {
     const obtenerRecetas = async () => {
       try {
@@ -124,9 +99,7 @@ const Recetas = () => {
           dificultad: (r.dificultad || '').toLowerCase().trim(),
           pais: r.pais || '',
           tiempo: r.tiempo || '',
-          // Asume que la API devuelve un campo como 'usuarioDioLike' (true/false)
-          // para cada receta, indicando si el usuario actual ya le dio "me gusta".
-          usuarioDioLike: r.usuarioDioLike || false // Normaliza este campo si existe
+          usuarioDioLike: r.usuarioDioLike || false
         }));
 
         setRecetas(recetasNormalizadas);
@@ -233,17 +206,6 @@ const Recetas = () => {
     const matchesLactosa = checkBooleanFilter(filterLactosa, receta.lactosa);
     const matchesVegana = checkBooleanFilter(filterVegana, receta.vegana);
 
-    //     console.log({
-    //   matchesSearchTerm,
-    //   matchesDificultad,
-    //   matchesPais,
-    //   matchesTiempo,
-    //   matchesGluten,
-    //   matchesVegetariana,
-    //   matchesLactosa,
-    //   matchesVegana
-    // });
-
     return matchesSearchTerm && matchesDificultad && matchesPais && matchesTiempo && matchesGluten && matchesVegetariana && matchesLactosa && matchesVegana;
   });
 
@@ -254,8 +216,6 @@ const Recetas = () => {
 
   // Calcular el total de páginas basado en las recetas filtradas
   const totalPaginas = Math.ceil(recetasFiltradas.length / recetasPorPagina);
-
-
 
   if (cargando) return (
     <div className="d-flex justify-content-center mt-5">

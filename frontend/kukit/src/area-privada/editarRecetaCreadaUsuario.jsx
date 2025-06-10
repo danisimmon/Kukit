@@ -56,49 +56,46 @@ const EditarRecetaCreada = () => {
             params: { recetaId },
             withCredentials: true
         })
-        .then(res => {
-            if (res.data.success) {
-                // Encontrar la receta específica. Asumimos que getRecetasConcreta.php puede devolver un array
-                // o que el ID ya filtra a una sola receta en el backend.
-                // Si devuelve un array, filtramos.
-                const recetaAEditar = Array.isArray(res.data.recetas)
-                    ? res.data.recetas.find(r => r._id?.$oid === recetaId || r.id === recetaId) // Ajustar según la estructura del ID
-                    : res.data.recetas; // Si ya es un objeto único
+            .then(res => {
+                if (res.data.success) {
+                    const recetaAEditar = Array.isArray(res.data.recetas)
+                        ? res.data.recetas.find(r => r._id?.$oid === recetaId || r.id === recetaId)
+                        : res.data.recetas;
 
-                if (recetaAEditar) {
-                    setFormReceta({
-                        nombre: recetaAEditar.nombre || '',
-                        dificultad: recetaAEditar.dificultad || '',
-                        tiempo: recetaAEditar.tiempo || '',
-                        pais: recetaAEditar.pais || '',
-                        gluten: recetaAEditar.gluten || false,
-                        vegetariana: recetaAEditar.vegetariana || false,
-                        lactosa: recetaAEditar.lactosa || false,
-                        vegana: recetaAEditar.vegana || false,
-                    });
-                    setIngredientes(recetaAEditar.ingredientes || []);
-                    setPasos(recetaAEditar.pasos || []);
-                    if (recetaAEditar.href) {
-                        setImagenPreview(recetaAEditar.href);
-                        setImagenExistenteUrl(recetaAEditar.href);
+                    if (recetaAEditar) {
+                        setFormReceta({
+                            nombre: recetaAEditar.nombre || '',
+                            dificultad: recetaAEditar.dificultad || '',
+                            tiempo: recetaAEditar.tiempo || '',
+                            pais: recetaAEditar.pais || '',
+                            gluten: recetaAEditar.gluten || false,
+                            vegetariana: recetaAEditar.vegetariana || false,
+                            lactosa: recetaAEditar.lactosa || false,
+                            vegana: recetaAEditar.vegana || false,
+                        });
+                        setIngredientes(recetaAEditar.ingredientes || []);
+                        setPasos(recetaAEditar.pasos || []);
+                        if (recetaAEditar.href) {
+                            setImagenPreview(recetaAEditar.href);
+                            setImagenExistenteUrl(recetaAEditar.href);
+                        }
+                    } else {
+                        setMensaje('Receta no encontrada.');
+                        setExito(false);
                     }
                 } else {
-                    setMensaje('Receta no encontrada.');
+                    setMensaje(res.data.message || 'Error al cargar la receta.');
                     setExito(false);
                 }
-            } else {
-                setMensaje(res.data.message || 'Error al cargar la receta.');
+            })
+            .catch(err => {
+                setMensaje('Error de conexión al cargar la receta.');
                 setExito(false);
-            }
-        })
-        .catch(err => {
-            setMensaje('Error de conexión al cargar la receta.');
-            setExito(false);
-            console.error('Error al obtener receta para editar:', err);
-        })
-        .finally(() => {
-            setCargandoReceta(false);
-        });
+                console.error('Error al obtener receta para editar:', err);
+            })
+            .finally(() => {
+                setCargandoReceta(false);
+            });
     }, [recetaId]);
 
 
@@ -127,7 +124,7 @@ const EditarRecetaCreada = () => {
         const file = e.target.files[0];
         setErrorImagenReceta('');
         if (file) {
-            const maxSize = 40 * 1024 * 1024; // 40MB
+            const maxSize = 40 * 1024 * 1024; // 40MB en bytes
             if (file.size > maxSize) {
                 setErrorImagenReceta('La imagen no puede superar los 40MB.');
                 setImagen(null);
@@ -146,36 +143,36 @@ const EditarRecetaCreada = () => {
     // --- Manejadores de Ingredientes ---
     const validateNewIngredientFields = () => {
         if (!newIngredienteNombre.trim()) {
-          setErrorNuevoIngrediente('El nombre del ingrediente es obligatorio.');
-          return false;
+            setErrorNuevoIngrediente('El nombre del ingrediente es obligatorio.');
+            return false;
         }
         if (!isNaN(parseFloat(newIngredienteNombre)) && isFinite(newIngredienteNombre)) {
-          setErrorNuevoIngrediente('El nombre del ingrediente no puede ser un número.');
-          return false;
+            setErrorNuevoIngrediente('El nombre del ingrediente no puede ser un número.');
+            return false;
         }
         if (!newIngredienteCantidad.trim()) {
-          setErrorNuevoIngrediente('La cantidad del ingrediente es obligatoria.');
-          return false;
+            setErrorNuevoIngrediente('La cantidad del ingrediente es obligatoria.');
+            return false;
         }
         if (isNaN(parseFloat(newIngredienteCantidad)) || !isFinite(newIngredienteCantidad)) {
-          setErrorNuevoIngrediente('La cantidad debe ser un número.');
-          return false;
+            setErrorNuevoIngrediente('La cantidad debe ser un número.');
+            return false;
         }
         if (Number(newIngredienteCantidad) <= 0) {
-          setErrorNuevoIngrediente('La cantidad debe ser un número positivo.');
-          return false;
+            setErrorNuevoIngrediente('La cantidad debe ser un número positivo.');
+            return false;
         }
         if (!newIngredienteUnidad.trim()) {
-          setErrorNuevoIngrediente('La unidad del ingrediente es obligatoria.');
-          return false;
+            setErrorNuevoIngrediente('La unidad del ingrediente es obligatoria.');
+            return false;
         }
         if (!isNaN(parseFloat(newIngredienteUnidad)) && isFinite(newIngredienteUnidad)) {
-          setErrorNuevoIngrediente('La unidad del ingrediente no puede ser un número.');
-          return false;
+            setErrorNuevoIngrediente('La unidad del ingrediente no puede ser un número.');
+            return false;
         }
         setErrorNuevoIngrediente('');
         return true;
-      };
+    };
 
     const handleAddIngrediente = () => {
         if (validateNewIngredientFields()) {
@@ -244,26 +241,26 @@ const EditarRecetaCreada = () => {
     const handleNewIngredientFieldBlur = (fieldName) => {
         let error = '';
         switch (fieldName) {
-          case 'nombre':
-            if (!newIngredienteNombre.trim()) error = 'El nombre del ingrediente es obligatorio.';
-            else if (!isNaN(parseFloat(newIngredienteNombre)) && isFinite(newIngredienteNombre)) error = 'El nombre no puede ser un número.';
-            break;
-          case 'cantidad':
-            if (!newIngredienteCantidad.trim()) error = 'La cantidad del ingrediente es obligatoria.';
-            else if (isNaN(parseFloat(newIngredienteCantidad)) || !isFinite(newIngredienteCantidad)) error = 'La cantidad debe ser un número.';
-            else if (Number(newIngredienteCantidad) <= 0) error = 'La cantidad debe ser un número positivo.';
-            break;
-          case 'unidad':
-            if (!newIngredienteUnidad.trim()) error = 'La unidad del ingrediente es obligatoria.';
-            else if (!isNaN(parseFloat(newIngredienteUnidad)) && isFinite(newIngredienteUnidad)) error = 'La unidad no puede ser un número.';
-            break;
-          default:
-            break;
+            case 'nombre':
+                if (!newIngredienteNombre.trim()) error = 'El nombre del ingrediente es obligatorio.';
+                else if (!isNaN(parseFloat(newIngredienteNombre)) && isFinite(newIngredienteNombre)) error = 'El nombre no puede ser un número.';
+                break;
+            case 'cantidad':
+                if (!newIngredienteCantidad.trim()) error = 'La cantidad del ingrediente es obligatoria.';
+                else if (isNaN(parseFloat(newIngredienteCantidad)) || !isFinite(newIngredienteCantidad)) error = 'La cantidad debe ser un número.';
+                else if (Number(newIngredienteCantidad) <= 0) error = 'La cantidad debe ser un número positivo.';
+                break;
+            case 'unidad':
+                if (!newIngredienteUnidad.trim()) error = 'La unidad del ingrediente es obligatoria.';
+                else if (!isNaN(parseFloat(newIngredienteUnidad)) && isFinite(newIngredienteUnidad)) error = 'La unidad no puede ser un número.';
+                break;
+            default:
+                break;
         }
         if (error) {
-          setErrorNuevoIngrediente(error);
+            setErrorNuevoIngrediente(error);
         }
-      };
+    };
 
     const handleNewStepFieldBlur = () => {
         if (!newPaso.trim()) setErrorNuevoPaso('Por favor, escribe el paso para añadirlo.');
@@ -336,7 +333,7 @@ const EditarRecetaCreada = () => {
         formDataToSend.append('pasos', JSON.stringify(pasos));
 
         try {
-            // Reemplaza la URL con tu endpoint PHP para editar recetas
+            // Reemplaza la URL en el endpoint PHP para editar recetas
             const respuesta = await axios.post(
                 'http://localhost/api/area_privada/editar-perfil/editarRecetaCreada.php',
                 formDataToSend,
@@ -397,7 +394,7 @@ const EditarRecetaCreada = () => {
     return (
         <>
             <Header />
-                <main>
+            <main>
                 <div className="container mt-4">
                     <div className="d-flex align-items-center mb-3">
                         <button
@@ -407,11 +404,11 @@ const EditarRecetaCreada = () => {
                         >
                             &lt; Volver
                         </button>
-                        <h2 className="mb-0 flex-grow-1 text-center">Editar Receta: {formReceta.nombre || "Cargando..."}</h2> {/* Título principal con mb-0 para alineación */}
+                        <h2 className="mb-0 flex-grow-1 text-center">Editar Receta: {formReceta.nombre || "Cargando..."}</h2>
                     </div>
                     {/* Aplicamos la misma estructura y clases que en EditarPerfil.jsx para la sección "crear" */}
-                    <div className="crear-receta"> 
-                        <form onSubmit={manejarEnvioEdicionReceta} style={{display: 'contents'}}>
+                    <div className="crear-receta">
+                        <form onSubmit={manejarEnvioEdicionReceta} style={{ display: 'contents' }}>
                             <div className="crear-receta-info"> {/* Clase de EditarPerfil.jsx */}
                                 <h3>Nombre de la Receta</h3>
                                 <input
@@ -502,61 +499,61 @@ const EditarRecetaCreada = () => {
                                             <option value="Libano">Líbano</option>
                                         </select>
                                         {errorPais && <span className="error-mensaje" style={{ color: 'red', display: 'block', minHeight: '1em' }}>{errorPais}</span>}
-                                        <br /> 
-                                    {/* Las siguientes secciones de booleanos se agrupan como en EditarPerfil.jsx */}
-                                    <div className="apartado-gluten"> {/* Clase de EditarPerfil.jsx */}
-                                        <h5>¿Contiene gluten?</h5>
-                                        <label><input type="radio" name="gluten" value="sí" checked={formReceta.gluten === true} onChange={manejarCambioOpcionBooleanaReceta} /> Sí</label><br />
-                                        <label><input type="radio" name="gluten" value="no" checked={formReceta.gluten === false} onChange={manejarCambioOpcionBooleanaReceta} /> No</label>
-                                    </div>
+                                        <br />
+                                        {/* Las siguientes secciones de booleanos se agrupan como en EditarPerfil.jsx */}
+                                        <div className="apartado-gluten"> {/* Clase de EditarPerfil.jsx */}
+                                            <h5>¿Contiene gluten?</h5>
+                                            <label><input type="radio" name="gluten" value="sí" checked={formReceta.gluten === true} onChange={manejarCambioOpcionBooleanaReceta} /> Sí</label><br />
+                                            <label><input type="radio" name="gluten" value="no" checked={formReceta.gluten === false} onChange={manejarCambioOpcionBooleanaReceta} /> No</label>
+                                        </div>
 
-                                    <div className="apartado-lactosa"> {/* Clase de EditarPerfil.jsx */}
-                                        <h5>¿Contiene lactosa?</h5>
-                                        <label><input type="radio" name="lactosa" value="sí" checked={formReceta.lactosa === true} onChange={manejarCambioOpcionBooleanaReceta} /> Sí</label><br />
-                                        <label><input type="radio" name="lactosa" value="no" checked={formReceta.lactosa === false} onChange={manejarCambioOpcionBooleanaReceta} /> No</label>
-                                    </div>
-                                    <div className="apartado-vegetariana"> {/* Clase de EditarPerfil.jsx */}
-                                        <h5>¿Es vegetariana?</h5>
-                                        <label><input type="radio" name="vegetariana" value="sí" checked={formReceta.vegetariana === true} onChange={manejarCambioOpcionBooleanaReceta} /> Sí</label><br />
-                                        <label><input type="radio" name="vegetariana" value="no" checked={formReceta.vegetariana === false} onChange={manejarCambioOpcionBooleanaReceta} /> No</label>
-                                    </div>
-                                    <div className="vegana"> {/* Clase de EditarPerfil.jsx */}
-                                        <h5>¿Es vegana?</h5>
-                                        <label><input type="radio" name="vegana" value="sí" checked={formReceta.vegana === true} onChange={manejarCambioOpcionBooleanaReceta} /> Sí</label><br />
-                                        <label><input type="radio" name="vegana" value="no" checked={formReceta.vegana === false} onChange={manejarCambioOpcionBooleanaReceta} /> No</label>
+                                        <div className="apartado-lactosa"> {/* Clase de EditarPerfil.jsx */}
+                                            <h5>¿Contiene lactosa?</h5>
+                                            <label><input type="radio" name="lactosa" value="sí" checked={formReceta.lactosa === true} onChange={manejarCambioOpcionBooleanaReceta} /> Sí</label><br />
+                                            <label><input type="radio" name="lactosa" value="no" checked={formReceta.lactosa === false} onChange={manejarCambioOpcionBooleanaReceta} /> No</label>
+                                        </div>
+                                        <div className="apartado-vegetariana"> {/* Clase de EditarPerfil.jsx */}
+                                            <h5>¿Es vegetariana?</h5>
+                                            <label><input type="radio" name="vegetariana" value="sí" checked={formReceta.vegetariana === true} onChange={manejarCambioOpcionBooleanaReceta} /> Sí</label><br />
+                                            <label><input type="radio" name="vegetariana" value="no" checked={formReceta.vegetariana === false} onChange={manejarCambioOpcionBooleanaReceta} /> No</label>
+                                        </div>
+                                        <div className="vegana"> {/* Clase de EditarPerfil.jsx */}
+                                            <h5>¿Es vegana?</h5>
+                                            <label><input type="radio" name="vegana" value="sí" checked={formReceta.vegana === true} onChange={manejarCambioOpcionBooleanaReceta} /> Sí</label><br />
+                                            <label><input type="radio" name="vegana" value="no" checked={formReceta.vegana === false} onChange={manejarCambioOpcionBooleanaReceta} /> No</label>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                             </div>
 
                             <div className="ingredientes-pasos"> {/* Clase de EditarPerfil.jsx (sin row y mt-4) */}
                                 <div className="ingredientes-crear-receta"> {/* Clase de EditarPerfil.jsx (sin col-md-6) */}
-                                  <div className="contenedor-ingredientes"> {/* Contenedor extra de EditarPerfil.jsx */}
-                                    <h5>Ingredientes</h5>
-                                    {ingredientes.length > 0 && (
-                                        <table className="tabla-ingredientes table table-striped table-sm">
-                                            <thead><tr><th>Nombre</th><th>Cantidad</th><th>Unidad</th><th></th></tr></thead> {/* Eliminado Acción del header para alinear */}
-                                            <tbody>
-                                                {ingredientes.map((ing, index) => (
-                                                    <tr key={`ing-${index}`}><td>{ing.nombre}</td><td>{ing.cantidad}</td><td>{ing.unidad}</td>
-                                                        <td><button type="button" onClick={() => handleRemoveIngrediente(index)}>Eliminar</button></td> {/* Botón sin clases Bootstrap para alinear */}
-                                                    </tr>
-                                                ))}
-                                            </tbody>
-                                        </table>
-                                    )}
-                                    {errorIngredientesLista && <p style={{ color: 'red', minHeight: '1em' }}>{errorIngredientesLista}</p>}
-                                    <div className="rellenar-ingrediente"> {/* Clase de EditarPerfil.jsx (sin card y p-3) */}
-                                        Nombre Ingrediente:
-                                        <input type="text" placeholder="Ej: Harina" value={newIngredienteNombre} onChange={(e) => { setNewIngredienteNombre(e.target.value); setErrorNuevoIngrediente(''); }} onBlur={() => handleNewIngredientFieldBlur('nombre')} />
-                                        <span>Cantidad</span>
-                                        <input type="text" placeholder="Ej: 200" value={newIngredienteCantidad} onChange={(e) => { setNewIngredienteCantidad(e.target.value); setErrorNuevoIngrediente(''); }} onBlur={() => handleNewIngredientFieldBlur('cantidad')} />
-                                        <span>Unidad</span>
-                                        <input type="text" placeholder="Ej: gramos" value={newIngredienteUnidad} onChange={(e) => { setNewIngredienteUnidad(e.target.value); setErrorNuevoIngrediente(''); }} onBlur={() => handleNewIngredientFieldBlur('unidad')} />
-                                        <button type="button" onClick={handleAddIngrediente} className="anadir-ingrediente-btn">Añadir Ingrediente</button> {/* Clase de EditarPerfil.jsx */}
-                                        {errorNuevoIngrediente && <span style={{ color: 'red', display: 'block', minHeight: '1em', marginTop: '5px' }}>{errorNuevoIngrediente}</span>}
+                                    <div className="contenedor-ingredientes"> {/* Contenedor extra de EditarPerfil.jsx */}
+                                        <h5>Ingredientes</h5>
+                                        {ingredientes.length > 0 && (
+                                            <table className="tabla-ingredientes table table-striped table-sm">
+                                                <thead><tr><th>Nombre</th><th>Cantidad</th><th>Unidad</th><th></th></tr></thead> {/* Eliminado Acción del header para alinear */}
+                                                <tbody>
+                                                    {ingredientes.map((ing, index) => (
+                                                        <tr key={`ing-${index}`}><td>{ing.nombre}</td><td>{ing.cantidad}</td><td>{ing.unidad}</td>
+                                                            <td><button type="button" onClick={() => handleRemoveIngrediente(index)}>Eliminar</button></td> {/* Botón sin clases Bootstrap para alinear */}
+                                                        </tr>
+                                                    ))}
+                                                </tbody>
+                                            </table>
+                                        )}
+                                        {errorIngredientesLista && <p style={{ color: 'red', minHeight: '1em' }}>{errorIngredientesLista}</p>}
+                                        <div className="rellenar-ingrediente"> {/* Clase de EditarPerfil.jsx (sin card y p-3) */}
+                                            Nombre Ingrediente:
+                                            <input type="text" placeholder="Ej: Harina" value={newIngredienteNombre} onChange={(e) => { setNewIngredienteNombre(e.target.value); setErrorNuevoIngrediente(''); }} onBlur={() => handleNewIngredientFieldBlur('nombre')} />
+                                            <span>Cantidad</span>
+                                            <input type="text" placeholder="Ej: 200" value={newIngredienteCantidad} onChange={(e) => { setNewIngredienteCantidad(e.target.value); setErrorNuevoIngrediente(''); }} onBlur={() => handleNewIngredientFieldBlur('cantidad')} />
+                                            <span>Unidad</span>
+                                            <input type="text" placeholder="Ej: gramos" value={newIngredienteUnidad} onChange={(e) => { setNewIngredienteUnidad(e.target.value); setErrorNuevoIngrediente(''); }} onBlur={() => handleNewIngredientFieldBlur('unidad')} />
+                                            <button type="button" onClick={handleAddIngrediente} className="anadir-ingrediente-btn">Añadir Ingrediente</button> {/* Clase de EditarPerfil.jsx */}
+                                            {errorNuevoIngrediente && <span style={{ color: 'red', display: 'block', minHeight: '1em', marginTop: '5px' }}>{errorNuevoIngrediente}</span>}
+                                        </div>
                                     </div>
-                                </div>
                                 </div>
 
                                 <div className="pasos-crear-receta"> {/* Clase de EditarPerfil.jsx (sin col-md-6) */}

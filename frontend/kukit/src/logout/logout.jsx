@@ -26,7 +26,7 @@ const Logout = () => {
                 setExito(false);
                 setMensaje(respuesta.data.message);
 }
-        // eslint-disable-next-line no-unused-vars
+
         } catch (error) {
             setExito(false);
             setMensaje('Hubo un error al procesar la solicitud.');

@@ -1,16 +1,9 @@
 import React, { useState, useEffect} from 'react';
 import axios from 'axios';
-// import logo from '../img/logo_kukit.png'; // No usado directamente en el JSX visible
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-// import CorazonRelleno from '../img/corazonRelleno.png'; // No usado
-// import CorazonSinRelleno from '../img/corazonSinRelleno.png'; // No usado
-// import NoFavorito from '../img/bookmark.png'; // No usado
-// import Favorito from '../img/bookmark-relleno.png'; // No usado
 import dificultadIcon from '../img/velocidad.png';
 import tiempoIcon from '../img/tiempo.png';
-// import Login from '../login/login'; // No usado
-// import Registro from '../login/registro/registro'; // No usado
 import Footer from '../footer/footer';
 import ListaCompra from '../listaCompra/listaCompra';
 import Header from '../header/header';
@@ -34,7 +27,6 @@ const VerReceta = () => {
         axios.get('http://localhost/api/area_privada/recetas/getRecetasConcreta.php'
             , {
                 params: { recetaId } // Pasar el ID de la receta como parámetro
-                // withCredentials: true // Descomentar si necesitas enviar cookies con la solicitud
             }
         )
             .then(res => {
@@ -140,12 +132,6 @@ const VerReceta = () => {
 
 
     if (!receta) return <p className="text-center mt-5">Cargando receta...</p>;
-    // Eliminamos el console.log(receta) que estaba aquí para limpiar.
-    // Si necesitas depurar, puedes volver a añadirlo temporalmente.
-    // console.log(receta);
-
-
-
 
     return (
         <>
@@ -190,8 +176,6 @@ const VerReceta = () => {
                                 <p><strong>Creado por:</strong> {receta.idUsuario}</p>
                             </div>
 
-                            {/* El título ya está arriba, se puede omitir aquí si se prefiere */}
-                            {/* <h3>{receta.nombre}</h3> */}
                             <div className="d-flex gap-4">
                                 <div>
                                     <p className="mb-1 fw-bold">Dificultad</p>
@@ -210,7 +194,7 @@ const VerReceta = () => {
                             </div>
 
                             <div className="row mt-4">
-                                {/* Columna Izquierda: Ingredientes e Información Nutricional */}
+                                {/* Columna Izquierda: Ingredientes*/}
                                 <div className="col-md-5">
                                     <div className="mb-4">
                                         <h5>Ingredientes</h5>
@@ -278,7 +262,7 @@ const VerReceta = () => {
                     />
                 )}
             </main>
-            {/* <Footer /> */}
+
         </>
     );
 };

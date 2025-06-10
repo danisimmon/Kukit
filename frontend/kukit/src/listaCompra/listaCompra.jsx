@@ -112,7 +112,6 @@ const ListaCompra = ({ showListaCompra, setListaCompra, refreshTrigger }) => {
   };
 
   const handleShowEditModal = (producto) => {
-    // *** DEBUGGING: Log the product object to see its structure and id_producto ***
     console.log("Producto a editar:", producto);
     console.log("ID del producto a editar:", producto.id_producto, typeof producto.id_producto);
 
@@ -222,7 +221,6 @@ const ListaCompra = ({ showListaCompra, setListaCompra, refreshTrigger }) => {
     const cantidadConUnidad = `${productoAEditar.cantidad} ${productoAEditar.unidad}`;
 
     try {
-      // *** IMPORTANT: Ensure id_producto is a number before sending to PHP backend ***
       const idProductoNum = Number(productoAEditar.id_producto);
 
       const response = await axios.post(

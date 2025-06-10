@@ -95,10 +95,10 @@ function Header() {
             <div
               onClick={() => setDesplegablePerfil(!showDesplegablePerfil)}
               style={{
-                width: '45px', // Ligeramente más grande para acomodar el GIF si es necesario
+                width: '45px',
                 height: '45px',
                 borderRadius: '50%',
-                backgroundColor: 'transparent', // Puedes mantener un color de fondo si tu GIF tiene transparencias
+                backgroundColor: 'transparent',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
