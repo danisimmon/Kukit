@@ -2801,7 +2801,7 @@ ul.perfil-opciones>li>div.perfil-menu-hamburguesa {
 }
 
 /* Inputs y botones alineados y del mismo ancho */
-.formulario-inicio-sesion,
+/* .formulario-inicio-sesion,
 .contenedor-email-password,
 #googleSignInButton,
 .botones-inicio-sesion,
@@ -2813,7 +2813,7 @@ ul.perfil-opciones>li>div.perfil-menu-hamburguesa {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
+} */
 
 #googleSignInButton>div {
     width: 100% !important;
@@ -2868,7 +2868,7 @@ ul.perfil-opciones>li>div.perfil-menu-hamburguesa {
     margin-bottom: 10px;
 }
 
-.contenedor-sign-up .formulario-inicio-sesion,
+/* .contenedor-sign-up .formulario-inicio-sesion,
 .contenedor-sign-up .contenedor-email-password,
 .contenedor-sign-up #googleSignUpButton,
 .contenedor-sign-up .botones-inicio-sesion,
@@ -2880,7 +2880,7 @@ ul.perfil-opciones>li>div.perfil-menu-hamburguesa {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
+} */
 
 .contenedor-sign-up .contenedor-email-password input {
     width: 100% !important;
@@ -2929,11 +2929,11 @@ ul.perfil-opciones>li>div.perfil-menu-hamburguesa {
     /* Espacio entre las secciones de ingredientes y pasos */
 }
 
-.ingredientes-crear-receta,
+/* .ingredientes-crear-receta,
 .pasos-crear-receta {
     flex: 1;
-    /* Para que ambas secciones compartan el espacio disponible */
-}
+    
+} */
 
 /* --- Responsive Design --- */
 
