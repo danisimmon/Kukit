@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import logo from '../img/logo_kukit.png';
+import perfilMenu from '../img/icons8-user-48.png'; 
 import perfilAnimado from '../img/perfil-animado.gif'; // Asumiendo que tu GIF se llama así y está en src/img/
 import Login from '../login/login';
 import Registro from '../login/registro/registro';
@@ -40,10 +41,6 @@ function Header() {
     setShowOffcanvas(false);
   };
 
-  // Calcula las iniciales del usuario para mostrar en el perfil móvil
-  const initialDisplay = user?.nombre
-    ? user.nombre.split(' ').map(n => n[0]).join('').toUpperCase()
-    : (user?.email ? user.email[0].toUpperCase() : '?');
 
   return (
     <>
@@ -95,10 +92,10 @@ function Header() {
             <div
               onClick={() => setDesplegablePerfil(!showDesplegablePerfil)}
               style={{
-                width: '45px', // Ligeramente más grande para acomodar el GIF si es necesario
+                width: '45px',
                 height: '45px',
                 borderRadius: '50%',
-                backgroundColor: 'transparent', // Puedes mantener un color de fondo si tu GIF tiene transparencias
+                backgroundColor: 'transparent',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -161,25 +158,29 @@ function Header() {
                   // className='perfil-menu-hamburguesa'
                   onClick={() => { setDesplegablePerfil(true); closeOffcanvas(); }}
                   style={{
-                    width: '40px',
-                    height: '40px',
-                    borderRadius: '50%',
-                    backgroundColor: '#C33333',
-                    color: 'white',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    cursor: 'pointer',
-                    fontSize: (user?.nombre?.length > 2) ? '0.7em' : '1.2em', // Ajuste simple
-                    fontWeight: 'bold',
-                    margin: '0 auto',
-                    padding: (user?.nombre?.length > 2) ? '2px' : '0',
-                    textAlign: 'center'
+                    // width: '40px',
+                    // height: '40px',
+                    // borderRadius: '50%',
+                    // backgroundColor: '#C33333',
+                    // color: 'white',
+                    // display: 'flex',
+                    // alignItems: 'center',
+                    // justifyContent: 'center',
+                    // cursor: 'pointer',
+                    // fontSize: (user?.nombre?.length > 2) ? '0.7em' : '1.2em', // Ajuste simple
+                    // fontWeight: 'bold',
+                    // margin: '0 auto',
+                    // padding: (user?.nombre?.length > 2) ? '2px' : '0',
+                    // textAlign: 'center'
                   }}
                   title={user?.nombre || user?.email || 'Perfil'}
                 >
                   {/* Perfil */}
-                  {initialDisplay}
+                  <img
+                    src={perfilMenu}
+                    alt="Perfil"
+                    style={{ width: '70%', height: '100%', objectFit: 'cover' }}
+                  />
                 </div>
               )}
             </li>

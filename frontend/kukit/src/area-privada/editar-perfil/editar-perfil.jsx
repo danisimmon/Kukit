@@ -67,13 +67,12 @@ const EditarPerfil = () => {
   // Usar para cerrar y redirigir
   const handleCerrarPopup = () => {
     setMostrarPopup(false);
-    //navigate("/ruta-destino"); // o usar window.location.href = "/..."
   };
 
   // Nueva función para cerrar el popup de perfil guardado
   const handleCerrarPopupPerfilGuardado = () => {
     setMostrarPopupPerfilGuardado(false);
-    setSeccionActiva("perfil"); // Volver a la vista de "Mi Perfil"
+    setSeccionActiva("perfil"); // Volver a la vista de Mi Perfil
   };
 
   const [formData, setFormData] = useState({
@@ -144,7 +143,7 @@ const EditarPerfil = () => {
 
   // Handler genérico para opciones booleanas de la receta (gluten, vegetariana, lactosa, vegana)
   const manejarCambioOpcionBooleanaReceta = (e) => {
-    const { name, value } = e.target; // name será "gluten", "vegetariana", etc.
+    const { name, value } = e.target; 
     setRecetaNueva(prevState => ({
       ...prevState,
       // Convertir el valor "sí" a true
@@ -381,11 +380,10 @@ const EditarPerfil = () => {
   useEffect(() => {
     obtenerDatosUsuario();
 
-    // Check for navigation state to set active section
     if (location.state?.seccion) {
       setSeccionActiva(location.state.seccion);
     } else {
-      // Default section if no state is passed
+      // Si no hay estado en la ubicación, se establece "perfil" como sección activa por defecto
       setSeccionActiva("perfil");
     }
   }, []); // Array de dependencias vacío, se ejecuta solo una vez al montar
@@ -500,7 +498,6 @@ const EditarPerfil = () => {
     // Validar si hay un error de imagen pendiente (por ejemplo, si se intentó subir una muy grande)
     if (errorImagenReceta) {
       // No es necesario establecer formIsValid = false aquí si el error ya impidió que 'imagen' se estableciera.
-      // Pero es bueno tenerlo en cuenta si la lógica cambia.
     }
 
     if (!formIsValid) return;
@@ -509,7 +506,6 @@ const EditarPerfil = () => {
 
     // Añadir los campos de texto de formRecetaNueva
     for (const key in formRecetaNueva) {
-      // Asegúrate de que los valores booleanos se envíen como 'true' o 'false' strings
       if (typeof formRecetaNueva[key] === 'boolean') {
         formDataToSend.append(key, formRecetaNueva[key] ? 'true' : 'false');
       } else {
@@ -519,7 +515,7 @@ const EditarPerfil = () => {
 
     // Añadir la imagen si existe
     if (imagen) {
-      formDataToSend.append('imagen', imagen); // 'imagen' es el nombre del campo que tu backend esperará para el archivo
+      formDataToSend.append('imagen', imagen);
     }
 
     // Añadir los ingredientes y pasos, convirtiéndolos a string JSON
@@ -559,9 +555,9 @@ const EditarPerfil = () => {
         setImagen(null); // Limpiar la imagen seleccionada
         setImagenPreview(null); // Limpiar la vista previa de la imagen
         setErrorImagenReceta(''); // Limpiar error de imagen
-        // Redirigir inmediatamente after successful creation
+
         navigate("/area-privada/editar-perfil", { state: { seccion: "recetas" } });
-        // Optionally show the popup after navigation
+        // Mostrar el popup de éxito
         setMostrarPopup(true);
       } else {
         setExito(false);
@@ -1073,7 +1069,7 @@ const EditarPerfil = () => {
                 <button
                   className="boton-crear-receta"
                   id="terminar-receta"
-                  type="button" // Dejar como button si el form tiene su propio onSubmit, o submit si este es el que gatilla el form.
+                  type="button" // Cambiado a type="button" para evitar el envío del formulario por defecto
                   onClick={manejarEnvioReceta} // Este botón ahora llama a la función que valida y envía
                 >
                   Terminar
@@ -1102,7 +1098,7 @@ const EditarPerfil = () => {
           {console.log("Valor de mostrarPopupPerfilGuardado antes de renderizar:", mostrarPopupPerfilGuardado)} {/* LOG DE ESTADO DEL POPUP */}
           {/* Popup para perfil guardado con éxito */}
           {mostrarPopupPerfilGuardado && (
-            <div className="popup-receta-creada"> {/* Puedes reutilizar la clase o crear una nueva si el estilo es diferente */}
+            <div className="popup-receta-creada">
               <div className="popup-contenido-receta-creada">
                 <h2>¡Perfil guardado con éxito!</h2>
                 <button

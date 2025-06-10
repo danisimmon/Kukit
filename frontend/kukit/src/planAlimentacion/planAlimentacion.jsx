@@ -5,8 +5,6 @@ import Footer from '../footer/footer';
 import Header from '../header/header';
 import {useNavigate } from 'react-router-dom';
 
-
-
 // Arrays con los dias de la semana y tipos de comida
 const DIAS_SEMANA = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
 const TIPOS_COMIDA = [
@@ -158,11 +156,9 @@ function PlanificacionSemanal() {
         console.log("Plan guardado exitosamente.");
       } else {
         console.error("Error al guardar el plan:", response.data.message || "Respuesta desconocida del servidor.");
-        // Aquí podrías implementar un reintento o una notificación al usuario más robusta
       }
     } catch (error) {
       console.error("Error de red o servidor al guardar el plan:", error);
-      // Aquí podrías implementar un reintento o una notificación al usuario más robusta
     }
   };
 
@@ -178,11 +174,9 @@ function PlanificacionSemanal() {
 
   const abrirSelectorRecetas = (semanaIndex, diaIndex, tipoComidaKey) => {
     setSlotSeleccionado({ semanaIndex, diaIndex, tipoComidaKey });
-    // Asegurarse de que el elemento del offcanvas exista en el DOM y la instancia esté creada
     if (recipeSelectorOffcanvasRef.current && recipeSelectorOffcanvasInstance.current) {
       recipeSelectorOffcanvasInstance.current.show();
     } else if (recipeSelectorOffcanvasRef.current) {
-      // Si el elemento existe pero la instancia no, intenta crearla (esto es una salvaguarda)
       console.warn("Instancia de Offcanvas no encontrada, intentando reinicializar.");
       // @ts-ignore
       import('bootstrap/dist/js/bootstrap.bundle.min.js').then(bootstrap => {

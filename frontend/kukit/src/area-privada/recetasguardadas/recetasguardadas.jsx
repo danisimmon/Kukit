@@ -29,7 +29,7 @@ const RecetasGuardadas = () => {
   const [selectedDificultad, setSelectedDificultad] = useState('');
   const [selectedPais, setSelectedPais] = useState('');
   const [filterTiempo, setFilterTiempo] = useState('');
-  const [filterGluten, setFilterGluten] = useState(''); // '' para cualquiera, 'true' para sí, 'false' para no
+  const [filterGluten, setFilterGluten] = useState('');
   const [filterVegetariana, setFilterVegetariana] = useState('');
   const [filterLactosa, setFilterLactosa] = useState('');
   const [filterVegana, setFilterVegana] = useState('');
@@ -166,7 +166,7 @@ const RecetasGuardadas = () => {
     const matchesTiempo = filterTiempo ? (receta.tiempo || '').toLowerCase().includes(filterTiempo.toLowerCase()) : true;
 
     const checkBooleanFilter = (filterValue, recetaValue) => {
-      if (filterValue === '') return true; // 'Cualquiera' no filtra
+      if (filterValue === '') return true; 
       return (filterValue === 'true' ? recetaValue === true : recetaValue === false);
     };
 
@@ -174,17 +174,6 @@ const RecetasGuardadas = () => {
     const matchesVegetariana = checkBooleanFilter(filterVegetariana, receta.vegetariana);
     const matchesLactosa = checkBooleanFilter(filterLactosa, receta.lactosa);
     const matchesVegana = checkBooleanFilter(filterVegana, receta.vegana);
-
-    //     console.log({
-    //   matchesSearchTerm,
-    //   matchesDificultad,
-    //   matchesPais,
-    //   matchesTiempo,
-    //   matchesGluten,
-    //   matchesVegetariana,
-    //   matchesLactosa,
-    //   matchesVegana
-    // });
 
     return matchesSearchTerm && matchesDificultad && matchesPais && matchesTiempo && matchesGluten && matchesVegetariana && matchesLactosa && matchesVegana;
   });
@@ -209,7 +198,7 @@ const RecetasGuardadas = () => {
             >
               Volver
             </button>
-            <div className="titulo-pagina d-flex align-items-center flex-grow-1"> {/* El título ocupa el espacio restante y alinea sus items */}
+            <div className="titulo-pagina d-flex align-items-center flex-grow-1">
               <h2>Recetas Guardadas</h2>
               <div className="linea-vertical mx-2"></div> {/* Margen horizontal para el separador */}
               <h2 className="numero-recetas">{`${n_recetas} recetas`}</h2>
