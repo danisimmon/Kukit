@@ -411,7 +411,7 @@ const EditarRecetaCreada = () => {
                     </div>
                     {/* Aplicamos la misma estructura y clases que en EditarPerfil.jsx para la sección "crear" */}
                     <div className="crear-receta"> 
-                        <form onSubmit={manejarEnvioEdicionReceta}>
+                        <form onSubmit={manejarEnvioEdicionReceta} style={{display: 'contents'}}>
                             <div className="crear-receta-info"> {/* Clase de EditarPerfil.jsx */}
                                 <h3>Nombre de la Receta</h3>
                                 <input
@@ -532,7 +532,7 @@ const EditarRecetaCreada = () => {
                             <div className="ingredientes-pasos"> {/* Clase de EditarPerfil.jsx (sin row y mt-4) */}
                                 <div className="ingredientes-crear-receta"> {/* Clase de EditarPerfil.jsx (sin col-md-6) */}
                                   <div className="contenedor-ingredientes"> {/* Contenedor extra de EditarPerfil.jsx */}
-                                    <h5>INGREDIENTES</h5>
+                                    <h5>Ingredientes</h5>
                                     {ingredientes.length > 0 && (
                                         <table className="tabla-ingredientes table table-striped table-sm">
                                             <thead><tr><th>Nombre</th><th>Cantidad</th><th>Unidad</th><th></th></tr></thead> {/* Eliminado Acción del header para alinear */}
@@ -560,7 +560,7 @@ const EditarRecetaCreada = () => {
                                 </div>
 
                                 <div className="pasos-crear-receta"> {/* Clase de EditarPerfil.jsx (sin col-md-6) */}
-                                    <h5>PASOS</h5>
+                                    <h5>Pasos</h5>
                                     {pasos.length > 0 && (
                                         <table className="tabla-pasos table table-striped table-sm">
                                             <thead><tr><th>Paso</th><th>Descripción</th><th></th></tr></thead> {/* Eliminado Acción del header y # por Paso */}

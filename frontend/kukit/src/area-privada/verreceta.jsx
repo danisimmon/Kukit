@@ -185,6 +185,11 @@ const VerReceta = () => {
                         </div>
 
                         <div className="flex-fill">
+                            <div className="receta-header">
+                                <h1>{receta.nombre}</h1>
+                                <p><strong>Creado por:</strong> {receta.idUsuario}</p>
+                            </div>
+
                             {/* El título ya está arriba, se puede omitir aquí si se prefiere */}
                             {/* <h3>{receta.nombre}</h3> */}
                             <div className="d-flex gap-4">
@@ -202,11 +207,6 @@ const VerReceta = () => {
                                         <span>{receta.tiempo}</span>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div className="receta-header">
-                                <h1>{receta.nombre}</h1>
-                                <p><strong>Creado por:</strong> {receta.idUsuario}</p>
                             </div>
 
                             <div className="row mt-4">

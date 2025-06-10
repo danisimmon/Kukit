@@ -3514,7 +3514,7 @@ ul.perfil-opciones>li>div.perfil-menu-hamburguesa {
     justify-content: center;
     align-items: center;
     gap: 20px;
-    width: 45vw;
+    width: 70vw;
     height: auto;
     flex-shrink: 0;
     border-radius: 20px;
@@ -3713,7 +3713,7 @@ ul.perfil-opciones>li>div.perfil-menu-hamburguesa {
         flex-direction: column;
         align-items: center;
         gap: 20px;
-        width: 60vw;
+        width: 90vw;
         height: auto;
         padding: 20px;
         flex-shrink: 0;
