@@ -2548,6 +2548,7 @@ header nav ul li.nav-link-li {
     width: 24px;
     height: 24px;
     object-fit: contain;
+    margin-bottom: 1em;
 }
 
 .modal-confirmacion {
@@ -3301,6 +3302,34 @@ ul.perfil-opciones>li>div.perfil-menu-hamburguesa {
 
 @media (max-width: 576px) {
 
+        .contenedores-info-perfil {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 70vw;
+        gap: 10px;
+        margin: 20px;
+        padding: 10px;
+        background-color: var(--background-color);
+        border: var(--primary-color) solid 1px;
+        border-radius: 15px;
+    }
+
+    .tarjeta-perfil {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        width: 80vw;
+        height: auto;
+        padding: 20px;
+        flex-shrink: 0;
+        border-radius: 20px;
+        background: #FFF;
+        box-shadow: 4px 0px 40px 0px rgba(0, 0, 0, 0.25);
+    }
+
     .contenedor-home-checks {
         width: 75%;
         height: 100%;
@@ -3344,35 +3373,7 @@ ul.perfil-opciones>li>div.perfil-menu-hamburguesa {
 
 }
 
-@media (max-width: 768px) {
 
-    /* Centrar los iconos sociales */
-    .list-inline {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        gap: 12px;
-        padding-left: 0;
-        margin-top: 10px;
-        margin-bottom: 0;
-    }
-
-    #imprescindibles-kukit-recetas {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-    }
-
-    .list-inline-item {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-}
 
 
 @media screen and (max-width: 998px) {
@@ -3399,6 +3400,7 @@ ul.perfil-opciones>li>div.perfil-menu-hamburguesa {
         display: flex;
         flex-direction: column;
         align-items: center;
+        margin-bottom: 1em;
     }
 
     footer .col-lg-3 ul {
@@ -3439,6 +3441,7 @@ ul.perfil-opciones>li>div.perfil-menu-hamburguesa {
         height: 32px;
         object-fit: contain;
         margin: 0 2px;
+        margin-bottom: 1em;
     }
 
     /* Ajustar el texto de contacto */
@@ -3493,6 +3496,83 @@ ul.perfil-opciones>li>div.perfil-menu-hamburguesa {
 
 @media (max-width: 768px) {
 
+    header nav ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        gap: 1.5rem;
+        align-items: center;
+    }   
+
+    .contenedores-info-perfil {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 70vw;
+        gap: 10px;
+        margin: 20px;
+        padding: 10px;
+        background-color: var(--background-color);
+        border: var(--primary-color) solid 1px;
+        border-radius: 15px;
+    }
+
+        .tarjeta-perfil {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        width: 80vw;
+        height: auto;
+        padding: 20px;
+        flex-shrink: 0;
+        border-radius: 20px;
+        background: #FFF;
+        box-shadow: 4px 0px 40px 0px rgba(0, 0, 0, 0.25);
+    }
+
+    /* Centrar los iconos sociales */
+    .list-inline {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+        padding-left: 0;
+        margin-top: 10px;
+        margin-bottom: 0;
+    }
+
+    #imprescindibles-kukit-recetas {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .list-inline-item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* .contenedores-info-perfil {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40vw;
+    gap: 10px;
+    margin: 20px;
+    padding: 10px;
+    background-color: var(--background-color);
+    border: var(--primary-color) solid 1px;
+    border-radius: 15px;
+} */
+
     /* Footer: apilar columnas y centrar contenido */
     footer .container-footer,
     .container-footer {
@@ -3524,6 +3604,7 @@ ul.perfil-opciones>li>div.perfil-menu-hamburguesa {
         display: flex;
         flex-direction: column;
         align-items: center;
+        margin-bottom: 1em;
     }
 
     footer .col-lg-3 ul {
@@ -3564,6 +3645,7 @@ ul.perfil-opciones>li>div.perfil-menu-hamburguesa {
         height: 32px;
         object-fit: contain;
         margin: 0 2px;
+        margin-bottom: 1em;
     }
 
     /* Ajustar el texto de contacto */
