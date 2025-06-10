@@ -170,20 +170,17 @@ const Login = ({ setShowLogin, setShowRegistro }) => {
         <button
           type="button"
           className="btn-close"
-          id='btn-cerrar-custom'
           aria-label="Close"
+          style={{ position: 'absolute', top: '15px', right: '15px', zIndex: 2 }}
           onClick={() => setShowLogin(false)}
         ></button>
-
         <figure>
           <a href="/home">
             <img src={logo} alt="Logo de Kukit" />
           </a>
         </figure>
 
-
-        <h1>Iniciar Sesión</h1>
-
+        <h1>INICIAR SESIÓN</h1>
         <hr className="linea-inicio-sesion" />
         <hr />
 
