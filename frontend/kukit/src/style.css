@@ -3275,7 +3275,7 @@ ul.perfil-opciones>li>div.perfil-menu-hamburguesa {
     .tarjeta-perfil,
     .contenedor-ingredientes,
     .pasos-crear-receta {
-        width: 95vw;
+        width: 90vw;
         padding: 15px;
         align-self: center;
     }
