@@ -19,6 +19,17 @@ const Login = ({ setShowLogin, setShowRegistro }) => {
   const navigate = useNavigate();
   const auth = useAuth(); // Obtener el contexto de autenticación
 
+  // Efecto para controlar el scroll del body
+  useEffect(() => {
+    // Cuando el pop-up se muestra, ocultar el scroll del body
+    document.body.style.overflow = 'hidden';
+
+    // Cuando el pop-up se oculta (componente se desmonta), restaurar el scroll
+    return () => {
+      document.body.style.overflow = ''; // Restaura al valor por defecto o el definido en CSS
+    };
+  }, []); // El array vacío asegura que esto solo se ejecute al montar y desmontar
+
   // Cargar script de Google Identity Services dinámicamente
   useEffect(() => {
     if (document.getElementById('google-client-script')) {
@@ -180,7 +191,7 @@ const Login = ({ setShowLogin, setShowRegistro }) => {
           </a>
         </figure>
 
-        <h1>INICIAR SESIÓN</h1>
+        <h1>Iniciar sesión</h1>
         <hr className="linea-inicio-sesion" />
         <hr />
 
