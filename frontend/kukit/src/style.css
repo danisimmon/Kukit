@@ -151,7 +151,7 @@ button {
     border: 1px solid #ccc;
     border-radius: 4px;
     overflow: hidden;
-    width:100%;
+    width: 100%;
 }
 
 .input-wrapper input {
@@ -185,6 +185,10 @@ button {
     font-size: 18px;
     color: #888;
     pointer-events: none;
+}
+
+#btn-cerrar-custom {
+    width: 5% !important;
 }
 
 
@@ -605,7 +609,7 @@ button.btn.btn-texto-toggle:hover {
     background-color: var(--primary-color) !important;
     color: var(--background-color) !important;
     border: none !important;
-    width: 10%;
+    /* width: 10%; */
     align-self: center;
     font-weight: bold;
 }
@@ -1124,7 +1128,8 @@ footer hr {
 /* Ajuste para el contenedor del correo en pantallas de 915px o menos */
 @media (max-width: 915px) {
     .contenedores-info-perfil {
-        width: 100%; /* Ocupa el ancho completo de su padre (.tarjeta-perfil) */
+        width: 100%;
+        /* Ocupa el ancho completo de su padre (.tarjeta-perfil) */
         /* .tarjeta-perfil ya se ajusta en otros breakpoints, 
            esto permitirá que .contenedores-info-perfil se adapte bien. */
     }
@@ -1148,10 +1153,14 @@ footer hr {
 }
 
 .correo-display-perfil {
-    overflow-wrap: break-word; /* Permite que el texto largo se rompa para evitar desbordamiento */
-    word-break: break-word; /* Alternativa o complemento, más compatibilidad */
-    max-width: 100%; /* Asegura que el párrafo no sea más ancho que su contenedor */
-    box-sizing: border-box; /* Para que padding y border se incluyan en el cálculo del ancho */
+    overflow-wrap: break-word;
+    /* Permite que el texto largo se rompa para evitar desbordamiento */
+    word-break: break-word;
+    /* Alternativa o complemento, más compatibilidad */
+    max-width: 100%;
+    /* Asegura que el párrafo no sea más ancho que su contenedor */
+    box-sizing: border-box;
+    /* Para que padding y border se incluyan en el cálculo del ancho */
 }
 
 /* Apartado Crear Receta */
@@ -1537,8 +1546,8 @@ footer hr {
 }
 
 .lupa {
-        width: 5%;
-    }
+    width: 5%;
+}
 
 #cancelar-receta {
     display: flex;
@@ -1901,7 +1910,7 @@ footer.section.bg-footer {
     color: #555;
     font-style: italic;
     text-align: center;
-    margin-top: -10px;
+    margin-top: 0px;
 }
 
 
@@ -2539,6 +2548,7 @@ header nav ul li.nav-link-li {
     width: 24px;
     height: 24px;
     object-fit: contain;
+    margin-bottom: 1em;
 }
 
 .modal-confirmacion {
@@ -2747,7 +2757,7 @@ header nav ul li.nav-link-li {
     transition: all 0.3s;
 }
 
-ul.perfil-opciones>li.perfil-menu-hamburguesa {
+ul.perfil-opciones>li>div.perfil-menu-hamburguesa {
     border: 1px solid var(--primary-color) !important;
     background-color: var(--primary-color) !important;
     color: var(--background-color) !important;
@@ -2942,6 +2952,7 @@ ul.perfil-opciones>li.perfil-menu-hamburguesa {
     font-weight: bold;
     cursor: pointer;
 }
+
 .btn.volver:active {
     margin: 10px;
     background-color: var(--background-color);
@@ -3194,6 +3205,21 @@ ul.perfil-opciones>li.perfil-menu-hamburguesa {
         justify-content: center;
         margin-top: 20px;
         flex-direction: column-reverse;
+        width: 50%;
+    }
+
+    .tarjeta-perfil {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        width: 80vw !important;
+        height: auto;
+        padding: 20px;
+        flex-shrink: 0;
+        border-radius: 20px;
+        background: #FFF;
+        box-shadow: 4px 0px 40px 0px rgba(0, 0, 0, 0.25);
     }
 
 }
@@ -3234,11 +3260,14 @@ ul.perfil-opciones>li.perfil-menu-hamburguesa {
 
     .botones-crear-receta button,
     .botones-perfil button,
-    #terminar-receta,
     #cancelar-receta {
         width: 80%;
         font-size: 1rem;
         align-self: center;
+    }
+
+    #terminar-receta{
+        width: 100%;    
     }
 
     /* Si estos botones están en home */
@@ -3284,6 +3313,34 @@ ul.perfil-opciones>li.perfil-menu-hamburguesa {
 
 @media (max-width: 576px) {
 
+        .contenedores-info-perfil {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 70vw;
+        gap: 10px;
+        margin: 20px;
+        padding: 10px;
+        background-color: var(--background-color);
+        border: var(--primary-color) solid 1px;
+        border-radius: 15px;
+    }
+
+    .tarjeta-perfil {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        width: 80vw;
+        height: auto;
+        padding: 20px;
+        flex-shrink: 0;
+        border-radius: 20px;
+        background: #FFF;
+        box-shadow: 4px 0px 40px 0px rgba(0, 0, 0, 0.25);
+    }
+
     .contenedor-home-checks {
         width: 75%;
         height: 100%;
@@ -3327,35 +3384,7 @@ ul.perfil-opciones>li.perfil-menu-hamburguesa {
 
 }
 
-@media (max-width: 768px) {
 
-    /* Centrar los iconos sociales */
-    .list-inline {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        gap: 12px;
-        padding-left: 0;
-        margin-top: 10px;
-        margin-bottom: 0;
-    }
-
-    #imprescindibles-kukit-recetas {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-    }
-
-    .list-inline-item {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-}
 
 
 @media screen and (max-width: 998px) {
@@ -3382,6 +3411,7 @@ ul.perfil-opciones>li.perfil-menu-hamburguesa {
         display: flex;
         flex-direction: column;
         align-items: center;
+        margin-bottom: 1em;
     }
 
     footer .col-lg-3 ul {
@@ -3422,6 +3452,7 @@ ul.perfil-opciones>li.perfil-menu-hamburguesa {
         height: 32px;
         object-fit: contain;
         margin: 0 2px;
+        margin-bottom: 1em;
     }
 
     /* Ajustar el texto de contacto */
@@ -3437,7 +3468,7 @@ ul.perfil-opciones>li.perfil-menu-hamburguesa {
         text-align: center;
     }
 
-    .list-inline{
+    .list-inline {
         display: flex;
         flex-direction: row;
         justify-content: center;
@@ -3471,17 +3502,95 @@ ul.perfil-opciones>li.perfil-menu-hamburguesa {
         min-width: 24px;
         max-width: 40px;
         padding: 0;
-    }        
+    }
 }
 
 @media (max-width: 768px) {
+
+    header nav ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        gap: 1.5rem;
+        align-items: center;
+    }   
+
+    .contenedores-info-perfil {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 70vw;
+        gap: 10px;
+        margin: 20px;
+        padding: 10px;
+        background-color: var(--background-color);
+        border: var(--primary-color) solid 1px;
+        border-radius: 15px;
+    }
+
+        .tarjeta-perfil {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        width: 80vw;
+        height: auto;
+        padding: 20px;
+        flex-shrink: 0;
+        border-radius: 20px;
+        background: #FFF;
+        box-shadow: 4px 0px 40px 0px rgba(0, 0, 0, 0.25);
+    }
+
+    /* Centrar los iconos sociales */
+    .list-inline {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+        padding-left: 0;
+        margin-top: 10px;
+        margin-bottom: 0;
+    }
+
+    #imprescindibles-kukit-recetas {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .list-inline-item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* .contenedores-info-perfil {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40vw;
+    gap: 10px;
+    margin: 20px;
+    padding: 10px;
+    background-color: var(--background-color);
+    border: var(--primary-color) solid 1px;
+    border-radius: 15px;
+} */
 
     /* Footer: apilar columnas y centrar contenido */
     footer .container-footer,
     .container-footer {
         width: 100%;
         padding: 0 10px;
-    }       
+    }
+
     .btn.volver:hover {
         margin: 10px;
         background-color: #fff;
@@ -3506,6 +3615,7 @@ ul.perfil-opciones>li.perfil-menu-hamburguesa {
         display: flex;
         flex-direction: column;
         align-items: center;
+        margin-bottom: 1em;
     }
 
     footer .col-lg-3 ul {
@@ -3546,6 +3656,7 @@ ul.perfil-opciones>li.perfil-menu-hamburguesa {
         height: 32px;
         object-fit: contain;
         margin: 0 2px;
+        margin-bottom: 1em;
     }
 
     /* Ajustar el texto de contacto */
@@ -3580,22 +3691,43 @@ ul.perfil-opciones>li.perfil-menu-hamburguesa {
         height: 100%;
     }
 
-    
+    /* Contenedor perfil */
+    .tarjeta-perfil {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        width: 60vw;
+        height: auto;
+        padding: 20px;
+        flex-shrink: 0;
+        border-radius: 20px;
+        background: #FFF;
+        box-shadow: 4px 0px 40px 0px rgba(0, 0, 0, 0.25);
+    }
+
 }
+
 @media (min-width: 768px) and (max-width: 892px) {
     .ingredientes-pasos {
-      flex-direction: column; /* Se apilan verticalmente */
-      gap: 0; /* Reseteamos el gap horizontal, usaremos márgenes para el vertical */
+        flex-direction: column;
+        /* Se apilan verticalmente */
+        gap: 0;
+        /* Reseteamos el gap horizontal, usaremos márgenes para el vertical */
     }
 
     .ingredientes-crear-receta,
     .pasos-crear-receta {
-      width: 100%; /* Ocupan todo el ancho disponible */
-      flex: none; /* Quitamos la propiedad flex:1 para que width:100% funcione bien en columna */
-      margin-bottom: 20px; /* Espacio debajo de la sección de ingredientes cuando está apilada */
+        width: 100%;
+        /* Ocupan todo el ancho disponible */
+        flex: none;
+        /* Quitamos la propiedad flex:1 para que width:100% funcione bien en columna */
+        margin-bottom: 20px;
+        /* Espacio debajo de la sección de ingredientes cuando está apilada */
     }
 
     .pasos-crear-receta {
-      margin-bottom: 0; /* El último elemento no necesita margen inferior */
+        margin-bottom: 0;
+        /* El último elemento no necesita margen inferior */
     }
 }

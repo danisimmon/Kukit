@@ -427,6 +427,7 @@ const EditarRecetaCreada = () => {
 
                                 <div className="subir-imagen-receta"> {/* Clase de EditarPerfil.jsx */}
                                     <h3>Imagen de la Receta</h3>
+                                    <p className="info-racion">*Tamaño máximo de la imagen: 40MB*</p>
                                     {imagenPreview && (
                                         <div className="vista-previa-imagen">  {/* Clase de EditarPerfil.jsx (sin mb-2 para alinear con el original) */}
                                             <img src={imagenPreview} alt="Vista previa" style={{ maxWidth: '200px', maxHeight: '200px', display: 'block', marginBottom: '10px' }} />
