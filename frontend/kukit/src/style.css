@@ -811,7 +811,7 @@ footer hr {
 }
 
 .img-hero {
-    width: 100vw;
+    width: 100%;
     height: 450px;
     object-fit: cover;
     /* oscurecemos la imagen un poquito */
@@ -1112,6 +1112,10 @@ footer hr {
     gap: 10px;
 } */
 
+/* *{
+    border: #990000 solid 1px;
+} */
+
 .contenedores-info-perfil {
     display: flex;
     flex-direction: column;
@@ -1342,7 +1346,7 @@ footer hr {
     align-items: center;
     flex-wrap: wrap;
     gap: 20px;
-    width: auto;
+    width: 100%;
     height: auto;
     flex-shrink: 0;
     border-radius: 20px;
