@@ -675,7 +675,7 @@ const EditarPerfil = () => {
                   <div className="contenedores-info-perfil">
                     <h3 className="titulos-perfil">Correo Electrónico</h3>
                     {/* Campo de correo no editable */}
-                    <p id="correo" name="correo" style={{ padding: '10px', border: '1px solid #ccc', borderRadius: '4px', backgroundColor: '#f0f0f0' }}>{formData.correo}</p>
+                    <p id="correo" name="correo" className="correo-display-perfil" style={{ padding: '10px', border: '1px solid #ccc', borderRadius: '4px', backgroundColor: '#f0f0f0' }}>{formData.correo}</p>
                   </div>
                 </div>
 

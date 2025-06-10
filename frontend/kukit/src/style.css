@@ -187,6 +187,10 @@ button {
     pointer-events: none;
 }
 
+#btn-cerrar-custom {
+    width: 5% !important;
+}
+
 
 /* hover de .btn-reservation */
 button:hover {
@@ -1114,11 +1118,20 @@ footer hr {
     align-items: center;
     width: 30vw;
     gap: 10px;
-    margin: 20px;
+    margin: 20px auto;
     padding: 10px;
     background-color: var(--background-color);
     border: var(--primary-color) solid 1px;
     border-radius: 15px;
+}
+
+/* Ajuste para el contenedor del correo en pantallas de 915px o menos */
+@media (max-width: 915px) {
+    .contenedores-info-perfil {
+        width: 100%; /* Ocupa el ancho completo de su padre (.tarjeta-perfil) */
+        /* .tarjeta-perfil ya se ajusta en otros breakpoints, 
+           esto permitirá que .contenedores-info-perfil se adapte bien. */
+    }
 }
 
 .botones-perfil {
@@ -1136,6 +1149,13 @@ footer hr {
     /* font-size: 24px;
     font-weight: 700;
     margin-bottom: 30px; */
+}
+
+.correo-display-perfil {
+    overflow-wrap: break-word; /* Permite que el texto largo se rompa para evitar desbordamiento */
+    word-break: break-word; /* Alternativa o complemento, más compatibilidad */
+    max-width: 100%; /* Asegura que el párrafo no sea más ancho que su contenedor */
+    box-sizing: border-box; /* Para que padding y border se incluyan en el cálculo del ancho */
 }
 
 /* Apartado Crear Receta */
@@ -2732,7 +2752,7 @@ header nav ul li.nav-link-li {
     transition: all 0.3s;
 }
 
-ul.perfil-opciones>li.perfil-menu-hamburguesa {
+ul.perfil-opciones>li>div.perfil-menu-hamburguesa {
     border: 1px solid var(--primary-color) !important;
     background-color: var(--primary-color) !important;
     color: var(--background-color) !important;

@@ -159,7 +159,6 @@ const Registro = ({ setShowRegistro, setShowLogin }) => {
           type="button"
           className="btn-close"
           aria-label="Close"
-          style={{ position: 'absolute', top: 10, right: 10, zIndex: 2 }}
           onClick={() => setShowRegistro(false)}
         ></button>
         <figure>
@@ -168,7 +167,7 @@ const Registro = ({ setShowRegistro, setShowLogin }) => {
           </a>
         </figure>
 
-        <h1>CREAR CUENTA</h1>
+        <h1>Crear cuenta</h1>
         <hr className="linea-inicio-sesion" />
 
         <form onSubmit={manejarEnvio}>

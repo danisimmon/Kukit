@@ -40,6 +40,11 @@ function Header() {
     setShowOffcanvas(false);
   };
 
+  // Calcula las iniciales del usuario para mostrar en el perfil móvil
+  const initialDisplay = user?.nombre
+    ? user.nombre.split(' ').map(n => n[0]).join('').toUpperCase()
+    : (user?.email ? user.email[0].toUpperCase() : '?');
+
   return (
     <>
       <header>
@@ -103,10 +108,10 @@ function Header() {
               }}
               title={user?.nombre || user?.email || 'Perfil'}
             >
-              <img 
-                src={perfilAnimado} 
-                alt="Perfil" 
-                style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+              <img
+                src={perfilAnimado}
+                alt="Perfil"
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
               />
             </div>
           )}
@@ -120,88 +125,90 @@ function Header() {
         tabIndex="-1"
         id="offcanvasMenu"
         aria-labelledby="offcanvasMenuLabel"
-    >
-      <div className="offcanvas-header">
-        <h5 className="offcanvas-title" id="offcanvasMenuLabel">Menú</h5>
-        <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Cerrar" onClick={closeOffcanvas}></button>
-      </div>
-      <div className="offcanvas-body">
-        <ul style={{ listStyle: 'none', padding: 0 }} className='perfil-opciones'> 
-          <li >
-            <NavLink to="/recetas" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"} end onClick={closeOffcanvas}>
-              Recetas
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/recetas/recetasguardadas" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"} onClick={closeOffcanvas}>
-              Recetas Guardadas
-            </NavLink>
-          </li>
-          <li onClick={() => { setListaCompra(true); closeOffcanvas(); }} className="nav-link-li">Lista de la Compra</li>
-          <li>
-            <NavLink to="/planAlimentacion" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"} onClick={closeOffcanvas}>
-              Plan de alimentación
-            </NavLink>
-          </li>
-          {/* Botón perfil solo en mobile */}
-          <li style={{ marginTop: '1em' }} className='perfil-menu-hamburguesa' onClick={() => { setDesplegablePerfil(true); closeOffcanvas(); }}>
-            {!isAuthenticated && (
-              <>
-                <button className="botones-inversos" style={{ width: '100%', marginBottom: '8px' }} onClick={() => { setShowLogin(true); closeOffcanvas(); }}>Iniciar sesión</button>
-                <button className="sign-up" style={{ width: '100%' }} onClick={() => { setShowRegistro(true); closeOffcanvas(); }}>Regístrate</button>
-              </>
-            )}
-            {isAuthenticated && (
-              <div
-                onClick={() => { setDesplegablePerfil(true); closeOffcanvas(); }}
-                style={{
-                  width: '45px', // Ligeramente más grande para acomodar el GIF si es necesario
-                  height: '45px',
-                  borderRadius: '50%',
-                  backgroundColor: 'transparent', // Puedes mantener un color de fondo si tu GIF tiene transparencias
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  cursor: 'pointer',
-                  margin: '0 auto',
-                  overflow: 'hidden' // Para asegurar que el GIF no se salga del círculo
-                }}
-                title={user?.nombre || user?.email || 'Perfil'}
-              >
-                <img 
-                  src={perfilAnimado} 
-                  alt="Perfil" 
-                  style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
-                />
-              </div>
-            )}
-          </li>
-        </ul>
-      </div>
-    </div >
-
-      {/* Popups y componentes */ }
-      <div id = "pop-up-sign-in" style = {{ display: showLogin ? 'flex' : 'none' }
-} onClick = {() => setShowLogin(false)}>
-  <div className="modal-content" onClick={e => e.stopPropagation()}>
-    <Login setShowLogin={setShowLogin} setShowRegistro={setShowRegistro} />
-  </div>
+      >
+        <div className="offcanvas-header">
+          <h5 className="offcanvas-title" id="offcanvasMenuLabel">Menú</h5>
+          <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Cerrar" onClick={closeOffcanvas}></button>
+        </div>
+        <div className="offcanvas-body">
+          <ul style={{ listStyle: 'none', padding: 0 }} className='perfil-opciones'>
+            <li >
+              <NavLink to="/recetas" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"} end onClick={closeOffcanvas}>
+                Recetas
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/recetas/recetasguardadas" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"} onClick={closeOffcanvas}>
+                Recetas Guardadas
+              </NavLink>
+            </li>
+            <li onClick={() => { setListaCompra(true); closeOffcanvas(); }} className="nav-link-li">Lista de la Compra</li>
+            <li>
+              <NavLink to="/planAlimentacion" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"} onClick={closeOffcanvas}>
+                Plan de alimentación
+              </NavLink>
+            </li>
+            {/* Botón perfil solo en mobile */}
+            <li style={{ marginTop: '1em' }} >
+              {!isAuthenticated && (
+                <>
+                  <button className="botones-inversos" style={{ width: '100%', marginBottom: '8px' }} onClick={() => { setShowLogin(true); closeOffcanvas(); }}>Iniciar sesión</button>
+                  <button className="sign-up" style={{ width: '100%' }} onClick={() => { setShowRegistro(true); closeOffcanvas(); }}>Regístrate</button>
+                </>
+              )}
+              {isAuthenticated && (
+                <div
+                  // className='perfil-menu-hamburguesa'
+                  onClick={() => { setDesplegablePerfil(true); closeOffcanvas(); }}
+                  style={{
+                    width: '40px',
+                    height: '40px',
+                    borderRadius: '50%',
+                    backgroundColor: '#C33333',
+                    color: 'white',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    cursor: 'pointer',
+                    fontSize: (user?.nombre?.length > 2) ? '0.7em' : '1.2em', // Ajuste simple
+                    fontWeight: 'bold',
+                    margin: '0 auto',
+                    padding: (user?.nombre?.length > 2) ? '2px' : '0',
+                    textAlign: 'center'
+                  }}
+                  title={user?.nombre || user?.email || 'Perfil'}
+                >
+                  {/* Perfil */}
+                  {initialDisplay}
+                </div>
+              )}
+            </li>
+          </ul>
+        </div>
       </div >
-  <div id="pop-up-sign-up" style={{ display: showRegistro ? 'flex' : 'none' }} onClick={() => setShowRegistro(false)}>
-    <div className="modal-content-2" onClick={e => e.stopPropagation()}>
-      <Registro setShowRegistro={setShowRegistro} setShowLogin={setShowLogin} />
-    </div>
-  </div>
-{
-  showListaCompra && (
-    <ListaCompra showListaCompra={showListaCompra} setListaCompra={setListaCompra} />
-  )
-}
-{
-  showDesplegablePerfil && (
-    <DesplegablePerfil showDesplegablePerfil={showDesplegablePerfil} setDesplegablePerfil={setDesplegablePerfil} />
-  )
-}
+
+      {/* Popups y componentes */}
+      <div id="pop-up-sign-in" style={{ display: showLogin ? 'flex' : 'none' }
+      } onClick={() => setShowLogin(false)}>
+        <div className="modal-content" onClick={e => e.stopPropagation()}>
+          <Login setShowLogin={setShowLogin} setShowRegistro={setShowRegistro} />
+        </div>
+      </div >
+      <div id="pop-up-sign-up" style={{ display: showRegistro ? 'flex' : 'none' }} onClick={() => setShowRegistro(false)}>
+        <div className="modal-content-2" onClick={e => e.stopPropagation()}>
+          <Registro setShowRegistro={setShowRegistro} setShowLogin={setShowLogin} />
+        </div>
+      </div>
+      {
+        showListaCompra && (
+          <ListaCompra showListaCompra={showListaCompra} setListaCompra={setListaCompra} />
+        )
+      }
+      {
+        showDesplegablePerfil && (
+          <DesplegablePerfil showDesplegablePerfil={showDesplegablePerfil} setDesplegablePerfil={setDesplegablePerfil} />
+        )
+      }
     </>
   );
 }
