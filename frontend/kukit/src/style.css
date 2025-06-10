@@ -811,7 +811,7 @@ footer hr {
 }
 
 .img-hero {
-    width: 100%;
+    width: 100vw;
     height: 450px;
     object-fit: cover;
     /* oscurecemos la imagen un poquito */
@@ -2999,6 +2999,10 @@ ul.perfil-opciones>li>div.perfil-menu-hamburguesa {
         z-index: 199;
         /* Debajo del icono hamburguesa, encima del contenido */
         padding-bottom: 10px;
+    }
+
+    .img-hero {
+        width: 100%;
     }
 
     /* Deberás añadir una clase 'active' mediante JavaScript para mostrar el menú móvil */
