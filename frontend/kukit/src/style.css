@@ -2495,7 +2495,9 @@ header nav ul li.nav-link-li {
     border: none;
 }
 
-
+.table-responsive {
+    width: 100%;
+}
 
 #guardarPlanButton {
     width: 14vw;
@@ -2517,7 +2519,7 @@ header nav ul li.nav-link-li {
     padding: 10px 10px;
     box-sizing: border-box;
     align-self: center;
-
+    margin: 10px;
     border: 2px solid #C33333;
     border-radius: 8px;
     background-color: white;
