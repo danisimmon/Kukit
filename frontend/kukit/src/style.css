@@ -1910,7 +1910,7 @@ footer.section.bg-footer {
     color: #555;
     font-style: italic;
     text-align: center;
-    margin-top: -10px;
+    margin-top: 0px;
 }
 
 
@@ -3198,6 +3198,7 @@ ul.perfil-opciones>li>div.perfil-menu-hamburguesa {
         justify-content: center;
         margin-top: 20px;
         flex-direction: column-reverse;
+        width: 50%;
     }
 
     .tarjeta-perfil {
@@ -3252,11 +3253,14 @@ ul.perfil-opciones>li>div.perfil-menu-hamburguesa {
 
     .botones-crear-receta button,
     .botones-perfil button,
-    #terminar-receta,
     #cancelar-receta {
         width: 80%;
         font-size: 1rem;
         align-self: center;
+    }
+
+    #terminar-receta{
+        width: 100%;    
     }
 
     /* Si estos botones están en home */
