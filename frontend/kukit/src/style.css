@@ -502,9 +502,10 @@ header .contenedor-header .sign-up:hover {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
+    ;
     gap: 10px;
-    width: 100%;
+    width: 100vw;
 }
 
 #contenedor-recetas {
@@ -1116,7 +1117,7 @@ footer hr {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 30vw;
+    width: 35vw;
     gap: 10px;
     margin: 20px auto;
     padding: 10px;
@@ -2838,8 +2839,8 @@ ul.perfil-opciones>li>div.perfil-menu-hamburguesa {
 }
 
 .contenedor-email-password input {
-    width: 100% !important;
-    max-width: 340px;
+    width: 334px !important;
+    max-width: 82%;
 }
 
 .botones-inicio-sesion,
@@ -3224,6 +3225,23 @@ ul.perfil-opciones>li>div.perfil-menu-hamburguesa {
         box-shadow: 4px 0px 40px 0px rgba(0, 0, 0, 0.25);
     }
 
+    .crear-receta {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        width: 98vw;
+        height: auto;
+        flex-shrink: 0;
+        border-radius: 20px;
+        padding: 5vw;
+    }
+
+    .contenedor-email-password input {
+        width: 82% !important;
+        max-width: 95%;
+    }
 }
 
 /* Smaller mobile devices */
@@ -3268,8 +3286,8 @@ ul.perfil-opciones>li>div.perfil-menu-hamburguesa {
         align-self: center;
     }
 
-    #terminar-receta{
-        width: 100%;    
+    #terminar-receta {
+        width: 100%;
     }
 
     /* Si estos botones están en home */
@@ -3315,7 +3333,7 @@ ul.perfil-opciones>li>div.perfil-menu-hamburguesa {
 
 @media (max-width: 576px) {
 
-        .contenedores-info-perfil {
+    .contenedores-info-perfil {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -3518,19 +3536,19 @@ ul.perfil-opciones>li>div.perfil-menu-hamburguesa {
 
     /* Crear receta */
     .crear-receta-info {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    width: 70vw;
-    height: auto;
-    flex-shrink: 0;
-    border-radius: 20px;
-    padding: 5vw;
-    background: #FFF;
-    box-shadow: 4px 0px 40px 0px rgba(0, 0, 0, 0.25);
-}
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        width: 70vw;
+        height: auto;
+        flex-shrink: 0;
+        border-radius: 20px;
+        padding: 5vw;
+        background: #FFF;
+        box-shadow: 4px 0px 40px 0px rgba(0, 0, 0, 0.25);
+    }
 
     header nav ul {
         list-style: none;
@@ -3539,7 +3557,7 @@ ul.perfil-opciones>li>div.perfil-menu-hamburguesa {
         display: flex;
         gap: 1.5rem;
         align-items: center;
-    }   
+    }
 
     .contenedores-info-perfil {
         display: flex;
@@ -3555,7 +3573,7 @@ ul.perfil-opciones>li>div.perfil-menu-hamburguesa {
         border-radius: 15px;
     }
 
-        .tarjeta-perfil {
+    .tarjeta-perfil {
         display: flex;
         flex-direction: column;
         align-items: center;

@@ -77,28 +77,26 @@ function Home() {
 
   // Manejadores para el carrusel de Imprescindibles
   const handleNextImprescindibles = useCallback(() => {
-    const numTotalSlides = recetasImprescindibles.length + 1; // +1 para la tarjeta de login/registro
+    const numTotalSlides = recetasImprescindibles.length + (!isAuthenticated ? 1 : 0);
     setCurrentIndexImprescindibles((prev) => (prev + 1) % numTotalSlides);
-  }, [recetasImprescindibles.length]);
+  }, [recetasImprescindibles.length, isAuthenticated]);
 
   const handlePrevImprescindibles = useCallback(() => {
-    const numTotalSlides = recetasImprescindibles.length + 1;
+    const numTotalSlides = recetasImprescindibles.length + (!isAuthenticated ? 1 : 0);
     setCurrentIndexImprescindibles((prev) => (prev - 1 + numTotalSlides) % numTotalSlides);
-  }, [recetasImprescindibles.length]);
+  }, [recetasImprescindibles.length, isAuthenticated]);
 
-  const recetaImprescindibleActual = recetasImprescindibles[currentIndexImprescindibles];
-
-  // Manejadores para el carrusel de Novedades
   const handleNextNovedades = useCallback(() => {
-    const numTotalSlides = recetasNovedades.length + 1; // +1 para la tarjeta de login/registro
+    const numTotalSlides = recetasNovedades.length + (!isAuthenticated ? 1 : 0);
     setCurrentIndexNovedades((prev) => (prev + 1) % numTotalSlides);
-  }, [recetasNovedades.length]);
+  }, [recetasNovedades.length, isAuthenticated]);
 
   const handlePrevNovedades = useCallback(() => {
-    const numTotalSlides = recetasNovedades.length + 1;
+    const numTotalSlides = recetasNovedades.length + (!isAuthenticated ? 1 : 0);
     setCurrentIndexNovedades((prev) => (prev - 1 + numTotalSlides) % numTotalSlides);
-  }, [recetasNovedades.length]);
+  }, [recetasNovedades.length, isAuthenticated]);
 
+  const recetaImprescindibleActual = recetasImprescindibles[currentIndexImprescindibles];
   const recetaNovedadActual = recetasNovedades[currentIndexNovedades];
 
   return (
@@ -158,24 +156,27 @@ function Home() {
                     </div>
                   </div>
                 ) : (
-                  // Tarjeta de Login/Registro para Imprescindibles
-                  <div className="tarjeta-receta tarjeta-login-extra" key="login-imprescindibles" style={{ textAlign: 'center', padding: '20px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', minHeight: '300px', width: '100%' }}>
-                    <h4>¡Únete a Kukit!</h4>
-                    <p style={{ fontSize: '0.9rem', margin: '10px 0' }}>Regístrate o inicia sesión para descubrir un mundo de recetas y funcionalidades.</p>
-                    <button
-                      className="btn btn-primary mt-2 w-75"
-                      style={{ backgroundColor: '#C33333', color: '#FFFFFF', borderColor: '#C33333' }}
-                      onClick={() => setShowLogin(true)}
-                    >
-                      Iniciar Sesión
-                    </button>
-                    <button
-                      className="btn btn-outline-primary mt-2 w-75"
-                      style={{ backgroundColor: '#FFFFFF', color: '#C33333', borderColor: '#C33333' }}
-                      onClick={() => setShowRegistro(true)}
-                    >
-                      Registrarse
-                    </button>                      </div>
+                  // Solo mostrar la tarjeta de login/registro si NO está autenticado
+                  !isAuthenticated && (
+                    <div className="tarjeta-receta tarjeta-login-extra" key="login-imprescindibles" style={{ textAlign: 'center', padding: '20px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', minHeight: '300px', width: '100%' }}>
+                      <h4>¡Únete a Kukit!</h4>
+                      <p style={{ fontSize: '0.9rem', margin: '10px 0' }}>Regístrate o inicia sesión para descubrir un mundo de recetas y funcionalidades.</p>
+                      <button
+                        className="btn btn-primary mt-2 w-75"
+                        style={{ backgroundColor: '#C33333', color: '#FFFFFF', borderColor: '#C33333' }}
+                        onClick={() => setShowLogin(true)}
+                      >
+                        Iniciar Sesión
+                      </button>
+                      <button
+                        className="btn btn-outline-primary mt-2 w-75"
+                        style={{ backgroundColor: '#FFFFFF', color: '#C33333', borderColor: '#C33333' }}
+                        onClick={() => setShowRegistro(true)}
+                      >
+                        Registrarse
+                      </button>
+                    </div>
+                  )
                 )}
                 <div className='contenedor-boton'>
                   {/* Los botones se deshabilitan si solo hay un slide (la tarjeta de login/registro cuando no hay recetas) */}
@@ -218,25 +219,26 @@ function Home() {
                     </div>
                   </div>
                 ) : (
-
-                  <div className="tarjeta-receta tarjeta-login-extra" key="login-novedades" style={{ textAlign: 'center', padding: '20px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', minHeight: '300px', width: '100%' }}>
-                    <h4>¡Explora Más!</h4>
-                    <p style={{ fontSize: '0.9rem', margin: '10px 0' }}>Inicia sesión para acceder a todas las funcionalidades y guardar tus recetas favoritas.</p>
-                    <button
-                      className="btn btn-primary mt-2 w-75"
-                      style={{ backgroundColor: '#C33333', color: '#FFFFFF', borderColor: '#C33333' }}
-                      onClick={() => setShowLogin(true)}
-                    >
-                      Iniciar Sesión
-                    </button>
-                    <button
-                      className="btn btn-outline-primary mt-2 w-75"
-                      style={{ backgroundColor: '#FFFFFF', color: '#C33333', borderColor: '#C33333' }}
-                      onClick={() => setShowRegistro(true)}
-                    >
-                      Registrarse
-                    </button>
-                  </div>
+                  !isAuthenticated && (
+                    <div className="tarjeta-receta tarjeta-login-extra" key="login-novedades" style={{ textAlign: 'center', padding: '20px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', minHeight: '300px', width: '100%' }}>
+                      <h4>¡Explora Más!</h4>
+                      <p style={{ fontSize: '0.9rem', margin: '10px 0' }}>Inicia sesión para acceder a todas las funcionalidades y guardar tus recetas favoritas.</p>
+                      <button
+                        className="btn btn-primary mt-2 w-75"
+                        style={{ backgroundColor: '#C33333', color: '#FFFFFF', borderColor: '#C33333' }}
+                        onClick={() => setShowLogin(true)}
+                      >
+                        Iniciar Sesión
+                      </button>
+                      <button
+                        className="btn btn-outline-primary mt-2 w-75"
+                        style={{ backgroundColor: '#FFFFFF', color: '#C33333', borderColor: '#C33333' }}
+                        onClick={() => setShowRegistro(true)}
+                      >
+                        Registrarse
+                      </button>
+                    </div>
+                  )
                 )}
                 <div className='contenedor-boton'>
                   <button onClick={handlePrevNovedades} disabled={(recetasNovedades.length + 1) <= 1}>&lt;</button>
