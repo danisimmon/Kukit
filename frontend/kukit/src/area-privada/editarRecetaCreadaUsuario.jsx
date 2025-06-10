@@ -402,10 +402,10 @@ const EditarRecetaCreada = () => {
                     <div className="d-flex align-items-center mb-3">
                         <button
                             onClick={() => navigate(-1)}
-                            className="btn btn-outline-secondary me-3" /* Estilo de botón más integrado y margen a la derecha */
+                            className="btn volver me-3" /* Estilo de botón más integrado y margen a la derecha */
                             title="Volver a la página anterior" /* Tooltip para accesibilidad y claridad */
                         >
-                            &lt; Volver
+                            Volver
                         </button>
                         <h2 className="mb-0 flex-grow-1 text-center">Editar Receta: {formReceta.nombre || "Cargando..."}</h2> {/* Título principal con mb-0 para alineación */}
                     </div>
