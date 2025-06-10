@@ -3507,6 +3507,22 @@ ul.perfil-opciones>li>div.perfil-menu-hamburguesa {
 
 @media (max-width: 768px) {
 
+    /* Crear receta */
+    .crear-receta-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 45vw;
+    height: auto;
+    flex-shrink: 0;
+    border-radius: 20px;
+    padding: 5vw;
+    background: #FFF;
+    box-shadow: 4px 0px 40px 0px rgba(0, 0, 0, 0.25);
+}
+
     header nav ul {
         list-style: none;
         padding: 0;
