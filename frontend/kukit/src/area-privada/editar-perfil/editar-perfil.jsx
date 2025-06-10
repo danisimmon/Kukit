@@ -749,6 +749,7 @@ const EditarPerfil = () => {
                 {/* Sección para subir la imagen */}
                 <div className="subir-imagen-receta">
                   <h3>Imagen de la Receta</h3>
+                  <p className="info-racion">*Tamaño máximo de la imagen: 40MB*</p>
                   <input
                     type="file"
                     id="imagen-receta-nueva"
