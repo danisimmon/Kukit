@@ -2804,9 +2804,16 @@ ul.perfil-opciones>li>div.perfil-menu-hamburguesa {
 /* .formulario-inicio-sesion,
 .contenedor-email-password,
 #googleSignInButton,
-.botones-inicio-sesion,
 .botones-inversos,
 .contenedor-sign-in button[type="button"] {
+    max-width: 340px;
+    margin: 0 auto 10px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.botones-inicio-sesion,
+.botones-inversos{
     width: 100% !important;
     max-width: 340px;
     margin: 0 auto 10px auto;
@@ -2814,6 +2821,7 @@ ul.perfil-opciones>li>div.perfil-menu-hamburguesa {
     flex-direction: column;
     align-items: center;
 } */
+
 
 #googleSignInButton>div {
     width: 100% !important;
@@ -2874,7 +2882,6 @@ ul.perfil-opciones>li>div.perfil-menu-hamburguesa {
 .contenedor-sign-up .botones-inicio-sesion,
 .contenedor-sign-up .botones-inversos,
 .contenedor-sign-up button[type="button"] {
-    width: 100% !important;
     max-width: 340px;
     margin: 0 auto 10px auto;
     display: flex;
@@ -3499,6 +3506,22 @@ ul.perfil-opciones>li>div.perfil-menu-hamburguesa {
 }
 
 @media (max-width: 768px) {
+
+    /* Crear receta */
+    .crear-receta-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 45vw;
+    height: auto;
+    flex-shrink: 0;
+    border-radius: 20px;
+    padding: 5vw;
+    background: #FFF;
+    box-shadow: 4px 0px 40px 0px rgba(0, 0, 0, 0.25);
+}
 
     header nav ul {
         list-style: none;

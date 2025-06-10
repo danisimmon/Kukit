@@ -185,7 +185,7 @@ function Home() {
               </div>
             </div>
             <div className="col-auto d-none d-md-flex align-items-center">
-              <div class="vr"></div>
+              <div className="vr" style={{ minHeight: '30em' }}></div>
             </div>
             {/* Sección Novedades de la semana - Ocupa la mitad del ancho en pantallas medianas y superiores */}
 
