@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import logo from '../img/logo_kukit.png';
@@ -18,10 +18,13 @@ const Login = ({ setShowLogin, setShowRegistro }) => {
 
   const navigate = useNavigate();
   const auth = useAuth(); // Obtener el contexto de autenticación
+  const googleSignInButtonRef = useRef(null);
 
   // Cargar script de Google Identity Services dinámicamente
   useEffect(() => {
-    if (document.getElementById('google-client-script')) {
+    // Usar el mismo ID que en login.jsx para asegurar que se cargue una sola vez.
+    const scriptId = 'google-client-script';
+    if (document.getElementById(scriptId)) {
       setScriptLoaded(true);
       return;
     }
@@ -30,41 +33,16 @@ const Login = ({ setShowLogin, setShowRegistro }) => {
     script.src = 'https://accounts.google.com/gsi/client';
     script.async = true;
     script.defer = true;
-    script.id = 'google-client-script';
+    script.id = scriptId;
 
     script.onload = () => setScriptLoaded(true);
 
     document.body.appendChild(script);
-
-    return () => {
-      if (document.getElementById('google-client-script')) {
-        document.body.removeChild(script);
-      }
-    };
   }, []);
 
-  // Inicializar botón Google cuando el script está listo
-  useEffect(() => {
-    if (scriptLoaded && window.google) {
-      window.google.accounts.id.initialize({
-        client_id: '457729135946-4i3fug0fv5h3p1h8kfmmkhra1dfuvn81.apps.googleusercontent.com',
-        callback: handleGoogleResponse,
-      });
-
-      window.google.accounts.id.renderButton(
-        document.getElementById('googleSignInButton'),
-        { theme: 'outline', size: 'large', width: 300 }
-      );
-    }
-  }, [scriptLoaded]);
-
-  const handleGoogleResponse = async (response) => {
+  const handleGoogleLoginResponse = useCallback(async (response) => {
     try {
-      const res = await axios.post(
-        'http://localhost/api/login/google/login-google.php',
-        { id_token: response.credential },
-        { headers: { 'Content-Type': 'application/json' }, withCredentials: true }
-      );
+      const res = await axios.post('http://localhost/api/login/google/login-google.php', { id_token: response.credential }, { headers: { 'Content-Type': 'application/json' }, withCredentials: true });
 
       if (res.data.success) {
         setExito(true);
@@ -81,7 +59,28 @@ const Login = ({ setShowLogin, setShowRegistro }) => {
       setMensaje('Error en comunicación con el servidor');
       console.error(error);
     }
-  };
+  }, [auth, navigate, setShowLogin]);
+
+  // Inicializar botón Google cuando el script está listo y el div está disponible
+  useEffect(() => {
+    if (scriptLoaded && window.google && window.google.accounts && window.google.accounts.id) {
+      if (googleSignInButtonRef.current && googleSignInButtonRef.current.childNodes.length === 0) {
+        try {
+          window.google.accounts.id.initialize({
+            client_id: '457729135946-4i3fug0fv5h3p1h8kfmmkhra1dfuvn81.apps.googleusercontent.com',
+            callback: handleGoogleLoginResponse,
+          });
+          window.google.accounts.id.renderButton(
+            googleSignInButtonRef.current,
+            { theme: 'outline', size: 'large', width: 300 }
+          );
+        } catch (error) {
+          console.error("Error initializing or rendering Google Sign-In button:", error);
+          setMensaje("Error al cargar el botón de Google.");
+        }
+      }
+    }
+  }, [scriptLoaded, handleGoogleLoginResponse]);
 
   const manejarCambio = (e) => {
     const { name, value } = e.target;
@@ -226,7 +225,7 @@ const Login = ({ setShowLogin, setShowRegistro }) => {
 
         <hr style={{ margin: '1rem 0' }} />
 
-        <div id="googleSignInButton"></div>
+        <div id="googleSignInButton" ref={googleSignInButtonRef}></div>
 
         <p>¿No tienes cuenta?</p>
 

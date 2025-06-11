@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import logo from '../../img/logo_kukit.png';
@@ -17,13 +17,17 @@ const Registro = ({ setShowRegistro, setShowLogin }) => {
   const [errorCorreo, setErrorCorreo] = useState('');
   const [errorPassword, setErrorPassword] = useState('');
   const [scriptLoaded, setScriptLoaded] = useState(false);
+  const googleSignUpButtonRef = useRef(null); // Cambiado de googleSignInButtonRef a googleSignUpButtonRef
+
 
   const navigate = useNavigate();
   const auth = useAuth();
 
   // Cargar script de Google Identity Services dinámicamente
   useEffect(() => {
-    if (document.getElementById('google-client-script-registro')) {
+    // Usar el mismo ID que en login.jsx para asegurar que se cargue una sola vez.
+    const scriptId = 'google-client-script';
+    if (document.getElementById(scriptId)) {
       setScriptLoaded(true);
       return;
     }
@@ -32,41 +36,17 @@ const Registro = ({ setShowRegistro, setShowLogin }) => {
     script.src = 'https://accounts.google.com/gsi/client';
     script.async = true;
     script.defer = true;
-    script.id = 'google-client-script-registro';
+    script.id = scriptId;
 
     script.onload = () => setScriptLoaded(true);
 
     document.body.appendChild(script);
+  }, []); // Eliminadas dependencias innecesarias como auth, navigate, setShowLogin
 
-    return () => {
-      if (document.getElementById('google-client-script-registro')) {
-        document.body.removeChild(script);
-      }
-    };
-  }, []);
-
-  // Inicializar botón Google cuando el script está listo
-  useEffect(() => {
-    if (scriptLoaded && window.google) {
-      window.google.accounts.id.initialize({
-        client_id: '457729135946-4i3fug0fv5h3p1h8kfmmkhra1dfuvn81.apps.googleusercontent.com',
-        callback: handleGoogleResponse,
-      });
-
-      window.google.accounts.id.renderButton(
-        document.getElementById('googleSignUpButton'),
-        { theme: 'outline', size: 'large', width: 300 }
-      );
-    }
-  }, [scriptLoaded]);
-
-  const handleGoogleResponse = async (response) => {
+  const handleGoogleRegisterResponse = useCallback(async (response) => { // Renombrada la función
     try {
-      const res = await axios.post(
-        'http://localhost/api/login/google/registro-google.php',
-        { id_token: response.credential },
-        { headers: { 'Content-Type': 'application/json' }, withCredentials: true }
-      );
+      "../../../../../backend/api/login/google/login-google.php"
+      const res = await axios.post('http://localhost/api/login/google/login-google.php', { id_token: response.credential }, { headers: { 'Content-Type': 'application/json' }, withCredentials: true });
 
       if (res.data.success) {
         setExito(true);
@@ -83,7 +63,29 @@ const Registro = ({ setShowRegistro, setShowLogin }) => {
       setMensaje('Error en comunicación con el servidor');
       console.error(error);
     }
-  };
+  }, [auth, navigate, setShowRegistro]); // Ajustada la dependencia
+
+  // Inicializar botón Google cuando el script está listo y el div está disponible
+  useEffect(() => {
+    if (scriptLoaded && window.google && window.google.accounts && window.google.accounts.id) {
+      if (googleSignUpButtonRef.current && googleSignUpButtonRef.current.childNodes.length === 0) {
+        try {
+          window.google.accounts.id.initialize({
+            client_id: '457729135946-4i3fug0fv5h3p1h8kfmmkhra1dfuvn81.apps.googleusercontent.com',
+            callback: handleGoogleRegisterResponse, // Usar la función renombrada
+          });
+          window.google.accounts.id.renderButton(
+            googleSignUpButtonRef.current, // Usar la ref correcta
+            { theme: 'outline', size: 'large', width: 300 }
+          );
+        } catch (error) {
+          console.error("Error initializing or rendering Google Sign-Up button:", error); // Mensaje de error específico
+          setMensaje("Error al cargar el botón de Google.");
+        }
+      }
+    }
+  }, [scriptLoaded, handleGoogleRegisterResponse]); // Usar la callback correcta en dependencias
+
 
   const manejarCambio = (e) => {
     const { name, value } = e.target;
@@ -217,7 +219,8 @@ const Registro = ({ setShowRegistro, setShowLogin }) => {
 
         <hr style={{ margin: '1rem 0' }} />
 
-        <div id="googleSignUpButton"></div>
+        <div id="googleSignUpButton" ref={googleSignUpButtonRef}></div>
+
 
         <p>¿Ya tienes cuenta?</p>
         <button
