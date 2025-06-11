@@ -503,9 +503,7 @@ header .contenedor-header .sign-up:hover {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    ;
     gap: 10px;
-    width: 100vw;
 }
 
 #contenedor-recetas {
@@ -3247,7 +3245,6 @@ ul.perfil-opciones>li>div.perfil-menu-hamburguesa {
     }
 
     .contenedor-email-password input {
-        width: 82% !important;
         max-width: 95%;
     }
 }
